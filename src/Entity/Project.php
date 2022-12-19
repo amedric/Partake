@@ -30,10 +30,10 @@ class Project
     private ?string $projectColor = null;
 
     #[ORM\ManyToOne]
-    private ?category $category = null;
+    private ?Category $category = null;
 
     #[ORM\ManyToOne]
-    private ?user $user = null;
+    private ?User $user = null;
 
     public function getId(): ?int
     {
@@ -100,24 +100,24 @@ class Project
         return $this;
     }
 
-    public function getCategory(): ?category
+    public function getCategory(): ?Category
     {
         return $this->category;
     }
 
-    public function setCategory(?category $category): self
+    public function setCategory(?Category $category): self
     {
         $this->category = $category;
 
         return $this;
     }
 
-    public function getUser(): ?user
+    public function getUser(): ?User
     {
         return $this->user;
     }
 
-    public function setUser(?user $user): self
+    public function setUser(?User $user): self
     {
         $this->user = $user;
 
