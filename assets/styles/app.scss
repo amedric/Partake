@@ -1,2 +1,24 @@
 //start coding by removing this file and adding yours ;)
-@import "wcs";
+@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;700&display=swap');
+// Primary Colours
+$primaryBlue: rgb(0, 66, 191);
+$primaryYellow: rgb(255, 195, 23);
+$primaryGreen: rgb(6, 192, 127);
+$primaryPurple: rgb(192, 15, 255);
+$primaryGrey: rgb(226, 226, 226);
+$primaryWhite: rgb(255, 255, 255);
+
+// Colour palette
+$secondaryPink: rgb(255, 180, 180);
+$secondaryYellow: rgb(255, 238, 83);
+$secondaryGreen: rgb(116, 255, 84);
+$secondaryBlue: rgb(83, 141, 255);
+$secondaryPurple: rgb(251, 71, 255);
+$secondaryOrange: rgb(255, 146, 46);
+$secondaryRed: rgb(255, 46, 46);
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Rajdhani;
+}
