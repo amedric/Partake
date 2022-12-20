@@ -15,64 +15,63 @@ class Like
     private ?int $id = null;
 
     #[ORM\ManyToOne]
-    private ?project $project = null;
+    private ?Project $project = null;
 
     #[ORM\ManyToOne]
-    private ?user $user = null;
+    private ?User $user = null;
+    #[ORM\ManyToOne]
+    private ?Idea $idea = null;
 
     #[ORM\ManyToOne]
-    private ?idea $idea = null;
-
-    #[ORM\ManyToOne]
-    private ?comment $comment = null;
+    private ?Comment $comment = null;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getProject(): ?project
+    public function getProject(): ?Project
     {
         return $this->project;
     }
 
-    public function setProject(?project $project): self
+    public function setProject(?Project $project): self
     {
         $this->project = $project;
 
         return $this;
     }
 
-    public function getUser(): ?user
+    public function getUser(): ?User
     {
         return $this->user;
     }
 
-    public function setUser(?user $user): self
+    public function setUser(?User $user): self
     {
         $this->user = $user;
 
         return $this;
     }
 
-    public function getIdea(): ?idea
+    public function getIdea(): ?Idea
     {
         return $this->idea;
     }
 
-    public function setIdea(?idea $idea): self
+    public function setIdea(?Idea $idea): self
     {
         $this->idea = $idea;
 
         return $this;
     }
 
-    public function getComment(): ?comment
+    public function getComment(): ?Comment
     {
         return $this->comment;
     }
 
-    public function setComment(?comment $comment): self
+    public function setComment(?Comment $comment): self
     {
         $this->comment = $comment;
 

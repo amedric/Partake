@@ -27,10 +27,10 @@ class Comment
     private ?string $commentColor = null;
 
     #[ORM\ManyToOne]
-    private ?user $user = null;
+    private ?User $user = null;
 
     #[ORM\ManyToOne]
-    private ?project $project = null;
+    private ?Project $project = null;
 
     public function getId(): ?int
     {
@@ -85,24 +85,24 @@ class Comment
         return $this;
     }
 
-    public function getUser(): ?user
+    public function getUser(): ?User
     {
         return $this->user;
     }
 
-    public function setUser(?user $user): self
+    public function setUser(?User $user): self
     {
         $this->user = $user;
 
         return $this;
     }
 
-    public function getProject(): ?project
+    public function getProject(): ?Project
     {
         return $this->project;
     }
 
-    public function setProject(?project $project): self
+    public function setProject(?Project $project): self
     {
         $this->project = $project;
 
