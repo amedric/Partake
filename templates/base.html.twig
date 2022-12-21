@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <link rel="icon" type="image/png" href="{{ asset('build/images/favicon.png') }}"/>
         <title>
-            {% block title %}Projet 3 Name{% endblock %}
+            {% block title %}Partake{% endblock %}
         </title>
         {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
         {% block stylesheets %}
@@ -17,6 +17,21 @@
         {% endblock %}
     </head>
     <body>
+
+    <div class="ptk-baseContainer">
+        <div class="ptk-navbarContainer">
+            {% include '/_includes/_navbar.html.twig' %}
+        </div>
+        <div class="ptk-sideContainer">
+            <p class="ptk-logo">PARTAKE</p>
+        </div>
+        <div class="ptk-blockContainer">
+        </div>
+    </div>
+
+    <div class="ptk-bodyContainer">
         {% block body %}{% endblock %}
+    </div>
+
     </body>
 </html>

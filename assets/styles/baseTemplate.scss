@@ -1,0 +1,54 @@
+//------------------- Base Template -------------------------------------------------------
+.ptk-baseContainer {
+    display: grid;
+    grid-template-columns: 25vw 75vw;
+    grid-template-rows: 8vh 92vh;
+}
+
+.ptk-navbarContainer{
+    grid-area: navabr;
+    grid-column-start: 1;
+    grid-column-end: last-line;
+    grid-row-start: 1;
+    grid-row-end: 2;
+    background-color: $primaryWhite;
+}
+
+.ptk-sideContainer{
+    grid-area: sideBlock;
+    grid-column-start: 1;
+    grid-column-end: 2;
+    grid-row-start: 1;
+    grid-row-end: last-line;
+    background-color: $primaryBlue;
+
+    .ptk-logo{
+        margin: 0;
+        margin-left: 20px;
+        font-style: normal;
+        font-weight: 700;
+        font-size: 3rem;
+        line-height: 61px;
+        display: flex;
+        align-items: center;
+        text-align: center;
+        letter-spacing: 0.15em;
+        color: $primaryWhite;
+    }
+}
+
+.ptk-blockContainer{
+    grid-area: centreBlock;
+    grid-column-start: 2;
+    grid-column-end: last-line;
+    grid-row-start: 2;
+    grid-row-end: last-line;
+    background-color: $primaryGrey;
+}
+
+//------------------- Page Container -------------------------------------------------------
+.ptk-bodyContainer{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
