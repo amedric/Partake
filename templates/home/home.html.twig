@@ -1,0 +1,201 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Home{% endblock %}
+
+{% block body %}
+    <div class="ptk-titleBlock">
+        <div class="ptk-titleContainer" style="background-image: url('{{ asset('build/images/business.jpg') }}');background-size: cover">
+        <h1 class="ptk-titleHeader">Projects</h1>
+        </div>
+    </div>
+
+    <div class="ptk-underTitleBlock">
+        <div class="ptk-createProjectContainer">
+            <p id="ptk-addProjectIcon">+</p>
+            <a href="#" id="ptk-createProjectBttn"> Create a project</a>
+        </div>
+    </div>
+
+    <div class="ptk-filterBlock">
+        <div class="ptk-filterContainer">
+        <a href="#" class="ptk-filterBttns">Popularity /</a>
+        <a href="#" class="ptk-filterBttns">Categories /</a>
+        <a href="#" class="ptk-filterBttns">Newest projects /</a>
+        <a href="#" class="ptk-filterBttns">Oldest projects</a>
+        </div>
+    </div>
+
+    <div class="ptk-cardsBlock">
+
+        <div class="ptk-categoryContainer">
+            <h1 class="ptk-category">Students</h1>
+        </div>
+
+        <div class="ptk-cardsContainer">
+
+            <a href="#" class="ptk-cardsLink">
+            <div class="ptk-cards">
+                <div class="ptk-cardTitleContainer" style="background-image: url('{{ asset('build/images/bgBlockIdea.png') }}');background-size: cover">
+                    <h1 class="ptk-cardTitle">Project title</h1>
+                </div>
+
+                <div class="ptk-cardStatsContainer">
+                    <div class="ptk-cardIcons">
+                    <img src="{{ asset('build/images/like.png') }}" alt="like">
+                    <img src="{{ asset('build/images/idea.png') }}" alt="like">
+                    <img src="{{ asset('build/images/view.png') }}" alt="like">
+                    </div>
+                    <div class="ptk-cardStats">
+                        <p class="ptk-cardStatsNo">25</p>
+                        <p class="ptk-cardStatsNo">35</p>
+                        <p class="ptk-cardStatsNo">45</p>
+                    </div>
+                </div>
+            </div>
+            </a>
+            <a href="#" class="ptk-cardsLink">
+                <div class="ptk-cards">
+                    <div class="ptk-cardTitleContainer" style="background-image: url('{{ asset('build/images/bgBlockIdea.png') }}');background-size: cover">
+                        <h1 class="ptk-cardTitle">Project title</h1>
+                    </div>
+
+                    <div class="ptk-cardStatsContainer">
+                        <div class="ptk-cardIcons">
+                            <img src="{{ asset('build/images/like.png') }}" alt="like">
+                            <img src="{{ asset('build/images/idea.png') }}" alt="like">
+                            <img src="{{ asset('build/images/view.png') }}" alt="like">
+                        </div>
+                        <div class="ptk-cardStats">
+                            <p class="ptk-cardStatsNo">25</p>
+                            <p class="ptk-cardStatsNo">35</p>
+                            <p class="ptk-cardStatsNo">45</p>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <a href="#" class="ptk-cardsLink">
+                <div class="ptk-cards">
+                    <div class="ptk-cardTitleContainer" >
+                        <h1 class="ptk-cardTitle">Project title</h1>
+                    </div>
+
+                    <div class="ptk-cardStatsContainer">
+                        <div class="ptk-cardIcons">
+                            <img src="{{ asset('build/images/like.png') }}" alt="like">
+                            <img src="{{ asset('build/images/idea.png') }}" alt="like">
+                            <img src="{{ asset('build/images/view.png') }}" alt="like">
+                        </div>
+                        <div class="ptk-cardStats">
+                            <p class="ptk-cardStatsNo">25</p>
+                            <p class="ptk-cardStatsNo">35</p>
+                            <p class="ptk-cardStatsNo">45</p>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <a href="#" class="ptk-cardsLink">
+                <div class="ptk-cards">
+                    <div class="ptk-cardTitleContainer" >
+                        <h1 class="ptk-cardTitle">Project title</h1>
+                    </div>
+
+                    <div class="ptk-cardStatsContainer">
+                        <div class="ptk-cardIcons">
+                            <img src="{{ asset('build/images/like.png') }}" alt="like">
+                            <img src="{{ asset('build/images/idea.png') }}" alt="like">
+                            <img src="{{ asset('build/images/view.png') }}" alt="like">
+                        </div>
+                        <div class="ptk-cardStats">
+                            <p class="ptk-cardStatsNo">25</p>
+                            <p class="ptk-cardStatsNo">35</p>
+                            <p class="ptk-cardStatsNo">45</p>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <a href="#" class="ptk-cardsLink">
+                <div class="ptk-cards">
+                    <div class="ptk-cardTitleContainer" style="background-image: url('{{ asset('build/images/bgBlockIdea.png') }}');background-size: cover">
+                        <h1 class="ptk-cardTitle">Project title</h1>
+                    </div>
+
+                    <div class="ptk-cardStatsContainer">
+                        <div class="ptk-cardIcons">
+                            <img src="{{ asset('build/images/like.png') }}" alt="like">
+                            <img src="{{ asset('build/images/idea.png') }}" alt="like">
+                            <img src="{{ asset('build/images/view.png') }}" alt="like">
+                        </div>
+                        <div class="ptk-cardStats">
+                            <p class="ptk-cardStatsNo">25</p>
+                            <p class="ptk-cardStatsNo">35</p>
+                            <p class="ptk-cardStatsNo">45</p>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <a href="#" class="ptk-cardsLink">
+                <div class="ptk-cards">
+                    <div class="ptk-cardTitleContainer" >
+                        <h1 class="ptk-cardTitle">Project title</h1>
+                    </div>
+
+                    <div class="ptk-cardStatsContainer">
+                        <div class="ptk-cardIcons">
+                            <img src="{{ asset('build/images/like.png') }}" alt="like">
+                            <img src="{{ asset('build/images/idea.png') }}" alt="like">
+                            <img src="{{ asset('build/images/view.png') }}" alt="like">
+                        </div>
+                        <div class="ptk-cardStats">
+                            <p class="ptk-cardStatsNo">25</p>
+                            <p class="ptk-cardStatsNo">35</p>
+                            <p class="ptk-cardStatsNo">45</p>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <a href="#" class="ptk-cardsLink">
+                <div class="ptk-cards">
+                    <div class="ptk-cardTitleContainer" >
+                        <h1 class="ptk-cardTitle">Project title</h1>
+                    </div>
+
+                    <div class="ptk-cardStatsContainer">
+                        <div class="ptk-cardIcons">
+                            <img src="{{ asset('build/images/like.png') }}" alt="like">
+                            <img src="{{ asset('build/images/idea.png') }}" alt="like">
+                            <img src="{{ asset('build/images/view.png') }}" alt="like">
+                        </div>
+                        <div class="ptk-cardStats">
+                            <p class="ptk-cardStatsNo">25</p>
+                            <p class="ptk-cardStatsNo">35</p>
+                            <p class="ptk-cardStatsNo">45</p>
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <a href="#" class="ptk-cardsLink">
+                <div class="ptk-cards">
+                    <div class="ptk-cardTitleContainer" >
+                        <h1 class="ptk-cardTitle">Project title</h1>
+                    </div>
+
+                    <div class="ptk-cardStatsContainer">
+                        <div class="ptk-cardIcons">
+                            <img src="{{ asset('build/images/like.png') }}" alt="like">
+                            <img src="{{ asset('build/images/idea.png') }}" alt="like">
+                            <img src="{{ asset('build/images/view.png') }}" alt="like">
+                        </div>
+                        <div class="ptk-cardStats">
+                            <p class="ptk-cardStatsNo">25</p>
+                            <p class="ptk-cardStatsNo">35</p>
+                            <p class="ptk-cardStatsNo">45</p>
+                        </div>
+                    </div>
+                </div>
+            </a>
+
+
+        </div>
+
+    </div>
+{% endblock %}
