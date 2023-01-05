@@ -237,6 +237,64 @@ body {
     color: black;
 }
 
+// Landing Page
+
+.ptk-landingContainer{
+    background-image: url("../images/landing-page.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.ptk-landingButton{
+    margin-bottom: 2%;
+}
+
+.ptk-landingButton button{
+    width: 110px;
+    height: 50px;
+    background-color: $primaryWhite;
+    border: $primaryWhite;
+    border-radius: 12px;
+    font-family: Rajdhani;
+}
+
+.ptk-landingButton a{
+    text-decoration: none;
+    color: $primaryBlue;
+    font-size: 20px;
+    font-weight: bold;
+    letter-spacing: 0.1rem;
+}
+
+.ptk-landingFooter{
+    width: 50vw;
+    margin-bottom: 1%;
+}
+
+.ptk-landingFooter ul{
+    display: flex;
+    justify-content: space-between;
+    list-style: none;
+    padding-left: 0;
+}
+
+.ptk-landingFooter li{
+    width: 20%;
+    text-align: center;
+}
+
+.ptk-landingFooter a{
+    text-decoration: none;
+    color: $primaryWhite;
+    font-size: 15px;
+    font-weight: bold;
+}
+
 // Project Page
 
 .headProjectPage{
