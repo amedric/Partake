@@ -111,7 +111,7 @@ body {
     text-decoration: none;
 }
 
-// Project Page
+// User Page
 
 .userProfile {
     border: solid $primaryBlue 2px;
@@ -178,8 +178,11 @@ body {
 }
 .projectContainer{
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
     padding-left: 100px;
+    width: 90vw;
+    height: auto;
 }
 .projectShowContainer{
     position: relative;
@@ -189,6 +192,7 @@ body {
     width: 215px;
     height: 145px;
     background-color: $primaryYellow;
+    margin-bottom: 60px;
 }
 .projectTitle{
     position: absolute;
@@ -232,5 +236,40 @@ body {
     font-weight: bold;
     color: black;
 }
+
+// Project Page
+
+.headProjectPage{
+    border: solid $primaryBlue 2px;
+    border-radius: 10px;
+    box-shadow: 2px 5px 5px grey;
+    position: relative;
+    left: 30%;
+    top: -680px;
+    width: 1106px;
+    background-color: #FFFFFF;
+    font-size: 20px;
+}
+
+.headProjectPage h1{
+    position: absolute;
+    top : 5%;
+    left: 40%;
+    color: #FFFFFF;
+    font-size: 60px;
+    text-shadow: 0 4px 0 $primaryBlue;
+}
+
+.showProjectsPage{
+    border-top: #FFFFFF solid 2px;
+    color: #FFFFFF;
+    width: 25vw;
+    position: absolute;
+    top: -480px;
+    padding-left: 20px;
+    font-size: 20px;
+}
+
 @import "navbar.scss";
 @import "baseTemplate.scss";
+@import "pages.scss";
