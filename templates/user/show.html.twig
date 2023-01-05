@@ -3,74 +3,81 @@
 {% block title %}User{% endblock %}
 
 {% block body %}
-    <div class="userProfile">
-        <h1>Profile</h1>
 
-        <table class="userProfileTable">
-            <tbody>
-            <tr class="userProfileCol1">
-                <th>{% if user.avatar is null %}
-                        <img src="{{ asset('build/images/avatar_defaut.png') }}" alt="avatar_defaut">
-                    {% endif %}
-                    {{ user.avatar }}
-                </th>
-            </tr>
-            <tr class="userProfileCol2">
-                <th>Firstname:</th>
-                <td>{{ user.firstname }}</td>
-            </tr>
-            <tr class="userProfileCol2">
-                <th>Lastname:</th>
-                <td>{{ user.lastname }}</td>
-            </tr>
-            <tr class="userProfileCol2">
-                <th>Email:</th>
-                <td>{{ user.email }}</td>
-            </tr>
 
-            <tr class="userProfileCol3">
-                <th>Birthday:</th>
-                <td>{{ user.birthday ? user.birthday|date('Y-m-d') : '' }}</td>
-            </tr>
-            </tbody>
-        </table>
-        <a class="userProfileEdit" href="{{ path('app_user_edit', {'id': user.id}) }}">edit profile</a>
+
+<div class="userProfile">
+    <h1>Profile</h1>
+    <table class="userProfileTable">
+        <tbody>
+        <tr class="userProfileCol1">
+            <th>{% if user.avatar is null %}
+                    <img src="{{ asset('build/images/avatar_defaut.png') }}" alt="avatar_defaut">
+                {% endif %}
+                {{ user.avatar }}
+            </th>
+        </tr>
+        <tr class="userProfileCol2">
+            <th>Firstname:</th>
+            <td>{{ user.firstname }}</td>
+        </tr>
+        <tr class="userProfileCol2">
+            <th>Lastname:</th>
+            <td>{{ user.lastname }}</td>
+        </tr>
+        <tr class="userProfileCol2">
+            <th>Email:</th>
+            <td>{{ user.email }}</td>
+        </tr>
+
+        <tr class="userProfileCol3">
+            <th>Birthday:</th>
+            <td>{{ user.birthday ? user.birthday|date('Y-m-d') : '' }}</td>
+        </tr>
+        </tbody>
+    </table>
+    <a class="userProfileEdit" href="{{ path('app_user_edit', {'id': user.id}) }}">edit profile</a>
+</div>
+<div class="userShowProjects">
+    {% for user in users %}
+        <h2>User</h2>
+        {{ user.lastname }}
+        {{ user.firstname }}
+    {% endfor %}
+    <h2>Projects</h2>
+    <div class="projectContainer">
+        {% for project in projects %}
+            <div class="projectShowContainer">
+                <img src="{{ asset('build/images/bgBlockProject.png') }}" alt="like">
+                <div class="projectTitle">
+                    {{ project.title }}
+                </div>
+                <div class="projectShowCounter">
+                    <img src="{{ asset('build/images/like.png') }}" alt="like">
+                    <img src="{{ asset('build/images/idea.png') }}" alt="like">
+                    <img src="{{ asset('build/images/view.png') }}" alt="like">
+                    {{ project.projectViews }}
+                </div>
+            </div>
+        {% endfor %}
     </div>
-    <div class="userShowProjects">
-        <h2>Projects</h2>
-        <div class="projectContainer">
-            {%  for project in projects %}
-                <div class="projectShowContainer">
-                    <img src="{{ asset('build/images/bgBlockProject.png') }}" alt="like">
-                    <div class="projectTitle">
-                        {{ project.title }}
+    <div class="userShowIdeas">
+        <h2>Ideas</h2>
+        <div class="ideaContainer">
+            {% for idea in ideas %}
+                <div class="ideaShowContainer">
+                    <img src="{{ asset('build/images/bgBlockIdea.png') }}" alt="like">
+                    <div class="ideaTitle">
+                        {{ idea.title }}
                     </div>
-                    <div class="projectShowCounter">
+                    <div class="ideaShowCounter">
                         <img src="{{ asset('build/images/like.png') }}" alt="like">
                         <img src="{{ asset('build/images/idea.png') }}" alt="like">
                         <img src="{{ asset('build/images/view.png') }}" alt="like">
-                        {{ project.projectViews }}
+                        {{ idea.ideaViews }}
                     </div>
                 </div>
             {% endfor %}
         </div>
-        <div class="userShowIdeas">
-            <h2>Ideas</h2>
-            <div class="ideaContainer">
-                {%  for idea in ideas %}
-                    <div class="ideaShowContainer">
-                        <img src="{{ asset('build/images/bgBlockIdea.png') }}" alt="like">
-                        <div class="ideaTitle">
-                            {{ idea.title }}
-                        </div>
-                        <div class="ideaShowCounter">
-                            <img src="{{ asset('build/images/like.png') }}" alt="like">
-                            <img src="{{ asset('build/images/idea.png') }}" alt="like">
-                            <img src="{{ asset('build/images/view.png') }}" alt="like">
-                            {{ idea.ideaViews }}
-                        </div>
-                    </div>
-                {% endfor %}
-            </div>
     </div>
-{% endblock %}
+    {% endblock %}
