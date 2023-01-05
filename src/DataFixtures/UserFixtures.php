@@ -17,6 +17,7 @@ class UserFixtures extends \Doctrine\Bundle\FixturesBundle\Fixture
             $user->setLastname($faker->lastName);
             $user->setEmail($faker->email);
             $user->setPassword(password_hash('1234', PASSWORD_DEFAULT));
+            $user->setTeam($faker->randomElement(['Students', 'Management', 'HR', 'Formateurs']));
             $this->addReference('user_' . $i, $user);
             $manager->persist($user);
         }
