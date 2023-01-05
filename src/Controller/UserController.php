@@ -3,7 +3,6 @@
 namespace App\Controller;
 
 use App\Entity\User;
-use App\Entity\Project;
 use App\Form\UserType;
 use App\Repository\IdeaRepository;
 use App\Repository\ProjectRepository;
@@ -46,8 +45,8 @@ class UserController extends AbstractController
     #[Route('/{id}', name: 'app_user_show', methods: ['GET'])]
     public function show(User $user, ProjectRepository $projectRepository, IdeaRepository $ideaRepository): Response
     {
-        $projects = $projectRepository->findBy(['user' => 433]);
-        $ideas = $ideaRepository->findBy(['user' => 433]);
+        $projects = $projectRepository->findBy(['user' => $user->getId()]);
+        $ideas = $ideaRepository->findBy(['user' => $user->getId()]);
         return $this->render('user/show.html.twig', [
             'user' => $user,
             'projects' => $projects,
