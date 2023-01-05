@@ -39,6 +39,16 @@ class IdeaRepository extends ServiceEntityRepository
         }
     }
 
+    public function findLikeIdea(string $name): array
+    {
+        $queryBuilder = $this->createQueryBuilder('i')
+            ->where('i.title LIKE :name')
+            ->setParameter('name', '%' . $name . '%')
+            ->orderBy('i.title', 'ASC')
+            ->getQuery();
+        return $queryBuilder->getResult();
+    }
+
 //    /**
 //     * @return Idea[] Returns an array of Idea objects
 //     */
