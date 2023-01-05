@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Form\SearchContentType;
 use App\Form\UserType;
 use App\Repository\IdeaRepository;
 use App\Repository\ProjectRepository;
@@ -32,7 +33,6 @@ class UserController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $userRepository->save($user, true);
-
             return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -42,15 +42,32 @@ class UserController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_user_show', methods: ['GET'])]
-    public function show(User $user, ProjectRepository $projectRepository, IdeaRepository $ideaRepository): Response
-    {
-        $projects = $projectRepository->findBy(['user' => $user->getId()]);
-        $ideas = $ideaRepository->findBy(['user' => $user->getId()]);
+    #[Route('/{id}', name: 'app_user_show', methods: ['GET', 'POST'])]
+    public function show(
+        Request $request,
+        User $user,
+        UserRepository $userRepository,
+        ProjectRepository $projectRepository,
+        IdeaRepository $ideaRepository
+    ): Response {
+        $form = $this->createForm(SearchContentType::class);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $search = $form->getData()['search'];
+            $projects = $projectRepository->findLikeProject($search);
+            $ideas = $ideaRepository->findLikeIdea($search);
+            $users = $userRepository->findLikeUser($search);
+        } else {
+            $projects = $projectRepository->findBy(['user' => $user->getId()]);
+            $ideas = $ideaRepository->findBy(['user' => $user->getId()]);
+            $users = null;
+        }
         return $this->render('user/show.html.twig', [
             'user' => $user,
+            'users' => $users,
             'projects' => $projects,
             'ideas' => $ideas,
+            'form' => $form->createView(),
         ]);
     }
 
