@@ -85,19 +85,20 @@
 
 .ptk-cardsBlock{
     display: flex;
-    flex-direction: row;
-    align-items: center;
+    flex-direction: column;
     width: 98%;
+    height: 54vh;
     margin: 10px;
+    overflow-y: auto;
 
     .ptk-categoryContainer {
         margin-right: 10px;
 
-
         .ptk-category {
             font-style: normal;
             font-weight: 700;
-            font-size: 30px;
+            font-size: 25px;
+            width: 150px;
             color: $primaryWhite;
 
         }
@@ -107,11 +108,11 @@
         display: flex;
         flex-direction: row;
         align-items: center;
-        overflow-x: hidden;
+        overflow-x: auto;
         overflow-y: hidden;
         width: 100%;
-        height: 200px;
-        padding: 0 18px 18px 0;
+        height: 100%;
+
 
         .ptk-cardsLink{
             text-decoration: none;
@@ -119,7 +120,7 @@
 
         .ptk-cards {
             position: relative;
-            margin-left: 50px;
+            margin-right: 40px;
             border-radius: 10px;
             width: 215px;
             height: 145px;
@@ -179,9 +180,20 @@
 
         }
     }
-    .ptk-cardsContainer:hover {
-        overflow-x: auto;
-        padding:0;
-    }
 
+}
+
+.ptk-categoryCardsContainer{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+
+}
+
+.ptk-categorySection{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    overflow-y: hidden;
+    overflow-x: auto;
 }
