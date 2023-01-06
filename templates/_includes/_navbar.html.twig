@@ -1,7 +1,8 @@
 <a href="{{ path('app_home') }}">Accueil</a>
 
 {% if app.user %}
-    {% if form is defined %}
+
+    {% if (form is defined) and (edit is not defined) %}
         {{ form_start(form, {'attr': {'class': 'searchBar'}}) }}
         {{ form_widget(form, {'attr': {'class': 'inputSearchBar'}}) }}
         {{ form_end(form) }}

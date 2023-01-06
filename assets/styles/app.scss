@@ -97,7 +97,7 @@ body {
     border-radius: 5px;
     width: 20%;
     position: absolute;
-    top: 80%;
+    top: 90%;
     left: 40%;
 }
 
@@ -110,6 +110,84 @@ body {
     color: $primaryBlue;
     text-decoration: none;
 }
+
+// Add User
+
+
+.formAddUser {
+    z-index: 10;
+    position: fixed;
+    left: 40%;
+    top: 40%;
+    width: 500px;
+    height: 375px;
+    margin: 20px;
+    border: solid $primaryGreen 2px;
+    border-radius: 10px;
+    box-shadow: 2px 5px 5px grey;
+}
+
+.formAddUserTitle {
+    display: flex;
+    justify-content: center;
+}
+
+.formAddUserTitle h1 {
+    background-color: $primaryGreen;
+    height: 20px;
+    padding: 0 5px 20px 5px;
+}
+
+//#user div {
+//    display: flex;
+//    justify-content: space-between;
+//    padding-right: 40px;
+//}
+
+.formAddUserBody form div {
+    margin-bottom: 10px;
+}
+
+.formAddUserBody form {
+    padding-top: 20px;
+}
+
+.formAddUserBody label {
+    color: $primaryBlue;
+    font-weight: bold;
+    padding-left: 40px;
+}
+
+.formAddUserBody input {
+    border: solid 1px $primaryBlue;
+    border-radius: 4px;
+    color: $primaryBlue;
+    height: 30px;
+    width: 200px;
+    text-align: right;
+}
+
+.formAddUserBody button {
+    background-color: $primaryBlue;
+    font-weight: bold;
+    color: #FFFFFF;
+    border-radius: 5px;
+    width: 20%;
+    position: absolute;
+    top: 90%;
+    left: 40%;
+}
+
+.formAddUserClose {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 10px 10px 0 0;
+    font-weight: bold;
+    color: $primaryGreen;
+    text-decoration: none;
+}
+
 
 // User Page
 
