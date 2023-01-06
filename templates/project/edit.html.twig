@@ -7,7 +7,7 @@
     <div class="ptk-projectFormContainer">
 
         <div class="ptk-projectFormCloseContainer">
-            <a href="{{ path('app_project_index') }}" class="ptk-projectFormCloseBttn">X</a>
+            <a href="{{ path('app_project_show', {id: project.id}) }}" class="ptk-projectFormCloseBttn">X</a>
         </div>
 
         <div class="ptk-projectFormTitleContainer">
@@ -15,12 +15,13 @@
         </div>
 
     {{ form_start(form) }}
+
     <div class="ptk-formErrors ptk-formContainerMargins">
         {{ form_errors(form) }}
     </div>
 
         <div class="ptk-formRow ptk-formContainerMargins">
-            {{ form_label(form.category, null, {'label_attr': {'class': 'ptk-formLabels'}}) }}
+            {{ form_label(form.category, 'Team', {'label_attr': {'class': 'ptk-formLabels'}}) }}
             {{ form_widget(form.category, {'attr': {'class': 'ptk-formTitleInput'}}) }}
         </div>
         <div class="ptk-formRow ptk-formContainerMargins">
@@ -31,11 +32,14 @@
             {{ form_label(form.content, null, {'label_attr': {'class': 'ptk-formLabels'}}) }}
             {{ form_widget(form.content, {'attr': {'class': 'ptk-formContentInput'}}) }}
         </div>
+        {{ form_row(form._token) }}
 
         <div class="ptk-formBttnsContainer">
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
             <button class="ptk-formBttns">{{ button_label|default('Save') }}</button>
             {{ include('project/_delete_form.html.twig') }}
         </div>
+
         {{ form_end(form) }}
     </div>
 </div>

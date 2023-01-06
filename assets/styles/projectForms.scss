@@ -35,6 +35,7 @@
             .ptk-projectFormTitle{
                 display: flex;
                 justify-content: center;
+                margin: 0;
                 font-size: 40px;
                 font-weight: 550;
                 width: 10ch;
@@ -56,15 +57,21 @@
                 border: 1.5px solid $primaryBlue;
                 border-radius: 5px;
                 height: 30px;
+                font-family: Rajdhani;
+                font-size: 20px;
             }
 
             .ptk-formContentInput{
                 display: flex;
-                justify-content: flex-start;
-                flex-wrap: nowrap;
+                flex-wrap: wrap !important;
+                word-break: break-word !important;
                 border: 1.5px solid $primaryBlue;
                 border-radius: 5px;
-                height: 80px;
+                height: 150px;
+                font-family: Rajdhani;
+                font-size: 20px;
+                overflow-y: auto;
+                resize: none;
             }
         }
 
