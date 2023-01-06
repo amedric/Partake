@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Project;
 use App\Form\Project1Type;
+use App\Form\EditProjectType;
 use App\Repository\CategoryRepository;
 use App\Repository\ProjectRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -53,18 +54,19 @@ class ProjectController extends AbstractController
     #[Route('/{id}/edit', name: 'app_project_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Project $project, ProjectRepository $projectRepository): Response
     {
-        $form = $this->createForm(Project1Type::class, $project);
+        $form = $this->createForm(EditProjectType::class, $project);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $projectRepository->save($project, true);
 
-            return $this->redirectToRoute('app_project_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_project_show', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('project/edit.html.twig', [
             'project' => $project,
             'form' => $form,
+            'edit' => true,
         ]);
     }
 
