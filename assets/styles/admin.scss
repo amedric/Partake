@@ -1,0 +1,73 @@
+.ptk-adminBlock{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.ptk-adminContainer{
+    display: flex;
+    flex-direction: row;
+    height: 85vh;
+    border: 3px solid $primaryBlue;
+    border-radius: 10px;
+
+    .ptk-adminSideMenuContainer{
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        padding-top: 50px;
+        width: 150px;
+        border-radius: 10px 0 0 10px;
+        border-right: 3px solid $primaryBlue;
+        background: $primaryWhite;
+
+        .ptk-SideMenuLink{
+            margin: 0;
+            text-decoration: none;
+            font-size: 25px;
+            font-weight: 500;
+            color: $primaryBlue;
+        }
+    }
+
+    .ptk-adminViewContainer{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 950px;
+        border-radius: 0 10px 10px 0;
+        background: $primaryWhite;
+
+        .ptk-adminTitle{
+            display: flex;
+            justify-content: center;
+            width: 6ch;
+            color: black;
+            background: linear-gradient(180deg, $primaryWhite 55%, $primaryBlue 45%);
+        }
+
+        .ptk-adminViewInfoContainer{
+            overflow-x: hidden;
+            overflow-y: auto;
+
+            .ptk-adminTableHeader{
+                font-size: 22px;
+            }
+
+            .ptk-adminTableData{
+                font-size: 19px;
+            }
+
+            .ptk-adminDataRow{
+                border-bottom: 1.5px solid $primaryBlue;
+            }
+        }
+
+        .ptk-adminTableGap{
+            padding-left: 15px;
+            padding-right: 15px;
+        }
+    }
+}

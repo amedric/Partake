@@ -3,9 +3,13 @@
 {% block title %}New User{% endblock %}
 
 {% block body %}
-    <h1>Create new User</h1>
-
-    {{ include('user/_form.html.twig') }}
-
-    <a href="{{ path('app_user_index') }}">back to list</a>
+    <div class="formAddUser">
+        <div class="formAddUserTitle">
+            <h1>Add User</h1>
+        </div>
+        <div class="formAddUserBody">
+            {{ include('user/_form.html.twig', {'button_label': 'Save'}) }}
+        </div>
+        <a href="{{ path('app_user_show', {'id': app.user.id}) }}" class="formAddUserClose">X</a>
+    </div>
 {% endblock %}

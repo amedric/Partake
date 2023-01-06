@@ -3,36 +3,42 @@
 {% block title %}User index{% endblock %}
 
 {% block body %}
-    <h1>User index</h1>
 
-    <table class="table">
+    <div class="ptk-adminBlock">
+
+        <div class="ptk-adminContainer">
+
+        <div class="ptk-adminSideMenuContainer">
+            <a href="#" class="ptk-SideMenuLink">Users</a>
+        </div>
+
+        <div class="ptk-adminViewContainer">
+            <div class="ptk-adminTitleContainer">
+                <h1 class="ptk-adminTitle">Users</h1>
+            </div>
+            <div class="ptk-adminViewInfoContainer">
+    <table>
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Firstname</th>
-                <th>Lastname</th>
-                <th>Email</th>
-{#                <th>Password</th>#}
-{#                <th>Role</th>#}
-                <th>Avatar</th>
-                <th>Birthday</th>
-                <th>actions</th>
+                <th class="ptk-adminTableGap ptk-adminTableHeader">Firstname</th>
+                <th class="ptk-adminTableGap ptk-adminTableHeader">Lastname</th>
+                <th class="ptk-adminTableGap ptk-adminTableHeader">Role</th>
+                <th class="ptk-adminTableGap ptk-adminTableHeader">Team</th>
+                <th class="ptk-adminTableGap ptk-adminTableHeader">Email</th>
+                <th class="ptk-adminTableGap ptk-adminTableHeader">actions</th>
             </tr>
         </thead>
         <tbody>
         {% for user in users %}
-            <tr>
-                <td>{{ user.id }}</td>
-                <td>{{ user.firstname }}</td>
-                <td>{{ user.lastname }}</td>
-                <td>{{ user.email }}</td>
-{#                <td>{{ user.password }}</td>#}
-{#                <td>{{ user.roles }}</td>#}
-                <td>{{ user.avatar }}</td>
-                <td>{{ user.birthday ? user.birthday|date('Y-m-d') : '' }}</td>
-                <td>
-                    <a href="{{ path('app_user_show', {'id': user.id}) }}">show</a>
-                    <a href="{{ path('app_user_edit', {'id': user.id}) }}">edit</a>
+            <tr class="ptk-adminDataRow">
+                <td class="ptk-adminTableGap ptk-adminTableData">{{ user.firstname }}</td>
+                <td class="ptk-adminTableGap ptk-adminTableData">{{ user.lastname }}</td>
+                <td class="ptk-adminTableGap ptk-adminTableData">{{ user.roles[0] }}</td>
+                <td class="ptk-adminTableGap ptk-adminTableData">{{ user.team }}</td>
+                <td class="ptk-adminTableGap ptk-adminTableData">{{ user.email }}</td>
+                <td class="ptk-adminTableGap ptk-adminTableData">
+                    <a href="{{ path('app_user_edit', {'id': user.id}) }}">Edit</a>
+                    <a href="#">Delete</a>
                 </td>
             </tr>
         {% else %}
@@ -42,6 +48,11 @@
         {% endfor %}
         </tbody>
     </table>
+            </div>
+        </div>
 
-    <a href="{{ path('app_user_new') }}">Create new</a>
+        </div>
+    </div>
+
+{#    <a href="{{ path('app_user_new') }}">Create new</a>#}
 {% endblock %}
