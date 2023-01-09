@@ -45,6 +45,8 @@ class HomeController extends AbstractController
         return $this->render('home/filter_by_popularity.html.twig', [
             'idea' => $idea,
         ]);
+
+
     }
 
     #[Route('/filter_by_categories', name: 'filter_by_categories')]

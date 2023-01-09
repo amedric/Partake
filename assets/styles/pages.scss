@@ -8,15 +8,16 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        width: 1100px;
+        width: 70vw;
         height: 160px;
+        padding: 25px;
         border: 5px solid $primaryWhite;
         border-radius: 10px;
 
         .ptk-titleHeader{
             font-style: normal;
             font-weight: 700;
-            font-size: 65px;
+            font-size: 40px;
             color: $primaryWhite;
             text-shadow: 2px 0 $primaryBlue, -2px 0 $primaryBlue, 0 2px $primaryBlue, 0 -2px $primaryBlue,
             1px 1px $primaryBlue, -1px -1px $primaryBlue, 1px -1px $primaryBlue, -1px 1px $primaryBlue;
@@ -28,7 +29,12 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 0 50px 0 50px;
     width: 100%;
+
+    .ptk-projectContent{
+        font-size: 20px;
+    }
 
     .ptk-createProjectContainer{
         display: flex;
@@ -83,117 +89,180 @@
     }
 }
 
-.ptk-cardsBlock{
+.ptk-ideaCardsBlock{
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    height: 50%;
     width: 98%;
-    height: 54vh;
     margin: 10px;
-    overflow-y: auto;
-
-    .ptk-categoryContainer {
-        margin-right: 10px;
-
-        .ptk-category {
-            font-style: normal;
-            font-weight: 700;
-            font-size: 25px;
-            width: 150px;
-            color: $primaryWhite;
-
-        }
-    }
-
-    .ptk-cardsContainer {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        overflow-x: auto;
-        overflow-y: hidden;
-        width: 100%;
-        height: 100%;
-
-
-        .ptk-cardsLink{
-            text-decoration: none;
-        }
-
-        .ptk-cards {
-            position: relative;
-            margin-right: 40px;
-            border-radius: 10px;
-            width: 215px;
-            height: 145px;
-            text-decoration: none;
-
-            .ptk-cardTitleContainer{
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                text-align: center;
-                height: 95px;
-                width: 215px;
-                background-color: $primaryWhite;
-                border-radius: 10px 10px 0 0;
-
-                .ptk-cardTitle{
-                    font-style: normal;
-                    font-weight: 500;
-                    font-size: 24px;
-                    color: $primaryWhite;
-                    text-shadow: 2px 0 black, -2px 0 black, 0 2px black, 0 -2px black,
-                    1px 1px black, -1px -1px black, 1px -1px black, -1px 1px black;
-                }
-            }
-
-            .ptk-cardStatsContainer{
-                display: flex;
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
-                height: 50px;
-                width: 215px;
-                background-color: $secondaryYellow;
-                border-radius: 0 0 10px 10px;
-
-                .ptk-cardIcons{
-                    display: flex;
-                    flex-direction: row;
-                    justify-content: center;
-                    align-items: center;
-                    gap: 50px;
-                }
-
-                .ptk-cardStats{
-                    display: flex;
-                    flex-direction: row;
-                    justify-content: center;
-                    align-items: center;
-                    gap: 50px;
-
-                    .ptk-cardStatsNo{
-                        margin: 0;
-                        color: black;
-                    }
-                }
-            }
-
-        }
-    }
 
 }
 
-.ptk-categoryCardsContainer{
+.ptk-ideaCardsContainer{
     display: flex;
-    flex-direction: column;
-    margin-bottom: 20px;
-
+    flex-direction: row;
+    width: 90%;
+    overflow-y: auto;
 }
 
-.ptk-categorySection{
+.ptk-cardsBlock{
     display: flex;
     flex-direction: row;
     align-items: center;
+    height: 50%;
+    width: 98%;
+    margin: 10px;
+}
+
+.ptk-categoryContainer {
+    margin-right: 10px;
+}
+
+.ptk-category {
+    font-style: normal;
+    font-weight: 700;
+    font-size: 30px;
+    color: $primaryWhite;
+}
+
+.ptk-cardsContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    overflow-x: hidden;
     overflow-y: hidden;
+    width: 100%;
+    height: 200px;
+    padding: 0 18px 18px 0;
+}
+.ptk-cardsLink{
+    text-decoration: none;
+}
+
+.ptk-cards {
+    position: relative;
+    margin-left: 50px;
+    border-radius: 10px;
+    width: 215px;
+    height: 145px;
+    text-decoration: none;
+    background-color: $primaryWhite;
+}
+
+.ptk-cardTitleContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 95px;
+    width: 215px;
+    background-color: $primaryWhite;
+    border-radius: 10px 10px 0 0;
+}
+
+.ptk-cardIdeaTitleContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 95px;
+    border-radius: 10px 10px 0 0;
+}
+
+.ptk-cardTitle{
+    font-style: normal;
+    font-weight: 500;
+    font-size: 24px;
+    color: $primaryWhite;
+    text-shadow: 2px 0 black, -2px 0 black, 0 2px black, 0 -2px black,
+    1px 1px black, -1px -1px black, 1px -1px black, -1px 1px black;
+}
+
+.ptk-cardIdeaTitle{
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    padding: 5px;
+    color: black;
+}
+
+.ptk-cardStatsContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+    width: 215px;
+    background-color: $primaryWhite;
+    border-radius: 0 0 10px 10px;
+}
+
+.ptk-cardIdeaStatsContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 50px;
+    border-radius: 0 0 10px 10px;
+}
+
+.ptk-cardIcons{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 47px;
+}
+
+.ptk-ideaInfoIcons{
+    width: 17px;
+    height: 17px;
+}
+
+.ptk-cardStats{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 45px;
+}
+
+.ptk-cardStatsNo{
+    margin: 0;
+    color: black;
+}
+
+.ptk-cardsContainer:hover {
     overflow-x: auto;
+    padding:0;
+}
+
+.ptk-addIdeaBlock{
+    display: flex;
+    align-items: flex-end;
+    height: 100%;
+}
+
+#ptk-ideaCat{
+    margin: 0;
+    font-size: 40px;
+    color: $primaryWhite;
+}
+
+#ptk-addIdeaIcon{
+    margin: 0;
+    margin-right: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 60px;
+    height: 60px;
+    border-radius: 30px;
+    background: $primaryBlue;
+    font-size: 50px;
+    color: $primaryWhite;
+    text-decoration: none;
+}
+
+.ptk-formHiddenElement{
+    display: none;
 }

@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Project;
+use App\Entity\Idea;
 use App\Entity\User;
 use App\Form\Project1Type;
 use App\Form\SearchContentType;
@@ -70,10 +71,13 @@ class ProjectController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_project_show', methods: ['GET'])]
-    public function show(Project $project): Response
+    public function show(Project $project, IdeaRepository $ideaRepository): Response
     {
+
+        $ideas = $ideaRepository->findBy(['project' => $project->getId()]);
         return $this->render('project/show.html.twig', [
             'project' => $project,
+            'ideas' => $ideas,
         ]);
     }
 

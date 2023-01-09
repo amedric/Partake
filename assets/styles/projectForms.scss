@@ -1,10 +1,10 @@
-.ptk-projectFormBlock {
+.ptk-formBlock {
     display: flex;
     justify-content: center;
     height: 90vh;
     width: 97vw;
 
-    .ptk-projectFormContainer {
+    .ptk-formContainer {
         display: flex;
         flex-direction: column;
         height: 80vh;
@@ -14,25 +14,25 @@
         border: 3px solid $primaryYellow;
         border-radius: 10px;
 
-        .ptk-projectFormCloseContainer{
+        .ptk-formCloseContainer{
             display: flex;
             justify-content: flex-end;
             width: 100%;
             margin: 0;
 
-            .ptk-projectFormCloseBttn{
+            .ptk-formCloseBttn{
                 font-size: 20px;
                 font-weight: 550;
                 text-decoration: none;
             }
         }
 
-        .ptk-projectFormTitleContainer{
+        .ptk-formTitleContainer{
             display: flex;
             justify-content: center;
             width: 100%;
 
-            .ptk-projectFormTitle{
+            .ptk-formTitle{
                 display: flex;
                 justify-content: center;
                 margin: 0;
@@ -73,6 +73,11 @@
                 overflow-y: auto;
                 resize: none;
             }
+
+        }
+
+        .ptk-formHiddenRows{
+            display: none;
         }
 
         .ptk-formBttnsContainer {
@@ -100,4 +105,9 @@
 
 .ptk-formContainerMargins{
     margin-bottom: 30px;
+}
+
+.ptk-formIdeaColours{
+    gap: 15px;
+    font-size: 20px;
 }
