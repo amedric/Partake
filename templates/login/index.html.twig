@@ -7,19 +7,31 @@
         <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
     {% endif %}
 
-    <div class="homeLogin">
-
-        <form action="{{ path('app_login') }}" method="post">
-            <label for="username">Email:</label>
-            <input type="text" id="username" name="_username" value="{{ last_username }}">
-
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="_password">
-
-            <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-
-            <button type="submit">login</button>
-        </form>
+    <div class="formLogin">
+        <div class="formLoginTitle">
+            <h1>LOGIN</h1>
+        </div>
+        <div class="formLoginBody">
+            <form action="{{ path('app_login') }}" method="post">
+                <label for="username">Login ID:</label>
+                <br>
+                <input type="text" id="username" name="_username" value="{{ last_username }}">
+                <br>
+                <label for="password">Password:</label>
+                <br>
+                <input type="password" id="password" name="_password">
+                <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+                <br>
+                <button type="submit">Connect</button>
+                <label>
+                    <input type="checkbox" name="_remember_me" id="formLoginCheckbox" checked/>
+                    Keep me logged in
+                </label>
+                <div class="formLoginLink">
+                    <a href="{{ path('app_forgot_password_request') }}">Forgot password</a>
+                </div>
+            </form>
+        </div>
     </div>
 
 {% endblock %}

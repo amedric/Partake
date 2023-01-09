@@ -18,8 +18,8 @@ class Project1Type extends AbstractType
             ->add('createdAt')
             ->add('projectViews')
             ->add('projectColor')
-            ->add('category')
-            ->add('user')
+//            ->add('category')
+//            ->add('user')
         ;
     }
 

@@ -1,0 +1,69 @@
+.formLogin {
+    z-index: 10;
+    position: fixed;
+    left: 40%;
+    top: 40%;
+    width: 400px;
+    height: 350px;
+    margin: 20px;
+    border: solid $primaryBlue 2px;
+    border-radius: 10px;
+    box-shadow: 2px 5px 5px grey;
+    font-size: 20px;
+}
+
+.formLoginTitle {
+    display: flex;
+    justify-content: center;
+}
+
+.formLoginTitle h1 {
+    background-color: $primaryBlue;
+    height: 20px;
+    padding: 0 5px 20px 5px;
+}
+
+.formLoginBody form div {
+    margin-bottom: 10px;
+}
+
+.formLoginBody form {
+    padding-top: 20px;
+}
+
+.formLoginBody label {
+    color: $primaryBlue;
+    font-weight: bold;
+    padding-left: 40px;
+}
+
+.formLoginBody input {
+    border: solid 1px $primaryBlue;
+    border-radius: 4px;
+    color: $primaryBlue;
+    height: 30px;
+    width: 200px;
+    text-align: right;
+    margin-left: 40px;
+}
+
+.formLoginBody button {
+    background-color: $primaryBlue;
+    color: $primaryWhite;
+    border-radius: 5px;
+    width: 30%;
+    position: absolute;
+    top: 90%;
+    left: 40%;
+    border: none;
+    font-size: 20px;
+}
+
+#formLoginCheckbox {
+    width: 40px;
+    height: auto;
+}
+
+.formLoginLink {
+    margin-left: 40px;
+}

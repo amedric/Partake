@@ -3,11 +3,15 @@
 namespace App\Controller;
 
 use App\Entity\Project;
+use App\Entity\User;
 use App\Form\Project1Type;
+use App\Form\SearchContentType;
 use App\Form\EditProjectType;
 use App\Form\ProjectEditType;
 use App\Repository\CategoryRepository;
+use App\Repository\IdeaRepository;
 use App\Repository\ProjectRepository;
+use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -17,11 +21,31 @@ use Symfony\Component\Routing\Annotation\Route;
 class ProjectController extends AbstractController
 {
     #[Route('/', name: 'app_project_index', methods: ['GET'])]
-    public function index(ProjectRepository $projectRepository, CategoryRepository $categoryRepository): Response
-    {
+    public function index(
+        Request $request,
+        User $user,
+        UserRepository $userRepository,
+        ProjectRepository $projectRepository,
+        CategoryRepository $categoryRepository,
+    ): Response {
+        $form = $this->createForm(SearchContentType::class);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $search = $form->getData()['search'];
+            $projects = $projectRepository->findLikeProject($search);
+            $users = $userRepository->findLikeUser($search);
+            $categories = $categoryRepository->findAll();
+        } else {
+            $projects = $projectRepository->findAll();
+            $categories = $categoryRepository->findAll();
+            $users = null;
+        }
         return $this->render('project/index.html.twig', [
-            'projects' => $projectRepository->findAll(),
-            'categories' => $categoryRepository->findAll(),
+            'user' => $user,
+            'users' => $users,
+            'projects' => $projects,
+            'categories' => $categories,
+            'form' => $form->createView(),
         ]);
     }
 
@@ -41,6 +65,7 @@ class ProjectController extends AbstractController
         return $this->renderForm('project/new.html.twig', [
             'project' => $project,
             'form' => $form,
+            'edit' => true,
         ]);
     }
 

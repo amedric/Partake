@@ -93,7 +93,7 @@ body {
 .formUserBody button {
     background-color: $primaryBlue;
     font-weight: bold;
-    color: #FFFFFF;
+    color: $primaryWhite;
     border-radius: 5px;
     width: 20%;
     position: absolute;
@@ -170,7 +170,7 @@ body {
 .formAddUserBody button {
     background-color: $primaryBlue;
     font-weight: bold;
-    color: #FFFFFF;
+    color: $primaryWhite;
     border-radius: 5px;
     width: 20%;
     position: absolute;
@@ -199,7 +199,7 @@ body {
     left: 20%;
     top: 8%;
     width: 1200px;
-    background-color: #FFFFFF;
+    background-color: $primaryWhite;
     font-size: 20px;
 }
 .userProfileTable{
@@ -246,8 +246,8 @@ body {
     text-decoration: none;
 }
 .userShowProjects{
-    border-top: #FFFFFF solid 2px;
-    color: #FFFFFF;
+    border-top: $primaryWhite solid 2px;
+    color: $primaryWhite;
     width: 25vw;
     position: fixed;
     top: 400px;
@@ -373,41 +373,42 @@ body {
     font-weight: bold;
 }
 
-// Project Page
-
-.headProjectPage{
-    border: solid $primaryBlue 2px;
-    border-radius: 10px;
-    box-shadow: 2px 5px 5px grey;
-    position: relative;
-    left: 30%;
-    top: -680px;
-    width: 1106px;
-    background-color: #FFFFFF;
-    font-size: 20px;
-}
-
-.headProjectPage h1{
-    position: absolute;
-    top : 5%;
-    left: 40%;
-    color: #FFFFFF;
-    font-size: 60px;
-    text-shadow: 0 4px 0 $primaryBlue;
-}
-
-.showProjectsPage{
-    border-top: #FFFFFF solid 2px;
-    color: #FFFFFF;
-    width: 25vw;
-    position: absolute;
-    top: -480px;
-    padding-left: 20px;
-    font-size: 20px;
-}
+//// Project Page
+//
+//.headProjectPage{
+//    border: solid $primaryBlue 2px;
+//    border-radius: 10px;
+//    box-shadow: 2px 5px 5px grey;
+//    position: relative;
+//    left: 30%;
+//    top: -680px;
+//    width: 1106px;
+//    background-color: $primaryWhite;
+//    font-size: 20px;
+//}
+//
+//.headProjectPage h1{
+//    position: absolute;
+//    top : 5%;
+//    left: 40%;
+//    color: $primaryWhite;
+//    font-size: 60px;
+//    text-shadow: 0 4px 0 $primaryBlue;
+//}
+//
+//.showProjectsPage{
+//    border-top: $primaryWhite solid 2px;
+//    color: $primaryWhite;
+//    width: 25vw;
+//    position: absolute;
+//    top: -480px;
+//    padding-left: 20px;
+//    font-size: 20px;
+//}
 
 @import "navbar.scss";
 @import "baseTemplate.scss";
 @import "pages.scss";
 @import "admin.scss";
+@import "login.scss";
 @import "projectForms.scss";
