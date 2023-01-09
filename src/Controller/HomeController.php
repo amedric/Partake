@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-
 use App\Repository\CategoryRepository;
 use App\Repository\IdeaRepository;
 use App\Repository\ProjectRepository;
@@ -35,44 +34,39 @@ class HomeController extends AbstractController
         return $this->render('home/filter_by_popularity.html.twig', [
             'idea' => $idea,
         ]);
-
-
     }
 
     #[Route('/filter_by_categories', name: 'filter_by_categories')]
     public function filterByCategories(CategoryRepository $categoryRepository): Response
-{
-    $category = $categoryRepository->findAll();
+    {
+        $category = $categoryRepository->findAll();
 
-    return $this->render('home/filter_by_categories.html.twig', [
+        return $this->render('home/filter_by_categories.html.twig', [
         'category' => $category,
-    ]);
-
-
+        ]);
     }
 
     #[Route('/filter_by_asc', name: 'filter_by_asc')]
     public function filterByAsc(ProjectRepository $projectRepository, CategoryRepository $categoryRepository): Response
-{
-    $project = $projectRepository->findBy([], ['createdAt' => 'ASC']);
-    $category = $categoryRepository->findAll();
+    {
+        $project = $projectRepository->findBy([], ['createdAt' => 'ASC']);
+        $category = $categoryRepository->findAll();
 
-    return $this->render('home/filter_by_asc.html.twig', [
+        return $this->render('home/filter_by_asc.html.twig', [
         'project' => $project,
         'category' => $category,
-    ]);
-
-}
+        ]);
+    }
 
     #[Route('/filter_by_desc', name: 'filter_by_desc')]
     public function filterByDesc(ProjectRepository $projectRepository, CategoryRepository $categoryRepository): Response
-{
-    $project = $projectRepository->findBy([], ['createdAt' => 'DESC']);
-    $category = $categoryRepository->findAll();
+    {
+        $project = $projectRepository->findBy([], ['createdAt' => 'DESC']);
+        $category = $categoryRepository->findAll();
 
-    return $this->render('home/filter_by_desc.html.twig', [
+        return $this->render('home/filter_by_desc.html.twig', [
         'project' => $project,
         'category' => $category,
-    ]);
-}
+        ]);
+    }
 }

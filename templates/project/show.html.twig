@@ -3,40 +3,60 @@
 {% block title %}Project{% endblock %}
 
 {% block body %}
-    <h1>Project</h1>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ project.id }}</td>
-            </tr>
-            <tr>
-                <th>Title</th>
-                <td>{{ project.title }}</td>
-            </tr>
-            <tr>
-                <th>Content</th>
-                <td>{{ project.content }}</td>
-            </tr>
-            <tr>
-                <th>CreatedAt</th>
                 <td>{{ project.createdAt ? project.createdAt|date('Y-m-d') : '' }}</td>
-            </tr>
-            <tr>
-                <th>ProjectViews</th>
-                <td>{{ project.projectViews }}</td>
-            </tr>
-            <tr>
-                <th>ProjectColor</th>
-                <td>{{ project.projectColor }}</td>
-            </tr>
-        </tbody>
-    </table>
 
-    <a href="{{ path('app_project_index') }}">back to list</a>
+    <div class="ptk-titleBlock">
+        <div class="ptk-titleContainer" style="background-image: url('{{ asset('build/images/business.jpg') }}');background-size: cover">
+            <h1 class="ptk-titleHeader">{{ project.title }}</h1>
+        </div>
+    </div>
 
-    <a href="{{ path('app_project_edit', {'id': project.id}) }}">edit</a>
+    <div class="ptk-underTitleBlock">
+            <p class="ptk-projectContent">{{ project.content }}</p>
+    </div>
 
-    {{ include('project/_delete_form.html.twig') }}
+    <div class="ptk-filterBlock">
+        <div class="ptk-filterContainer">
+            <a href="{{ path('filter_by_popularity') }}" class="ptk-filterBttns">Newest /</a>
+            <a href="{{ path('filter_by_categories') }}" class="ptk-filterBttns">Oldest /</a>
+            <a href="{{ path('filter_by_desc') }}" class="ptk-filterBttns">Order by likes /</a>
+            <a href="{{ path('filter_by_asc') }}" class="ptk-filterBttns">Order by comments /</a>
+            <a href="{{ path('filter_by_asc') }}" class="ptk-filterBttns">Order by views</a>
+        </div>
+    </div>
+
+        <div class="ptk-ideaCardsBlock">
+            <div class="ptk-ideaCatContainer">
+                <p id="ptk-ideaCat">Ideas</p>
+            </div>
+            <div class="ptk-ideaCardsContainer">
+                        {% for idea in ideas %}
+                        <a href="{{ path('app_idea_show', {id: idea.id}) }}" class="ptk-cardsLink">
+                            <div class="ptk-cards" style="border: 4px solid {{idea.ideaColor}}">
+                                <div class="ptk-cardIdeaTitleContainer">
+                                    <h1 class="ptk-cardIdeaTitle">{{ idea.title|striptags|length > 40 ? idea.title|striptags|slice(0, 40) ~ '...' : idea.title|striptags }}</h1>
+                                </div>
+
+                                <div class="ptk-cardIdeaStatsContainer">
+                                    <div class="ptk-cardIcons">
+                                        <img src="{{ asset('build/images/like.png') }}" class="ptk-ideaInfoIcons" alt="like">
+                                        <img src="{{ asset('build/images/comment.png') }}" class="ptk-ideaInfoIcons" alt="Comments">
+                                        <img src="{{ asset('build/images/view.png') }}" class="ptk-ideaInfoIcons" alt="Views">
+                                    </div>
+                                    <div class="ptk-cardStats">
+                                        <p class="ptk-cardStatsNo">25</p>
+                                        <p class="ptk-cardStatsNo">35</p>
+                                        <p class="ptk-cardStatsNo">{{ idea.ideaViews }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                        {% endfor %}
+            </div>
+            <div class="ptk-addIdeaBlock">
+                <a href="{{ path('app_idea_new', {id: project.id}) }}" id="ptk-addIdeaIcon">+</a>
+            </div>
+        </div>
+
 {% endblock %}

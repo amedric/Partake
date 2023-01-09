@@ -49,6 +49,14 @@ class IdeaRepository extends ServiceEntityRepository
         return $queryBuilder->getResult();
     }
 
+    public function findIdeasByProject(string $id): array
+    {
+        $queryBuilder = $this->createQueryBuilder('i')
+            ->where('i.project_id LIKE :id')
+            ->getQuery();
+        return $queryBuilder->getResult();
+    }
+
 //    /**
 //     * @return Idea[] Returns an array of Idea objects
 //     */

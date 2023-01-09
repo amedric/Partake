@@ -3,10 +3,12 @@
 namespace App\Controller;
 
 use App\Entity\Project;
+use App\Entity\Idea;
 use App\Form\Project1Type;
 use App\Form\EditProjectType;
 use App\Form\ProjectEditType;
 use App\Repository\CategoryRepository;
+use App\Repository\IdeaRepository;
 use App\Repository\ProjectRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -45,10 +47,13 @@ class ProjectController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_project_show', methods: ['GET'])]
-    public function show(Project $project): Response
+    public function show(Project $project, IdeaRepository $ideaRepository): Response
     {
+
+        $ideas = $ideaRepository->findBy(['project' => $project->getId()]);
         return $this->render('project/show.html.twig', [
             'project' => $project,
+            'ideas' => $ideas,
         ]);
     }
 

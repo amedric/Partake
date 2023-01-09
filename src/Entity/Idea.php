@@ -27,13 +27,18 @@ class Idea
     private ?\DateTimeInterface $createdAt = null;
 
     #[ORM\Column(nullable: true)]
-    private ?int $ideaViews = null;
+    private ?int $ideaViews = 0;
 
     #[ORM\ManyToOne]
     private ?User $user = null;
 
     #[ORM\ManyToOne]
     private ?Project $project = null;
+
+    public function __construct()
+    {
+        $this->createdAt = new \DateTime();
+    }
 
     public function getId(): ?int
     {
