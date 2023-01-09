@@ -38,7 +38,7 @@
                 {% for proj in project %}
                 {% if cat.title == proj.category.title %}
 
-                <a href="#" class="ptk-cardsLink">
+                <a href="{{ path('app_project_show', {'id': proj.id}) }}" class="ptk-cardsLink">
                         <div class="ptk-cards">
                             <div class="ptk-cardTitleContainer" style="background-image: url('{{ asset('build/images/bgBlockIdea.png') }}');background-size: cover">
                                     <h1 class="ptk-cardTitle">{{ proj.title|striptags|length > 40 ? proj.title|striptags|slice(0, 40) ~ '...' : proj.title|striptags }}</h1>

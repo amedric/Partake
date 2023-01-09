@@ -61,10 +61,10 @@ class IdeaController extends AbstractController
     #[Route('/{id}/edit', name: 'app_idea_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Idea $idea, IdeaRepository $ideaRepository): Response
     {
-        $ideaUserId = $idea->getUser()->getId();
-        $user = $this->getUser();
+        $userId = $this->getUser();
+        $ideaCreatedBy = $idea->getUser();
 
-        if ($ideaUserId == $user) {
+        if ($ideaCreatedBy === $userId) {
             $form = $this->createForm(IdeaEditType::class, $idea);
             $form->handleRequest($request);
 
