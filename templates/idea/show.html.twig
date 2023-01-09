@@ -1,0 +1,63 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Idea{% endblock %}
+
+{% block body %}
+<div class="ptk-ideaShowBlock">
+
+    <div class="ptk-ideaShowContainer">
+
+        <div class="ptk-ideaCloseContainer">
+            {% if user.id == idea.user.id %}
+                <a href="{{ path('app_idea_edit', {'id': idea.id}) }}" class="ptk-ideaCloseBttn">edit</a>
+            {% endif %}
+
+            <a href="{{ path('app_project_show', {'id': idea.project.id}) }}" class="ptk-ideaCloseBttn">X</a>
+        </div>
+
+        <div class="ptk-ideaTitleContainer">
+            <h1 class="ptk-ideaTitle">{{ idea.title }}</h1>
+        </div>
+
+        <div class="ptk-ideaContentContainer">
+            <p class="ptk-ideaContent">{{ idea.content }}</p>
+        </div>
+
+        <div class="ptk-ideaInfoContainer">
+                <div class="ptk-ideaInfoIconsContainer">
+                    <img src="{{ asset('build/images/like.png') }}" class="ptk-ideaInfoIcons" alt="likes">
+                    <img src="{{ asset('build/images/comment.png') }}" class="ptk-ideaInfoIcons" alt="Comments">
+                    <img src="{{ asset('build/images/view.png') }}" class="ptk-ideaInfoIcons" alt="Views">
+                </div>
+                <div class="ptk-ideaInfoStats">
+                    <p class="ptk-ideaStatsNo">25</p>
+                    <p class="ptk-ideaStatsNo">35</p>
+                    <p class="ptk-ideaStatsNo">{{ idea.ideaViews }}</p>
+                </div>
+        </div>
+
+        <div class="ptk-ideaFilterContainer">
+            <a href="#" class="ptk-ideaFilters">Newest / </a>
+            <a href="#" class="ptk-ideaFilters">Oldest / </a>
+            <a href="#" class="ptk-ideaFilters">Most liked</a>
+        </div>
+
+        <div class="ptk-ideaCommentsContainer">
+            <div class="ptk-ideaCommentsByUser">
+                <a href="#" class="ptk-ideaCommentUser">Name Name</a>
+                <p class="ptk-ideaComments">Comment goes here - Consectetur vero aspernatur et. Nostrum numquam exercitationem quaerat consequuntur voluptates.</p>
+                <div class="ptk-ideaCommentLikeContainer">
+                    <img src="{{ asset('build/images/like.png') }}" class="ptk-ideaCommentLikeIcon" alt="likes">
+                    <p class="ptk-ideaCommentLikeNo">25</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="ptk-ideaPostCommentContainer">
+{#            TODO - form to post a comment section#}
+        </div>
+
+    </div>
+
+</div>
+{% endblock %}

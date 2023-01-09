@@ -29,7 +29,7 @@ class Idea
     private ?\DateTimeInterface $createdAt = null;
 
     #[ORM\Column(nullable: true)]
-    private ?int $ideaViews = null;
+    private ?int $ideaViews = 0;
 
     #[ORM\ManyToOne]
     private ?User $user = null;
@@ -43,7 +43,8 @@ class Idea
     public function __construct()
     {
         $this->comments = new ArrayCollection();
-    }
+        $this->createdAt = new \DateTime();
+
 
     public function getId(): ?int
     {
