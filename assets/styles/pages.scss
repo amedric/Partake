@@ -29,10 +29,12 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    margin: 10px 0 10px 0;
     padding: 0 50px 0 50px;
     width: 100%;
 
     .ptk-projectContent{
+        margin: 0;
         font-size: 20px;
     }
 
@@ -41,7 +43,6 @@
         flex-direction: row;
         justify-content: space-around;
         align-items: center;
-        margin: 25px;
 
         #ptk-addProjectIcon{
             margin: 0;
@@ -73,6 +74,7 @@
 
 .ptk-filterBlock{
     display: flex;
+    flex-direction: row;
     justify-content: flex-end;
     width: 100%;
 
@@ -89,29 +91,45 @@
     }
 }
 
+.ptk-createdAt{
+    display: inline-block;
+    margin: 0;
+    margin-left: 15px;
+    font-weight: 550;
+    font-size: 20px;
+    color: $primaryWhite;
+}
+
 .ptk-ideaCardsBlock{
     display: flex;
     flex-direction: row;
-    height: 50%;
+    height: 53%;
     width: 98%;
-    margin: 10px;
+    margin: 10px 10px 0 10px;
 
 }
 
 .ptk-ideaCardsContainer{
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
     width: 90%;
     overflow-y: auto;
 }
 
 .ptk-cardsBlock{
     display: flex;
-    flex-direction: row;
-    align-items: center;
-    height: 50%;
+    flex-direction: column;
+    height: 65%;
     width: 98%;
     margin: 10px;
+    overflow-y: auto;
+}
+
+.ptk-categorySection{
+    display: flex;
+    flex-direction: Row;
+    align-items: center;
 }
 
 .ptk-categoryContainer {
@@ -144,7 +162,17 @@
     margin-left: 50px;
     border-radius: 10px;
     width: 215px;
-    height: 145px;
+    height: 155px;
+    text-decoration: none;
+    background-color: $primaryWhite;
+}
+
+.ptk-ideaCards {
+    position: relative;
+    margin-left: 50px;
+    border-radius: 10px;
+    width: 225px;
+    height: 155px;
     text-decoration: none;
     background-color: $primaryWhite;
 }
@@ -170,6 +198,7 @@
 }
 
 .ptk-cardTitle{
+    margin: 0;
     font-style: normal;
     font-weight: 500;
     font-size: 24px;
@@ -188,10 +217,10 @@
 
 .ptk-cardStatsContainer{
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    flex-direction: row;
+    justify-content: space-around;
     align-items: center;
-    height: 50px;
+    height: 65px;
     width: 215px;
     background-color: $primaryWhite;
     border-radius: 0 0 10px 10px;
@@ -205,17 +234,33 @@
     border-radius: 0 0 10px 10px;
 }
 
+.ptk-cardIconStats{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.ptk-ideaCardIconStats{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .ptk-cardIcons{
     display: flex;
     flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    gap: 47px;
+    justify-content: space-between;
+    //align-items: center;
+    //gap: 44px;
 }
 
 .ptk-ideaInfoIcons{
     width: 17px;
     height: 17px;
+}
+
+.ptk-ideaStatsNo{
+    margin: 0;
 }
 
 .ptk-cardStats{

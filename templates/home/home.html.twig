@@ -44,16 +44,14 @@
                                     <h1 class="ptk-cardTitle">{{ proj.title|striptags|length > 40 ? proj.title|striptags|slice(0, 40) ~ '...' : proj.title|striptags }}</h1>
                             </div>
 
-                            <div class="ptk-cardStatsContainer">
-                                <div class="ptk-cardIcons">
-                                    <img src="{{ asset('build/images/like.png') }}" alt="like">
-                                    <img src="{{ asset('build/images/idea.png') }}" alt="like">
-                                    <img src="{{ asset('build/images/view.png') }}" alt="like">
-                                </div>
-                                <div class="ptk-cardStats">
-                                    <p class="ptk-cardStatsNo">25</p>
-                                    <p class="ptk-cardStatsNo">35</p>
+                            <div class="ptk-cardStatsContainer" style="background-color: {{ proj.projectColor }}">
+                                <div class="ptk-cardIconStats">
+                                    <img src="{{ asset('build/images/idea.png') }}" alt="Ideas">
                                     <p class="ptk-cardStatsNo">45</p>
+                                </div>
+                                <div class="ptk-cardIconStats">
+                                    <img src="{{ asset('build/images/view.png') }}" alt="Views">
+                                    <p class="ptk-cardStatsNo">{{ proj.projectViews }}</p>
                                 </div>
                             </div>
                         </div>
