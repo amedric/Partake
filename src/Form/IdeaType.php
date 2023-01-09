@@ -26,6 +26,7 @@ class IdeaType extends AbstractType
             ->add('ideaColor', ChoiceType::class, [
                 'expanded' => true,
                 'multiple' => false,
+                'placeholder' => false,
                 'choices' => [
                     'Pink' => 'rgb(255, 180, 180)',
                     'Yellow' => 'rgb(255, 238, 83)',
@@ -38,14 +39,6 @@ class IdeaType extends AbstractType
             ])
             ->add('user', IntegerType::class)
             ->add('project', IntegerType::class)
-//            ->add('user', EntityType::class, [
-//                'class' => User::class,
-//                'choice_label' => 'id',
-//            ])
-//            ->add('project', EntityType::class, [
-//                'class' => Project::class,
-//                'choice_label' => 'id',
-//            ])
         ;
     }
 
