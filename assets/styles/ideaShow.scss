@@ -10,14 +10,13 @@
         height: 90vh;
         width: 50vw;
         background-color: $primaryWhite;
-        border: 3px solid $primaryBlue;
+        border: 3px solid $primaryYellow;
         border-radius: 10px;
 
         .ptk-ideaCloseContainer{
             display: flex;
-            justify-content: flex-end;
-            padding: 5px 15px 0 15px;
-            gap: 95%;
+            justify-content: space-between;
+            padding: 10px 2vw 0 2vw;
 
             .ptk-ideaCloseBttn{
                 font-size: 20px;

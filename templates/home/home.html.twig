@@ -4,7 +4,7 @@
 
 {% block body %}
     <div class="ptk-titleBlock">
-        <div class="ptk-titleContainer" style="background-image: url('{{ asset('build/images/business.jpg') }}');background-size: cover">
+        <div class="ptk-titleContainer">
         <h1 class="ptk-titleHeader">Projects</h1>
         </div>
     </div>
@@ -40,7 +40,7 @@
 
                 <a href="{{ path('app_project_show', {'id': proj.id}) }}" class="ptk-cardsLink">
                         <div class="ptk-cards">
-                            <div class="ptk-cardTitleContainer" style="background-image: url('{{ asset('build/images/bgBlockIdea.png') }}');background-size: cover">
+                            <div class="ptk-cardTitleContainer">
                                     <h1 class="ptk-cardTitle">{{ proj.title|striptags|length > 40 ? proj.title|striptags|slice(0, 40) ~ '...' : proj.title|striptags }}</h1>
                             </div>
 
