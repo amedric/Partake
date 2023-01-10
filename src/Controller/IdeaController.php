@@ -49,9 +49,12 @@ class IdeaController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_idea_show', methods: ['GET'])]
-    public function show(Idea $idea): Response
+    public function show(Idea $idea, IdeaRepository $ideaRepository): Response
     {
         $user = $this->getUser();
+        $idea->setIdeaViews($idea->getIdeaViews() + 1);
+        $ideaRepository->save($idea, true);
+
         return $this->render('idea/show.html.twig', [
             'idea' => $idea,
             'user' => $user,
