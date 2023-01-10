@@ -1,0 +1,41 @@
+{% extends 'adminBase.html.twig' %}
+
+{% block title %}Admin - Teams{% endblock %}
+
+{% block adminTitle %}<h1 class="ptk-adminTitle">Teams</h1>{% endblock %}
+
+{% block adminBody %}
+
+<div class="ptk-adminViewInfoContainer">
+
+    <table class="ptk-teamTable">
+        <thead>
+            <tr>
+                <th class="ptk-adminTableGap ptk-adminTableHeader">Title</th>
+                <th class="ptk-adminTableGap ptk-adminTableHeader">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for category in categories %}
+            <tr class="ptk-adminDataRow">
+                <td class="ptk-adminTableGap ptk-adminTableData">{{ category.title }}</td>
+                <td class="ptk-adminTableGap ptk-adminTableData">
+                    <a href="{{ path('app_category_edit', {'id': category.id}) }}">Edit</a>
+                    <a href="#">Delete</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="ptk-teamAddEditContainer">
+        {% include '/category/new.html.twig' %}
+    </div>
+
+</div>
+
+{% endblock %}

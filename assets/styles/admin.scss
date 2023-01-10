@@ -9,7 +9,7 @@
     display: flex;
     flex-direction: row;
     height: 85vh;
-    border: 3px solid $primaryBlue;
+    border: 3px solid $primaryGreen;
     border-radius: 10px;
 
     .ptk-adminSideMenuContainer{
@@ -20,7 +20,7 @@
         padding-top: 50px;
         width: 150px;
         border-radius: 10px 0 0 10px;
-        border-right: 3px solid $primaryBlue;
+        border-right: 3px solid $primaryGreen;
         background: $primaryWhite;
 
         .ptk-SideMenuLink{
@@ -43,14 +43,26 @@
         .ptk-adminTitle{
             display: flex;
             justify-content: center;
-            width: 6ch;
             color: black;
-            background: linear-gradient(180deg, $primaryWhite 55%, $primaryBlue 45%);
+            background: linear-gradient(180deg, $primaryWhite 55%, $primaryGreen 45%);
         }
 
         .ptk-adminViewInfoContainer{
-            overflow-x: hidden;
-            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            height: 90%;
+            width: 100%;
+
+            .ptk-teamTable{
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                height: 40%;
+                width: 100%;
+            tbody{
+                overflow-y: auto;
+            }
+            }
 
             .ptk-adminTableHeader{
                 font-size: 22px;
@@ -63,6 +75,12 @@
             .ptk-adminDataRow{
                 border-bottom: 1.5px solid $primaryBlue;
             }
+
+            .ptk-teamAddEditContainer{
+                display: flex;
+                height: 70%;
+                width: 100%;
+            }
         }
 
         .ptk-adminTableGap{
@@ -71,3 +89,4 @@
         }
     }
 }
+

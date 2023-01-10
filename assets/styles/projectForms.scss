@@ -1,3 +1,4 @@
+//---------------------- CSS for generic forms ---------------------------------
 .ptk-formBlock {
     display: flex;
     justify-content: center;
@@ -110,4 +111,29 @@
 .ptk-formIdeaColours{
     gap: 15px;
     font-size: 20px;
+}
+
+//--------------------------------- CSS for Category forms ---------------------------------
+.ptk-teamFormContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 50%;
+    width: 100%;
+}
+
+.ptk-teamFormTitleContainer{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+
+    .ptk-teamFormTitle{
+        display: flex;
+        justify-content: center;
+        margin: 0;
+        font-size: 40px;
+        font-weight: 550;
+        width: 10ch;
+        background: linear-gradient(180deg, $primaryWhite 55%, $primaryYellow 45%);
+    }
 }

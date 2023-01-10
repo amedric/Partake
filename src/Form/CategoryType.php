@@ -2,27 +2,20 @@
 
 namespace App\Form;
 
-use App\Entity\Idea;
-
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use App\Entity\Category;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\DateType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 
-class IdeaType extends AbstractType
+class CategoryType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
-
         $builder
-            ->add('title', TextType::class)
-            ->add('content', TextareaType::class)
-            ->add('ideaColor', ChoiceType::class, [
+            ->add('title', textType::class)
+            ->add('categoryColor', ChoiceType::class, [
                 'expanded' => true,
                 'multiple' => false,
                 'placeholder' => false,
@@ -42,7 +35,7 @@ class IdeaType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => Idea::class,
+            'data_class' => Category::class,
         ]);
     }
 }
