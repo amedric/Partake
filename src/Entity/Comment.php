@@ -32,6 +32,10 @@ class Comment
     #[ORM\ManyToOne]
     private ?Project $project = null;
 
+    #[ORM\ManyToOne(inversedBy: 'comments')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Idea $idea = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -105,6 +109,18 @@ class Comment
     public function setProject(?Project $project): self
     {
         $this->project = $project;
+
+        return $this;
+    }
+
+    public function getIdea(): ?Idea
+    {
+        return $this->idea;
+    }
+
+    public function setIdea(?Idea $idea): self
+    {
+        $this->idea = $idea;
 
         return $this;
     }
