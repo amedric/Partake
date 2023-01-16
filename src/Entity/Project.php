@@ -20,9 +20,8 @@ class Project
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $content = null;
 
-
     #[ORM\Column(nullable: true)]
-    private ?int $projectViews = null;
+    private ?int $projectViews = 0;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $projectColor = null;

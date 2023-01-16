@@ -4,7 +4,7 @@
 
 {% block body %}
     <div class="ptk-titleBlock">
-        <div class="ptk-titleContainer" style="background-image: url('{{ asset('build/images/business.jpg') }}');background-size: cover">
+        <div class="ptk-titleContainer">
         <h1 class="ptk-titleHeader">Projects</h1>
         </div>
     </div>
@@ -55,6 +55,11 @@
                                     <p class="ptk-cardStatsNo">35</p>
 
                                     <p class="ptk-cardStatsNo">{{ project.projectViews is null ? project.projectViews == 0 : project.projectViews  }}</p>
+
+                                </div>
+                                <div class="ptk-cardIconStats">
+                                    <img src="{{ asset('build/images/view.png') }}" alt="Views">
+                                    <p class="ptk-cardStatsNo">{{ proj.projectViews }}</p>
                                 </div>
                             </div>
                         </div>

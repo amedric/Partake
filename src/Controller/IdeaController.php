@@ -30,7 +30,6 @@ class IdeaController extends AbstractController
         $idea = new Idea();
         $form = $this->createForm(IdeaType::class, $idea);
         $form->handleRequest($request);
-
         if ($form->isSubmitted() && $form->isValid()) {
             $idea->setUser($this->getUser());
             $idea->setProject($project);
@@ -44,6 +43,7 @@ class IdeaController extends AbstractController
         return $this->renderForm('idea/new.html.twig', [
             'idea' => $idea,
             'form' => $form,
+            'project' => $project,
             'edit' => true,
         ]);
     }
