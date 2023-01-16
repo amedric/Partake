@@ -118,6 +118,7 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
     height: 50%;
     width: 100%;
 }
@@ -126,14 +127,48 @@
     display: flex;
     justify-content: center;
     width: 100%;
+}
 
-    .ptk-teamFormTitle{
-        display: flex;
-        justify-content: center;
-        margin: 0;
-        font-size: 40px;
-        font-weight: 550;
-        width: 10ch;
-        background: linear-gradient(180deg, $primaryWhite 55%, $primaryYellow 45%);
-    }
+.ptk-teamFormTitle{
+    display: flex;
+    justify-content: center;
+    margin: 0;
+    font-size: 30px;
+    font-weight: 550;
+    width: 10ch;
+    background: linear-gradient(180deg, $primaryWhite 55%, $primaryYellow 45%);
+}
+
+.ptk-teamForm{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 70%;
+}
+
+.ptk-teamFormTitleUnderline{
+    background: linear-gradient(180deg, $primaryWhite 55%, $primaryGreen 45%);
+}
+
+.ptk-teamFormRow {
+    display: flex;
+    flex-direction: column;
+    width: 60%;
+}
+
+.ptk-teamFormLabels{
+    width: 70%;
+}
+
+.ptk-teamFormLabels {
+    color: $primaryBlue;
+    font-size: 25px;
+    font-weight: 550;
+}
+
+.ptk-teamBttnsFlex{
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
 }

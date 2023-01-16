@@ -27,6 +27,32 @@ body {
     font-family: Rajdhani;
 }
 
+a {
+    text-decoration: none;
+    margin: 0;
+    padding: 0;
+}
+
+// --------------------- Buttons --------------------------------
+.ptk-bttns {
+    display: flex;
+    justify-content: center;
+    padding: 10px 25px;
+    border-radius: 5px;
+    border-color: $primaryBlue;
+    background-color: $primaryBlue;
+    cursor: pointer;
+    font-family: Rajdhani;
+    font-weight: 600;
+    font-size: 15px;
+    color: $primaryWhite;
+}
+
+.ptk-smlBttns {
+    padding: 5px 10px;
+    width: 70px;
+}
+
 // Login position
 
 .homeLogin{
