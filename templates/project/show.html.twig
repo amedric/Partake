@@ -20,11 +20,11 @@
 
     <div class="ptk-filterBlock">
         <div class="ptk-filterContainer">
-            <a href="{{ path('filter_by_popularity') }}" class="ptk-filterBttns">Newest /</a>
-            <a href="{{ path('filter_by_categories') }}" class="ptk-filterBttns">Oldest /</a>
-            <a href="{{ path('filter_by_desc') }}" class="ptk-filterBttns">Order by likes /</a>
-            <a href="{{ path('filter_by_asc') }}" class="ptk-filterBttns">Order by comments /</a>
-            <a href="{{ path('filter_by_asc') }}" class="ptk-filterBttns">Order by views</a>
+            <a href="{{ path('app_project_show', {id: project.id, 'orderBy': 'newest'}) }}" class="ptk-filterBttns">Newest /</a>
+            <a href="{{ path('app_project_show', {id: project.id, 'orderBy': 'oldest'}) }}" class="ptk-filterBttns">Oldest /</a>
+            <a href="#" class="ptk-filterBttns">Order by likes /</a>
+            <a href="#" class="ptk-filterBttns">Order by comments /</a>
+            <a href="{{ path('app_project_show', {id: project.id, 'orderBy': 'views'}) }}" class="ptk-filterBttns">Order by views</a>
         </div>
     </div>
 

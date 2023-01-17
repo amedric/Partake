@@ -38,10 +38,10 @@
                 {% for project in projects %}
                 {% if category.title == project.category.title %}
 
-                <a href="{{ path('app_project_show', {'id': proj.id}) }}" class="ptk-cardsLink">
+                <a href="{{ path('app_project_show', {'id': project.id, 'orderBy': 'show'}) }}" class="ptk-cardsLink">
                         <div class="ptk-cards">
                             <div class="ptk-cardTitleContainer">
-                                    <h1 class="ptk-cardTitle">{{ proj.title|striptags|length > 40 ? proj.title|striptags|slice(0, 40) ~ '...' : proj.title|striptags }}</h1>
+                                    <h1 class="ptk-cardTitle">{{ project.title|striptags|length > 40 ? project.title|striptags|slice(0, 40) ~ '...' : project.title|striptags }}</h1>
                             </div>
 
                             <div class="ptk-cardStatsContainer" style="background-color: {{ category.categoryColor }}">

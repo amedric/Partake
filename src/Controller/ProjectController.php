@@ -75,16 +75,30 @@ class ProjectController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_project_show', methods: ['GET'])]
+    #[Route('/{id}/{orderBy}', name: 'app_project_show', methods: ['GET', 'POST'])]
     public function show(
         Project $project,
         IdeaRepository $ideaRepository,
-        ProjectRepository $projectRepository
+        ProjectRepository $projectRepository,
+        string $orderBy
     ): Response {
 
-        $ideas = $ideaRepository->findBy(['project' => $project->getId()]);
-        $project->setProjectViews($project->getProjectViews() + 1);
-        $projectRepository->save($project, true);
+        switch ($orderBy) {
+            case 'show':
+                $ideas = $ideaRepository->findBy(['project' => $project->getId()]);
+                $project->setProjectViews($project->getProjectViews() + 1);
+                $projectRepository->save($project, true);
+                break;
+            case 'newest':
+                $ideas = $ideaRepository->findBy(['project' => $project->getId()], ['createdAt' => 'DESC']);
+                break;
+            case 'oldest':
+                $ideas = $ideaRepository->findBy(['project' => $project->getId()], ['createdAt' => 'ASC']);
+                break;
+            case 'views':
+                $ideas = $ideaRepository->findBy(['project' => $project->getId()], ['ideaViews' => 'Desc']);
+                break;
+        }
 
         return $this->render('project/show.html.twig', [
             'project' => $project,
@@ -121,5 +135,42 @@ class ProjectController extends AbstractController
         }
 
         return $this->redirectToRoute('app_project_index', [], Response::HTTP_SEE_OTHER);
+    }
+
+    //---------------------------- Filters for Ideas --------------------------------------------------------------
+    #[Route('/{id}/order_idea_newest', name: 'order_idea_newest')]
+    public function orderIdeaNewest(
+        Project $project,
+        IdeaRepository $ideaRepository,
+    ): Response {
+        $ideas = $ideaRepository->findBy(['project' => $project->getId()], ['createdAt' => 'DESC']);
+        return $this->render('project/show.html.twig', [
+            'project' => $project,
+            'ideas' => $ideas,
+        ]);
+    }
+
+    #[Route('/{id}/order_idea_oldest', name: 'order_idea_oldest')]
+    public function orderIdeaOldest(
+        Project $project,
+        IdeaRepository $ideaRepository,
+    ): Response {
+        $ideas = $ideaRepository->findBy(['project' => $project->getId()], ['createdAt' => 'ASC']);
+        return $this->render('project/show.html.twig', [
+            'project' => $project,
+            'ideas' => $ideas,
+        ]);
+    }
+
+    #[Route('/{id}/order_idea_views', name: 'order_idea_views')]
+    public function orderIdeaViews(
+        Project $project,
+        IdeaRepository $ideaRepository,
+    ): Response {
+        $ideas = $ideaRepository->findBy(['project' => $project->getId()], ['ideaViews' => 'Desc']);
+        return $this->render('project/show.html.twig', [
+            'project' => $project,
+            'ideas' => $ideas,
+        ]);
     }
 }
