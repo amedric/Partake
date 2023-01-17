@@ -6,6 +6,7 @@ use App\Entity\User;
 use App\Form\SearchContentType;
 use App\Form\UserType;
 use App\Repository\IdeaRepository;
+use App\Repository\LikeRepository;
 use App\Repository\ProjectRepository;
 use App\Repository\UserRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
@@ -53,10 +54,13 @@ class UserController extends AbstractController
         User $user,
         UserRepository $userRepository,
         ProjectRepository $projectRepository,
-        IdeaRepository $ideaRepository
+        IdeaRepository $ideaRepository,
+        LikeRepository $likeRepository,
     ): Response {
         $form = $this->createForm(SearchContentType::class);
         $form->handleRequest($request);
+        $likesIdea = [];
+        $ideaLikeId = [];
         if ($form->isSubmitted() && $form->isValid()) {
             $search = $form->getData()['search'];
             $projects = $projectRepository->findLikeProject($search);
@@ -67,11 +71,17 @@ class UserController extends AbstractController
             $ideas = $ideaRepository->findBy(['user' => $user->getId()]);
             $users = null;
         }
+        for ($i = 1; $i <= count($ideas); $i++) {
+            $likesIdea[$i] = $likeRepository->count(['idea' => $i]);
+            $ideaLikeId[$i] = $likeRepository->findLikeByUser($user->getId(), $i);
+        }
         return $this->render('user/show.html.twig', [
             'user' => $user,
             'users' => $users,
             'projects' => $projects,
             'ideas' => $ideas,
+            'likes' => $likesIdea,
+            'likeIdeaId' => $ideaLikeId,
             'form' => $form->createView(),
         ]);
     }

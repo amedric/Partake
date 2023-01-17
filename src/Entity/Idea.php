@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\IdeaRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use DateTime;
 
 #[ORM\Entity(repositoryClass: IdeaRepository::class)]
 class Idea
@@ -37,7 +38,7 @@ class Idea
 
     public function __construct()
     {
-        $this->createdAt = new \DateTime();
+        $this->createdAt = new DateTime();
     }
 
     public function getId(): ?int
