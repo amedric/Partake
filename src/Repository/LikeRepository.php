@@ -39,6 +39,17 @@ class LikeRepository extends ServiceEntityRepository
         }
     }
 
+    public function findLikeByUser(int $id, int $ideaId): mixed
+    {
+        $queryBuilder = $this->createQueryBuilder('l')
+            ->andWhere('l.user = :id')
+            ->andWhere('l.idea = :ideaId')
+            ->setParameter('id', $id)
+            ->setParameter('ideaId', $ideaId)
+            ->getQuery();
+        return $queryBuilder->getResult();
+    }
+
 //    /**
 //     * @return Like[] Returns an array of Like objects
 //     */
