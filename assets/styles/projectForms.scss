@@ -139,12 +139,33 @@
     background: linear-gradient(180deg, $primaryWhite 55%, $primaryYellow 45%);
 }
 
+.ptk-teamEditTitle{
+    margin: 0;
+    span {
+        color: $primaryBlue;
+    }
+}
+
 .ptk-teamForm{
+    margin: 0;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+
     align-items: center;
     width: 70%;
+}
+
+.ptk-teamFormTitleInput{
+    border: 1.5px solid $primaryBlue;
+    border-radius: 5px;
+    height: 30px;
+    font-family: Rajdhani;
+    font-size: 20px;
+}
+
+.ptk-teamFormColor{
+    font-family: Rajdhani;
+    font-size: 20px;
 }
 
 .ptk-teamFormTitleUnderline{
@@ -155,20 +176,24 @@
     display: flex;
     flex-direction: column;
     width: 60%;
-}
-
-.ptk-teamFormLabels{
-    width: 70%;
+    margin-bottom: 10px;
 }
 
 .ptk-teamFormLabels {
     color: $primaryBlue;
     font-size: 25px;
     font-weight: 550;
+    width: 70%;
 }
 
 .ptk-teamBttnsFlex{
     display: flex;
     flex-direction: row;
     gap: 5px;
+}
+
+.ptk-teamBttnsContainer{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
 }

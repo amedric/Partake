@@ -9,6 +9,7 @@
     {% endif %}
 
     <a href="{{ path('app_user_show', {'id': app.user.id}) }}"> {{ app.user.lastname }} {{ app.user.firstname }}</a>
+    <a href="{{ path('app_category_index') }}"> Admin </a>
     <a href="{{ path('app_logout') }}"> Se déconnecter </a>
 {% else %}
     <a href="{{ path('app_login') }}">Se connecter </a>

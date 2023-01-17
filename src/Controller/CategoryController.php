@@ -74,7 +74,8 @@ class CategoryController extends AbstractController
         }
 
         return $this->renderForm('category/edit.html.twig', [
-            'category' => $category,
+            'categories' => $categoryRepository->findAll(),
+            'categoryById' => $categoryRepository->findOneBy(['id' => $category->getId()]),
             'form' => $form,
             'edit' => true,
         ]);
@@ -83,7 +84,7 @@ class CategoryController extends AbstractController
     #[Route('/{id}', name: 'app_category_delete', methods: ['POST'])]
     public function delete(Request $request, Category $category, CategoryRepository $categoryRepository): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$category->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $category->getId(), $request->request->get('_token'))) {
             $categoryRepository->remove($category, true);
         }
 

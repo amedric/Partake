@@ -16,9 +16,7 @@ class CategoryType extends AbstractType
         $builder
             ->add('title', textType::class)
             ->add('categoryColor', ChoiceType::class, [
-                'expanded' => true,
-                'multiple' => false,
-                'placeholder' => false,
+                'placeholder' => 'Choose Team color',
                 'choices' => [
                     'Pink' => 'rgb(255, 180, 180)',
                     'Yellow' => 'rgb(255, 238, 83)',
