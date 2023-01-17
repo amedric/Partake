@@ -16,6 +16,9 @@ class Category
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $title = null;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $category_color = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -29,6 +32,18 @@ class Category
     public function setTitle(?string $title): self
     {
         $this->title = $title;
+
+        return $this;
+    }
+
+    public function getCategoryColor(): ?string
+    {
+        return $this->category_color;
+    }
+
+    public function setCategoryColor(?string $category_color): self
+    {
+        $this->category_color = $category_color;
 
         return $this;
     }

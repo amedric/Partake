@@ -1,3 +1,4 @@
+//---------------------- CSS for generic forms ---------------------------------
 .ptk-formBlock {
     display: flex;
     justify-content: center;
@@ -110,4 +111,89 @@
 .ptk-formIdeaColours{
     gap: 15px;
     font-size: 20px;
+}
+
+//--------------------------------- CSS for Category forms ---------------------------------
+.ptk-teamFormContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 50%;
+    width: 100%;
+}
+
+.ptk-teamFormTitleContainer{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.ptk-teamFormTitle{
+    display: flex;
+    justify-content: center;
+    margin: 0;
+    font-size: 30px;
+    font-weight: 550;
+    width: 10ch;
+    background: linear-gradient(180deg, $primaryWhite 55%, $primaryYellow 45%);
+}
+
+.ptk-teamEditTitle{
+    margin: 0;
+    span {
+        color: $primaryBlue;
+    }
+}
+
+.ptk-teamForm{
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+
+    align-items: center;
+    width: 70%;
+}
+
+.ptk-teamFormTitleInput{
+    border: 1.5px solid $primaryBlue;
+    border-radius: 5px;
+    height: 30px;
+    font-family: Rajdhani;
+    font-size: 20px;
+}
+
+.ptk-teamFormColor{
+    font-family: Rajdhani;
+    font-size: 20px;
+}
+
+.ptk-teamFormTitleUnderline{
+    background: linear-gradient(180deg, $primaryWhite 55%, $primaryGreen 45%);
+}
+
+.ptk-teamFormRow {
+    display: flex;
+    flex-direction: column;
+    width: 60%;
+    margin-bottom: 10px;
+}
+
+.ptk-teamFormLabels {
+    color: $primaryBlue;
+    font-size: 25px;
+    font-weight: 550;
+    width: 70%;
+}
+
+.ptk-teamBttnsFlex{
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+}
+
+.ptk-teamBttnsContainer{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
 }
