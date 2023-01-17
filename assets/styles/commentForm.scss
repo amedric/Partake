@@ -1,0 +1,29 @@
+.ptk-commentFormWidget {
+    display: flex;
+    flex-wrap: wrap !important;
+    word-break: break-word !important;
+    border: 1.5px solid $primaryBlue;
+    border-radius: 5px;
+    height: 10vh;
+    width: 80%;
+    font-family: Rajdhani;
+    font-size: 20px;
+    overflow-y: auto;
+    resize: none;
+    margin: auto;
+    padding-bottom: 10px;
+}
+
+.ptk-commentButton {
+    display: flex;
+    margin: auto;
+    padding: 5px 15px;
+    border-radius: 5px;
+    border-color: $primaryBlue;
+    background-color: $primaryBlue;
+    cursor: pointer;
+    font-family: Rajdhani;
+    font-weight: 600;
+    font-size: 15px;
+    color: $primaryWhite;
+}
