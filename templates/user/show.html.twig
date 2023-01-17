@@ -5,7 +5,6 @@
 {% block body %}
 
 
-
 <div class="userProfile">
     <h1>Profile</h1>
     <table class="userProfileTable">
@@ -47,7 +46,8 @@
     <h2>Projects</h2>
     <div class="projectContainer">
         {% for project in projects %}
-            <div class="projectShowContainer">
+            <a href="{{ path('app_project_show', {id: project.id}) }}">
+            <div class="projectShowContainer" style="opacity: 0.8;">
                 <img src="{{ asset('build/images/bgBlockProject.png') }}" alt="like">
                 <div class="projectTitle">
                     {{ project.title }}
@@ -58,7 +58,11 @@
                     <img src="{{ asset('build/images/view.png') }}" alt="like">
                     {{ project.projectViews }}
                 </div>
-            </div>
+                    {% if project.isArchived == 1 %}
+                    <h4 style="color:red; text-align: center;">Project archived</h4>
+                    {% endif %}
+                </div>
+            </a>
         {% endfor %}
     </div>
     <div class="userShowIdeas">

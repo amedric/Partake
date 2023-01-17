@@ -37,6 +37,7 @@
             <div class="ptk-cardsContainer">
                 {% for project in projects %}
                 {% if category.title == project.category.title %}
+                    {% if project.isArchived != 1 %}
 
                 <a href="{{ path('app_project_show', {'id': project.id}) }}" class="ptk-cardsLink">
                         <div class="ptk-cards">
@@ -61,6 +62,7 @@
                         </div>
                 </a>
 
+                {% endif %}
                 {% endif %}
                 {% endfor %}
             </div>

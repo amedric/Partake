@@ -122,4 +122,30 @@ class ProjectController extends AbstractController
 
         return $this->redirectToRoute('app_project_index', [], Response::HTTP_SEE_OTHER);
     }
+
+    #[Route('/{id}/archived', name: 'app_project_archived', methods: ['GET', 'POST'])]
+    public function archive(Request $request, Project $project, ProjectRepository $projectRepository): Response
+    {
+        if ($this->isCsrfTokenValid('archive' . $project->getId(), $request->request->get('_token'))) {
+            $project->setIsArchived(1);
+            $projectRepository->save($project, true);
+        }
+
+        return $this->redirectToRoute('app_project_show', [
+            'id' => $project->getId(),
+        ], Response::HTTP_SEE_OTHER);
+    }
+
+    #[Route('/{id}/unarchived', name: 'app_project_unarchived', methods: ['GET', 'POST'])]
+    public function unarchive(Request $request, Project $project, ProjectRepository $projectRepository): Response
+    {
+        if ($this->isCsrfTokenValid('unarchive' . $project->getId(), $request->request->get('_token'))) {
+            $project->setIsArchived(0);
+            $projectRepository->save($project, true);
+        }
+
+        return $this->redirectToRoute('app_project_show', [
+            'id' => $project->getId(),
+        ], Response::HTTP_SEE_OTHER);
+    }
 }
