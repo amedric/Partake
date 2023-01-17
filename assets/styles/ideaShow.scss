@@ -4,6 +4,8 @@
     height: 90vh;
     width: 97vw;
 
+
+
     .ptk-ideaShowContainer{
         display: flex;
         flex-direction: column;
@@ -13,10 +15,12 @@
         border: 3px solid $primaryYellow;
         border-radius: 10px;
 
+
         .ptk-ideaCloseContainer{
             display: flex;
             justify-content: space-between;
             padding: 10px 2vw 0 2vw;
+
 
             .ptk-ideaCloseBttn{
                 font-size: 20px;
@@ -95,11 +99,14 @@
         .ptk-ideaCommentsContainer{
             height: 30%;
             border-bottom: 2px solid $primaryBlue;
+            overflow-y: auto;
 
             .ptk-ideaCommentsByUser{
                 display: flex;
                 flex-direction: row;
                 align-items: center;
+                border-bottom: 2px solid $primaryBlue;
+
 
                 .ptk-ideaCommentUser{
                     width: 20%;

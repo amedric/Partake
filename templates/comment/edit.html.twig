@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Comment{% endblock %}
+
+{% block body %}
+
+    <div class="ptk-formBlock">
+        <div class="ptk-formContainer">
+
+            <div class="ptk-formCloseContainer">
+                <a href="{{ path('app_idea_show', {id: comment.idea.id}) }}" class="ptk-formCloseBttn">X</a>
+            </div>
+
+            <div class="ptk-formTitleContainer">
+                <h1 class="ptk-formTitle">Edit comment</h1>
+            </div>
+            <div style="margin-bottom: 15vh;">
+
+            </div>
+
+            {{ include('comment/_form.html.twig', {'button_label': 'Update'}) }}
+
+        </div>
+    </div>
+
+{% endblock %}
