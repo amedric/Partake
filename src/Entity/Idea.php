@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use DateTime;
 
 #[ORM\Entity(repositoryClass: IdeaRepository::class)]
 class Idea
@@ -42,8 +43,8 @@ class Idea
 
     public function __construct()
     {
+        $this->createdAt = new DateTime();
         $this->comments = new ArrayCollection();
-        $this->createdAt = new \DateTime();
     }
 
     public function getId(): ?int
