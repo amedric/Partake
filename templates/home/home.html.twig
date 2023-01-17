@@ -45,21 +45,17 @@
                             </div>
 
                             <div class="ptk-cardStatsContainer">
-                                <div class="ptk-cardIcons">
+                                <div class="ptk-cardIconStats">
                                     <img src="{{ asset('build/images/like.png') }}" alt="like">
-                                    <img src="{{ asset('build/images/idea.png') }}" alt="like">
-                                    <img src="{{ asset('build/images/view.png') }}" alt="like">
+                                    <p class="ptk-cardStatsNo">45</p>
                                 </div>
-                                <div class="ptk-cardStats">
-                                    <p class="ptk-cardStatsNo">25</p>
-                                    <p class="ptk-cardStatsNo">35</p>
-
-                                    <p class="ptk-cardStatsNo">{{ project.projectViews is null ? project.projectViews == 0 : project.projectViews  }}</p>
-
+                                <div class="ptk-cardIconStats">
+                                    <img src="{{ asset('build/images/idea.png') }}" alt="idea">
+                                    <p class="ptk-cardStatsNo">30</p>
                                 </div>
                                 <div class="ptk-cardIconStats">
                                     <img src="{{ asset('build/images/view.png') }}" alt="Views">
-                                    <p class="ptk-cardStatsNo">{{ proj.projectViews }}</p>
+                                    <p class="ptk-cardStatsNo">{{ project.projectViews is null ? project.projectViews == 0 : project.projectViews  }}</p>
                                 </div>
                             </div>
                         </div>
