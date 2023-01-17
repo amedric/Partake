@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ProjectRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -37,6 +39,14 @@ class Project
 
     #[ORM\Column]
     private ?bool $isArchived = null;
+
+    #[ORM\ManyToMany(targetEntity: User::class, mappedBy: 'projects')]
+    private Collection $usersSelectOnProject;
+
+    public function __construct()
+    {
+        $this->usersSelectOnProject = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -136,6 +146,33 @@ class Project
     public function setIsArchived(bool $isArchived): self
     {
         $this->isArchived = $isArchived;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, User>
+     */
+    public function getUsersSelectOnProject(): Collection
+    {
+        return $this->usersSelectOnProject;
+    }
+
+    public function addUsersSelectOnProject(User $usersSelectOnProject): self
+    {
+        if (!$this->usersSelectOnProject->contains($usersSelectOnProject)) {
+            $this->usersSelectOnProject->add($usersSelectOnProject);
+            $usersSelectOnProject->addProject($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUsersSelectOnProject(User $usersSelectOnProject): self
+    {
+        if ($this->usersSelectOnProject->removeElement($usersSelectOnProject)) {
+            $usersSelectOnProject->removeProject($this);
+        }
 
         return $this;
     }
