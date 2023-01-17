@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Project;
 use App\Form\SearchContentType;
 use App\Repository\CategoryRepository;
 use App\Repository\IdeaRepository;
@@ -24,15 +25,16 @@ class HomeController extends AbstractController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $search = $form->getData()['search'];
-            $project = $projectRepository->findLikeProject($search);
-            $category = $categoryRepository->findAll();
+            $projects = $projectRepository->findLikeProject($search);
+            $categories = $categoryRepository->findAll();
         } else {
-            $project = $projectRepository->findAll();
-            $category = $categoryRepository->findAll();
+            $projects = $projectRepository->findAll();
+            $categories = $categoryRepository->findAll();
         }
+
         return $this->render('home/home.html.twig', [
-            'project' => $project,
-            'category' => $category,
+            'projects' => $projects,
+            'categories' => $categories,
             'form' => $form->createView(),
         ]);
     }

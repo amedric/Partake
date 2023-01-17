@@ -8,11 +8,10 @@
     <div class="ptk-ideaShowContainer">
 
         <div class="ptk-ideaCloseContainer">
+            <a href="{{ path('app_project_show', {'id': idea.project.id}) }}" class="ptk-ideaCloseBttn">Close</a>
             {% if user.id == idea.user.id %}
                 <a href="{{ path('app_idea_edit', {'id': idea.id}) }}" class="ptk-ideaCloseBttn">edit</a>
             {% endif %}
-
-            <a href="{{ path('app_project_show', {'id': idea.project.id}) }}" class="ptk-ideaCloseBttn">X</a>
         </div>
 
         <div class="ptk-ideaTitleContainer">
@@ -24,16 +23,20 @@
         </div>
 
         <div class="ptk-ideaInfoContainer">
-                <div class="ptk-ideaInfoIconsContainer">
+            <div class="ptk-cardStatsContainer">
+                <div class="ptk-cardIconStats">
                     <img src="{{ asset('build/images/like.png') }}" class="ptk-ideaInfoIcons" alt="likes">
-                    <img src="{{ asset('build/images/comment.png') }}" class="ptk-ideaInfoIcons" alt="Comments">
-                    <img src="{{ asset('build/images/view.png') }}" class="ptk-ideaInfoIcons" alt="Views">
-                </div>
-                <div class="ptk-ideaInfoStats">
                     <p class="ptk-ideaStatsNo">25</p>
-                    <p class="ptk-ideaStatsNo">35</p>
+                </div>
+                <div class="ptk-cardIconStats">
+                    <img src="{{ asset('build/images/comment.png') }}" class="ptk-ideaInfoIcons" alt="Comments">
+                    <p class="ptk-ideaStatsNo">{{ comments|length }}</p>
+                </div>
+                <div class="ptk-cardIconStats">
+                    <img src="{{ asset('build/images/view.png') }}" class="ptk-ideaInfoIcons" alt="Views">
                     <p class="ptk-ideaStatsNo">{{ idea.ideaViews }}</p>
                 </div>
+            </div>
         </div>
 
         <div class="ptk-ideaFilterContainer">
@@ -43,18 +46,33 @@
         </div>
 
         <div class="ptk-ideaCommentsContainer">
+        {% for comment in comments %}
+            {% if comment.idea.id == idea.id %}
             <div class="ptk-ideaCommentsByUser">
-                <a href="#" class="ptk-ideaCommentUser">Name Name</a>
-                <p class="ptk-ideaComments">Comment goes here - Consectetur vero aspernatur et. Nostrum numquam exercitationem quaerat consequuntur voluptates.</p>
-                <div class="ptk-ideaCommentLikeContainer">
+                <a href="#" class="ptk-ideaCommentUser">{{ comment.user.firstname }} {{ comment.user.lastname }}</a>
+                <p class="ptk-ideaComments">{{ comment.content }}</p>
+                    {% if app.user.id == comment.user.id %}
+                    <a href="{{ path('app_comment_edit', {id: comment.id}) }}">
+                        <img src="{{ asset('build/images/modify-button-25.png') }}" alt="modify">
+                    </a>
+                {{ include('comment/_delete_form.html.twig') }}
+                    {% endif %}
+
+                    <div class="ptk-ideaCommentLikeContainer">
                     <img src="{{ asset('build/images/like.png') }}" class="ptk-ideaCommentLikeIcon" alt="likes">
                     <p class="ptk-ideaCommentLikeNo">25</p>
                 </div>
             </div>
+            {% endif %}
+            {% endfor %}
         </div>
 
+
         <div class="ptk-ideaPostCommentContainer">
-{#            TODO - form to post a comment section#}
+            <h3 style="text-align: center;">Leave a comment</h3>
+
+            {{ include('comment/_form.html.twig') }}
+
         </div>
 
     </div>

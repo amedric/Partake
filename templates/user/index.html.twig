@@ -1,58 +1,43 @@
-{% extends 'base.html.twig' %}
+{% extends 'adminBase.html.twig' %}
 
-{% block title %}User index{% endblock %}
+{% block title %}Admin - Users{% endblock %}
 
-{% block body %}
+{% block adminTitle %}<h1 class="ptk-adminTitle">Users</h1>{% endblock %}
 
-    <div class="ptk-adminBlock">
+{% block adminBody %}
 
-        <div class="ptk-adminContainer">
-
-        <div class="ptk-adminSideMenuContainer">
-            <a href="#" class="ptk-SideMenuLink">Users</a>
-        </div>
-
-        <div class="ptk-adminViewContainer">
-            <div class="ptk-adminTitleContainer">
-                <h1 class="ptk-adminTitle">Users</h1>
-            </div>
-            <div class="ptk-adminViewInfoContainer">
-    <table>
-        <thead>
-            <tr>
-                <th class="ptk-adminTableGap ptk-adminTableHeader">Firstname</th>
-                <th class="ptk-adminTableGap ptk-adminTableHeader">Lastname</th>
-                <th class="ptk-adminTableGap ptk-adminTableHeader">Role</th>
-                <th class="ptk-adminTableGap ptk-adminTableHeader">Team</th>
-                <th class="ptk-adminTableGap ptk-adminTableHeader">Email</th>
-                <th class="ptk-adminTableGap ptk-adminTableHeader">actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for user in users %}
-            <tr class="ptk-adminDataRow">
-                <td class="ptk-adminTableGap ptk-adminTableData">{{ user.firstname }}</td>
-                <td class="ptk-adminTableGap ptk-adminTableData">{{ user.lastname }}</td>
-                <td class="ptk-adminTableGap ptk-adminTableData">{{ user.roles[0] }}</td>
-                <td class="ptk-adminTableGap ptk-adminTableData">{{ user.team }}</td>
-                <td class="ptk-adminTableGap ptk-adminTableData">{{ user.email }}</td>
-                <td class="ptk-adminTableGap ptk-adminTableData">
-                    <a href="{{ path('app_user_edit', {'id': user.id}) }}">Edit</a>
-                    <a href="#">Delete</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="9">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-            </div>
-        </div>
-
-        </div>
+    <div class="ptk-adminViewInfoContainer">
+        <table>
+            <thead>
+                <tr>
+                    <th class="ptk-adminTableGap ptk-adminTableHeader">Firstname</th>
+                    <th class="ptk-adminTableGap ptk-adminTableHeader">Lastname</th>
+                    <th class="ptk-adminTableGap ptk-adminTableHeader">Role</th>
+                    <th class="ptk-adminTableGap ptk-adminTableHeader">Team</th>
+                    <th class="ptk-adminTableGap ptk-adminTableHeader">Email</th>
+                    <th class="ptk-adminTableGap ptk-adminTableHeader">actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in users %}
+                    <tr class="ptk-adminDataRow">
+                        <td class="ptk-adminTableGap ptk-adminTableData">{{ user.firstname }}</td>
+                        <td class="ptk-adminTableGap ptk-adminTableData">{{ user.lastname }}</td>
+                        <td class="ptk-adminTableGap ptk-adminTableData">{{ user.roles[0] }}</td>
+                        <td class="ptk-adminTableGap ptk-adminTableData">{{ user.team }}</td>
+                        <td class="ptk-adminTableGap ptk-adminTableData">{{ user.email }}</td>
+                        <td class="ptk-teamBttns">
+                            <a href="{{ path('app_user_edit', {'id': user.id}) }}" class="ptk-bttns ptk-smlBttn">Edit</a>
+                            {% include '/user/_delete_form.html.twig' %}
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="9">no records found</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
     </div>
 
-{#    <a href="{{ path('app_user_new') }}">Create new</a>#}
 {% endblock %}

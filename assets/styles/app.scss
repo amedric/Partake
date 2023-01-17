@@ -21,10 +21,41 @@ $secondaryRed: rgb(255, 46, 46);
     box-sizing: border-box;
 }
 
+*::-webkit-scrollbar {
+    width: 12px;
+}
+
 body {
     margin: 0;
     padding: 0;
     font-family: Rajdhani;
+
+}
+
+a {
+    text-decoration: none;
+    margin: 0;
+    padding: 0;
+}
+
+// --------------------- Buttons --------------------------------
+.ptk-bttns {
+    display: flex;
+    justify-content: center;
+    padding: 10px 25px;
+    border-radius: 5px;
+    border-color: $primaryBlue;
+    background-color: $primaryBlue;
+    cursor: pointer;
+    font-family: Rajdhani;
+    font-weight: 600;
+    font-size: 15px;
+    color: $primaryWhite;
+}
+
+.ptk-smlBttns {
+    padding: 5px 10px;
+    width: 70px;
 }
 
 // Login position
@@ -143,3 +174,4 @@ body {
 @import "ideaShow.scss";
 @import "pages.scss";
 @import "user.scss";
+@import "commentForm.scss";

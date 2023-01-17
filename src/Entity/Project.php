@@ -20,9 +20,8 @@ class Project
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $content = null;
 
-
     #[ORM\Column(nullable: true)]
-    private ?int $projectViews = null;
+    private ?int $projectViews = 0;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $projectColor = null;
@@ -35,6 +34,9 @@ class Project
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $createdAt = null;
+
+    #[ORM\Column]
+    private ?bool $isArchived = false;
 
     public function getId(): ?int
     {
@@ -122,6 +124,18 @@ class Project
     public function setCreatedAt(?\DateTimeInterface $createdAt): self
     {
         $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    public function isIsArchived(): ?bool
+    {
+        return $this->isArchived;
+    }
+
+    public function setIsArchived(bool $isArchived): self
+    {
+        $this->isArchived = $isArchived;
 
         return $this;
     }

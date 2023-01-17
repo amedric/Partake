@@ -57,10 +57,15 @@ class ProjectController extends AbstractController
         $form = $this->createForm(Project1Type::class, $project);
         $form->handleRequest($request);
 
+        /** @var User $user */
+        $user = $this->getUser();
+
+
         if ($form->isSubmitted() && $form->isValid()) {
+            $project->setUser($user);
             $projectRepository->save($project, true);
 
-            return $this->redirectToRoute('app_project_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_home', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('project/new.html.twig', [
@@ -71,10 +76,16 @@ class ProjectController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_project_show', methods: ['GET'])]
-    public function show(Project $project, IdeaRepository $ideaRepository): Response
-    {
+    public function show(
+        Project $project,
+        IdeaRepository $ideaRepository,
+        ProjectRepository $projectRepository
+    ): Response {
 
         $ideas = $ideaRepository->findBy(['project' => $project->getId()]);
+        $project->setProjectViews($project->getProjectViews() + 1);
+        $projectRepository->save($project, true);
+
         return $this->render('project/show.html.twig', [
             'project' => $project,
             'ideas' => $ideas,

@@ -9,7 +9,7 @@
     display: flex;
     flex-direction: row;
     height: 85vh;
-    border: 3px solid $primaryBlue;
+    border: 3px solid $primaryGreen;
     border-radius: 10px;
 
     .ptk-adminSideMenuContainer{
@@ -20,7 +20,7 @@
         padding-top: 50px;
         width: 150px;
         border-radius: 10px 0 0 10px;
-        border-right: 3px solid $primaryBlue;
+        border-right: 3px solid $primaryGreen;
         background: $primaryWhite;
 
         .ptk-SideMenuLink{
@@ -36,21 +36,30 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        width: 950px;
+        width: 1050px;
         border-radius: 0 10px 10px 0;
         background: $primaryWhite;
 
         .ptk-adminTitle{
             display: flex;
             justify-content: center;
-            width: 6ch;
             color: black;
-            background: linear-gradient(180deg, $primaryWhite 55%, $primaryBlue 45%);
+            background: linear-gradient(180deg, $primaryWhite 55%, $primaryGreen 45%);
         }
 
         .ptk-adminViewInfoContainer{
-            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            height: 90%;
+            width: 100%;
             overflow-y: auto;
+
+            .ptk-teamTable{
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                width: 100%;
+            }
 
             .ptk-adminTableHeader{
                 font-size: 22px;
@@ -63,6 +72,13 @@
             .ptk-adminDataRow{
                 border-bottom: 1.5px solid $primaryBlue;
             }
+
+            .ptk-teamAddEditContainer{
+                display: flex;
+                align-items: center;
+                height: 50%;
+                width: 100%;
+            }
         }
 
         .ptk-adminTableGap{
@@ -71,3 +87,73 @@
         }
     }
 }
+
+.ptk-teamListContainer{
+    display: flex;
+    height: 50%;
+    width: 100%;
+    border-bottom: 3px solid $primaryGreen;
+    overflow-y: auto;
+}
+
+
+.ptk-teamThead{
+    width: 50%;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.ptk-teamTbody{
+    width: 50%;
+}
+
+.ptk-teamTr{
+    display: flex;
+    flex-direction: row;
+}
+
+.ptk-teamTableData{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    font-size: 19px;
+}
+
+.ptk-teamTitleData{
+    display: flex;
+    width: 200px;
+    margin-right: 15px;
+    flex-wrap: wrap;
+}
+
+.ptk-teamColorData{
+    display: flex;
+    align-items: center;
+    width: 150px;
+    margin-right: 10px;
+}
+
+.ptk-teamBttns{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+}
+
+.ptk-teamColorDiv{
+    width: 55px;
+    height: 25px;
+    border-radius: 3px;
+}
+
+.ptk-teamTitleGap{
+    display: flex;
+    gap: 120px;
+}
+
+.ptk-teamTableGap{
+    padding-left: 15px;
+    padding-right: 85px;
+}
+

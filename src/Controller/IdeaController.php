@@ -2,14 +2,19 @@
 
 namespace App\Controller;
 
+use App\Entity\Comment;
 use App\Entity\Idea;
 use App\Entity\Like;
 use App\Entity\Project;
 use App\Entity\User;
+use App\Form\CommentType;
 use App\Form\IdeaType;
 use App\Form\IdeaEditType;
+use App\Repository\CommentRepository;
 use App\Repository\IdeaRepository;
 use App\Repository\LikeRepository;
+use App\Repository\UserRepository;
+use DateTime;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -32,7 +37,6 @@ class IdeaController extends AbstractController
         $idea = new Idea();
         $form = $this->createForm(IdeaType::class, $idea);
         $form->handleRequest($request);
-
         if ($form->isSubmitted() && $form->isValid()) {
             $idea->setUser($this->getUser());
             $idea->setProject($project);
@@ -46,17 +50,46 @@ class IdeaController extends AbstractController
         return $this->renderForm('idea/new.html.twig', [
             'idea' => $idea,
             'form' => $form,
+            'project' => $project,
             'edit' => true,
         ]);
     }
 
-    #[Route('/{id}', name: 'app_idea_show', methods: ['GET'])]
-    public function show(Idea $idea): Response
-    {
+    #[Route('/{id}', name: 'app_idea_show', methods: ['GET', 'POST'])]
+    public function show(
+        Idea $idea,
+        IdeaRepository $ideaRepository,
+        Request $request,
+        CommentRepository $commentRepository
+    ): Response {
         $user = $this->getUser();
-        return $this->render('idea/show.html.twig', [
+        $idea->setIdeaViews($idea->getIdeaViews() + 1);
+        $ideaRepository->save($idea, true);
+
+        $comment = new Comment();
+        $form = $this->createForm(CommentType::class, $comment);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $comment->setUser($this->getUser());
+            $comment->setIdea($idea);
+            $date = new DateTime('now');
+            $comment->setCreatedAt($date);
+            $commentRepository->save($comment, true);
+
+            return $this->redirectToRoute('app_idea_show', [
+                'id' => $idea->getId(),
+            ], Response::HTTP_SEE_OTHER);
+        }
+
+        $comments = $commentRepository->findAll();
+
+        return $this->renderForm('idea/show.html.twig', [
             'idea' => $idea,
             'user' => $user,
+            'form' => $form,
+            'edit' => true,
+            'comments' => $comments,
         ]);
     }
 
