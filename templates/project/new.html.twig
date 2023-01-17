@@ -32,6 +32,10 @@
             {{ form_label(form.content, 'Description', {'label_attr': {'class': 'ptk-formLabels'}}) }}
             {{ form_widget(form.content, {'attr': {'class': 'ptk-formContentInput'}}) }}
         </div>
+        <div class="ptk-formRow ptk-formContainerMargins">
+            {{ form_label(form.usersSelectOnProject, 'Authorize access', {'label_attr': {'class': 'ptk-formLabels'}}) }}
+            {{ form_widget(form.usersSelectOnProject, {'attr': {'class': 'ptk-formContentInput'}}) }}
+        </div>
 
         {{ form_row(form._token) }}
 

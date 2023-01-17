@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -42,6 +44,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $team = null;
+
+    #[ORM\ManyToMany(targetEntity: Project::class, inversedBy: 'usersSelectOnProject')]
+    private Collection $projects;
+
+    public function __construct()
+    {
+        $this->projects = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -137,6 +147,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
+    public function getFullName(): ?string
+    {
+        return $this->lastname . ' ' . $this->firstname;
+    }
+
     public function getAvatar(): ?string
     {
         return $this->avatar;
@@ -169,6 +184,30 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setTeam(?string $team): self
     {
         $this->team = $team;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Project>
+     */
+    public function getProjects(): Collection
+    {
+        return $this->projects;
+    }
+
+    public function addProject(Project $project): self
+    {
+        if (!$this->projects->contains($project)) {
+            $this->projects->add($project);
+        }
+
+        return $this;
+    }
+
+    public function removeProject(Project $project): self
+    {
+        $this->projects->removeElement($project);
 
         return $this;
     }
