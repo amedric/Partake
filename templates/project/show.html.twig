@@ -3,11 +3,17 @@
 {% block title %}Project{% endblock %}
 
 {% block body %}
-
+{% if project.isArchived != 1 %}
     <div class="ptk-titleBlock">
         <div class="ptk-titleContainer">
             <h1 class="ptk-titleHeader">{{ project.title }}</h1>
         </div>
+        {% if project.user.id == app.user.id %}
+        <form method="post" action="{{ path('app_project_archived', {'id': project.id}) }}" onsubmit="return confirm('Are you sure you want to archive this project?');">
+            <input type="hidden" name="_token" value="{{ csrf_token('archive' ~ project.id) }}">
+            <button class="archive-button" type="submit">Archive project</button>
+        </form>
+            {% endif %}
     </div>
 
     <div class="ptk-underTitleBlock">
@@ -64,5 +70,17 @@
                 <a href="{{ path('app_idea_new', {id: project.id}) }}" id="ptk-addIdeaIcon">+</a>
             </div>
         </div>
+    {% else %}
+        <div class="ptk-titleBlock">
+            <div class="ptk-titleContainer">
+                <h1 style="color: red;">This project is archived</h1>
+            </div>
+            <form method="post" action="{{ path('app_project_unarchived', {'id': project.id}) }}" onsubmit="return confirm('Do you want to unarchive this project?');">
+                <input type="hidden" name="_token" value="{{ csrf_token('unarchive' ~ project.id) }}">
+                <button class="archive-button" style="align-items: center;" type="submit">Unarchive project</button>
+            </form>
+        </div>
+
+    {% endif %}
 
 {% endblock %}
