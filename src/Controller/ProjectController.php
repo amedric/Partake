@@ -13,6 +13,7 @@ use App\Repository\CategoryRepository;
 use App\Repository\IdeaRepository;
 use App\Repository\ProjectRepository;
 use App\Repository\UserRepository;
+use phpDocumentor\Reflection\Types\Integer;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -75,16 +76,39 @@ class ProjectController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_project_show', methods: ['GET'])]
+    #[Route('/{id}/{orderBy}', name: 'app_project_show', methods: ['GET', 'POST'])]
     public function show(
         Project $project,
         IdeaRepository $ideaRepository,
-        ProjectRepository $projectRepository
+        ProjectRepository $projectRepository,
+        string $orderBy
     ): Response {
 
-        $ideas = $ideaRepository->findBy(['project' => $project->getId()]);
-        $project->setProjectViews($project->getProjectViews() + 1);
-        $projectRepository->save($project, true);
+        switch ($orderBy) {
+            case 'show':
+                $ideas = $ideaRepository->findBy(['project' => $project->getId()]);
+                $project->setProjectViews($project->getProjectViews() + 1);
+                $projectRepository->save($project, true);
+                break;
+            case 'newest':
+                $ideas = $ideaRepository->findBy(['project' => $project->getId()], ['createdAt' => 'DESC']);
+                break;
+            case 'oldest':
+                $ideas = $ideaRepository->findBy(['project' => $project->getId()], ['createdAt' => 'ASC']);
+                break;
+            case 'likes':
+                $ideas = $projectRepository->findIdeasCountLikes(
+                    $project->getId()
+                );
+            case 'comments':
+                $ideas = $projectRepository->findIdeasCountComments(
+                    $project->getId()
+                );
+                break;
+            case 'views':
+                $ideas = $ideaRepository->findBy(['project' => $project->getId()], ['ideaViews' => 'Desc']);
+                break;
+        }
 
         return $this->render('project/show.html.twig', [
             'project' => $project,

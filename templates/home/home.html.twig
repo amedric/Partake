@@ -39,7 +39,7 @@
                 {% if category.title == project.category.title %}
                     {% if project.isArchived != 1 %}
 
-                <a href="{{ path('app_project_show', {'id': project.id}) }}" class="ptk-cardsLink">
+                <a href="{{ path('app_project_show', {'id': project.id, 'orderBy': 'show'}) }}" class="ptk-cardsLink">
                         <div class="ptk-cards">
                             <div class="ptk-cardTitleContainer">
                                     <h1 class="ptk-cardTitle">{{ project.title|striptags|length > 40 ? project.title|striptags|slice(0, 40) ~ '...' : project.title|striptags }}</h1>
@@ -47,12 +47,8 @@
 
                             <div class="ptk-cardStatsContainer" style="background-color: {{ category.categoryColor }}">
                                 <div class="ptk-cardIconStats">
-                                    <img src="{{ asset('build/images/like.png') }}" alt="like">
+                                    <img src="{{ asset('build/images/idea.png') }}" alt="Ideas">
                                     <p class="ptk-cardStatsNo">45</p>
-                                </div>
-                                <div class="ptk-cardIconStats">
-                                    <img src="{{ asset('build/images/idea.png') }}" alt="idea">
-                                    <p class="ptk-cardStatsNo">30</p>
                                 </div>
                                 <div class="ptk-cardIconStats">
                                     <img src="{{ asset('build/images/view.png') }}" alt="Views">
