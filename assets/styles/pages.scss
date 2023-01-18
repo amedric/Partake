@@ -162,6 +162,22 @@
     width: 180px;
 }
 
+.ptk-leftRightBttn{
+    background-color: transparent;
+    box-shadow: none;
+    border: 0;
+    cursor: pointer;
+}
+
+.ptk-arrowBttn{
+    width: 30px;
+    aspect-ratio: 1/1;
+}
+
+.rightBttn{
+    transform: rotate(180deg);
+}
+
 .ptk-category {
     overflow-wrap: break-word;
     font-style: normal;
@@ -180,27 +196,7 @@
     width: 100%;
     height: 200px;
     padding: 0 18px 18px 0;
-}
-//------------------------------- Custom scrollbar for cards container --------------------------------
-.ptk-cardsContainer::-webkit-scrollbar-track
-{
-    background-color: $primaryGrey;
-}
-
-.ptk-cardsContainer::-webkit-scrollbar
-{
-    height: 6px;
-    background-color: #F5F5F5;
-}
-
-.ptk-cardsContainer::-webkit-scrollbar-thumb
-{
-    background-color: #d2d2d2;
-}
-
-.ptk-cardsContainer::-webkit-scrollbar-thumb:hover
-{
-    background-color: #989898;
+    cursor: grab;
 }
 
 .ptk-cardsLink{
