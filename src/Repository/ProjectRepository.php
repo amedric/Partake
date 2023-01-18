@@ -49,6 +49,81 @@ class ProjectRepository extends ServiceEntityRepository
         return $queryBuilder->getResult();
     }
 
+    public function findProjectDesc(): array
+    {
+        $conn = $this->getEntityManager()->getConnection();
+
+        $sql = '
+            select project.id,
+                   project.title,
+                   project.category_id,
+                   project.content,
+                   project.project_views,
+                   project.project_color,
+                   project.created_at,
+                   count(idea.id) as ideaCount
+            from project
+            left join idea on project.id = idea.project_id
+            group by project.id
+            order by project.created_at desc
+            ';
+        $stmt = $conn->prepare($sql);
+        $resultSet = $stmt->executeQuery();
+
+        // returns an array of arrays (i.e. a raw data set)
+        return $resultSet->fetchAllAssociative();
+    }
+
+    public function findProjectAsc(): array
+    {
+        $conn = $this->getEntityManager()->getConnection();
+
+        $sql = '
+            select project.id,
+                   project.title,
+                   project.category_id,
+                   project.content,
+                   project.project_views,
+                   project.project_color,
+                   project.created_at,
+                   count(idea.id) as ideaCount
+            from project
+            left join idea on project.id = idea.project_id
+            group by project.id
+            order by project.created_at asc
+            ';
+        $stmt = $conn->prepare($sql);
+        $resultSet = $stmt->executeQuery();
+
+        // returns an array of arrays (i.e. a raw data set)
+        return $resultSet->fetchAllAssociative();
+    }
+
+    public function findProjectViewsDesc(): array
+    {
+        $conn = $this->getEntityManager()->getConnection();
+
+        $sql = '
+            select project.id,
+                   project.title,
+                   project.category_id,
+                   project.content,
+                   project.project_views,
+                   project.project_color,
+                   project.created_at,
+                   count(idea.id) as ideaCount
+            from project
+            left join idea on project.id = idea.project_id
+            group by project.id
+            order by project.project_views desc
+            ';
+        $stmt = $conn->prepare($sql);
+        $resultSet = $stmt->executeQuery();
+
+        // returns an array of arrays (i.e. a raw data set)
+        return $resultSet->fetchAllAssociative();
+    }
+
 //    /**
 //     * @return Project[] Returns an array of Project objects
 //     */

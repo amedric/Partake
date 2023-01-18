@@ -13,6 +13,7 @@ use App\Repository\CategoryRepository;
 use App\Repository\IdeaRepository;
 use App\Repository\ProjectRepository;
 use App\Repository\UserRepository;
+use DateTime;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -63,6 +64,8 @@ class ProjectController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $project->setUser($user);
+            $today = new DateTime();
+            $project->setCreatedAt($today);
             $projectRepository->save($project, true);
 
             return $this->redirectToRoute('app_home', [], Response::HTTP_SEE_OTHER);
