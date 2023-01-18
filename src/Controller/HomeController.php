@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Idea;
 use App\Entity\Project;
 use App\Form\SearchContentType;
 use App\Repository\CategoryRepository;
@@ -20,6 +21,7 @@ class HomeController extends AbstractController
         Request $request,
         ProjectRepository $projectRepository,
         CategoryRepository $categoryRepository,
+        IdeaRepository $ideaRepository,
     ): Response {
         $form = $this->createForm(SearchContentType::class);
         $form->handleRequest($request);
@@ -28,7 +30,7 @@ class HomeController extends AbstractController
             $projects = $projectRepository->findLikeProject($search);
             $categories = $categoryRepository->findAll();
         } else {
-            $projects = $projectRepository->findAll();
+            $projects = $ideaRepository->findIdeasCount();
             $categories = $categoryRepository->findAll();
         }
 
@@ -39,44 +41,39 @@ class HomeController extends AbstractController
         ]);
     }
 
-
-    #[Route('/filter_by_popularity', name: 'filter_by_popularity')]
-    public function filterByPopularity(IdeaRepository $ideaRepository): Response
-    {
-        $idea = $ideaRepository->findBy(['id' => 4]);
-        return $this->render('home/filter_by_popularity.html.twig', [
-            'idea' => $idea,
-        ]);
-    }
-
-    #[Route('/filter_by_categories', name: 'filter_by_categories')]
-    public function filterByCategories(CategoryRepository $categoryRepository): Response
-    {
-        $category = $categoryRepository->findAll();
-        return $this->render('home/filter_by_categories.html.twig', [
-            'category' => $category,
-        ]);
-    }
-
-    #[Route('/filter_by_asc', name: 'filter_by_asc')]
-    public function filterByAsc(ProjectRepository $projectRepository, CategoryRepository $categoryRepository): Response
-    {
-        $project = $projectRepository->findBy([], ['createdAt' => 'ASC']);
-        $category = $categoryRepository->findAll();
-        return $this->render('home/filter_by_asc.html.twig', [
-            'project' => $project,
-            'category' => $category,
-        ]);
-    }
-
-    #[Route('/filter_by_desc', name: 'filter_by_desc')]
-    public function filterByDesc(ProjectRepository $projectRepository, CategoryRepository $categoryRepository): Response
-    {
-        $project = $projectRepository->findBy([], ['createdAt' => 'DESC']);
-        $category = $categoryRepository->findAll();
-        return $this->render('home/filter_by_desc.html.twig', [
-            'project' => $project,
-            'category' => $category,
+    #[Route('/{orderBy}', name: 'app_home_orderBy')]
+    public function orderBy(
+        Request $request,
+        ProjectRepository $projectRepository,
+        CategoryRepository $categoryRepository,
+        string $orderBy,
+    ): Response {
+        $form = $this->createForm(SearchContentType::class);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $search = $form->getData()['search'];
+            $projects = $projectRepository->findLikeProject($search);
+            $categories = $categoryRepository->findAll();
+        } else {
+            switch ($orderBy) {
+                case 'newest':
+                    $projects = $projectRepository->findProjectDesc();
+                    $categories = $categoryRepository->findAll();
+                    break;
+                case 'oldest':
+                    $projects = $projectRepository->findProjectAsc();
+                    $categories = $categoryRepository->findAll();
+                    break;
+                case 'views':
+                    $projects = $projectRepository->findProjectViewsDesc();
+                    $categories = $categoryRepository->findAll();
+                    break;
+            }
+        }
+        return $this->render('home/home.html.twig', [
+            'projects' => $projects,
+            'categories' => $categories,
+            'form' => $form->createView(),
         ]);
     }
 }

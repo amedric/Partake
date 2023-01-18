@@ -348,3 +348,25 @@
 .ptk-formHiddenElement{
     display: none;
 }
+
+.archive-button {
+    border-radius: 10px;
+    border-color: $primaryBlue;
+    background-color: $primaryBlue;
+    cursor: pointer;
+    font-family: Rajdhani;
+    font-weight: 600;
+    font-size: 15px;
+    color: $primaryWhite;
+    margin-left: 1vh;
+    align-self: end;
+}
+
+.ptk-project-archived {
+    color: red;
+    display: flex;
+    justify-content: center;
+}
+
+
+
