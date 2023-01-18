@@ -61,6 +61,7 @@ class ProjectRepository extends ServiceEntityRepository
                    project.project_views,
                    project.project_color,
                    project.created_at,
+                   project.is_archived,
                    count(idea.id) as ideaCount
             from project
             left join idea on project.id = idea.project_id
@@ -69,6 +70,32 @@ class ProjectRepository extends ServiceEntityRepository
             ';
         $stmt = $conn->prepare($sql);
         $resultSet = $stmt->executeQuery();
+        
+        // returns an array of arrays (i.e. a raw data set)
+        return $resultSet->fetchAllAssociative();
+    }
+
+  public function findIdeasCountLikes(int $id): array 
+    {
+      $conn = $this->getEntityManager()->getConnection();
+
+        $sql = '
+            select project.id,
+                   idea.id,
+                   idea.title,
+                   idea.content,
+                   idea.idea_color as "ideaColor",
+                   idea.idea_views as "ideaViews",
+                   count(`like`.idea_id) as ideaLikes
+            from project
+            left join idea on project.id = idea.project_id
+            left join `like` on idea.id = `like`.idea_id
+            where project.id = :id
+            group by `like`.idea_id
+            order by ideaLikes desc
+            ';
+        $stmt = $conn->prepare($sql);
+        $resultSet = $stmt->executeQuery(['id' => $id]);
 
         // returns an array of arrays (i.e. a raw data set)
         return $resultSet->fetchAllAssociative();
@@ -86,6 +113,7 @@ class ProjectRepository extends ServiceEntityRepository
                    project.project_views,
                    project.project_color,
                    project.created_at,
+                   project.is_archived,
                    count(idea.id) as ideaCount
             from project
             left join idea on project.id = idea.project_id
@@ -111,6 +139,7 @@ class ProjectRepository extends ServiceEntityRepository
                    project.project_views,
                    project.project_color,
                    project.created_at,
+                   project.is_archived,
                    count(idea.id) as ideaCount
             from project
             left join idea on project.id = idea.project_id
@@ -119,6 +148,32 @@ class ProjectRepository extends ServiceEntityRepository
             ';
         $stmt = $conn->prepare($sql);
         $resultSet = $stmt->executeQuery();
+        
+        // returns an array of arrays (i.e. a raw data set)
+        return $resultSet->fetchAllAssociative();
+    }
+        
+public function findIdeasCountComments(int $id): array
+{
+$conn = $this->getEntityManager()->getConnection();
+
+        $sql = '
+            select project.id,
+                   idea.id,
+                   idea.title,
+                   idea.content,
+                   idea.idea_color as "ideaColor",
+                   idea.idea_views as "ideaViews",
+                   count(comment.idea_id) as ideaComments
+            from project
+            left join idea on project.id = idea.project_id
+            left join comment on idea.id = comment.idea_id
+            where project.id = :id
+            group by comment.idea_id
+            order by ideaComments desc
+            ';
+        $stmt = $conn->prepare($sql);
+        $resultSet = $stmt->executeQuery(['id' => $id]);
 
         // returns an array of arrays (i.e. a raw data set)
         return $resultSet->fetchAllAssociative();

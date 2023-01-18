@@ -5,7 +5,6 @@
 {% block body %}
 
 
-
 <div class="userProfile">
     <h1>Profile</h1>
     <table class="userProfileTable">
@@ -47,23 +46,28 @@
     <h2>Projects</h2>
     <div class="projectContainer">
         {% for project in projects %}
-            <div class="projectShowContainer">
+            <a href="{{ path('app_project_show', {id: project.id}) }}">
+            <div class="projectShowContainer" style="opacity: 0.8;">
                 <img src="{{ asset('build/images/bgBlockProject.png') }}" alt="like">
                 <div class="projectTitle">
                     {{ project.title }}
                 </div>
                 <div class="projectShowCounter">
-                    <img src="{{ asset('build/images/like.png') }}" alt="like">
                     <img src="{{ asset('build/images/idea.png') }}" alt="like">
                     <img src="{{ asset('build/images/view.png') }}" alt="like">
                     {{ project.projectViews }}
                 </div>
-            </div>
+                    {% if project.isArchived == 1 %}
+                    <h4 style="color:red; text-align: center;">Project archived</h4>
+                    {% endif %}
+                </div>
+            </a>
         {% endfor %}
     </div>
     <div class="userShowIdeas">
         <h2>Ideas</h2>
         <div class="ideaContainer">
+            {% set count = 1 %}
             {% for idea in ideas %}
                 <div class="ideaShowContainer">
                     <img src="{{ asset('build/images/bgBlockIdea.png') }}" alt="like">
@@ -71,7 +75,17 @@
                         {{ idea.title }}
                     </div>
                     <div class="ideaShowCounter">
-                        <img src="{{ asset('build/images/like.png') }}" alt="like">
+                        {% if likeIdeaId[count] %}
+                            <a href="{{ path('app_idea_dislike', {'id': idea.id}) }}">
+                                <img src="{{ asset('build/images/blackheart.png') }}" class="ptk-likeIdeaFillIn"
+                                     alt="like"></a>
+                        {% else %}
+                            <a href="{{ path('app_idea_like', {'id': idea.id}) }}">
+                                <img src="{{ asset('build/images/like.png') }}" class="ptk-likeIdea"
+                                     alt="like"></a>
+                        {% endif %}
+                        {{ likes[count] }}
+                        {% set count = count +1 %}
                         <img src="{{ asset('build/images/idea.png') }}" alt="like">
                         <img src="{{ asset('build/images/view.png') }}" alt="like">
                         {{ idea.ideaViews }}

@@ -36,6 +36,7 @@
                 {% for project in projects %}
                 {% if category.id == project.category_id %}
                 <a href="{{ path('app_project_show', {'id': project.id}) }}" class="ptk-cardsLink">
+                    {% if project.is_archived != 1 %}
                         <div class="ptk-cards">
                             <div class="ptk-cardTitleContainer">
                                     <h1 class="ptk-cardTitle">{{ project.title|striptags|length > 40 ? project.title|striptags|slice(0, 40) ~ '...' : project.title|striptags }}</h1>
@@ -50,12 +51,14 @@
                                     <p class="ptk-cardStatsNo">{{ project.ideaCount }}</p>
                                    </div>
                                 <div class="ptk-cardIconStats">
+
                                     <img src="{{ asset('build/images/view.png') }}" alt="Views">
                                     <p class="ptk-cardStatsNo">{{ project.project_views is null ? 0 : project.project_views  }}</p>
                                 </div>
                             </div>
                         </div>
                 </a>
+                {% endif %}
                 {% endif %}
                 {% endfor %}
             </div>

@@ -4,12 +4,15 @@ namespace App\Controller;
 
 use App\Entity\Comment;
 use App\Entity\Idea;
+use App\Entity\Like;
 use App\Entity\Project;
+use App\Entity\User;
 use App\Form\CommentType;
 use App\Form\IdeaType;
 use App\Form\IdeaEditType;
 use App\Repository\CommentRepository;
 use App\Repository\IdeaRepository;
+use App\Repository\LikeRepository;
 use App\Repository\UserRepository;
 use DateTime;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -128,5 +131,30 @@ class IdeaController extends AbstractController
         }
 
         return $this->redirectToRoute('app_idea_index', [], Response::HTTP_SEE_OTHER);
+    }
+
+    #[Route('/{id}/like', name: 'app_idea_like', methods: ['GET','POST'])]
+    public function like(Idea $idea, LikeRepository $likeRepository): Response
+    {
+        $like = new Like();
+        $like->setIdea($idea);
+        $like->setUser($this->getUser());
+        $likeRepository->save($like, true);
+        return $this->redirectToRoute(
+            'app_user_show',
+            ['id' => $this->getUser()->getId()],
+            Response::HTTP_SEE_OTHER
+        );
+    }
+    #[Route('/{id}/dislike', name: 'app_idea_dislike', methods: ['GET','POST'])]
+    public function dislike(LikeRepository $likeRepository): Response
+    {
+        $ideaUser = $likeRepository->findOneBy(['user' => $this->getUser()]);
+        $likeRepository->remove($ideaUser, true);
+        return $this->redirectToRoute(
+            'app_user_show',
+            ['id' => $this->getUser()->getId()],
+            Response::HTTP_SEE_OTHER
+        );
     }
 }
