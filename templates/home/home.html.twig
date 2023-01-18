@@ -33,8 +33,10 @@
             <div class="ptk-categoryContainer">
                 <h1 class="ptk-category">{{ category.title }}</h1>
             </div>
-
-            <div class="ptk-cardsContainer">
+            <div class="ptk-homeCategoryBttns">
+                <button class="ptk-leftRightBttn" id="ptk-leftBttnId" type="button"><img class="ptk-arrowBttn" src="{{ asset('build/images/arrow.png') }}" alt="left"></button>
+            </div>
+            <div class="ptk-cardsContainer" id="ptk-cardsContainerId">
                 {% for project in projects %}
                 {% if category.title == project.category.title %}
 
@@ -59,6 +61,9 @@
 
                 {% endif %}
                 {% endfor %}
+            </div>
+            <div class="ptk-homeCategoryBttns">
+                <button class="ptk-leftRightBttn" id="ptk-rightBttnId" type="button"><img class="ptk-arrowBttn rightBttn" src="{{ asset('build/images/arrow.png') }}" alt="left" id="ptk-rightBttnId"></button>
             </div>
         </div>
     </div>

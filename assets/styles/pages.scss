@@ -162,6 +162,22 @@
     width: 180px;
 }
 
+.ptk-leftRightBttn{
+    background-color: transparent;
+    box-shadow: none;
+    border: 0;
+    cursor: pointer;
+}
+
+.ptk-arrowBttn{
+    width: 30px;
+    aspect-ratio: 1/1;
+}
+
+.rightBttn{
+    transform: rotate(180deg);
+}
+
 .ptk-category {
     overflow-wrap: break-word;
     font-style: normal;
