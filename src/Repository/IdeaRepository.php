@@ -68,6 +68,7 @@ class IdeaRepository extends ServiceEntityRepository
                    project.content,
                    project.project_views,
                    project.project_color,
+                   project.is_archived,
                    count(idea.id) as ideaCount
             from project
             left join idea on project.id = idea.project_id

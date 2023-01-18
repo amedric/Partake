@@ -3,7 +3,7 @@
 {% block title %}Project{% endblock %}
 
 {% block body %}
-{% if project.isArchived != 1 %}
+{% if project.isArchived != true %}
     <div class="ptk-titleBlock">
         <div class="ptk-titleContainer">
             <h1 class="ptk-titleHeader">{{ project.title }}</h1>
