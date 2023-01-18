@@ -64,6 +64,8 @@ class ProjectController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $project->setUser($user);
+            $today = new DateTime();
+            $project->setCreatedAt($today);
             $projectRepository->save($project, true);
 
             return $this->redirectToRoute('app_home', [], Response::HTTP_SEE_OTHER);
