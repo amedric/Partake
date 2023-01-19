@@ -16,8 +16,8 @@
         display: flex;
         flex-direction: column;
         justify-content: flex-start;
-        align-items: center;
-        padding-top: 50px;
+        align-items: flex-start;
+        padding: 50px 15px 15px 25px;
         width: 150px;
         border-radius: 10px 0 0 10px;
         border-right: 3px solid $primaryGreen;
@@ -27,8 +27,12 @@
             margin: 0;
             text-decoration: none;
             font-size: 25px;
-            font-weight: 500;
+            font-weight: 550;
             color: $primaryBlue;
+        }
+
+        .ptk-SideMenuLink:hover{
+            background: linear-gradient(180deg, $primaryWhite 55%, $primaryGreen 45%);
         }
     }
 
@@ -69,10 +73,6 @@
                 font-size: 19px;
             }
 
-            .ptk-adminDataRow{
-                border-bottom: 1.5px solid $primaryBlue;
-            }
-
             .ptk-teamAddEditContainer{
                 display: flex;
                 align-items: center;
@@ -88,6 +88,9 @@
     }
 }
 
+.ptk-adminDataRow{
+    border-bottom: 1.5px solid $primaryGreen;
+}
 
 //----------------------- Team section --------------------------------
 .ptk-teamListContainer{
@@ -103,10 +106,6 @@
     width: 50%;
     display: flex;
     justify-content: flex-start;
-}
-
-.ptk-teamTbody{
-    width: 50%;
 }
 
 .ptk-teamTr{
