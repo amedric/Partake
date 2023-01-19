@@ -1,0 +1,31 @@
+{% extends '/adminBase.html.twig' %}
+
+{% block title %}Admin - Projects{% endblock %}
+
+{% block adminTitle %}<h1 class="ptk-adminTitle">Project ID: {{ project.id }}</h1>{% endblock %}
+
+{% block adminBody %}
+
+    <div class="ptk-adminViewInfoContainer">
+
+        <div>
+            <h2 class="ptk-adminViewLabel">Title:</h2>
+            <p class="ptk-adminViewContent">{{ project.title }}</p>
+        </div>
+        <div>
+            <h2 class="ptk-adminViewLabel">Description:</h2>
+            <p class="ptk-adminViewContent">{{ project.content }}</p>
+        </div>
+        <div>
+            <h2 class="ptk-adminViewLabel">Created by: <span>{{ project.user.fullName }}</span></h2>
+        </div>
+        <div>
+            <h2 class="ptk-adminViewLabel">Created at: <span>{{ project.createdAt ? project.createdAt|date('d-m-Y') : '' }}</span></h2>
+        </div>
+        <div class="ptk-adminViewBttnsContainer">
+            <a href="{{ path('app_admin_project_list') }}" class="btn ptk-bttns ptk-smlBttns">Back</a>
+            {% include '/project/_delete_form.html.twig' %}
+        </div>
+    </div>
+
+{% endblock %}

@@ -15,7 +15,7 @@
                     <th class="ptk-adminTableGap ptk-adminTableHeader">Role</th>
                     <th class="ptk-adminTableGap ptk-adminTableHeader">Team</th>
                     <th class="ptk-adminTableGap ptk-adminTableHeader">Email</th>
-                    <th class="ptk-adminTableGap ptk-adminTableHeader">actions</th>
+                    <th class="ptk-adminTableGap ptk-adminTableHeader">Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -27,7 +27,7 @@
                         <td class="ptk-adminTableGap ptk-adminTableData">{{ user.team }}</td>
                         <td class="ptk-adminTableGap ptk-adminTableData">{{ user.email }}</td>
                         <td class="ptk-teamBttns">
-                            <a href="{{ path('app_user_edit', {'id': user.id}) }}" class="ptk-bttns ptk-smlBttn">Edit</a>
+                            <a href="{{ path('app_user_edit', {'id': user.id}) }}" class="ptk-bttns ptk-smlBttns">Edit</a>
                             {% include '/user/_delete_form.html.twig' %}
                         </td>
                     </tr>
