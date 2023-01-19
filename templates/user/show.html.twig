@@ -46,7 +46,7 @@
     <h2>Projects</h2>
     <div class="projectContainer">
         {% for project in projects %}
-            <a href="{{ path('app_project_show', {id: project.id, 'orderBy': 'show'})}}">
+            <a href="{{ path('app_project_show', {id: project.id, 'orderBy': 'show'}) }}">
             <div class="projectShowContainer" style="opacity: 0.8;">
                 <img src="{{ asset('build/images/bgBlockProject.png') }}" alt="like">
                 <div class="projectTitle">

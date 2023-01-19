@@ -43,6 +43,7 @@ class IdeaController extends AbstractController
 
             return $this->redirectToRoute('app_project_show', [
                 'id' => $project->getId(),
+                'orderBy' => 'show',
             ], Response::HTTP_SEE_OTHER);
         }
 

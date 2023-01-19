@@ -13,6 +13,7 @@ use App\Repository\CategoryRepository;
 use App\Repository\IdeaRepository;
 use App\Repository\ProjectRepository;
 use App\Repository\UserRepository;
+use DateTime;
 use phpDocumentor\Reflection\Types\Integer;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -64,6 +65,8 @@ class ProjectController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $project->setUser($user);
+            $today = new DateTime();
+            $project->setCreatedAt($today);
             $projectRepository->save($project, true);
 
             return $this->redirectToRoute('app_home', [], Response::HTTP_SEE_OTHER);
@@ -83,6 +86,7 @@ class ProjectController extends AbstractController
         ProjectRepository $projectRepository,
         string $orderBy
     ): Response {
+        $ideas = $ideaRepository->findBy(['project' => $project->getId()]);
 
         switch ($orderBy) {
             case 'show':
@@ -100,6 +104,7 @@ class ProjectController extends AbstractController
                 $ideas = $projectRepository->findIdeasCountLikes(
                     $project->getId()
                 );
+                break;
             case 'comments':
                 $ideas = $projectRepository->findIdeasCountComments(
                     $project->getId()
@@ -147,29 +152,31 @@ class ProjectController extends AbstractController
         return $this->redirectToRoute('app_project_index', [], Response::HTTP_SEE_OTHER);
     }
 
-    #[Route('/{id}/archived', name: 'app_project_archived', methods: ['GET', 'POST'])]
+    #[Route('/{id}/show/archived', name: 'app_project_archived', methods: ['GET', 'POST'])]
     public function archive(Request $request, Project $project, ProjectRepository $projectRepository): Response
     {
         if ($this->isCsrfTokenValid('archive' . $project->getId(), $request->request->get('_token'))) {
-            $project->setIsArchived(1);
+            $project->setIsArchived(true);
             $projectRepository->save($project, true);
         }
 
         return $this->redirectToRoute('app_project_show', [
             'id' => $project->getId(),
+            'orderBy' => 'show'
         ], Response::HTTP_SEE_OTHER);
     }
 
-    #[Route('/{id}/unarchived', name: 'app_project_unarchived', methods: ['GET', 'POST'])]
+    #[Route('/{id}/show/unarchived', name: 'app_project_unarchived', methods: ['GET', 'POST'])]
     public function unarchive(Request $request, Project $project, ProjectRepository $projectRepository): Response
     {
         if ($this->isCsrfTokenValid('unarchive' . $project->getId(), $request->request->get('_token'))) {
-            $project->setIsArchived(0);
+            $project->setIsArchived(false);
             $projectRepository->save($project, true);
         }
 
         return $this->redirectToRoute('app_project_show', [
             'id' => $project->getId(),
+            'orderBy' => 'show'
         ], Response::HTTP_SEE_OTHER);
     }
 }
