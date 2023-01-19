@@ -1,0 +1,42 @@
+{% extends '/adminBase.html.twig' %}
+
+{% block title %}Admin - Ideas{% endblock %}
+
+{% block adminTitle %}<h1 class="ptk-adminTitle">Ideas</h1>{% endblock %}
+
+{% block adminBody %}
+
+    <div class="ptk-adminViewInfoContainer">
+        <table>
+            <thead>
+            <tr>
+                <th class="ptk-adminTableGap ptk-adminTableHeader">Title</th>
+                <th class="ptk-adminTableGap ptk-adminTableHeader">Content</th>
+                <th class="ptk-adminTableGap ptk-adminTableHeader">Created At</th>
+                <th class="ptk-adminTableGap ptk-adminTableHeader">Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for idea in ideas %}
+                <tr class="ptk-adminDataRow">
+                    <td class="ptk-adminTableGap ptk-adminTableData">{{ idea.title|striptags|length > 40 ? idea.title|striptags|slice(0, 40) ~ '...' : idea.title|striptags }}</td>
+                    <td class="ptk-adminTableGap ptk-adminTableData">{{ idea.content|striptags|length > 40 ? idea.content|striptags|slice(0, 40) ~ '...' : idea.content|striptags }}</td>
+                    <td class="ptk-adminTableGap ptk-adminTableData">{{ idea.createdAt ? idea.createdAt|date('d-m-Y') : '' }}</td>
+                    <td class="ptk-teamBttns">
+                        <a href="{{ path('app_admin_idea_view', {'id': idea.id}) }}" class="btn ptk-bttns ptk-smlBttns">View</a>
+                        <form method="post" action="{{ path('app_admin_idea_delete', {'id': idea.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
+                            <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ idea.id) }}">
+                            <button class="btn ptk-bttns ptk-smlBttns">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="9">no records found</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+{% endblock %}
