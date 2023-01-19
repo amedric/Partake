@@ -101,7 +101,7 @@ class IdeaController extends AbstractController
         $ideaCreatedBy = $idea->getUser();
 
         if ($ideaCreatedBy === $userId) {
-            $form = $this->createForm(IdeaEditType::class, $idea);
+            $form = $this->createForm(IdeaType::class, $idea);
             $form->handleRequest($request);
 
             if ($form->isSubmitted() && $form->isValid()) {
