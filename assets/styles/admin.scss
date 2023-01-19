@@ -88,6 +88,8 @@
     }
 }
 
+
+//----------------------- Team section --------------------------------
 .ptk-teamListContainer{
     display: flex;
     height: 50%;
@@ -157,3 +159,39 @@
     padding-right: 85px;
 }
 
+//-------------------------- Projects section --------------------------------
+.ptk-adminViewContainer{
+    display: flex;
+    flex-direction: column;
+    padding: 25px;
+}
+
+.ptk-adminViewLabel{
+    margin: 0;
+    color: $primaryBlue;
+    font-size: 25px;
+    font-weight: 550;
+    span {
+        font-weight: normal;
+        color: black;
+        font-size: 20px;
+        margin-left: 15px;
+    }
+}
+
+.ptk-adminViewContent{
+    margin: 0 0 10px 0;
+    padding-left: 10px;
+    border: 1.5px solid $primaryBlue;
+    border-radius: 5px;
+    font-family: Rajdhani;
+    font-size: 20px;
+}
+
+.ptk-adminViewBttnsContainer{
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+    justify-content: center;
+    width: 100%;
+}
