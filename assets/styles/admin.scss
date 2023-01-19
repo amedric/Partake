@@ -92,6 +92,11 @@
     border-bottom: 1.5px solid $primaryGreen;
 }
 
+.ptk-adminCenter{
+    display: inline-list-item;
+    justify-content: center;
+}
+
 //----------------------- Team section --------------------------------
 .ptk-teamListContainer{
     display: flex;
