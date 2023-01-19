@@ -73,6 +73,7 @@ class AdminController extends AbstractController
         if ($this->isCsrfTokenValid('delete' . $idea->getId(), $request->request->get('_token'))) {
             $ideaRepository->remove($idea, true);
         }
+
         return $this->redirectToRoute('app_admin_idea_list', [], Response::HTTP_SEE_OTHER);
     }
 
