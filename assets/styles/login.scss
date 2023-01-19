@@ -67,3 +67,53 @@
 .formLoginLink {
     margin-left: 40px;
 }
+
+@media screen and (max-width: 480px) {
+    .ptk-baseContainer {
+        background-image: url("../images/loginMobile.png");
+        background-position: center;
+    }
+    .ptk-navbarContainer, .ptk-sideContainer, .ptk-blockContainer, .formLoginTitle, .formLoginLink, #formLoginCheckbox, .formTextCheckbox  {
+        display: none;
+    }
+
+    .formLogin {
+        border: none;
+        box-shadow: none;
+        left: 5%;
+        top: 30%;
+    }
+
+    .formLoginBody label {
+        color: $primaryWhite;
+        font-weight: bold;
+    }
+
+    .formLoginBody label {
+        font-size: 40px;
+    }
+
+    .formLoginBody input {
+        width: 300px;
+        height: 50px;
+    }
+    .formLoginRememberMe label {
+        font-size: 25px;
+    }
+
+
+    .formLoginLink a {
+        color: $primaryWhite;
+    }
+    .formLoginBody button {
+        background-color: $primaryWhite;
+        color: $primaryBlue;
+        border-radius: 5px;
+        width: 60%;
+        height: 15%;
+        left: 15%;
+        margin-top: 80px;
+        font-weight: bolder;
+        font-size: 30px;
+    }
+}
