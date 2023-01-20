@@ -18,6 +18,7 @@ class CommentFixtures extends \Doctrine\Bundle\FixturesBundle\Fixture implements
             $comment->setCreatedAt($faker->dateTimeBetween('-6 month'));
             $comment->setUser($this->getReference('user_' . $faker->numberBetween(0, 19)));
             $comment->setProject($this->getReference('project_' . $faker->numberBetween(0, 4)));
+            $comment->setIdea($this->getReference('idea_' . $faker->numberBetween(0, 4)));
             $comment->setCommentViews(1);
             $this->addReference('comment_' . $i, $comment);
             $manager->persist($comment);

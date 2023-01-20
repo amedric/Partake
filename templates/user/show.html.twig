@@ -35,13 +35,21 @@
         </tr>
         </tbody>
     </table>
+    {% if app.user.id is same as (user.id) %}
     <a class="userProfileEdit" href="{{ path('app_user_edit', {'id': user.id}) }}">edit profile</a>
+    {% else %}
+    <a class="userProfileEdit" href="{{ path('app_user_edit', {'id': user.id}) }}"></a>
+    {% endif %}
 </div>
 <div class="userShowProjects">
     {% for user in users %}
         <h2>User</h2>
+        <div>
+    <a class="userLinkColor" href="{{ path('app_user_show', {id: user.id}) }}">
         {{ user.lastname }}
         {{ user.firstname }}
+    </a>
+        </div>
     {% endfor %}
     <h2>Projects</h2>
     <div class="projectContainer">
