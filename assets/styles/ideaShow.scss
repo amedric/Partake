@@ -4,8 +4,6 @@
     height: 90vh;
     width: 97vw;
 
-
-
     .ptk-ideaShowContainer{
         display: flex;
         flex-direction: column;
@@ -14,7 +12,7 @@
         background-color: $primaryWhite;
         border: 3px solid $primaryYellow;
         border-radius: 10px;
-
+        overflow-y: auto;
 
         .ptk-ideaCloseContainer{
             display: flex;
