@@ -2,10 +2,12 @@
 
 namespace App\Controller;
 
+use App\Entity\Comment;
 use App\Entity\Project;
 use App\Entity\Idea;
 use App\Repository\ProjectRepository;
 use App\Repository\IdeaRepository;
+use App\Repository\CommentRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -73,5 +75,35 @@ class AdminController extends AbstractController
         }
 
         return $this->redirectToRoute('app_admin_idea_list', [], Response::HTTP_SEE_OTHER);
+    }
+
+    //    ---------------------------------------- Comment Routes -------------------------------------------------------
+    #[Route('/comment_list', name: 'app_admin_comment_list', methods: ['GET'])]
+    public function commentList(
+        CommentRepository $commentRepository,
+    ): Response {
+        $comments = $commentRepository->findAll();
+        return $this->render('admin/admin_comment_list.html.twig', [
+            'comments' => $comments,
+        ]);
+    }
+
+    #[Route('/comment_view/{id}', name: 'app_admin_comment_view', methods: ['GET'])]
+    public function commentView(
+        Comment $comment,
+        IdeaRepository $ideaRepository,
+    ): Response {
+        return $this->render('admin/admin_comment_view.html.twig', [
+            'comment' => $comment,
+        ]);
+    }
+
+    #[Route('/delete_comment/{id}', name: 'app_admin_comment_delete', methods: ['POST'])]
+    public function delete(Request $request, Comment $comment, CommentRepository $commentRepository): Response
+    {
+        if ($this->isCsrfTokenValid('delete' . $comment->getId(), $request->request->get('_token'))) {
+            $commentRepository->remove($comment, true);
+        }
+        return $this->redirectToRoute('app_admin_comment_list', [], Response::HTTP_SEE_OTHER);
     }
 }
