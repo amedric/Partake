@@ -46,6 +46,7 @@
         flex-direction: row;
         justify-content: space-around;
         align-items: center;
+        transition-duration: 0.2s;
 
         #ptk-addProjectIcon{
             margin: 0;
@@ -75,6 +76,11 @@
     }
 }
 
+.ptk-createProjectContainer:hover {
+    background-color: $primaryYellow;
+    border-radius: 15px 15px;
+}
+
 .ptk-filterBlock{
     display: flex;
     flex-direction: row;
@@ -92,6 +98,11 @@
             text-decoration: None;
         }
     }
+}
+
+.ptk-filterBttns:hover {
+    background-color: $primaryYellow;
+    border-radius: 15px 15px;
 }
 
 .ptk-createdAt{
@@ -211,6 +222,11 @@
     height: 155px;
     text-decoration: none;
     background-color: $primaryWhite;
+    transition: transform .2s;
+}
+
+.ptk-cards:hover{
+    transform: scale(1.05);
 }
 
 .ptk-ideaCards {
@@ -221,6 +237,11 @@
     height: 155px;
     text-decoration: none;
     background-color: $primaryWhite;
+    transition: transform .2s;
+}
+
+.ptk-ideaCards:hover {
+    transform: scale(1.05);
 }
 
 .ptk-cardTitleContainer{
@@ -343,6 +364,13 @@
     font-size: 50px;
     color: $primaryWhite;
     text-decoration: none;
+    transition: transform .2s;
+}
+
+#ptk-addIdeaIcon:hover {
+    background: $primaryWhite;
+    color: $primaryBlue;
+    transform: scale(1.5);
 }
 
 .ptk-formHiddenElement{
