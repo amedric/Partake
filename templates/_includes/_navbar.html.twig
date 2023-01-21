@@ -1,14 +1,16 @@
 {% if app.user %}
-
+    <p class="ptk-logo"><a href="{{ path('app_home') }}">PARTAKE</a></p>
     {% if (form is defined) and (edit is not defined) %}
         {{ form_start(form, {'attr': {'class': 'searchBar'}}) }}
         {{ form_widget(form, {'attr': {'class': 'inputSearchBar'}}) }}
         {{ form_end(form) }}
     {% endif %}
 
-    <a href="{{ path('app_user_show', {'id': app.user.id}) }}"> {{ app.user.lastname }} {{ app.user.firstname }}</a>
-    <a href="{{ path('app_user_index') }}"> Admin </a>
-    <a href="{{ path('app_logout') }}"> Se déconnecter </a>
+    <div>
+    <a href="{{ path('app_user_show', {'id': app.user.id}) }}" class="ptk-navbarLinks"> {{ app.user.lastname }} {{ app.user.firstname }}</a>
+    <a href="{{ path('app_user_index') }}" class="ptk-navbarLinks">Admin</a>
+    <a href="{{ path('app_logout') }}" class="ptk-navbarLinks">Logout</a>
+    </div>
 {% else %}
-    <a href="{{ path('app_login') }}">Se connecter </a>
+    <a href="{{ path('app_login') }}" class="ptk-navbarLinks">Login</a>
 {% endif %}

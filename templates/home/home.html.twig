@@ -2,7 +2,7 @@
 
 {% block title %}Home{% endblock %}
 
-{% block body %}
+{% block header %}
     <div class="ptk-titleBlock">
         <div class="ptk-titleContainer">
         <h1 class="ptk-titleHeader">Projects</h1>
@@ -15,6 +15,7 @@
             <a href="{{ path('app_project_new') }}" id="ptk-createProjectBttn"> Create a project</a>
         </div>
     </div>
+{% endblock %}
 
     <div class="ptk-filterBlock">
         <div class="ptk-filterContainer">
@@ -24,6 +25,7 @@
         </div>
     </div>
 
+{% block body %}
 <div class="ptk-cardsBlock">
 
     {% for category in categories %}
