@@ -53,18 +53,31 @@ class UserController extends AbstractController
         Request $request,
         User $user,
         UserRepository $userRepository,
+        ProjectRepository $projectRepository,
+        IdeaRepository $ideaRepository,
+        LikeRepository $likeRepository,
     ): Response {
         $form = $this->createForm(SearchContentType::class);
         $form->handleRequest($request);
+        $likesIdea = [];
+        $ideaLikeId = [];
         if ($form->isSubmitted() && $form->isValid()) {
             $search = $form->getData()['search'];
+            $ideas = $ideaRepository->findBy(['user' => $user->getId()]);
             $projectsIdeas = $userRepository->findProjectsIdeasForUser($user->getId());
         } else {
+            $ideas = $ideaRepository->findBy(['user' => $user->getId()]);
             $projectsIdeas = $userRepository->findProjectsIdeasForUser($user->getId());
+        }
+        for ($i = 1; $i <= count($ideas); $i++) {
+            $likesIdea[$i] = $likeRepository->count(['idea' => $i]);
+            $ideaLikeId[$i] = $likeRepository->findLikeByUser($user->getId(), $i);
         }
         return $this->render('user/show.html.twig', [
             'user' => $user,
             'projectsIdeas' => $projectsIdeas,
+            'likes' => $likesIdea,
+            'likeIdeaId' => $ideaLikeId,
             'form' => $form->createView(),
         ]);
     }
