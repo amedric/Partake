@@ -31,9 +31,17 @@
     height: 50px;
     background-color: $primaryBlue;
     width: 100vw;
+    margin: auto;
+}
+
+.ptk-containerSpaceBetween{
+    justify-content: space-between;
 }
 
 .ptk-underfiltersContainer{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
     height: 50px;
     background-color: $primaryGrey;
 }

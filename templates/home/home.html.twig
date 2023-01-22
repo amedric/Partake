@@ -43,7 +43,7 @@
                 {% if category.id == project.category_id %}
                     {% if project.is_archived != true %}
                         <a href="{{ path('app_project_show', {'id': project.id,'orderBy': 'show'}) }}" class="ptk-cardsLink">
-                        <div class="ptk-cards">
+                        <div class="ptk-cards ptk-cardMarginRight">
                             <div class="ptk-cardTitleContainer">
                                     <h1 class="ptk-cardTitle">{{ project.title|striptags|length > 40 ? project.title|striptags|slice(0, 40) ~ '...' : project.title|striptags }}</h1>
                             </div>

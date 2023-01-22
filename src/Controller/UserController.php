@@ -53,35 +53,18 @@ class UserController extends AbstractController
         Request $request,
         User $user,
         UserRepository $userRepository,
-        ProjectRepository $projectRepository,
-        IdeaRepository $ideaRepository,
-        LikeRepository $likeRepository,
     ): Response {
         $form = $this->createForm(SearchContentType::class);
         $form->handleRequest($request);
-        $likesIdea = [];
-        $ideaLikeId = [];
         if ($form->isSubmitted() && $form->isValid()) {
             $search = $form->getData()['search'];
-            $projects = $projectRepository->findLikeProject($search);
-            $ideas = $ideaRepository->findLikeIdea($search);
-            $users = $userRepository->findLikeUser($search);
+            $projectsIdeas = $userRepository->findProjectsIdeasForUser($user->getId());
         } else {
-            $projects = $projectRepository->findBy(['user' => $user->getId()]);
-            $ideas = $ideaRepository->findBy(['user' => $user->getId()]);
-            $users = null;
-        }
-        for ($i = 1; $i <= count($ideas); $i++) {
-            $likesIdea[$i] = $likeRepository->count(['idea' => $i]);
-            $ideaLikeId[$i] = $likeRepository->findLikeByUser($user->getId(), $i);
+            $projectsIdeas = $userRepository->findProjectsIdeasForUser($user->getId());
         }
         return $this->render('user/show.html.twig', [
             'user' => $user,
-            'users' => $users,
-            'projects' => $projects,
-            'ideas' => $ideas,
-            'likes' => $likesIdea,
-            'likeIdeaId' => $ideaLikeId,
+            'projectsIdeas' => $projectsIdeas,
             'form' => $form->createView(),
         ]);
     }

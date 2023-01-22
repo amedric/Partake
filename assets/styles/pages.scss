@@ -15,7 +15,6 @@
     color: $primaryWhite;
     width: 7ch;
     background: linear-gradient(180deg, $primaryBlue 55%, $primaryPurple 45%);
-
 }
 
 .ptk-underTitleContainer{
@@ -54,7 +53,9 @@
 .ptk-filterContainer{
     display: flex;
     flex-direction: row;
-    margin-right: 30px;
+    justify-content: flex-end;
+    width: 50%;
+    margin-right: 20px;
 }
 
 .ptk-filterLinks{
@@ -75,7 +76,7 @@
     font-style: normal;
     font-weight: 700;
     font-size: 1.8rem;
-    color: $primaryBlue;
+    color: $secondaryGrey;
 }
 
 .ptk-cardsBlock{
@@ -102,7 +103,7 @@
     font-style: normal;
     font-weight: 700;
     font-size: 1.8rem;
-    color: $primaryBlue;
+    color: $secondaryGrey;
 }
 
 .ptk-leftRightBttn{
@@ -130,19 +131,27 @@
     scrollbar-gutter: stable;
     width: 100%;
     height: 200px;
-    padding: 0 18px 18px 0;
+    padding: 0 15px 0 15px;
     cursor: grab;
+}
+
+.ptk-cardsLink{
+    display: flex;
+    align-items: center;
 }
 
 .ptk-cards {
     position: relative;
-    margin-left: 50px;
     border-radius: 10px;
     width: 215px;
     height: 155px;
     text-decoration: none;
     background-color: $primaryWhite;
     transition: transform .2s;
+}
+
+.ptk-cardMarginRight{
+    margin-right: 25px;
 }
 
 .ptk-cards:hover{
@@ -192,8 +201,73 @@
 
 //-------------------------------- Project page ------------------------------------------------------
 .ptk-ideaTitleHeader{
+    margin: 0;
+    padding: 0 5px 0 5px;
     font-style: normal;
-    font-size: 2rem;
+    font-size: 2.5rem;
+    color: white;
+    background: linear-gradient(180deg, $primaryBlue 55%, $primaryYellow 45%);
+    text-shadow: 2px 0 $primaryBlue, -2px 0 $primaryBlue, 0 2px $primaryBlue, 0 -2px $primaryBlue,
+                1px 1px $primaryBlue, -1px -1px $primaryBlue, 1px -1px $primaryBlue, -1px 1px $primaryBlue;
+}
+
+.ptk-underTitleBlock {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px 0 10px 0;
+    padding: 0 50px 0 50px;
+    width: 100%;
+}
+
+.ptk-projectContent{
+    margin: 0;
+    color: white;
+    font-size: 1.5rem;
+}
+
+.ptk-createdAtContainer{
+    width: 50%;
+}
+
+.ptk-createdAt{
+    display: inline-block;
+    margin: 0;
+    margin-left: 15px;
+    font-weight: 550;
+    font-size: 20px;
+    color: $primaryGrey;
+}
+
+.ptk-addIdeaContainer{
+    margin: 0 15px 0 0;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+#ptk-addIdeaIcon{
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 35px;
+    height: 35px;
+    border-radius: 30px;
+    background: $primaryBlue;
+    font-size: 30px;
+    color: $primaryWhite;
+    text-decoration: none;
+    transition: transform .2s;
+}
+
+.ptk-addIdea{
+    margin: 0 0 0 10px;
+    padding: 10px 0 10px 0;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 1.8rem;
+    color: $primaryBlue;
 }
 
 .ptk-cardIdeaTitleContainer{
@@ -204,7 +278,6 @@
     height: 95px;
     border-radius: 10px 10px 0 0;
 }
-
 
 .ptk-cardIdeaTitle{
     font-style: normal;
@@ -220,20 +293,19 @@
     height: 53%;
     width: 98%;
     margin: 10px 10px 0 10px;
-
 }
 
 .ptk-ideaCardsContainer{
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    width: 90%;
-    overflow-y: auto;
+    padding: 25px 25px 25px 25px;
+    height: 100%;
+    width: 100%;
 }
 
 .ptk-ideaCards {
     position: relative;
-    margin-left: 50px;
     border-radius: 10px;
     width: 225px;
     height: 155px;
@@ -267,6 +339,106 @@
 
 .ptk-ideaStatsNo{
     margin: 0;
+}
+
+//-------------------------------- Profile page ------------------------------------------------------
+.ptk-profileContainer{
+    position: relative;
+    height:200px;
+    width: 700px;
+    background-color: white;
+    border-radius: 10px;
+}
+
+.ptk-profileTitleContainer{
+    margin: 0 0 10px 0;
+    display: flex;
+    justify-content: center;
+}
+
+.ptk-profileHeader{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    padding: 0 5px 0 5px;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 2.5rem;
+    color: $primaryWhite;
+    background: linear-gradient(180deg, $primaryWhite 55%, $primaryPurple 45%);
+    text-shadow: 2px 0 $primaryBlue, -2px 0 $primaryBlue, 0 2px $primaryBlue, 0 -2px $primaryBlue,
+    1px 1px $primaryBlue, -1px -1px $primaryBlue, 1px -1px $primaryBlue, -1px 1px $primaryBlue;
+}
+
+.ptk-profileDetailsContainer{
+    display: flex;
+    flex-direction: row;
+}
+
+.ptk-profileDetailsLeft{
+    height: 100%;
+    width: 50%;
+}
+
+.ptk-profileDetailsRight{
+    height: 100%;
+    width: 50%;
+}
+
+.ptk-profileDetailsRow{
+    display: flex;
+    flex-direction: row;
+}
+
+.ptk-profileLabels{
+    margin: 0 0 10px 10px;
+    font-style: normal;
+    font-weight: 550;
+    font-size: 1.5rem;
+    color: $primaryBlue;
+    width: 125px;
+}
+
+.ptk-profileLabelsR{
+    margin: 0 0 10px 10px;
+    font-style: normal;
+    font-weight: 550;
+    font-size: 1.5rem;
+    color: $primaryBlue;
+    width: 60px;
+}
+
+.ptk-profileDetails{
+    margin: 0 0 10px 10px;
+    font-style: normal;
+    font-size: 1.5rem;
+    color: black;
+}
+
+.ptk-editProfileIcon{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 30px;
+    aspect-ratio: 1/1;
+}
+
+.ptk-profileCardContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    width: 300px;
+    height: 200px;
+}
+
+.ptk-profileCardTypeLabel{
+    margin: 0;
+    font-style: normal;
+    font-weight: 550;
+    font-size: 1.5rem;
+    color: #adadad;
 }
 
 //.ptk-titleBlock{
