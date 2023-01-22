@@ -18,7 +18,7 @@
 
 }
 
-.ptk-createProjectContainer{
+.ptk-underTitleContainer{
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -145,6 +145,10 @@
     transition: transform .2s;
 }
 
+.ptk-cards:hover{
+    transform: scale(1.05);
+}
+
 .ptk-cardTitleContainer{
     display: flex;
     justify-content: center;
@@ -186,6 +190,84 @@
     color: black;
 }
 
+//-------------------------------- Project page ------------------------------------------------------
+.ptk-ideaTitleHeader{
+    font-style: normal;
+    font-size: 2rem;
+}
+
+.ptk-cardIdeaTitleContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 95px;
+    border-radius: 10px 10px 0 0;
+}
+
+
+.ptk-cardIdeaTitle{
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    padding: 5px;
+    color: black;
+}
+
+.ptk-ideaCardsBlock{
+    display: flex;
+    flex-direction: row;
+    height: 53%;
+    width: 98%;
+    margin: 10px 10px 0 10px;
+
+}
+
+.ptk-ideaCardsContainer{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 90%;
+    overflow-y: auto;
+}
+
+.ptk-ideaCards {
+    position: relative;
+    margin-left: 50px;
+    border-radius: 10px;
+    width: 225px;
+    height: 155px;
+    text-decoration: none;
+    background-color: $primaryWhite;
+    transition: transform .2s;
+}
+
+.ptk-ideaCards:hover {
+    transform: scale(1.05);
+}
+
+.ptk-cardIdeaStatsContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 50px;
+    border-radius: 0 0 10px 10px;
+}
+
+.ptk-ideaCardIconStats{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.ptk-ideaInfoIcons{
+    width: 17px;
+    height: 17px;
+}
+
+.ptk-ideaStatsNo{
+    margin: 0;
+}
 
 //.ptk-titleBlock{
 //    display: flex;
