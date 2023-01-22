@@ -79,8 +79,9 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
                    count(i.id) as counts,
                     c1.category_color as color,
                    p.created_at as createdAt,
-                    "likes"
-            from project as p
+                    "likes",
+                    "liked"
+                    from project as p
                 left join category as c1 on p.category_id = c1.id
             left join idea as i on p.id = i.project_id
             where p.user_id = :id
@@ -93,7 +94,12 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
                    count(c2.idea_id),
                    i1.idea_color,
                    i1.created_at,
-                   count(l.idea_ID) as likes
+                   count(l.idea_ID) as likes,
+                   (select count(l2.user_id)
+	                    FROM idea as i2
+                        left join `like` as l2 on i2.id = l2.idea_id
+                        where l2.user_id = :id and l2.idea_id = i1.id
+	                    group by i1.id)
             FROM idea as i1
                 left join `like` as l on i1.id = l.idea_id
             left join comment as c2 on i1.id = c2.idea_id

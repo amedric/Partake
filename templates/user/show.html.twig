@@ -60,15 +60,9 @@
                                     <div class="ptk-cardIdeaStatsContainer">
                                         <div class="ptk-cardStatsContainer">
                                             <div class="ptk-cardIconStats">
-                                                {% if likeIdeaId[count] %}
-                                                    <a href="{{ path('app_idea_dislike', {'id': idea.id}) }}">
-                                                        <img src="{{ asset('build/images/blackheart.png') }}" class="ptk-ideaInfoIcons" alt="like">
-                                                    </a>
-                                                {% else %}
-                                                    <a href="{{ path('app_idea_like', {'id': idea.id}) }}">
-                                                        <img src="{{ asset('build/images/like.png') }}" class="ptk-likeIdea" alt="like">
-                                                    </a>
-                                                {% endif %}
+                                                <a href="{{ path('app_idea_like', {'id': projectIdea.id}) }}">
+                                                    <img src="{{ asset('build/images/like.png') }}" class="ptk-likeIdea" alt="like">
+                                                </a>
                                                 <p class="ptk-cardStatsNo">{{ projectIdea.likes }}</p>
                                             </div>
                                             <div class="ptk-cardIconStats">
