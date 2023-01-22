@@ -60,9 +60,26 @@
                                     <div class="ptk-cardIdeaStatsContainer">
                                         <div class="ptk-cardStatsContainer">
                                             <div class="ptk-cardIconStats">
-                                                <a href="{{ path('app_idea_like', {'id': projectIdea.id}) }}">
-                                                    <img src="{{ asset('build/images/like.png') }}" class="ptk-likeIdea" alt="like">
-                                                </a>
+{#                                                {% if likeIdeaId[count] %}#}
+{#                                                    <a href="{{ path('app_idea_dislike', {'id': idea.id}) }}">#}
+{#                                                        <img src="{{ asset('build/images/blackheart.png') }}" class="ptk-likeIdeaFillIn"#}
+{#                                                             alt="like"></a>#}
+{#                                                {% else %}#}
+{#                                                    <a href="{{ path('app_idea_like', {'id': idea.id}) }}">#}
+{#                                                        <img src="{{ asset('build/images/like.png') }}" class="ptk-likeIdea"#}
+{#                                                             alt="like"></a>#}
+{#                                                {% endif %}#}
+{#                                                {{ likes[count] }}#}
+{#                                                {% set count = count +1 %}#}
+                                                {% if projectIdea.liked == 1 %}
+                                                    <a href="{{ path('app_idea_dislike', {'id': projectIdea.id}) }}" class="ptk-cardsLink">
+                                                        <img src="{{ asset('build/images/blackheart.png') }}" class="ptk-ideaInfoIcons" alt="Dislike">
+                                                    </a>
+                                                {% else %}
+                                                    <a href="{{ path('app_idea_like', {'id': projectIdea.id}) }}" class="ptk-cardsLink">
+                                                        <img src="{{ asset('build/images/like.png') }}" class="ptk-ideaInfoIcons" alt="Like">
+                                                    </a>
+                                                {% endif %}
                                                 <p class="ptk-cardStatsNo">{{ projectIdea.likes }}</p>
                                             </div>
                                             <div class="ptk-cardIconStats">
@@ -112,106 +129,3 @@
 
     </div>
 {% endblock %}
-
-
-{#{% block body %}#}
-
-
-{#<div class="userProfile">#}
-{#    <h1>Profile</h1>#}
-{#    <table class="userProfileTable">#}
-{#        <tbody>#}
-{#        <tr class="userProfileCol1">#}
-{#            <th>{% if user.avatar is null %}#}
-{#                    <img src="{{ asset('build/images/avatar_defaut.png') }}" alt="avatar_defaut">#}
-{#                {% endif %}#}
-{#                {{ user.avatar }}#}
-{#            </th>#}
-{#        </tr>#}
-{#        <tr class="userProfileCol2">#}
-{#            <th>Firstname:</th>#}
-{#            <td>{{ user.firstname }}</td>#}
-{#        </tr>#}
-{#        <tr class="userProfileCol2">#}
-{#            <th>Lastname:</th>#}
-{#            <td>{{ user.lastname }}</td>#}
-{#        </tr>#}
-{#        <tr class="userProfileCol2">#}
-{#            <th>Email:</th>#}
-{#            <td>{{ user.email }}</td>#}
-{#        </tr>#}
-
-{#        <tr class="userProfileCol3">#}
-{#            <th>Birthday:</th>#}
-{#            <td>{{ user.birthday ? user.birthday|date('Y-m-d') : '' }}</td>#}
-{#        </tr>#}
-{#        </tbody>#}
-{#    </table>#}
-{#    {% if app.user.id is same as (user.id) %}#}
-{#    <a class="userProfileEdit" href="{{ path('app_user_edit', {'id': user.id}) }}">edit profile</a>#}
-{#    {% else %}#}
-{#    <a class="userProfileEdit" href="{{ path('app_user_edit', {'id': user.id}) }}"></a>#}
-{#    {% endif %}#}
-{#</div>#}
-{#<div class="userShowProjects">#}
-{#    {% for user in users %}#}
-{#        <h2>User</h2>#}
-{#        <div>#}
-{#    <a class="userLinkColor" href="{{ path('app_user_show', {id: user.id}) }}">#}
-{#        {{ user.lastname }}#}
-{#        {{ user.firstname }}#}
-{#    </a>#}
-{#        </div>#}
-{#    {% endfor %}#}
-{#    <h2>Projects</h2>#}
-{#    <div class="projectContainer">#}
-{#        {% for project in projects %}#}
-{#            <a href="{{ path('app_project_show', {id: project.id, 'orderBy': 'show'}) }}">#}
-{#            <div class="projectShowContainer" style="opacity: 0.8;">#}
-{#                <img src="{{ asset('build/images/bgBlockProject.png') }}" alt="like">#}
-{#                <div class="projectTitle">#}
-{#                    {{ project.title }}#}
-{#                </div>#}
-{#                <div class="projectShowCounter">#}
-{#                    <img src="{{ asset('build/images/idea.png') }}" alt="like">#}
-{#                    <img src="{{ asset('build/images/view.png') }}" alt="like">#}
-{#                    {{ project.projectViews }}#}
-{#                </div>#}
-{#                    {% if project.isArchived == 1 %}#}
-{#                    <h4 style="color:red; text-align: center;">Project archived</h4>#}
-{#                    {% endif %}#}
-{#                </div>#}
-{#            </a>#}
-{#        {% endfor %}#}
-{#    </div>#}
-{#    <div class="userShowIdeas">#}
-{#        <h2>Ideas</h2>#}
-{#        <div class="ideaContainer">#}
-{#            {% set count = 1 %}#}
-{#            {% for idea in ideas %}#}
-{#                <div class="ideaShowContainer">#}
-{#                    <img src="{{ asset('build/images/bgBlockIdea.png') }}" alt="like">#}
-{#                    <div class="ideaTitle">#}
-{#                        {{ idea.title }}#}
-{#                    </div>#}
-{#                    <div class="ideaShowCounter">#}
-{#                        {% if likeIdeaId[count] %}#}
-{#                            <a href="{{ path('app_idea_dislike', {'id': idea.id}) }}">#}
-{#                                <img src="{{ asset('build/images/blackheart.png') }}" class="ptk-likeIdeaFillIn"#}
-{#                                     alt="like"></a>#}
-{#                        {% else %}#}
-{#                            <a href="{{ path('app_idea_like', {'id': idea.id}) }}">#}
-{#                                <img src="{{ asset('build/images/like.png') }}" class="ptk-likeIdea"#}
-{#                                     alt="like"></a>#}
-{#                        {% endif %}#}
-{#                        {{ likes[count] }}#}
-{#                        {% set count = count +1 %}#}
-{#                        <img src="{{ asset('build/images/idea.png') }}" alt="like">#}
-{#                        <img src="{{ asset('build/images/view.png') }}" alt="like">#}
-{#                        {{ idea.ideaViews }}#}
-{#                    </div>#}
-{#                </div>#}
-{#            {% endfor %}#}
-{#        </div>#}
-{#    </div>#}
-{#    {% endblock %}#}
