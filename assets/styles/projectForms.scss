@@ -145,6 +145,8 @@
     font-weight: 550;
     width: 10ch;
     background: linear-gradient(180deg, $primaryWhite 55%, $primaryYellow 45%);
+    text-shadow: 2px 0 $primaryBlue, -2px 0 $primaryBlue, 0 2px $primaryBlue, 0 -2px $primaryBlue,
+                1px 1px $primaryBlue, -1px -1px $primaryBlue, 1px -1px $primaryBlue, -1px 1px $primaryBlue;
 }
 
 .ptk-teamEditTitle{

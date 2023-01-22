@@ -1,11 +1,190 @@
+.ptk-titleContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
+.ptk-titleHeader{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 4.5rem;
+    color: $primaryWhite;
+    width: 7ch;
+    background: linear-gradient(180deg, $primaryBlue 55%, $primaryPurple 45%);
 
+}
 
+.ptk-createProjectContainer{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
 
+#ptk-addProjectIcon{
+    margin: 0;
+    margin-right: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 35px;
+    height: 35px;
+    border-radius: 25px;
+    background: $primaryPurple;
+    font-size: 35px;
+    color: $primaryGrey;
+}
 
+#ptk-createProjectLink{
+    font-style: normal;
+    font-weight: 700;
+    font-size: 2.3rem;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    letter-spacing: 0.15em;
+    color: $primaryGrey;
+    text-decoration: none;
+}
 
+.ptk-filterContainer{
+    display: flex;
+    flex-direction: row;
+    margin-right: 30px;
+}
 
+.ptk-filterLinks{
+    font-style: normal;
+    font-weight: 600;
+    font-size: 1.3rem;
+    color: $primaryGrey;
+}
 
+.ptk-filterLinks:hover {
+    background-color: $primaryYellow;
+    border-radius: 15px 15px;
+}
+
+.ptk-blockDescription{
+    margin: 0 0 0 10px;
+    padding: 10px 0 10px 0;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 1.8rem;
+    color: $primaryBlue;
+}
+
+.ptk-cardsBlock{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    margin: 10px;
+    overflow-y: auto;
+}
+
+.ptk-categorySection{
+    display: flex;
+    flex-direction: Row;
+    align-items: center;
+}
+
+.ptk-categoryContainer {
+    margin-right: 10px;
+    width: 180px;
+}
+
+.ptk-category {
+    overflow-wrap: break-word;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 1.8rem;
+    color: $primaryBlue;
+}
+
+.ptk-leftRightBttn{
+    background-color: transparent;
+    box-shadow: none;
+    border: 0;
+    cursor: pointer;
+}
+
+.ptk-arrowBttn{
+    width: 30px;
+    aspect-ratio: 1/1;
+}
+
+.rightBttn{
+    transform: rotate(180deg);
+}
+
+.ptk-cardsContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scrollbar-gutter: stable;
+    width: 100%;
+    height: 200px;
+    padding: 0 18px 18px 0;
+    cursor: grab;
+}
+
+.ptk-cards {
+    position: relative;
+    margin-left: 50px;
+    border-radius: 10px;
+    width: 215px;
+    height: 155px;
+    text-decoration: none;
+    background-color: $primaryWhite;
+    transition: transform .2s;
+}
+
+.ptk-cardTitleContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 95px;
+    width: 215px;
+    background-color: $primaryWhite;
+    border-radius: 10px 10px 0 0;
+}
+
+.ptk-cardTitle{
+    margin: 0;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 24px;
+    color: black;
+}
+
+.ptk-cardStatsContainer{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    height: 65px;
+    width: 215px;
+    background-color: $primaryWhite;
+    border-radius: 0 0 10px 10px;
+}
+
+.ptk-cardIconStats{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.ptk-cardStatsNo{
+    margin: 0;
+    color: black;
+}
 
 
 //.ptk-titleBlock{

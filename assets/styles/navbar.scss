@@ -21,11 +21,12 @@
     align-items: center;
     text-align: center;
     letter-spacing: 0.15em;
-    color: $primaryWhite;
+    color: $primaryGrey;
 }
 
 .ptk-navbarLinks{
-    color: white;
+    font-weight: 550;
+    color: $primaryGrey;
 }
 
 .ptk-navbarContainer a:hover{
@@ -53,3 +54,6 @@
     border: none;
 }
 
+.ptk-navbarLinksContainer{
+    margin-right: 30px;
+}

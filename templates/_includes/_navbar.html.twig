@@ -6,11 +6,14 @@
         {{ form_end(form) }}
     {% endif %}
 
-    <div>
+    <div class="ptk-navbarLinksContainer">
     <a href="{{ path('app_user_show', {'id': app.user.id}) }}" class="ptk-navbarLinks"> {{ app.user.lastname }} {{ app.user.firstname }}</a>
     <a href="{{ path('app_user_index') }}" class="ptk-navbarLinks">Admin</a>
     <a href="{{ path('app_logout') }}" class="ptk-navbarLinks">Logout</a>
     </div>
 {% else %}
-    <a href="{{ path('app_login') }}" class="ptk-navbarLinks">Login</a>
+    <p class="ptk-logo"><a href="{{ path('app_home') }}">PARTAKE</a></p>
+    <div class="ptk-navbarLinksContainer">
+        <a href="{{ path('app_login') }}" class="ptk-navbarLinks">Login</a>
+    </div>
 {% endif %}
