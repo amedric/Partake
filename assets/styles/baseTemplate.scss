@@ -50,7 +50,15 @@
     width: 100vw;
 }
 
-
+//------------------- Admin Base Template -------------------------------------------------------
+.ptk-adminHeaderContainer{
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    height: 150px;
+    background-color: $primaryBlue;
+    width: 100vw;
+}
 
 
 
