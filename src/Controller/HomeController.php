@@ -54,6 +54,7 @@ class HomeController extends AbstractController
         Request $request,
         ProjectRepository $projectRepository,
         CategoryRepository $categoryRepository,
+        ChartStats $chartStats,
         string $orderBy,
     ): Response {
         $form = $this->createForm(SearchContentType::class);
@@ -78,10 +79,19 @@ class HomeController extends AbstractController
                     break;
             }
         }
+        $projectChart1 = $chartStats->getMobileProjectChart1();
+        $projectChart2 = $chartStats->getMobileProjectChart2();
+        $ideaChart1 = $chartStats->getMobileIdeaChart1();
+        $ideaChart2 = $chartStats->getMobileIdeaChart2();
+
         return $this->render('home/home.html.twig', [
             'projects' => $projects,
             'categories' => $categories,
             'form' => $form->createView(),
+            'projectChart1' => $projectChart1,
+            'ideaChart1' => $ideaChart1,
+            'projectChart2' => $projectChart2,
+            'ideaChart2' => $ideaChart2,
         ]);
     }
 }

@@ -1,8 +1,36 @@
 @media screen and (max-width: 480px) {
+    .mobile-container {
+        display: block;
+    }
+    .ptk-headerContainer {
+        height: 15vh;
+        margin-bottom: 5vh;
+        .ptk-titleHeader {
+            display: none;
+        }
+    }
+
     .ptk-Charts {
         display: flex;
         flex-direction: column;
         background-color: $primaryGrey;
+    }
+
+    #ptk-createProjectLink{
+        display: none;
+    }
+    #ptk-addProjectIcon{
+        display: none;
+    }
+    .ptk-filtersContainer {
+        display: none;
+    }
+    .ptk-underfiltersContainer {
+        display: none;
+    }
+
+    .ptk-titleHeader {
+        font-size: 40px;
     }
     .ptk-titleBlock .ptk-titleContainer {
         height: 20px;
@@ -60,14 +88,13 @@
 
     .ptk-mobileNavbar {
         display: flex;
-        justify-content: space-evenly;
-        background-image: url("../images/loginMobile.png");
-        background-position: center;
+        justify-content: space-between;
     }
 
     .ptk-mobileNavbar a {
         text-decoration: none;
         color: $primaryWhite;
+        padding: 10px;
     }
 
     // SWITCH TOGGLE BUTTON
@@ -138,6 +165,7 @@
         justify-content: flex-end;
         margin-right: 1vw;
         margin-bottom: 1vh;
+        margin-top: 2vh;
     }
 }
 
