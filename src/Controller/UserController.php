@@ -63,13 +63,11 @@ class UserController extends AbstractController
         $ideaLikeId = [];
         if ($form->isSubmitted() && $form->isValid()) {
             $search = $form->getData()['search'];
-            $projects = $projectRepository->findLikeProject($search);
-            $ideas = $ideaRepository->findLikeIdea($search);
-            $users = $userRepository->findLikeUser($search);
-        } else {
-            $projects = $projectRepository->findBy(['user' => $user->getId()]);
             $ideas = $ideaRepository->findBy(['user' => $user->getId()]);
-            $users = null;
+            $projectsIdeas = $userRepository->findProjectsIdeasForUser($user->getId());
+        } else {
+            $ideas = $ideaRepository->findBy(['user' => $user->getId()]);
+            $projectsIdeas = $userRepository->findProjectsIdeasForUser($user->getId());
         }
         for ($i = 1; $i <= count($ideas); $i++) {
             $likesIdea[$i] = $likeRepository->count(['idea' => $i]);
@@ -77,9 +75,7 @@ class UserController extends AbstractController
         }
         return $this->render('user/show.html.twig', [
             'user' => $user,
-            'users' => $users,
-            'projects' => $projects,
-            'ideas' => $ideas,
+            'projectsIdeas' => $projectsIdeas,
             'likes' => $likesIdea,
             'likeIdeaId' => $ideaLikeId,
             'form' => $form->createView(),

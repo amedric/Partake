@@ -18,20 +18,22 @@
     </head>
     <body>
 
-    <div class="ptk-baseContainer">
-        <div class="ptk-navbarContainer">
-            {% include '/_includes/_navbar.html.twig' %}
+        <div class="ptk-stickyContainer">
+            <div class="ptk-navbarContainer">
+                {% include '/_includes/_navbar.html.twig' %}
+            </div>
+            <div class="ptk-headerContainer">
+                {% block header %}{% endblock %}
+            </div>
+            <div class="ptk-filtersContainer">
+                {% block filters %}{% endblock %}
+            </div>
+            <div class="ptk-underfiltersContainer">
+                {% block underFilters %}{% endblock %}
+            </div>
         </div>
-        <div class="ptk-sideContainer">
-            <p class="ptk-logo"><a href="{{ path('app_home') }}">PARTAKE</a></p>
+        <div class="ptk-bodyContainer">
+            {% block body %}{% endblock %}
         </div>
-        <div class="ptk-blockContainer">
-        </div>
-    </div>
-
-    <div class="ptk-bodyContainer">
-        {% block body %}{% endblock %}
-    </div>
-
     </body>
 </html>
