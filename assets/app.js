@@ -11,3 +11,5 @@ import './styles/app.scss';
 // start the Stimulus application
 import './bootstrap';
 import '/assets/js/horizontalScroll.js';
+import '/assets/js/charts.js';
+

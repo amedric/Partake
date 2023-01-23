@@ -3,6 +3,7 @@
 {% block title %}Home{% endblock %}
 
 {% block header %}
+    {% include '/_includes/_mobileNavbar.html.twig' %}
     <div class="ptk-titleContainer">
         <h1 class="ptk-titleHeader">Projects</h1>
     </div>
@@ -25,7 +26,9 @@
 {% endblock %}
 
 {% block body %}
-<div class="ptk-cardsBlock">
+    {% include '/_includes/_mobileCharts.html.twig' %}
+
+    <div class="ptk-cardsBlock">
 
     {% for category in categories %}
     <div class="ptk-categoryCardsContainer">

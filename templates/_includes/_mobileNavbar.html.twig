@@ -1,0 +1,6 @@
+{% if app.user %}
+<div class="ptk-mobileNavbar">
+    <a href="{{ path('app_user_show', {'id': app.user.id}) }}"> {{ app.user.lastname }} {{ app.user.firstname }}</a>
+    <a href="{{ path('app_logout') }}"> Se déconnecter </a>
+    {% endif %}
+</div>

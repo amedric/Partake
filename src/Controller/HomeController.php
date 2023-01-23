@@ -2,12 +2,11 @@
 
 namespace App\Controller;
 
-use App\Entity\Idea;
-use App\Entity\Project;
 use App\Form\SearchContentType;
 use App\Repository\CategoryRepository;
 use App\Repository\IdeaRepository;
 use App\Repository\ProjectRepository;
+use App\Service\ChartStats;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -22,6 +21,7 @@ class HomeController extends AbstractController
         ProjectRepository $projectRepository,
         CategoryRepository $categoryRepository,
         IdeaRepository $ideaRepository,
+        ChartStats $chartStats
     ): Response {
         $form = $this->createForm(SearchContentType::class);
         $form->handleRequest($request);
@@ -33,11 +33,19 @@ class HomeController extends AbstractController
             $projects = $ideaRepository->findIdeasCount();
             $categories = $categoryRepository->findAll();
         }
+        $projectChart1 = $chartStats->getMobileProjectChart1();
+        $projectChart2 = $chartStats->getMobileProjectChart2();
+        $ideaChart1 = $chartStats->getMobileIdeaChart1();
+        $ideaChart2 = $chartStats->getMobileIdeaChart2();
 
         return $this->render('home/home.html.twig', [
             'projects' => $projects,
             'categories' => $categories,
             'form' => $form->createView(),
+            'projectChart1' => $projectChart1,
+            'ideaChart1' => $ideaChart1,
+            'projectChart2' => $projectChart2,
+            'ideaChart2' => $ideaChart2,
         ]);
     }
 
