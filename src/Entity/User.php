@@ -48,6 +48,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\ManyToMany(targetEntity: Project::class, inversedBy: 'usersSelectOnProject')]
     private Collection $projects;
 
+    #[ORM\ManyToOne]
+    private ?Category $category = null;
+
     public function __construct()
     {
         $this->projects = new ArrayCollection();
@@ -208,6 +211,30 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function removeProject(Project $project): self
     {
         $this->projects->removeElement($project);
+
+        return $this;
+    }
+
+    public function getCategoryId(): ?int
+    {
+        return $this->category_id;
+    }
+
+    public function setCategoryId(?int $category_id): self
+    {
+        $this->category_id = $category_id;
+
+        return $this;
+    }
+
+    public function getCategory(): ?Category
+    {
+        return $this->category;
+    }
+
+    public function setCategory(?Category $category): self
+    {
+        $this->category = $category;
 
         return $this;
     }

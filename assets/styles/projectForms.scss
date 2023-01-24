@@ -160,12 +160,12 @@
     margin: 0;
     display: flex;
     flex-direction: column;
-
     align-items: center;
     width: 70%;
 }
 
 .ptk-teamFormTitleInput{
+    padding:0 10px 0 10px;
     border: 1.5px solid $primaryBlue;
     border-radius: 5px;
     height: 30px;
@@ -180,7 +180,6 @@
 
 .ptk-teamFormTitleUnderline{
     margin: 0;
-    background: linear-gradient(180deg, $primaryGrey 55%, $primaryGreen 45%);
 }
 
 .ptk-teamFormRow {

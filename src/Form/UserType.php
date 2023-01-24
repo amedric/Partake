@@ -3,6 +3,8 @@
 namespace App\Form;
 
 use App\Entity\User;
+use App\Entity\Category;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
@@ -19,8 +21,12 @@ class UserType extends AbstractType
             ->add('lastname', TextType::class)
             ->add('email', TextType::class)
             ->add('password', PasswordType::class)
-//            ->add('role')
-            ->add('avatar')
+            ->add('category', EntityType::class, [
+                'class' => Category::class,
+                'placeholder' => 'Choose department',
+                'required' => true,
+                'choice_label' => 'title',
+            ])
             ->add('birthday', DateType::Class, array(
                 'widget' => 'choice',
                 'years' => range(date('Y'), date('Y') - 100),
