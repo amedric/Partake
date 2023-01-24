@@ -86,39 +86,46 @@ class ProjectController extends AbstractController
         ProjectRepository $projectRepository,
         string $orderBy
     ): Response {
-        $ideas = $ideaRepository->findBy(['project' => $project->getId()]);
+        $currentUser = $this->getUser();
+        $projectCreateBy = $project->getUser();
+        $userAuthorized = $project->getUsersSelectOnProject()->contains($currentUser);
+        if ($currentUser === $projectCreateBy || $currentUser == $userAuthorized) {
+            $ideas = $ideaRepository->findBy(['project' => $project->getId()]);
 
-        switch ($orderBy) {
-            case 'show':
-                $ideas = $ideaRepository->findBy(['project' => $project->getId()]);
-                $project->setProjectViews($project->getProjectViews() + 1);
-                $projectRepository->save($project, true);
-                break;
-            case 'newest':
-                $ideas = $ideaRepository->findBy(['project' => $project->getId()], ['createdAt' => 'DESC']);
-                break;
-            case 'oldest':
-                $ideas = $ideaRepository->findBy(['project' => $project->getId()], ['createdAt' => 'ASC']);
-                break;
-            case 'likes':
-                $ideas = $projectRepository->findIdeasCountLikes(
-                    $project->getId()
-                );
-                break;
-            case 'comments':
-                $ideas = $projectRepository->findIdeasCountComments(
-                    $project->getId()
-                );
-                break;
-            case 'views':
-                $ideas = $ideaRepository->findBy(['project' => $project->getId()], ['ideaViews' => 'Desc']);
-                break;
+            switch ($orderBy) {
+                case 'show':
+                    $ideas = $ideaRepository->findBy(['project' => $project->getId()]);
+                    $project->setProjectViews($project->getProjectViews() + 1);
+                    $projectRepository->save($project, true);
+                    break;
+                case 'newest':
+                    $ideas = $ideaRepository->findBy(['project' => $project->getId()], ['createdAt' => 'DESC']);
+                    break;
+                case 'oldest':
+                    $ideas = $ideaRepository->findBy(['project' => $project->getId()], ['createdAt' => 'ASC']);
+                    break;
+                case 'likes':
+                    $ideas = $projectRepository->findIdeasCountLikes(
+                        $project->getId()
+                    );
+                    break;
+                case 'comments':
+                    $ideas = $projectRepository->findIdeasCountComments(
+                        $project->getId()
+                    );
+                    break;
+                case 'views':
+                    $ideas = $ideaRepository->findBy(['project' => $project->getId()], ['ideaViews' => 'Desc']);
+                    break;
+            }
+
+            return $this->render('project/show.html.twig', [
+                'project' => $project,
+                'ideas' => $ideas,
+            ]);
+        } else {
+            return $this->redirectToRoute('app_home');
         }
-
-        return $this->render('project/show.html.twig', [
-            'project' => $project,
-            'ideas' => $ideas,
-        ]);
     }
 
     #[Route('/{id}/edit', name: 'app_project_edit', methods: ['GET', 'POST'])]
