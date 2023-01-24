@@ -39,6 +39,20 @@ class CommentRepository extends ServiceEntityRepository
         }
     }
 
+    public function countComments(): array
+    {
+        $conn = $this->getEntityManager()->getConnection();
+
+        $sql = '
+            select count(*) as nbComments from comment;
+            ';
+        $stmt = $conn->prepare($sql);
+        $resultSet = $stmt->executeQuery();
+
+        // returns an array of arrays (i.e. a raw data set)
+        return $resultSet->fetchAllAssociative();
+    }
+
 //    /**
 //     * @return Comment[] Returns an array of Comment objects
 //     */

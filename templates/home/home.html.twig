@@ -3,6 +3,9 @@
 {% block title %}Home{% endblock %}
 
 {% block header %}
+    <div class="ptk-mobileNavbar">
+        {% include '/_includes/_mobileNavbar.html.twig' %}
+    </div>
     <div class="ptk-titleContainer">
         <h1 class="ptk-titleHeader">Projects</h1>
     </div>
@@ -10,9 +13,10 @@
         <p id="ptk-addProjectIcon">+</p>
         <a href="{{ path('app_project_new') }}" id="ptk-createProjectLink"> Create a project</a>
     </div>
-{% endblock %}
 
+{% endblock %}
 {% block filters %}
+
     <div class="ptk-filterContainer">
         <a href="{{ path('app_home_orderBy', {'orderBy': 'views'}) }}" class="ptk-filterLinks">Most viewed /</a>
         <a href="{{ path('app_home_orderBy', {'orderBy': 'newest'}) }}" class="ptk-filterLinks">Newest projects /</a>
@@ -25,7 +29,9 @@
 {% endblock %}
 
 {% block body %}
-<div class="ptk-cardsBlock">
+    {% include '/_includes/_mobileCharts.html.twig' %}
+
+    <div class="ptk-cardsBlock">
 
     {% for category in categories %}
     <div class="ptk-categoryCardsContainer">

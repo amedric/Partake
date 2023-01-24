@@ -96,6 +96,34 @@ class IdeaRepository extends ServiceEntityRepository
         return $qb->getResult();
     }
 
+    public function countNumberIdeas(): array
+    {
+        $conn = $this->getEntityManager()->getConnection();
+
+        $sql = '
+            select count(*) as nbIdeas from idea;
+            ';
+        $stmt = $conn->prepare($sql);
+        $resultSet = $stmt->executeQuery();
+
+        // returns an array of arrays (i.e. a raw data set)
+        return $resultSet->fetchAllAssociative();
+    }
+
+    public function countTotalIdeaViews(): array
+    {
+        $conn = $this->getEntityManager()->getConnection();
+
+        $sql = '
+            select SUM(idea_views) as nbIdeaViews from idea;
+            ';
+        $stmt = $conn->prepare($sql);
+        $resultSet = $stmt->executeQuery();
+
+        // returns an array of arrays (i.e. a raw data set)
+        return $resultSet->fetchAllAssociative();
+    }
+
 //    /**
 //     * @return Idea[] Returns an array of Idea objects
 //     */
