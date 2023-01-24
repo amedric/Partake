@@ -71,41 +71,43 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
 
         $conn = $this->getEntityManager()->getConnection();
 
+        // query to find data for projects and ideas
         $sql = '
-            select "project" as dataType,
-                   p.id as id,
-                   p.title as title,
-                   p.project_views as views,
-                   count(i.id) as counts,
+                select "project" as dataType,
+                    p.id as id,
+                    p.title as title,
+                    p.project_views as views,
+                    (select count(i2.project_id)
+                        FROM idea as i2
+                        where i2.project_id = p.id
+                        group by p.id) as counts,
                     c1.category_color as color,
-                   p.created_at as createdAt,
-                    "likes",
-                    "liked"
+                    "0" as "likes",
+                    "0" as "liked",
+                    p.created_at as createdAt
                     from project as p
-                left join category as c1 on p.category_id = c1.id
-            left join idea as i on p.id = i.project_id
-            where p.user_id = :id
-            group by p.id
-            UNION
-            SELECT "idea",
-                   i1.id,
-                   i1.title,
-                   i1.idea_views,
-                   count(c2.idea_id),
-                   i1.idea_color,
-                   i1.created_at,
-                   count(l.idea_ID) as likes,
-                   (select count(l2.user_id)
-	                    FROM idea as i2
-                        left join `like` as l2 on i2.id = l2.idea_id
-                        where l2.user_id = :id and l2.idea_id = i1.id
-	                    group by i1.id)
-            FROM idea as i1
-                left join `like` as l on i1.id = l.idea_id
-            left join comment as c2 on i1.id = c2.idea_id
-            where i1.user_id = :id
-            group by i1.id
-            order by createdAt ASC
+                    left join category as c1 on p.category_id = c1.id
+                    left join idea as i on p.id = i.project_id
+                    where p.user_id = :id
+                union
+                select "idea" as dataType,
+                        i3.id as id,
+                        i3.title as title,
+                        i3.idea_views as views,
+                        (select count(c2.id)
+                            FROM comment as c2
+                            where c2.idea_id = i3.id) as counts,
+                        i3.idea_color as color,
+                        (select count(l.id)
+                            FROM `like` as l
+                            where l.idea_id = i3.id) as "likes",
+                        (select count(l2.user_id)
+                            FROM `like` as l2
+                            where l2.idea_id = i3.id and l2.user_id = :id) as "liked",
+                        i3.created_at as createdAt
+                from idea as i3
+                where i3.user_id = :id
+                order by createdAt ASC
             ';
         $stmt = $conn->prepare($sql);
         $resultSet = $stmt->executeQuery(['id' => $id]);
@@ -113,29 +115,4 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         // returns an array of arrays (i.e. a raw data set)
         return $resultSet->fetchAllAssociative();
     }
-
-//    /**
-//     * @return User[] Returns an array of User objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('u')
-//            ->andWhere('u.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('u.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
-
-//    public function findOneBySomeField($value): ?User
-//    {
-//        return $this->createQueryBuilder('u')
-//            ->andWhere('u.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
 }

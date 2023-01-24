@@ -16,22 +16,33 @@
     {% endblock %}
 </head>
 <body>
+    <div class="ptk-stickyContainer">
+        <div class="ptk-navbarContainer">
+            {% include '/_includes/_navbar.html.twig' %}
+        </div>
+        <div class="ptk-adminHeaderContainer">
+            <h1 class="ptk-adminHeaderTitle">Admin</h1>
+        </div>
+        <div class="ptk-adminSideMenuContainer">
+            <a href="#" class="ptk-SideMenuLink">Add User</a>
+            <a href="{{ path('app_user_index') }}" class="ptk-SideMenuLink">Users</a>
+            <a href="{{ path('app_admin_project_list') }}" class="ptk-SideMenuLink">Projects</a>
+            <a href="{{ path('app_admin_idea_list') }}" class="ptk-SideMenuLink">Ideas</a>
+            <a href="{{ path('app_admin_comment_list') }}" class="ptk-SideMenuLink">Comments</a>
+            <a href="{{ path('app_category_index') }}" class="ptk-SideMenuLink">Teams</a>
+        </div>
+        <div class="ptk-adminHeader">
+            {% block adminTitle %}{% endblock %}
+        </div>
+    </div>
+    <div class="ptk-adminBlockContainer">
 
-<div class="ptk-stickyContainer">
-    <div class="ptk-navbarContainer">
-        {% include '/_includes/_navbar.html.twig' %}
-    </div>
-    <div class="ptk-adminHeaderContainer">
-        {% block header %}{% endblock %}
-    </div>
-</div>
-<div class="ptk-bodyContainer">
-    <div class="ptk-adminSideContainer">
+        <div class="ptk-adminBodyContainer">
 
+            <div class="ptk-adminBody">
+                {% block adminBody %}{% endblock %}
+            </div>
+        </div>
     </div>
-    <div class="ptk-adminBodyContainer">
-        {% block adminBody %}{% endblock %}
-    </div>
-</div>
 </body>
 </html>

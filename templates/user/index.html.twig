@@ -10,22 +10,22 @@
         <table>
             <thead>
                 <tr>
-                    <th class="ptk-adminTableGap ptk-adminTableHeader">Firstname</th>
-                    <th class="ptk-adminTableGap ptk-adminTableHeader">Lastname</th>
-                    <th class="ptk-adminTableGap ptk-adminTableHeader">Role</th>
-                    <th class="ptk-adminTableGap ptk-adminTableHeader">Team</th>
-                    <th class="ptk-adminTableGap ptk-adminTableHeader">Email</th>
-                    <th class="ptk-adminTableGap ptk-adminTableHeader">Actions</th>
+                    <th class="ptk-adminTableHeader">Firstname</th>
+                    <th class="ptk-adminTableHeader">Lastname</th>
+                    <th class="ptk-adminTableHeader">Role</th>
+                    <th class="ptk-adminTableHeader">Team</th>
+                    <th class="ptk-adminTableHeader">Email</th>
+                    <th class="ptk-adminTableHeader">Actions</th>
                 </tr>
             </thead>
             <tbody>
                 {% for user in users %}
                     <tr class="ptk-adminDataRow">
-                        <td class="ptk-adminTableGap ptk-adminTableData">{{ user.firstname }}</td>
-                        <td class="ptk-adminTableGap ptk-adminTableData">{{ user.lastname }}</td>
-                        <td class="ptk-adminTableGap ptk-adminTableData">{{ user.roles[0] }}</td>
-                        <td class="ptk-adminTableGap ptk-adminTableData">{{ user.team }}</td>
-                        <td class="ptk-adminTableGap ptk-adminTableData">{{ user.email }}</td>
+                        <td class="ptk-adminTableData">{{ user.firstname }}</td>
+                        <td class="ptk-adminTableData">{{ user.lastname }}</td>
+                        <td class="ptk-adminTableData">{{ user.roles[0] }}</td>
+                        <td class="ptk-adminTableData">{{ user.team }}</td>
+                        <td class="ptk-adminTableData">{{ user.email }}</td>
                         <td class="ptk-teamBttns">
                             <a href="{{ path('app_user_edit', {'id': user.id}) }}" class="ptk-bttns ptk-smlBttns">Edit</a>
                             {% include '/user/_delete_form.html.twig' %}
