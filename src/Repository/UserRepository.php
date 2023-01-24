@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\DBAL\Exception;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -66,46 +67,49 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         return $queryBuilder->getResult();
     }
 
+    /**
+     * @throws Exception
+     */
     public function findProjectsIdeasForUser(int $id): array
     {
 
         $conn = $this->getEntityManager()->getConnection();
 
         $sql = '
-            select "project" as projectOrIdea,
-                   p.id as id,
-                   p.title as title,
-                   p.project_views as views,
-                   count(i.id) as counts,
-                    c1.category_color as color,
-                   p.created_at as createdAt,
+            SELECT "project" AS projectOrIdea,
+                   p.id AS id,
+                   p.title AS title,
+                   p.project_views AS views,
+                   count(i.id) AS counts,
+                    c1.category_color AS color,
+                   p.created_at AS createdAt,
                     "likes",
                     "liked"
-                    from project as p
-                left join category as c1 on p.category_id = c1.id
-            left join idea as i on p.id = i.project_id
-            where p.user_id = :id
-            group by p.id
+                    FROM project AS p
+                LEFT JOIN category AS c1 ON p.category_id = c1.id
+            LEFT JOIN idea AS i ON p.id = i.project_id
+            WHERE p.user_id = :id
+            GROUP BY p.id
             UNION
             SELECT "idea",
                    i1.id,
                    i1.title,
                    i1.idea_views,
-                   count(c2.idea_id),
+                   (SELECT COUNT(idea_id) FROM comment AS c2
+                       WHERE c2.idea_id = i1.id),
                    i1.idea_color,
                    i1.created_at,
-                   count(l.idea_ID) as likes,
-                   (select count(l2.user_id)
-	                    FROM idea as i2
-                        left join `like` as l2 on i2.id = l2.idea_id
-                        where l2.user_id = :id and l2.idea_id = i1.id
-	                    group by i1.id)
-            FROM idea as i1
-                left join `like` as l on i1.id = l.idea_id
-            left join comment as c2 on i1.id = c2.idea_id
-            where i1.user_id = :id
-            group by i1.id
-            order by createdAt ASC
+                   COUNT(l.idea_id) AS likes,
+                   (SELECT COUNT(l2.user_id)
+	                    FROM idea AS i2
+                        LEFT JOIN `like` AS l2 ON i2.id = l2.idea_id
+                        WHERE l2.user_id = :id AND l2.idea_id = i1.id
+	                    GROUP BY i1.id)
+            FROM idea AS i1
+                LEFT JOIN `like` AS l ON i1.id = l.idea_id
+            WHERE i1.user_id = :id
+            GROUP BY i1.id
+            ORDER BY createdAt ASC
             ';
         $stmt = $conn->prepare($sql);
         $resultSet = $stmt->executeQuery(['id' => $id]);
