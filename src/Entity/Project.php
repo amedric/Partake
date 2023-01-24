@@ -40,7 +40,7 @@ class Project
     #[ORM\Column]
     private ?bool $isArchived = false;
 
-    #[ORM\ManyToMany(targetEntity: User::class, mappedBy: 'projects')]
+    #[ORM\ManyToMany(targetEntity: User::class, inversedBy: 'projects')]
     private Collection $usersSelectOnProject;
 
     public function __construct()
@@ -162,7 +162,6 @@ class Project
     {
         if (!$this->usersSelectOnProject->contains($usersSelectOnProject)) {
             $this->usersSelectOnProject->add($usersSelectOnProject);
-            $usersSelectOnProject->addProject($this);
         }
 
         return $this;
@@ -170,10 +169,9 @@ class Project
 
     public function removeUsersSelectOnProject(User $usersSelectOnProject): self
     {
-        if ($this->usersSelectOnProject->removeElement($usersSelectOnProject)) {
-            $usersSelectOnProject->removeProject($this);
-        }
+        $this->usersSelectOnProject->removeElement($usersSelectOnProject);
 
         return $this;
     }
+
 }

@@ -70,12 +70,12 @@ class ProjectRepository extends ServiceEntityRepository
             ';
         $stmt = $conn->prepare($sql);
         $resultSet = $stmt->executeQuery();
-        
+
         // returns an array of arrays (i.e. a raw data set)
         return $resultSet->fetchAllAssociative();
     }
 
-  public function findIdeasCountLikes(int $id): array 
+    public function findIdeasCountLikes(int $id): array
     {
       $conn = $this->getEntityManager()->getConnection();
 
@@ -148,14 +148,14 @@ class ProjectRepository extends ServiceEntityRepository
             ';
         $stmt = $conn->prepare($sql);
         $resultSet = $stmt->executeQuery();
-        
+
         // returns an array of arrays (i.e. a raw data set)
         return $resultSet->fetchAllAssociative();
     }
-        
-public function findIdeasCountComments(int $id): array
-{
-$conn = $this->getEntityManager()->getConnection();
+
+    public function findIdeasCountComments(int $id): array
+    {
+        $conn = $this->getEntityManager()->getConnection();
 
         $sql = '
             select project.id,
@@ -174,6 +174,34 @@ $conn = $this->getEntityManager()->getConnection();
             ';
         $stmt = $conn->prepare($sql);
         $resultSet = $stmt->executeQuery(['id' => $id]);
+
+        // returns an array of arrays (i.e. a raw data set)
+        return $resultSet->fetchAllAssociative();
+    }
+
+    public function countNumberProjects(): array
+    {
+        $conn = $this->getEntityManager()->getConnection();
+
+        $sql = '
+            select count(*) as nbProjects from project;
+            ';
+        $stmt = $conn->prepare($sql);
+        $resultSet = $stmt->executeQuery();
+
+        // returns an array of arrays (i.e. a raw data set)
+        return $resultSet->fetchAllAssociative();
+    }
+
+    public function countTotalProjectViews(): array
+    {
+        $conn = $this->getEntityManager()->getConnection();
+
+        $sql = '
+            select SUM(project_views) as nbProjectViews from project;
+            ';
+        $stmt = $conn->prepare($sql);
+        $resultSet = $stmt->executeQuery();
 
         // returns an array of arrays (i.e. a raw data set)
         return $resultSet->fetchAllAssociative();
