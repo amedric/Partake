@@ -179,7 +179,8 @@
 }
 
 .ptk-teamFormTitleUnderline{
-    background: linear-gradient(180deg, $primaryWhite 55%, $primaryGreen 45%);
+    margin: 0;
+    background: linear-gradient(180deg, $primaryGrey 55%, $primaryGreen 45%);
 }
 
 .ptk-teamFormRow {
