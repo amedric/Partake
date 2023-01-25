@@ -19,6 +19,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Email;
 
 #[Route('/project')]
 class ProjectController extends AbstractController
@@ -53,7 +55,7 @@ class ProjectController extends AbstractController
     }
 
     #[Route('/new', name: 'app_project_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, ProjectRepository $projectRepository): Response
+    public function new(Request $request, ProjectRepository $projectRepository, MailerInterface $mailer,): Response
     {
         $project = new Project();
         $form = $this->createForm(Project1Type::class, $project);
@@ -68,6 +70,16 @@ class ProjectController extends AbstractController
             $today = new DateTime();
             $project->setCreatedAt($today);
             $projectRepository->save($project, true);
+
+            //Email
+            $email = (new Email())
+                ->from('hello@example.com')
+                ->to('you@example.com')
+                ->subject('Time for Symfony Mailer!')
+                ->text('Sending emails is fun again!')
+                ->html('<p>See Twig integration for better HTML integration!</p>');
+
+            $mailer->send($email);
 
             return $this->redirectToRoute('app_home', [], Response::HTTP_SEE_OTHER);
         }
