@@ -1,34 +1,3 @@
-{#<div class="ptk-teamFormContainer">#}
-
-{#    <div class="ptk-teamFormTitleContainer">#}
-{#        <h1 class="ptk-teamFormTitle ptk-teamFormTitleUnderline">Edit Team</h1>#}
-{#    </div>#}
-
-{#    {{ form_start(form, {'attr': {'class': 'ptk-teamForm'}}) }}#}
-
-{#    <div class="ptk-formErrors ptk-formContainerMargins">#}
-{#        {{ form_errors(form) }}#}
-{#    </div>#}
-
-{#    <div class="ptk-teamFormRow ptk-formContainerMargins">#}
-{#        {{ form_label(form.title, null, {'label_attr': {'class': 'ptk-teamFormLabels'}}) }}#}
-{#        {{ form_widget(form.title, {'attr': {'class': 'ptk-teamFormTitleInput'}}) }}#}
-{#    </div>#}
-{#    <div class="ptk-teamFormRow ptk-formContainerMargins">#}
-{#        {{ form_label(form.categoryColor, 'Team Colour', {'label_attr': {'class': 'ptk-teamFormLabels'}}) }}#}
-{#        {{ form_widget(form.categoryColor, {'attr': {'class': 'ptk-teamFormColor'}}) }}#}
-{#    </div>#}
-
-{#    {{ form_row(form._token) }}#}
-
-{#    <div class="ptk-formBttnsContainer">#}
-{#        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">#}
-{#        <button class="ptk-bttns">{{ button_label|default('Save') }}</button>#}
-{#    </div>#}
-
-{#    {{ form_end(form, {'render_rest': false }) }}#}
-{#</div>#}
-
 {% extends 'adminBase.html.twig' %}
 
 {% block title %}Admin - Teams{% endblock %}

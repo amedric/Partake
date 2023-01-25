@@ -1,18 +1,26 @@
-//.ptk-navbarContainer{
-//    display: flex;
-//    justify-content: space-evenly;
-//    align-items: center;
-//    color: #B0413E;
-//    margin-left: 20vw;
-//    font-size: 20px;
-//}
+.ptk-navbarLogoContainer{
+    background-color: $primaryBlue;
+    width: calc(100% / 3);
+}
 
-//.ptk-navbarContainer a:visited{
-//    color: $primaryBlue;
-//}
+.ptk-searchContainer{
+    display: flex;
+    justify-content: center;
+    background-color: $primaryBlue;
+    width: calc(100% / 3);
+}
+
+.ptk-expandMenuContainer{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    background-color: $primaryBlue;
+    width: calc(100% / 3);
+    gap: 30px;
+}
 
 .ptk-logo{
-    margin-left: 20px;
+    margin: 0 0 0 20px;
     font-style: normal;
     font-weight: 700;
     font-size: 3rem;
@@ -21,20 +29,33 @@
     align-items: center;
     text-align: center;
     letter-spacing: 0.15em;
-    color: $primaryGrey;
+    color: $secondaryPurple;
 }
 
 .ptk-navbarLinks{
+    display: flex;
+    justify-content: center;
+    margin: 0;
     font-weight: 550;
-    color: $primaryGrey;
+    color: $secondaryPurple;
 }
 
 .ptk-navbarContainer a:hover{
-    background-color: $primaryYellow;
-    border-radius: 15px 15px;
+    color: $secondaryYellow;
+}
+
+.ptk-navbarLinks:hover{
+    color: $secondaryYellow;
+}
+
+.required{
+    display: none;
 }
 
 .inputSearchBar{
+    display: flex;
+    justify-content: center;
+    align-items: center;
     color: $primaryBlue;
 }
 
@@ -44,6 +65,7 @@
     border-radius: 20px;
     margin-left: 10px;
     font-weight: lighter;
+    padding: 5px 10px 5px 10px;
 }
 
 .btnSearchBar{
@@ -55,5 +77,37 @@
 }
 
 .ptk-navbarLinksContainer{
-    margin-right: 30px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    margin-right: 20px;
+    width: 0;
+    gap: 30px;
+    overflow: hidden;
+    transition: 0.4s ease-out;
+}
+
+.ptk-expand-menu-checkbox{
+    display: none;
+}
+
+.ptk-menuLabel{
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.ptk-expand-menu-checkbox:checked~.ptk-navbarLinksContainer{
+    width: 230px;
+}
+
+.ptk-expandArrow{
+    margin: 0 10px 0 0;
+    width: 20px;
+    height: 20px;
+    transition: 0.4s ease;
+}
+
+.ptk-expand-menu-checkbox:checked ~ .ptk-menuLabel .ptk-expandArrow{
+    transform: rotate(180deg);
 }

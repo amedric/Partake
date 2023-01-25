@@ -9,15 +9,15 @@
 <div class="ptk-adminViewInfoContainer">
 
     <div class="ptk-teamListContainer">
-    <table class="ptk-teamTable">
-        <thead class="ptk-teamThead">
+    <table>
+        <thead>
             <tr class="ptk-teamTr">
                 <th class="ptk-adminTableHeader ptk-teamTitleData">Title</th>
                 <th class="ptk-adminTableHeader ptk-teamColorData">Team Color</th>
                 <th class="ptk-adminTableHeader ptk-teamBttns">Actions</th>
             </tr>
         </thead>
-        <tbody class="ptk-teamTbody">
+        <tbody>
         {% for category in categories %}
             <tr class="ptk-teamTableData">
                 <td class="ptk-teamTitleData">{{ category.title }}</td>
