@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "452e0b2e31daf8d40252d8496cd31710",
+    "content-hash": "251745846b65dfe23eeeab68a335583a",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -6896,16 +6896,16 @@
         },
         {
             "name": "symfony/ux-chartjs",
-            "version": "v2.6.1",
+            "version": "v2.7.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/ux-chartjs.git",
-                "reference": "1f8d1fe38e5ffc60a4afb0a5680bd77f0e3503f8"
+                "reference": "1dc192838f6bfbc30236cc971652ee049263274a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/ux-chartjs/zipball/1f8d1fe38e5ffc60a4afb0a5680bd77f0e3503f8",
-                "reference": "1f8d1fe38e5ffc60a4afb0a5680bd77f0e3503f8",
+                "url": "https://api.github.com/repos/symfony/ux-chartjs/zipball/1dc192838f6bfbc30236cc971652ee049263274a",
+                "reference": "1dc192838f6bfbc30236cc971652ee049263274a",
                 "shasum": ""
             },
             "require": {
@@ -6957,7 +6957,7 @@
                 "symfony-ux"
             ],
             "support": {
-                "source": "https://github.com/symfony/ux-chartjs/tree/v2.6.1"
+                "source": "https://github.com/symfony/ux-chartjs/tree/v2.7.1"
             },
             "funding": [
                 {
@@ -6973,7 +6973,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-11-22T21:09:47+00:00"
+            "time": "2023-01-24T15:40:19+00:00"
         },
         {
             "name": "symfony/validator",
