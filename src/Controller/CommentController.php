@@ -3,7 +3,6 @@
 namespace App\Controller;
 
 use App\Entity\Comment;
-use App\Entity\Idea;
 use App\Form\CommentType;
 use App\Repository\CommentRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -34,22 +33,11 @@ class CommentController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'app_comment_show', methods: ['GET'])]
-    public function show(Comment $comment): Response
-    {
-        return $this->render('comment/show.html.twig', [
-            'comment' => $comment,
-        ]);
-    }
-
     #[Route('/{id}/edit', name: 'app_comment_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Comment $comment, CommentRepository $commentRepository): Response
     {
         $form = $this->createForm(CommentType::class, $comment);
         $form->handleRequest($request);
-
-
-
         if ($form->isSubmitted() && $form->isValid()) {
             $commentRepository->save($comment, true);
             return $this->redirectToRoute('app_idea_show', [

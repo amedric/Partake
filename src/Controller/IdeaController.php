@@ -12,6 +12,7 @@ use App\Repository\CommentRepository;
 use App\Repository\IdeaRepository;
 use App\Repository\LikeRepository;
 use DateTime;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -113,6 +114,16 @@ class IdeaController extends AbstractController
                 'id' => $idea->getId(),
             ], Response::HTTP_SEE_OTHER);
         }
+    }
+
+    #[Route('/{id}', name: 'app_idea_delete', methods: ['POST'])]
+    public function ideaDelete(Request $request, Idea $idea, IdeaRepository $ideaRepository): Response
+    {
+        if ($this->isCsrfTokenValid('delete' . $idea->getId(), $request->request->get('_token'))) {
+            $ideaRepository->remove($idea, true);
+        }
+
+        return $this->redirectToRoute('app_admin_idea_list', [], Response::HTTP_SEE_OTHER);
     }
 
     #[Route('/{id}/like', name: 'app_idea_like', methods: ['GET','POST'])]

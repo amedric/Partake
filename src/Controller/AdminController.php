@@ -167,7 +167,7 @@ class AdminController extends AbstractController
      */
     #[Route('/delete_comment/{id}', name: 'app_admin_comment_delete', methods: ['POST'])]
     #[IsGranted('ROLE_ADMIN')]
-    public function delete(Request $request, Comment $comment, CommentRepository $commentRepository): Response
+    public function deleteComment(Request $request, Comment $comment, CommentRepository $commentRepository): Response
     {
         if ($this->isCsrfTokenValid('delete' . $comment->getId(), $request->request->get('_token'))) {
             $commentRepository->remove($comment, true);
@@ -217,5 +217,23 @@ class AdminController extends AbstractController
             'form' => $form,
             'edit' => true,
         ]);
+    }
+
+    /**
+     * @param Request $request
+     * @param User $user
+     * @param UserRepository $userRepository
+     * @return Response
+     * deletes user
+     */
+    #[Route('/{id}', name: 'app_admin_user_delete', methods: ['POST'])]
+    #[IsGranted('ROLE_ADMIN')]
+    public function deleteUser(Request $request, User $user, UserRepository $userRepository): Response
+    {
+        if ($this->isCsrfTokenValid('delete' . $user->getId(), $request->request->get('_token'))) {
+            $userRepository->remove($user, true);
+        }
+
+        return $this->redirectToRoute('app_admin_user_list', [], Response::HTTP_SEE_OTHER);
     }
 }
