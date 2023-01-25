@@ -21,6 +21,12 @@ use Symfony\Component\Routing\Annotation\Route;
 class AdminController extends AbstractController
 {
 //    ---------------------------------- Project Routes ---------------------------------------------------
+
+    /**
+     * @param ProjectRepository $projectRepository
+     * @return Response
+     * lists all projects in admin
+     */
     #[Route('/project_list', name: 'app_admin_project_list', methods: ['GET'])]
     #[IsGranted('ROLE_ADMIN')]
     public function projectList(
@@ -32,6 +38,11 @@ class AdminController extends AbstractController
         ]);
     }
 
+    /**
+     * @param Project $project
+     * @return Response
+     * project view page for admin
+     */
     #[Route('/project_view/{id}', name: 'app_admin_project_view', methods: ['GET'])]
     #[IsGranted('ROLE_ADMIN')]
     public function projectView(
@@ -43,6 +54,13 @@ class AdminController extends AbstractController
         ]);
     }
 
+    /**
+     * @param Request $request
+     * @param Project $project
+     * @param ProjectRepository $projectRepository
+     * @return Response
+     * deletes project
+     */
     #[Route('/delete_project/{id}', name: 'app_admin_project_delete', methods: ['POST'])]
     #[IsGranted('ROLE_ADMIN')]
     public function projectDelete(Request $request, Project $project, ProjectRepository $projectRepository): Response
@@ -55,6 +73,12 @@ class AdminController extends AbstractController
     }
 
     //    ---------------------------------------- Idea Routes -------------------------------------------------------
+
+    /**
+     * @param IdeaRepository $ideaRepository
+     * @return Response
+     * lists all ideas in admin page
+     */
     #[Route('/idea_list', name: 'app_admin_idea_list', methods: ['GET'])]
     #[IsGranted('ROLE_ADMIN')]
     public function ideaList(
@@ -66,6 +90,11 @@ class AdminController extends AbstractController
         ]);
     }
 
+    /**
+     * @param Idea $idea
+     * @return Response
+     * idea view page for admin
+     */
     #[Route('/idea_view/{id}', name: 'app_admin_idea_view', methods: ['GET'])]
     #[IsGranted('ROLE_ADMIN')]
     public function ideaView(
@@ -76,6 +105,13 @@ class AdminController extends AbstractController
         ]);
     }
 
+    /**
+     * @param Request $request
+     * @param Idea $idea
+     * @param IdeaRepository $ideaRepository
+     * @return Response
+     * deletes idea
+     */
     #[Route('/delete_idea/{id}', name: 'app_admin_idea_delete', methods: ['POST'])]
     #[IsGranted('ROLE_ADMIN')]
     public function ideaDelete(Request $request, Idea $idea, IdeaRepository $ideaRepository): Response
@@ -87,7 +123,13 @@ class AdminController extends AbstractController
         return $this->redirectToRoute('app_admin_idea_list', [], Response::HTTP_SEE_OTHER);
     }
 
-    //    ---------------------------------------- Comment Routes -------------------------------------------------------
+    //---------------------------------------- Comment Routes -------------------------------------------------------
+
+    /**
+     * @param CommentRepository $commentRepository
+     * @return Response
+     * lists all comments
+     */
     #[Route('/comment_list', name: 'app_admin_comment_list', methods: ['GET'])]
     #[IsGranted('ROLE_ADMIN')]
     public function commentList(
@@ -99,6 +141,12 @@ class AdminController extends AbstractController
         ]);
     }
 
+    /**
+     * @param Comment $comment
+     * @param IdeaRepository $ideaRepository
+     * @return Response
+     * comment view page for admin
+     */
     #[Route('/comment_view/{id}', name: 'app_admin_comment_view', methods: ['GET'])]
     #[IsGranted('ROLE_ADMIN')]
     public function commentView(
@@ -110,6 +158,13 @@ class AdminController extends AbstractController
         ]);
     }
 
+    /**
+     * @param Request $request
+     * @param Comment $comment
+     * @param CommentRepository $commentRepository
+     * @return Response
+     * deletes comment
+     */
     #[Route('/delete_comment/{id}', name: 'app_admin_comment_delete', methods: ['POST'])]
     #[IsGranted('ROLE_ADMIN')]
     public function delete(Request $request, Comment $comment, CommentRepository $commentRepository): Response
@@ -122,6 +177,11 @@ class AdminController extends AbstractController
 
     // ---------------------------------------- User Routes -------------------------------------------------------
 
+    /**
+     * @param UserRepository $userRepository
+     * @return Response
+     * lists all users
+     */
     #[Route('/', name: 'app_admin_user_list', methods: ['GET'])]
     #[IsGranted('ROLE_ADMIN')]
     public function index(UserRepository $userRepository): Response
@@ -132,6 +192,12 @@ class AdminController extends AbstractController
         ]);
     }
 
+    /**
+     * @param Request $request
+     * @param UserRepository $userRepository
+     * @return Response
+     * adds new user
+     */
     #[Route('/new_user', name: 'app_admin_user_new', methods: ['GET', 'POST'])]
     #[IsGranted('ROLE_ADMIN')]
     public function new(Request $request, UserRepository $userRepository): Response
