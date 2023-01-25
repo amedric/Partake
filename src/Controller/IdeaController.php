@@ -8,7 +8,6 @@ use App\Entity\Like;
 use App\Entity\Project;
 use App\Form\CommentType;
 use App\Form\IdeaType;
-use App\Form\IdeaEditType;
 use App\Repository\CommentRepository;
 use App\Repository\IdeaRepository;
 use App\Repository\LikeRepository;
@@ -22,13 +21,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
 #[Route('/idea')]
 class IdeaController extends AbstractController
 {
-    #[Route('/', name: 'app_idea_index', methods: ['GET'])]
-    public function index(IdeaRepository $ideaRepository): Response
-    {
-        return $this->render('idea/index.html.twig', [
-            'ideas' => $ideaRepository->findAll(),
-        ]);
-    }
 
     #[Route('/new/{id}', name: 'app_idea_new', methods: ['GET', 'POST'])]
     public function new(Project $project, Request $request, IdeaRepository $ideaRepository): Response
@@ -121,16 +113,6 @@ class IdeaController extends AbstractController
                 'id' => $idea->getId(),
             ], Response::HTTP_SEE_OTHER);
         }
-    }
-
-    #[Route('/{id}', name: 'app_idea_delete', methods: ['POST'])]
-    public function delete(Request $request, Idea $idea, IdeaRepository $ideaRepository): Response
-    {
-        if ($this->isCsrfTokenValid('delete' . $idea->getId(), $request->request->get('_token'))) {
-            $ideaRepository->remove($idea, true);
-        }
-
-        return $this->redirectToRoute('app_idea_index', [], Response::HTTP_SEE_OTHER);
     }
 
     #[Route('/{id}/like', name: 'app_idea_like', methods: ['GET','POST'])]
