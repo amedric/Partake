@@ -29,7 +29,7 @@
 
 .ptk-adminViewInfoContainer{
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: center;
     width: 100%;
     padding: 0 150px 0 150px;
@@ -146,8 +146,13 @@
     padding-right: 85px;
 }
 
-.ptk-noPadding{
+.ptk-departmentFlex{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
     padding: 0;
+    overflow-y: auto;
 }
 
 //-------------------------- Projects section --------------------------------

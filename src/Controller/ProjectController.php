@@ -35,7 +35,7 @@ class ProjectController extends AbstractController
             $today = new DateTime();
             $project->setCreatedAt($today);
             $projectRepository->save($project, true);
-
+            $this->addFlash('success', 'Success: New project created');
             return $this->redirectToRoute('app_home', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -96,7 +96,7 @@ class ProjectController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $projectRepository->save($project, true);
-
+            $this->addFlash('success', 'Success: Project modified');
             return $this->redirectToRoute('app_project_show', [
                 'id' => $project->getId(),
             ], Response::HTTP_SEE_OTHER);
@@ -115,6 +115,7 @@ class ProjectController extends AbstractController
         if ($this->isCsrfTokenValid('archive' . $project->getId(), $request->request->get('_token'))) {
             $project->setIsArchived(true);
             $projectRepository->save($project, true);
+            $this->addFlash('success', 'Success: Project archived');
         }
 
         return $this->redirectToRoute('app_project_show', [
@@ -129,6 +130,8 @@ class ProjectController extends AbstractController
         if ($this->isCsrfTokenValid('unarchive' . $project->getId(), $request->request->get('_token'))) {
             $project->setIsArchived(false);
             $projectRepository->save($project, true);
+            $this->addFlash('notice', 'Success: Project unarchived');
+
         }
 
         return $this->redirectToRoute('app_project_show', [

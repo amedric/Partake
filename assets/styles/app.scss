@@ -1,4 +1,3 @@
-//start coding by removing this file and adding yours ;)
 @import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;700&display=swap');
 // Primary Colours
 $primaryBlue: rgb(0, 66, 191);
@@ -144,39 +143,6 @@ a {
     width: 45px;
 }
 
-//// Project Page
-//
-//.headProjectPage{
-//    border: solid $primaryBlue 2px;
-//    border-radius: 10px;
-//    box-shadow: 2px 5px 5px grey;
-//    position: relative;
-//    left: 30%;
-//    top: -680px;
-//    width: 1106px;
-//    background-color: $primaryWhite;
-//    font-size: 20px;
-//}
-//
-//.headProjectPage h1{
-//    position: absolute;
-//    top : 5%;
-//    left: 40%;
-//    color: $primaryWhite;
-//    font-size: 60px;
-//    text-shadow: 0 4px 0 $primaryBlue;
-//}
-//
-//.showProjectsPage{
-//    border-top: $primaryWhite solid 2px;
-//    color: $primaryWhite;
-//    width: 25vw;
-//    position: absolute;
-//    top: -480px;
-//    padding-left: 20px;
-//    font-size: 20px;
-//}
-
 @media screen and (max-width: 480px) {
     .ptk-landingContainer {
         background-image: url("../images/landingMobile.png");
@@ -188,8 +154,10 @@ a {
 @import "baseTemplate.scss";
 @import "admin.scss";
 @import "login.scss";
-@import "projectForms.scss";
+@import "assets/styles/forms.scss";
 @import "ideaShow.scss";
 @import "pages.scss";
 @import "user.scss";
 @import "commentForm.scss";
+@import "flashMessages.scss";
+@import "forms.scss";

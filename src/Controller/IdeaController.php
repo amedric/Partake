@@ -33,7 +33,7 @@ class IdeaController extends AbstractController
             $idea->setUser($this->getUser());
             $idea->setProject($project);
             $ideaRepository->save($idea, true);
-
+            $this->addFlash('success', 'Success:  New idea created');
             return $this->redirectToRoute('app_project_show', [
                 'id' => $project->getId(),
                 'orderBy' => 'show',
@@ -98,7 +98,7 @@ class IdeaController extends AbstractController
 
             if ($form->isSubmitted() && $form->isValid()) {
                 $ideaRepository->save($idea, true);
-
+                $this->addFlash('success', 'Success: Idea modified');
                 return $this->redirectToRoute('app_idea_show', [
                     'id' => $idea->getId(),
                 ], Response::HTTP_SEE_OTHER);
@@ -117,13 +117,17 @@ class IdeaController extends AbstractController
     }
 
     #[Route('/{id}', name: 'app_idea_delete', methods: ['POST'])]
-    public function ideaDelete(Request $request, Idea $idea, IdeaRepository $ideaRepository): Response
+    public function delete(Request $request, Idea $idea, IdeaRepository $ideaRepository): Response
     {
         if ($this->isCsrfTokenValid('delete' . $idea->getId(), $request->request->get('_token'))) {
             $ideaRepository->remove($idea, true);
+            $this->addFlash('notice', 'Notice: Idea deleted');
         }
 
-        return $this->redirectToRoute('app_admin_idea_list', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('app_project_show', [
+            'id' => $idea->getProject()->getId(),
+            'orderBy' => 'show'
+        ], Response::HTTP_SEE_OTHER);
     }
 
     #[Route('/{id}/like', name: 'app_idea_like', methods: ['GET','POST'])]
