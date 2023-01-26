@@ -65,6 +65,7 @@ class IdeaRepository extends ServiceEntityRepository
             select project.id,
                    project.title,
                    project.category_id,
+                   project.user_id,
                    project.content,
                    project.project_views,
                    project.project_color,

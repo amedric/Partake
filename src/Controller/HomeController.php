@@ -37,6 +37,7 @@ class HomeController extends AbstractController
         $projectChart2 = $chartStats->getMobileProjectChart2();
         $ideaChart1 = $chartStats->getMobileIdeaChart1();
         $ideaChart2 = $chartStats->getMobileIdeaChart2();
+        $authorizedProjects = $projectRepository->findProjectAuthorizedForUser($this->getUser()->getId());
 
         return $this->render('home/home.html.twig', [
             'projects' => $projects,
@@ -46,6 +47,7 @@ class HomeController extends AbstractController
             'ideaChart1' => $ideaChart1,
             'projectChart2' => $projectChart2,
             'ideaChart2' => $ideaChart2,
+            "authorizedProjects" => $authorizedProjects,
         ]);
     }
 
