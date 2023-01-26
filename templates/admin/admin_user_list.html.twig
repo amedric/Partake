@@ -27,8 +27,7 @@
                     <td class="ptk-adminTableData">{{ user.team }}</td>
                     <td class="ptk-adminTableData">{{ user.email }}</td>
                     <td class="ptk-teamBttns">
-{#                        <a href="{{ path('app_user_edit', {'id': user.id}) }}" class="ptk-bttns ptk-smlBttns">Edit</a>#}
-                        {% include '/user/_delete_form.html.twig' %}
+                        {% include '/admin/admin_delete_form.html.twig' %}
                     </td>
                 </tr>
             {% else %}

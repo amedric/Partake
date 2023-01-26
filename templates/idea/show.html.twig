@@ -6,7 +6,6 @@
 <div class="ptk-ideaShowBlock">
 
     <div class="ptk-ideaShowContainer">
-
         <div class="ptk-ideaCloseContainer">
             <a href="{{ path('app_project_show', {'id': idea.project.id, 'orderBy': 'show'}) }}" class="ptk-ideaCloseBttn">Close</a>
             {% if user.id == idea.user.id %}
