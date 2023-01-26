@@ -116,10 +116,10 @@
                         </a>
                     </div>
                 {% endif %}
-                {% if projectIdea.projectOrIdea == 'project' %}
+                {% if projectIdea.dataType == 'project' %}
                     {#  ------------ Project cards -------------------------------------------------------------- -#}
                     <div class="ptk-profileCardContainer">
-                        <p class="ptk-profileCardTypeLabel">{{ projectIdea.projectOrIdea }}</p>
+                        <p class="ptk-profileCardTypeLabel">{{ projectIdea.dataType }}</p>
                         <a href="{{ path('app_project_show', {'id': projectIdea.id, orderBy: 'show'}) }}"
                            class="ptk-cardsLink">
                             <div class="ptk-cards">
