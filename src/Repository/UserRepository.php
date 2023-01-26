@@ -70,14 +70,15 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
     /**
      * @throws Exception
      */
-    public function findProjectsIdeasForUser(int $id): array
+    public function findProjectsIdeasForUser($id, $column, $orderBy): array
     {
-
+        $order = " " . $column . " " . $orderBy;
         $conn = $this->getEntityManager()->getConnection();
 
         // query to find data for projects and ideas
         $sql = '
-                select "project" as dataType,
+                select
+                    "project" as dataType,
                     p.id as id,
                     p.title as title,
                     p.project_views as views,
@@ -111,8 +112,8 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
                         i3.created_at as createdAt
                 from idea as i3
                 where i3.user_id = :id
-                order by createdAt ASC
-            ';
+                order by' . $order
+            ;
         $stmt = $conn->prepare($sql);
         $resultSet = $stmt->executeQuery(['id' => $id]);
 

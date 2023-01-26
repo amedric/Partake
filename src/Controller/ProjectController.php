@@ -58,10 +58,9 @@ class ProjectController extends AbstractController
         $projectCreateBy = $project->getUser();
         $userAuthorized = $project->getUsersSelectOnProject()->contains($currentUser);
         if ($currentUser === $projectCreateBy || $currentUser == $userAuthorized) {
-//            $ideas = $ideaRepository->findBy(['project' => $project->getId()]);
             switch ($orderBy) {
                 case 'show':
-                    $ideas = $ideaRepository->findAllIdeasByProjectId($project->getId());
+                    $ideas = $ideaRepository->findAllIdeasByProjectId($project->getId(), 'createdAt', 'ASC');
                     $project->setProjectViews($project->getProjectViews() + 1);
                     $projectRepository->save($project, true);
                     break;
