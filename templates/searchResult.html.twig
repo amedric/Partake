@@ -1,8 +1,19 @@
-{% include 'base.html.twig' %}
+{% extends 'base.html.twig'%}
 
-{% block title %}<p>Search Results</p>{% endblock %}
+{% block title %}Search Results{% endblock %}
+
+{% block header %}
+    <div class="ptk-titleContainer">
+        <h1 class="ptk-titleHeader">Results</h1>
+    </div>
+{% endblock %}
+
+{% block underFilters %}
+    <p class="ptk-blockDescription">Search results :</p>
+{% endblock %}
 
 {% block body %}
+
     <p>Users :</p>
     <ul>{% for user in users %}
             <li><a href="{{ path('app_user_show', {'id': user.id}) }}">{{ user.lastname }}</li>
