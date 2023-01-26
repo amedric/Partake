@@ -9,6 +9,8 @@ use App\Repository\IdeaRepository;
 use App\Repository\LikeRepository;
 use App\Repository\ProjectRepository;
 use App\Repository\UserRepository;
+use Doctrine\DBAL\Exception;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -18,6 +20,9 @@ use Symfony\Component\Routing\Annotation\Route;
 class UserController extends AbstractController
 {
 
+    /**
+     * @throws Exception
+     */
     #[Route('/{id}', name: 'app_user_show', methods: ['GET', 'POST'])]
     public function show(
         Request $request,
@@ -29,25 +34,17 @@ class UserController extends AbstractController
     ): Response {
         $form = $this->createForm(SearchContentType::class);
         $form->handleRequest($request);
-        $likesIdea = [];
-        $ideaLikeId = [];
         if ($form->isSubmitted() && $form->isValid()) {
             $search = $form->getData()['search'];
-            $ideas = $ideaRepository->findBy(['user' => $user->getId()]);
             $projectsIdeas = $userRepository->findProjectsIdeasForUser($user->getId());
         } else {
             $ideas = $ideaRepository->findBy(['user' => $user->getId()]);
             $projectsIdeas = $userRepository->findProjectsIdeasForUser($user->getId());
         }
-        for ($i = 1; $i <= count($ideas); $i++) {
-            $likesIdea[$i] = $likeRepository->count(['idea' => $i]);
-            $ideaLikeId[$i] = $likeRepository->findLikeByUser($user->getId(), $i);
-        }
         return $this->render('user/show.html.twig', [
             'user' => $user,
+            'ideas' => $ideas,
             'projectsIdeas' => $projectsIdeas,
-            'likes' => $likesIdea,
-            'likeIdeaId' => $ideaLikeId,
             'form' => $form->createView(),
         ]);
     }

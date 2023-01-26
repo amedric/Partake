@@ -106,15 +106,44 @@
                                             <p class="ptk-cardStatsNo">{{ projectIdea.counts }}</p>
                                         </div>
                                         <div class="ptk-cardIconStats">
-
-                                            <img src="{{ asset('build/images/view.png') }}" alt="Views">
-                                            <p class="ptk-cardStatsNo">{{ projectIdea.views is null ? 0 : projectIdea.views  }}</p>
+                                            <img src="{{ asset('build/images/view.png') }}" class="ptk-ideaInfoIcons"
+                                                 alt="Views">
+                                            <p class="ptk-cardStatsNo">{{ projectIdea.views }}</p>
                                         </div>
                                     </div>
                                 </div>
-                            </a>
-                        </div>
-                    {% endif %}
+                            </div>
+                        </a>
+                    </div>
+                {% endif %}
+                {% if projectIdea.projectOrIdea == 'project' %}
+                    {#  ------------ Project cards -------------------------------------------------------------- -#}
+                    <div class="ptk-profileCardContainer">
+                        <p class="ptk-profileCardTypeLabel">{{ projectIdea.projectOrIdea }}</p>
+                        <a href="{{ path('app_project_show', {'id': projectIdea.id, orderBy: 'show'}) }}"
+                           class="ptk-cardsLink">
+                            <div class="ptk-cards">
+                                <div class="ptk-cardTitleContainer">
+                                    <h1 class="ptk-cardTitle">{{ projectIdea.title|striptags|length > 40
+                                        ? projectIdea.title|striptags|slice(0, 40) ~ '...'
+                                        : projectIdea.title|striptags }}</h1>
+                                </div>
+                                <div class="ptk-cardStatsContainer" style="background-color: {{ projectIdea.color }}">
+                                    <div class="ptk-cardIconStats">
+                                        <img src="{{ asset('build/images/idea.png') }}" alt="idea">
+                                        <p class="ptk-cardStatsNo">{{ projectIdea.counts }}</p>
+                                    </div>
+                                    <div class="ptk-cardIconStats">
+
+                                        <img src="{{ asset('build/images/view.png') }}" alt="Views">
+                                        <p class="ptk-cardStatsNo">
+                                            {{ projectIdea.views is null ? 0 : projectIdea.views }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                {% endif %}
             {% endfor %}
         </div>
 

@@ -131,7 +131,6 @@ class IdeaController extends AbstractController
     }
 
     #[Route('/{id}/like', name: 'app_idea_like', methods: ['GET','POST'])]
-    #[Entity('user', options: ['mapping' => ['userId' => 'id']])]
     public function like(Idea $idea, LikeRepository $likeRepository): Response
     {
         $like = new Like();
@@ -145,10 +144,9 @@ class IdeaController extends AbstractController
         );
     }
     #[Route('/{id}/dislike', name: 'app_idea_dislike', methods: ['GET','POST'])]
-    #[Entity('user', options: ['mapping' => ['userId' => 'id']])]
-    public function dislike(LikeRepository $likeRepository): Response
+    public function dislike(LikeRepository $likeRepository, Idea $idea): Response
     {
-        $ideaUser = $likeRepository->findOneBy(['user' => $this->getUser()]);
+        $ideaUser = $likeRepository->findOneBy(['user' => $this->getUser(), 'idea' => $idea->getId()]);
         $likeRepository->remove($ideaUser, true);
         return $this->redirectToRoute(
             'app_user_show',

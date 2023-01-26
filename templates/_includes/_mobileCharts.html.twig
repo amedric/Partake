@@ -1,0 +1,45 @@
+<div class="mobile-container">
+<div class="ptk-titleContainer">
+    <h1 class="ptk-titleHeader">Projects</h1>
+</div>
+<div class="ptk-Charts">
+<div class="ptk-chartsContainer">
+        <div class="switch-container">
+            <label class="switch">
+                <input type="checkbox" id="switch1">
+                <span class="slider round"></span>
+            </label>
+        </div>
+        <div id="canvas1" class="visible">
+            {{ render_chart(projectChart1) }}
+        </div>
+    </div>
+    <div class="ptk-chartsContainer2">
+        <div id="canvas2" class="hidden">
+            {{ render_chart(projectChart2) }}
+        </div>
+    </div>
+
+
+        <div class="ptk-titleContainer">
+            <h1 class="ptk-titleHeader">Ideas</h1>
+        </div>
+
+    <div class="ptk-chartsContainer">
+        <div class="switch-container">
+            <label class="switch">
+                <input type="checkbox" id="switch2">
+                <span class="slider round"></span>
+            </label>
+        </div>
+        <div id="canvas3" class="visible">
+            {{ render_chart(ideaChart1) }}
+        </div>
+    </div>
+    <div class="ptk-chartsContainer2">
+        <div id="canvas4" class="hidden">
+            {{ render_chart(ideaChart2) }}
+        </div>
+    </div>
+</div>
+</div>

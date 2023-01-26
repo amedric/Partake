@@ -45,7 +45,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $team = null;
 
-    #[ORM\ManyToMany(targetEntity: Project::class, inversedBy: 'usersSelectOnProject')]
+    #[ORM\ManyToMany(targetEntity: Project::class, mappedBy: 'usersSelectOnProject')]
     private Collection $projects;
 
     #[ORM\ManyToOne]
@@ -203,6 +203,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         if (!$this->projects->contains($project)) {
             $this->projects->add($project);
+            $project->addUsersSelectOnProject($this);
         }
 
         return $this;
@@ -210,7 +211,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function removeProject(Project $project): self
     {
-        $this->projects->removeElement($project);
+        if ($this->projects->removeElement($project)) {
+            $project->removeUsersSelectOnProject($this);
+        }
 
         return $this;
     }
