@@ -14,13 +14,14 @@
     background-color: $primaryBlue;
     font-size: 20px;
     width: 100vw;
+    border-bottom: 2px solid #003ea8;
 }
 
 .ptk-headerContainer{
     display: grid;
     justify-content: center;
     align-items: center;
-    height: 200px;
+    height: 220px;
     background-color: $primaryBlue;
     width: 100vw;
 }
@@ -33,6 +34,7 @@
     background-color: $primaryBlue;
     width: 100vw;
     margin: auto;
+    border-top: 2px solid #003ea8;
 }
 
 .ptk-containerSpaceBetween{

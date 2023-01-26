@@ -42,10 +42,10 @@ class UserController extends AbstractController
                         $wherePara = "allData.dataType";
                         break;
                     case 'project':
-                        $wherePara = "project";
+                        $wherePara = "'project'";
                         break;
                     case 'idea':
-                        $wherePara = "idea";
+                        $wherePara = "'idea'";
                         break;
                 }
 

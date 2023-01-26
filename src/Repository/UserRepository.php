@@ -113,7 +113,7 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
                 from idea as i3
                 where i3.user_id = :id
                 order by " . $order . ") as allData
-                where allData.dataType = '" . $wherePara . "'"
+                where allData.dataType = " . $wherePara
             ;
 
         $stmt = $conn->prepare($sql);
