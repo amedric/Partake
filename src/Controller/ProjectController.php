@@ -57,6 +57,7 @@ class ProjectController extends AbstractController
         $currentUser = $this->getUser();
         $projectCreateBy = $project->getUser();
         $userAuthorized = $project->getUsersSelectOnProject()->contains($currentUser);
+        $ideas = $ideaRepository->findAllIdeasByProjectId($project->getId(), 'createdAt', 'ASC');
         if ($currentUser === $projectCreateBy || $currentUser == $userAuthorized) {
             switch ($orderBy) {
                 case 'show':

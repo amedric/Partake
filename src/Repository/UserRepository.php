@@ -70,15 +70,15 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
     /**
      * @throws Exception
      */
-    public function findProjectsIdeasForUser($id, $column, $orderBy): array
+    public function findProjectsIdeasForUser($id, $column, $orderBy, $wherePara): array
     {
-        $order = " " . $column . " " . $orderBy;
+        $order = $column . " " . $orderBy;
         $conn = $this->getEntityManager()->getConnection();
-
         // query to find data for projects and ideas
-        $sql = '
-                select
-                    "project" as dataType,
+        $sql = "
+                select * from
+                (select
+                    'project' as dataType,
                     p.id as id,
                     p.title as title,
                     p.project_views as views,
@@ -87,15 +87,15 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
                         where i2.project_id = p.id
                         group by p.id) as counts,
                     c1.category_color as color,
-                    "0" as "likes",
-                    "0" as "liked",
+                    '0' as 'likes',
+                    '0' as liked,
                     p.created_at as createdAt
                     from project as p
                     left join category as c1 on p.category_id = c1.id
                     left join idea as i on p.id = i.project_id
                     where p.user_id = :id
                 union
-                select "idea" as dataType,
+                select 'idea' as dataType,
                         i3.id as id,
                         i3.title as title,
                         i3.idea_views as views,
@@ -105,15 +105,17 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
                         i3.idea_color as color,
                         (select count(l.id)
                             FROM `like` as l
-                            where l.idea_id = i3.id) as "likes",
+                            where l.idea_id = i3.id) as 'likes',
                         (select count(l2.user_id)
                             FROM `like` as l2
-                            where l2.idea_id = i3.id and l2.user_id = :id) as "liked",
+                            where l2.idea_id = i3.id and l2.user_id = :id) as liked,
                         i3.created_at as createdAt
                 from idea as i3
                 where i3.user_id = :id
-                order by' . $order
+                order by " . $order . ") as allData
+                where allData.dataType = '" . $wherePara . "'"
             ;
+
         $stmt = $conn->prepare($sql);
         $resultSet = $stmt->executeQuery(['id' => $id]);
 

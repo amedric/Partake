@@ -15,10 +15,9 @@
         <p id="ptk-createProjectLink">Create a project</p>
         </a>
     </div>
-
 {% endblock %}
-{% block filters %}
 
+{% block filters %}
     <div class="ptk-filterContainer">
         <p class="ptk-filterSeparators ptk-filtersWhite"> Order by: </p>
         <a href="{{ path('app_home_orderBy', {'orderBy': 'views'}) }}" class="ptk-filterLinks">most viewed</a>
@@ -44,12 +43,10 @@
             <div class="ptk-categoryContainer">
                 <h1 class="ptk-category">{{ category.title }}</h1>
             </div>
-
             <div class="ptk-homeCategoryBttns">
                 <button class="ptk-leftRightBttn" id="ptk-leftBttnId" type="button"><img class="ptk-arrowBttn" src="{{ asset('build/images/arrow.png') }}" alt="left"></button>
             </div>
             <div class="ptk-cardsContainer" id="ptk-cardsContainerId">
-
                 {% for project in projects %}
                 {% if category.id == project.category_id %}
                     {% if project.is_archived != true %}
@@ -64,7 +61,6 @@
                                     <p class="ptk-cardStatsNo">{{ project.ideaCount }}</p>
                                    </div>
                                 <div class="ptk-cardIconStats">
-
                                     <img src="{{ asset('build/images/view.png') }}" alt="Views">
                                     <p class="ptk-cardStatsNo">{{ project.project_views is null ? 0 : project.project_views  }}</p>
                                 </div>

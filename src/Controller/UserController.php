@@ -22,15 +22,13 @@ class UserController extends AbstractController
     /**
      * @throws Exception
      */
-    #[Route('/{id}/{orderBy}', name: 'app_user_show', methods: ['GET', 'POST'])]
+    #[Route('/{id}/{orderBy}/{dataType}', name: 'app_user_show', methods: ['GET', 'POST'])]
     public function show(
         Request $request,
         User $user,
         UserRepository $userRepository,
-        ProjectRepository $projectRepository,
-        IdeaRepository $ideaRepository,
-        LikeRepository $likeRepository,
-        string $orderBy
+        string $orderBy,
+        string $dataType
     ): Response {
         $form = $this->createForm(SearchContentType::class);
         $form->handleRequest($request);
@@ -38,14 +36,28 @@ class UserController extends AbstractController
                 $search = $form->getData()['search'];
                 $projectsIdeas = $userRepository->findProjectsIdeasForUser($user->getId(), 'createdAt', 'ASC');
             } else {
-    //            $ideas = $ideaRepository->findBy(['user' => $user->getId()]);
-    //            $projectsIdeas = $userRepository->findProjectsIdeasForUser($user->getId());
+
+                switch ($dataType) {
+                    case 'all':
+                        $wherePara = "allData.dataType";
+                        break;
+                    case 'project':
+                        $wherePara = "project";
+                        break;
+                    case 'idea':
+                        $wherePara = "idea";
+                        break;
+                }
+
                 switch ($orderBy) {
                     case 'newest':
-                        $projectsIdeas = $userRepository->findProjectsIdeasForUser($user->getId(), 'createdAt', 'DESC');
+                        $projectsIdeas = $userRepository->findProjectsIdeasForUser($user->getId(), 'createdAt', 'DESC', $wherePara);
                         break;
                     case 'oldest':
-                        $projectsIdeas = $userRepository->findProjectsIdeasForUser($user->getId(), 'createdAt', 'ASC');
+                        $projectsIdeas = $userRepository->findProjectsIdeasForUser($user->getId(), 'createdAt', 'ASC', $wherePara);
+                        break;
+                    case 'views':
+                        $projectsIdeas = $userRepository->findProjectsIdeasForUser($user->getId(), 'views', 'DESC', $wherePara);
                         break;
                 }
             }
