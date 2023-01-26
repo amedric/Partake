@@ -29,9 +29,10 @@
 
 .ptk-adminViewInfoContainer{
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    justify-content: center;
     width: 100%;
-    padding: 40px;
+    padding: 0 150px 0 150px;
     overflow-y: auto;
 }
 
@@ -60,7 +61,7 @@
     display: flex;
     align-items: center;
     height: 50%;
-    width: 100%;
+    width: 50%;
 }
 
 .ptk-adminDataRow{
@@ -76,11 +77,10 @@
 .ptk-teamListContainer{
     display: flex;
     justify-content: center;
-    padding-bottom: 15px;
     height: 55%;
-    width: 100%;
-    border-bottom: 3px solid $primaryGreen;
+    width: 50%;
     overflow-y: auto;
+    border-right: 3px solid #a8a8a8;
 }
 
 
@@ -141,6 +141,10 @@
     padding-right: 85px;
 }
 
+.ptk-noPadding{
+    padding: 0;
+}
+
 //-------------------------- Projects section --------------------------------
 .ptk-adminViewContainer{
     display: flex;
@@ -174,6 +178,13 @@
     display: flex;
     flex-direction: row;
     gap: 15px;
+    justify-content: center;
+    width: 100%;
+}
+
+//-------------------------- Users section --------------------------------
+.ptk-adminFormContainer{
+    display: flex;
     justify-content: center;
     width: 100%;
 }
