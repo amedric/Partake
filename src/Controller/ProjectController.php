@@ -51,38 +51,34 @@ class ProjectController extends AbstractController
         Project $project,
         IdeaRepository $ideaRepository,
         ProjectRepository $projectRepository,
+        int $id,
         string $orderBy
     ): Response {
         $currentUser = $this->getUser();
         $projectCreateBy = $project->getUser();
         $userAuthorized = $project->getUsersSelectOnProject()->contains($currentUser);
         if ($currentUser === $projectCreateBy || $currentUser == $userAuthorized) {
-            $ideas = $ideaRepository->findBy(['project' => $project->getId()]);
-
+//            $ideas = $ideaRepository->findBy(['project' => $project->getId()]);
             switch ($orderBy) {
                 case 'show':
-                    $ideas = $ideaRepository->findBy(['project' => $project->getId()]);
+                    $ideas = $ideaRepository->findAllIdeasByProjectId($project->getId());
                     $project->setProjectViews($project->getProjectViews() + 1);
                     $projectRepository->save($project, true);
                     break;
                 case 'newest':
-                    $ideas = $ideaRepository->findBy(['project' => $project->getId()], ['createdAt' => 'DESC']);
+                    $ideas = $ideaRepository->findAllIdeasByProjectId($project->getId(), 'createdAt', 'DESC');
                     break;
                 case 'oldest':
-                    $ideas = $ideaRepository->findBy(['project' => $project->getId()], ['createdAt' => 'ASC']);
+                    $ideas = $ideaRepository->findAllIdeasByProjectId($project->getId(), 'createdAt', 'ASC');
                     break;
                 case 'likes':
-                    $ideas = $projectRepository->findIdeasCountLikes(
-                        $project->getId()
-                    );
+                    $ideas = $ideaRepository->findAllIdeasByProjectId($project->getId(), 'ideaLikes', 'DESC');
                     break;
                 case 'comments':
-                    $ideas = $projectRepository->findIdeasCountComments(
-                        $project->getId()
-                    );
+                    $ideas = $ideaRepository->findAllIdeasByProjectId($project->getId(), 'ideaComments', 'DESC');
                     break;
                 case 'views':
-                    $ideas = $ideaRepository->findBy(['project' => $project->getId()], ['ideaViews' => 'Desc']);
+                    $ideas = $ideaRepository->findAllIdeasByProjectId($project->getId(), 'ideaViews', 'DESC');
                     break;
             }
 

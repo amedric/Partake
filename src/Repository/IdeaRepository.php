@@ -124,28 +124,34 @@ class IdeaRepository extends ServiceEntityRepository
         return $resultSet->fetchAllAssociative();
     }
 
-//    /**
-//     * @return Idea[] Returns an array of Idea objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('i')
-//            ->andWhere('i.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('i.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+    public function findAllIdeasByProjectId($id, $column, $orderBy): array
+    {
+        $order = " " . $column . " " . $orderBy;
+        $conn = $this->getEntityManager()->getConnection();
+        $sql = '
+            select
+                p.id as projectId,
+                i.id,
+                i.title,
+                i.content,
+                i.idea_color as ideaColor,
+                i.idea_views as ideaViews,
+                (select count(l.id)
+                    FROM `like` as l
+                    where l.idea_id = i.id) as ideaLikes,
+                (select count(c.id)
+                    FROM comment as c
+                    where c.idea_id = i.id) as ideaComments,
+                i.created_at as createdAt
+            from idea as i
+            right join project as p on i.project_id = p.id
+            where p.id = :id
+            order by' . $order
+            ;
+        $stmt = $conn->prepare($sql);
+        $resultSet = $stmt->executeQuery(['id' => $id]);
 
-//    public function findOneBySomeField($value): ?Idea
-//    {
-//        return $this->createQueryBuilder('i')
-//            ->andWhere('i.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+        // returns an array of arrays (i.e. a raw data set)
+        return $resultSet->fetchAllAssociative();
+    }
 }
