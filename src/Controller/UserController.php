@@ -19,35 +19,35 @@ use Symfony\Component\Routing\Annotation\Route;
 #[Route('/user')]
 class UserController extends AbstractController
 {
-    #[Route('/', name: 'app_user_index', methods: ['GET'])]
-    public function index(UserRepository $userRepository): Response
-    {
+//    #[Route('/', name: 'app_user_index', methods: ['GET'])]
+//    public function index(UserRepository $userRepository): Response
+//    {
+//
+//        return $this->render('user/index.html.twig', [
+//            'users' => $userRepository->findAll(),
+//        ]);
+//    }
 
-        return $this->render('user/index.html.twig', [
-            'users' => $userRepository->findAll(),
-        ]);
-    }
-
-    #[Route('/new', name: 'app_user_new', methods: ['GET', 'POST'])]
-    #[IsGranted('ROLE_ADMIN')]
-    public function new(Request $request, UserRepository $userRepository): Response
-    {
-        $user = new User();
-        $form = $this->createForm(UserType::class, $user);
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-            $passwordUser = $user->getPassword();
-            $user->setPassword(password_hash($passwordUser, PASSWORD_DEFAULT));
-            $userRepository->save($user, true);
-            return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);
-        }
-
-        return $this->renderForm('user/new.html.twig', [
-            'user' => $user,
-            'form' => $form,
-            'edit' => true,
-        ]);
-    }
+//    #[Route('/new', name: 'app_user_new', methods: ['GET', 'POST'])]
+//    #[IsGranted('ROLE_ADMIN')]
+//    public function new(Request $request, UserRepository $userRepository): Response
+//    {
+//        $user = new User();
+//        $form = $this->createForm(UserType::class, $user);
+//        $form->handleRequest($request);
+//        if ($form->isSubmitted() && $form->isValid()) {
+//            $passwordUser = $user->getPassword();
+//            $user->setPassword(password_hash($passwordUser, PASSWORD_DEFAULT));
+//            $userRepository->save($user, true);
+//            return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);
+//        }
+//
+//        return $this->renderForm('user/new.html.twig', [
+//            'user' => $user,
+//            'form' => $form,
+//            'edit' => true,
+//        ]);
+//    }
 
     /**
      * @throws Exception
