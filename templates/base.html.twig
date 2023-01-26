@@ -21,6 +21,12 @@
             <div class="ptk-navbarContainer">
                 {% include '/_includes/_navbar.html.twig' %}
             </div>
+            <div class="ptk-headerContainer">
+                {% block header %}{% endblock %}
+            </div>
+            <div class="ptk-filtersContainer">
+                {% block filters %}{% endblock %}
+            </div>
             <div class="ptk-flashMessagesContainer">
                 {% for category, messages in app.flashes %}
                     {% for message in messages %}
@@ -29,12 +35,6 @@
                         </div>
                     {% endfor %}
                 {% endfor %}
-            </div>
-            <div class="ptk-headerContainer">
-                {% block header %}{% endblock %}
-            </div>
-            <div class="ptk-filtersContainer">
-                {% block filters %}{% endblock %}
             </div>
             <div class="ptk-underfiltersContainer">
                 {% block underFilters %}{% endblock %}
