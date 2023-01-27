@@ -24,7 +24,7 @@
                     <td class="ptk-adminTableData">{{ user.firstname }}</td>
                     <td class="ptk-adminTableData">{{ user.lastname }}</td>
                     <td class="ptk-adminTableData">{{ user.roles[0] }}</td>
-                    <td class="ptk-adminTableData">{{ user.team }}</td>
+                    <td class="ptk-adminTableData">{{ user.category.title }}</td>
                     <td class="ptk-adminTableData">{{ user.email }}</td>
                     <td class="ptk-teamBttns">
                         {% include '/admin/admin_delete_form.html.twig' %}

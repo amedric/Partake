@@ -37,7 +37,7 @@
 {% block body %}
     {% include '/_includes/_mobileCharts.html.twig' %}
     <div class="ptk-cardsBlock">
-        {
+
         {% for category in categories %}
             <div class="ptk-categoryCardsContainer">
                 <div class="ptk-categorySection">
@@ -58,7 +58,7 @@
                                     <a href="{{ path('app_project_show', {'id': project.id,'orderBy': 'show'}) }}"
                                        class="ptk-cardsLink">
                                         {% set unauthorizedColor = 'grey' %}
-                                        {% if (app.user.id == project.userId) %}
+                                        {% if (app.user.id == project.user) %}
                                             {% set unauthorizedColor = category.categoryColor %}
                                         {% else %}
                                             {% for authorizedProject in authorizedProjects %}

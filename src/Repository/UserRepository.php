@@ -68,7 +68,14 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
     }
 
     /**
+     * @param $id
+     * @param $column
+     * @param $orderBy
+     * @param $wherePara
+     * @return array
      * @throws Exception
+     * retireves all projects and ideas into one table
+     * can be filtered by projects and ideas
      */
     public function findProjectsIdeasForUser($id, $column, $orderBy, $wherePara): array
     {

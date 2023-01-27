@@ -39,14 +39,42 @@ class ProjectRepository extends ServiceEntityRepository
         }
     }
 
+//    public function findLikeProject(string $name): array
+//    {
+//        $queryBuilder = $this->createQueryBuilder('p')
+//            ->where('p.title LIKE :name')
+//            ->setParameter('name', '%' . $name . '%')
+//            ->orderBy('p.title', 'ASC')
+//            ->getQuery();
+//        return $queryBuilder->getResult();
+//    }
+
     public function findLikeProject(string $name): array
     {
-        $queryBuilder = $this->createQueryBuilder('p')
-            ->where('p.title LIKE :name')
-            ->setParameter('name', '%' . $name . '%')
-            ->orderBy('p.title', 'ASC')
-            ->getQuery();
-        return $queryBuilder->getResult();
+        $conn = $this->getEntityManager()->getConnection();
+        $sql = "
+            select
+                p.id,
+                p.user_id as user,
+                p.category_id as categoryId,
+                p.title,
+                p.content,
+                p.created_at as createdAt,
+                p.project_views as views,
+                    (select count(i.id)
+                        FROM idea as i
+                        where i.project_id = p.id
+                        group by p.id) as ideaCount,
+                    p.is_archived as isArchived
+                from project as p
+                where p.title = '" . $name . "'
+                order by p.title"
+        ;
+        $stmt = $conn->prepare($sql);
+        $resultSet = $stmt->executeQuery();
+
+        // returns an array of arrays (i.e. a raw data set)
+        return $resultSet->fetchAllAssociative();
     }
 
 //    public function findProjectDesc(): array
@@ -229,7 +257,7 @@ class ProjectRepository extends ServiceEntityRepository
         $sql = '
             select
                 p.id,
-                p.user_id as userId,
+                p.user_id as user,
                 p.category_id as categoryId,
                 p.title,
                 p.content,
