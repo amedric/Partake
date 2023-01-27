@@ -24,21 +24,21 @@
     </div>
     <div class="ptk-filterContainer">
         <p class="ptk-filterSeparators"> Order by: </p>
-        <a href="{{ path('app_project_show', {id: project.id, 'orderBy': 'newest'}) }}" class="ptk-filterLinks">newest</a>
+        <a href="{{ path('app_project_show', {'id': project.id, 'orderBy': 'newest'}) }}" class="ptk-filterLinks">newest</a>
         <p class="ptk-filterSeparators">/</p>
-        <a href="{{ path('app_project_show', {id: project.id, 'orderBy': 'oldest'}) }}" class="ptk-filterLinks">oldest</a>
+        <a href="{{ path('app_project_show', {'id': project.id, 'orderBy': 'oldest'}) }}" class="ptk-filterLinks">oldest</a>
         <p class="ptk-filterSeparators">/</p>
-        <a href="{{ path('app_project_show', {id: project.id, 'orderBy': 'likes'}) }}" class="ptk-filterLinks">likes</a>
+        <a href="{{ path('app_project_show', {'id': project.id, 'orderBy': 'likes'}) }}" class="ptk-filterLinks">likes</a>
         <p class="ptk-filterSeparators">/</p>
-        <a href="{{ path('app_project_show', {id: project.id, 'orderBy': 'comments'}) }}" class="ptk-filterLinks">comments</a>
+        <a href="{{ path('app_project_show', {'id': project.id, 'orderBy': 'comments'}) }}" class="ptk-filterLinks">comments</a>
         <p class="ptk-filterSeparators">/</p>
-        <a href="{{ path('app_project_show', {id: project.id, 'orderBy': 'views'}) }}" class="ptk-filterLinks">views</a>
+        <a href="{{ path('app_project_show', {'id': project.id, 'orderBy': 'views'}) }}" class="ptk-filterLinks">views</a>
     </div>
 {% endblock %}
 
 {% block underFilters %}
     <p class="ptk-blockDescription">Ideas</p>
-    <a href="{{ path('app_idea_new', {id: project.id}) }}" id="ptk-addIdeaLink">
+    <a href="{{ path('app_idea_new', {'id': project.id}) }}" id="ptk-addIdeaLink">
         <div class="ptk-addIdeaContainer">
             <p id="ptk-addIdeaIcon">+</p>
             <p class="ptk-addIdea">Add Idea</p>
@@ -51,7 +51,7 @@
         <div class="ptk-cardsBlock">
             <div class="ptk-ideaCardsContainer">
                 {% for idea in ideas %}
-                    <a href="{{ path('app_idea_show', {id: idea.id}) }}" class="ptk-cardsLink">
+                    <a href="{{ path('app_idea_show', {'id': idea.id}) }}" class="ptk-cardsLink">
                         <div class="ptk-ideaCards ptk-cardMarginRight" style="border: 2.5px solid {{idea.ideaColor}}">
                             <div class="ptk-cardIdeaTitleContainer">
                                 <h1 class="ptk-cardIdeaTitle">{{ idea.title|striptags|length > 40 ? idea.title|striptags|slice(0, 40) ~ '...' : idea.title|striptags }}</h1>
@@ -61,11 +61,11 @@
                                 <div class="ptk-cardStatsContainer">
                                     <div class="ptk-cardIconStats">
                                         <img src="{{ asset('build/images/like.png') }}" class="ptk-ideaInfoIcons" alt="like">
-                                        <p class="ptk-cardStatsNo">25</p>
+                                        <p class="ptk-cardStatsNo">{{ idea.ideaLikes }}</p>
                                     </div>
                                     <div class="ptk-cardIconStats">
                                         <img src="{{ asset('build/images/comment.png') }}" class="ptk-ideaInfoIcons" alt="Comments">
-                                        <p class="ptk-cardStatsNo">35</p>
+                                        <p class="ptk-cardStatsNo">{{ idea.ideaComments }}</p>
                                     </div>
                                     <div class="ptk-cardIconStats">
                                         <img src="{{ asset('build/images/view.png') }}" class="ptk-ideaInfoIcons" alt="Views">

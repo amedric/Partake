@@ -76,11 +76,10 @@ class IdeaController extends AbstractController
         }
 
         $comments = $commentRepository->findAll();
-
-        return $this->renderForm('idea/show.html.twig', [
+        return $this->render('idea/show.html.twig', [
             'idea' => $idea,
             'user' => $user,
-            'form' => $form,
+            'form' => $form->createView(),
             'edit' => true,
             'comments' => $comments,
         ]);
