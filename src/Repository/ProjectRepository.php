@@ -67,7 +67,7 @@ class ProjectRepository extends ServiceEntityRepository
                         group by p.id) as ideaCount,
                     p.is_archived as isArchived
                 from project as p
-                where p.title = '" . $name . "'
+                where p.title like '%" . $name . "%'
                 order by p.title"
         ;
         $stmt = $conn->prepare($sql);
