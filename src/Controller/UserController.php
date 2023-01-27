@@ -61,6 +61,7 @@ class UserController extends AbstractController
                         break;
                 }
             }
+
         return $this->render('user/show.html.twig', [
             'user' => $user,
             'projectsIdeas' => $projectsIdeas,
