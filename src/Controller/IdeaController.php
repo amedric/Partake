@@ -8,11 +8,11 @@ use App\Entity\Like;
 use App\Entity\Project;
 use App\Form\CommentType;
 use App\Form\IdeaType;
-use App\Form\IdeaEditType;
 use App\Repository\CommentRepository;
 use App\Repository\IdeaRepository;
 use App\Repository\LikeRepository;
 use DateTime;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -22,13 +22,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
 #[Route('/idea')]
 class IdeaController extends AbstractController
 {
-    #[Route('/', name: 'app_idea_index', methods: ['GET'])]
-    public function index(IdeaRepository $ideaRepository): Response
-    {
-        return $this->render('idea/index.html.twig', [
-            'ideas' => $ideaRepository->findAll(),
-        ]);
-    }
 
     #[Route('/new/{id}', name: 'app_idea_new', methods: ['GET', 'POST'])]
     public function new(Project $project, Request $request, IdeaRepository $ideaRepository): Response
@@ -40,7 +33,7 @@ class IdeaController extends AbstractController
             $idea->setUser($this->getUser());
             $idea->setProject($project);
             $ideaRepository->save($idea, true);
-
+            $this->addFlash('success', 'Success:  New idea created');
             return $this->redirectToRoute('app_project_show', [
                 'id' => $project->getId(),
                 'orderBy' => 'show',
@@ -105,7 +98,7 @@ class IdeaController extends AbstractController
 
             if ($form->isSubmitted() && $form->isValid()) {
                 $ideaRepository->save($idea, true);
-
+                $this->addFlash('success', 'Success: Idea modified');
                 return $this->redirectToRoute('app_idea_show', [
                     'id' => $idea->getId(),
                 ], Response::HTTP_SEE_OTHER);
@@ -128,9 +121,13 @@ class IdeaController extends AbstractController
     {
         if ($this->isCsrfTokenValid('delete' . $idea->getId(), $request->request->get('_token'))) {
             $ideaRepository->remove($idea, true);
+            $this->addFlash('notice', 'Notice: Idea deleted');
         }
 
-        return $this->redirectToRoute('app_idea_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('app_project_show', [
+            'id' => $idea->getProject()->getId(),
+            'orderBy' => 'show'
+        ], Response::HTTP_SEE_OTHER);
     }
 
     #[Route('/{id}/like', name: 'app_idea_like', methods: ['GET','POST'])]

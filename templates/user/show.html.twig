@@ -33,7 +33,11 @@
                 </div>
             </div>
         </div>
-        <img class="ptk-editProfileIcon" src="{{ asset('build/images/editProfile.png') }}" alt="Edit profile"/>
+        {% if app.user.id == user.id %}
+        <a href="{{ path('app_user_edit', {id: user.id}) }}" class="ptk-cardsLink">
+            <img class="ptk-editProfileIcon" src="{{ asset('build/images/editProfile.png') }}" alt="edit profile"/>
+        </a>
+        {% endif %}
     </div>
 {% endblock %}
 
@@ -50,104 +54,98 @@
     <div class="ptk-cardsBlock">
         <div class="ptk-ideaCardsContainer">
             {% for projectIdea in projectsIdeas %}
-            {% if projectIdea.dataType == 'idea' %}
-                {# ------------ Idea cards --------------------------------------------------------------- #}
-                <div class="ptk-profileCardContainer">
-                    <p class="ptk-profileCardTypeLabel">{{ projectIdea.dataType }}</p>
-                    <div class="ptk-ideaCards" style="border: 2.5px solid {{ projectIdea.color }}">
-                        <a href="{{ path('app_idea_show', {id: projectIdea.id}) }}" class="ptk-cardsLink">
-                            <div class="ptk-cardIdeaTitleContainer">
-                                <h1 class="ptk-cardIdeaTitle">{{ projectIdea.title|striptags|length > 40 ? projectIdea.title|striptags|slice(0, 40) ~ '...' : projectIdea.title|striptags }}</h1>
+                {% if projectIdea.dataType == 'idea' %}
+                    {# ------------ Idea cards --------------------------------------------------------------- #}
+                    <div class="ptk-profileCardContainer">
+                        <p class="ptk-profileCardTypeLabel">{{projectIdea.dataType}}</p>
+                            <div class="ptk-ideaCards" style="border: 2.5px solid {{projectIdea.color}}">
+                                <a href="{{ path('app_idea_show', {id: projectIdea.id}) }}" class="ptk-cardsLink">
+                                <div class="ptk-cardIdeaTitleContainer">
+                                    <h1 class="ptk-cardIdeaTitle">{{ projectIdea.title|striptags|length > 40 ? projectIdea.title|striptags|slice(0, 40) ~ '...' : projectIdea.title|striptags }}</h1>
+                                </div>
+                                </a>
+                                <div class="ptk-cardIdeaStatsContainer">
+                                    <div class="ptk-cardStatsContainer">
+                                        <div class="ptk-cardIconStats">
+                                            {% if projectIdea.liked == 1 %}
+                                                <a href="{{ path('app_idea_dislike', {'id': projectIdea.id}) }}" class="ptk-cardsLink">
+                                                    <img src="{{ asset('build/images/blackheart.png') }}" class="ptk-ideaInfoIcons" alt="Dislike">
+                                                </a>
+                                            {% else %}
+                                                <a href="{{ path('app_idea_like', {'id': projectIdea.id}) }}" class="ptk-cardsLink">
+                                                    <img src="{{ asset('build/images/like.png') }}" class="ptk-ideaInfoIcons" alt="Like">
+                                                </a>
+                                            {% endif %}
+                                            <p class="ptk-cardStatsNo">{{ projectIdea.likes }}</p>
+                                        </div>
+                                        <div class="ptk-cardIconStats">
+                                            <img src="{{ asset('build/images/comment.png') }}" class="ptk-ideaInfoIcons" alt="Comments">
+                                            <p class="ptk-cardStatsNo">{{ projectIdea.counts }}</p>
+                                        </div>
+                                        <div class="ptk-cardIconStats">
+                                            <img src="{{ asset('build/images/view.png') }}" class="ptk-ideaInfoIcons" alt="Views">
+                                            <p class="ptk-cardStatsNo">{{ projectIdea.views }}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                    </div>
+                    {% endif %}
+                    {% if projectIdea.dataType == 'project' %}
+                        {# ------------ Project cards --------------------------------------------------------------- #}
+                        <div class="ptk-profileCardContainer">
+                            <p class="ptk-profileCardTypeLabel">{{projectIdea.dataType}}</p>
+                            <a href="{{ path('app_project_show', {'id': projectIdea.id, orderBy: 'show'}) }}" class="ptk-cardsLink">
+                                <div class="ptk-cards">
+                                    <div class="ptk-cardTitleContainer">
+                                        <h1 class="ptk-cardTitle">{{ projectIdea.title|striptags|length > 40 ? projectIdea.title|striptags|slice(0, 40) ~ '...' : projectIdea.title|striptags }}</h1>
+                                    </div>
+                                    <div class="ptk-cardStatsContainer" style="background-color: {{ projectIdea.color }}">
+                                        <div class="ptk-cardIconStats">
+                                            <img src="{{ asset('build/images/idea.png') }}" alt="idea">
+                                            <p class="ptk-cardStatsNo">{{ projectIdea.counts }}</p>
+                                        </div>
+                                        <div class="ptk-cardIconStats">
+                                            <img src="{{ asset('build/images/view.png') }}" class="ptk-ideaInfoIcons"
+                                                 alt="Views">
+                                            <p class="ptk-cardStatsNo">{{ projectIdea.views }}</p>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </a>
-                        <div class="ptk-cardIdeaStatsContainer">
-                            <div class="ptk-cardStatsContainer">
-                                <div class="ptk-cardIconStats">
-                                    {% if projectIdea.liked == 1 %}
-                                        <a href="{{ path('app_idea_dislike', {'id': projectIdea.id}) }}"
-                                           class="ptk-cardsLink">
-                                            <img src="{{ asset('build/images/blackheart.png') }}"
-                                                 class="ptk-ideaInfoIcons" alt="Dislike">
-                                        </a>
-                                    {% else %}
-                                        <a href="{{ path('app_idea_like', {'id': projectIdea.id}) }}"
-                                           class="ptk-cardsLink">
-                                            <img src="{{ asset('build/images/like.png') }}" class="ptk-ideaInfoIcons"
-                                                 alt="Like">
-                                        </a>
-                                    {% endif %}
-                                    <p class="ptk-cardStatsNo">{{ projectIdea.likes }}</p>
-                                </div>
-                                <div class="ptk-cardIconStats">
-                                    <img src="{{ asset('build/images/comment.png') }}" class="ptk-ideaInfoIcons"
-                                         alt="Comments">
-                                    <p class="ptk-cardStatsNo">{{ projectIdea.counts }}</p>
-                                </div>
-                                <div class="ptk-cardIconStats">
-                                    <img src="{{ asset('build/images/view.png') }}" class="ptk-ideaInfoIcons"
-                                         alt="Views">
-                                    <p class="ptk-cardStatsNo">{{ projectIdea.views }}</p>
-                                </div>
-                            </div>
-                        </div>
                     </div>
-                </div>
-            {% endif %}
-            {% if projectIdea.dataType == 'project' %}
-            {# ------------ Project cards --------------------------------------------------------------- #}
-            <div class="ptk-profileCardContainer">
-                <p class="ptk-profileCardTypeLabel">{{ projectIdea.dataType }}</p>
-                <a href="{{ path('app_project_show', {'id': projectIdea.id, orderBy: 'show'}) }}" class="ptk-cardsLink">
-                    <div class="ptk-cards">
-                        <div class="ptk-cardTitleContainer">
-                            <h1 class="ptk-cardTitle">{{ projectIdea.title|striptags|length > 40 ? projectIdea.title|striptags|slice(0, 40) ~ '...' : projectIdea.title|striptags }}</h1>
-                        </div>
-                        <div class="ptk-cardStatsContainer" style="background-color: {{ projectIdea.color }}">
-                            <div class="ptk-cardIconStats">
-                                <img src="{{ asset('build/images/idea.png') }}" alt="idea">
-                                <p class="ptk-cardStatsNo">{{ projectIdea.counts }}</p>
-                            </div>
-                            <div class="ptk-cardIconStats">
-                                <img src="{{ asset('build/images/view.png') }}" class="ptk-ideaInfoIcons"
-                                     alt="Views">
-                                <p class="ptk-cardStatsNo">{{ projectIdea.views }}</p>
-                            </div>
-                        </div>
-                    </div>
-            </div>
-            </a>
-        </div>
-        {% endif %}
-        {#                {% if projectIdea.projectOrIdea == 'project' %} #}
-        {#                    #}{#  ------------ Project cards -------------------------------------------------------------- -#}
-        {#                    <div class="ptk-profileCardContainer"> #}
-        {#                        <p class="ptk-profileCardTypeLabel">{{ projectIdea.projectOrIdea }}</p> #}
-        {#                        <a href="{{ path('app_project_show', {'id': projectIdea.id, orderBy: 'show'}) }}" #}
-        {#                           class="ptk-cardsLink"> #}
-        {#                            <div class="ptk-cards"> #}
-        {#                                <div class="ptk-cardTitleContainer"> #}
-        {#                                    <h1 class="ptk-cardTitle">{{ projectIdea.title|striptags|length > 40 #}
-        {#                                        ? projectIdea.title|striptags|slice(0, 40) ~ '...' #}
-        {#                                        : projectIdea.title|striptags }}</h1> #}
-        {#                                </div> #}
-        {#                                <div class="ptk-cardStatsContainer" style="background-color: {{ projectIdea.color }}"> #}
-        {#                                    <div class="ptk-cardIconStats"> #}
-        {#                                        <img src="{{ asset('build/images/idea.png') }}" alt="idea"> #}
-        {#                                        <p class="ptk-cardStatsNo">{{ projectIdea.counts }}</p> #}
-        {#                                    </div> #}
-        {#                                    <div class="ptk-cardIconStats"> #}
+                {% endif %}
+                {% if projectIdea.projectOrIdea == 'project' %}
+                    {#  ------------ Project cards -------------------------------------------------------------- -#}
+                    <div class="ptk-profileCardContainer">
+                        <p class="ptk-profileCardTypeLabel">{{ projectIdea.projectOrIdea }}</p>
+                        <a href="{{ path('app_project_show', {'id': projectIdea.id, orderBy: 'show'}) }}"
+                           class="ptk-cardsLink">
+                            <div class="ptk-cards">
+                                <div class="ptk-cardTitleContainer">
+                                    <h1 class="ptk-cardTitle">{{ projectIdea.title|striptags|length > 40
+                                        ? projectIdea.title|striptags|slice(0, 40) ~ '...'
+                                        : projectIdea.title|striptags }}</h1>
+                                </div>
+                                <div class="ptk-cardStatsContainer" style="background-color: {{ projectIdea.color }}">
+                                    <div class="ptk-cardIconStats">
+                                        <img src="{{ asset('build/images/idea.png') }}" alt="idea">
+                                        <p class="ptk-cardStatsNo">{{ projectIdea.counts }}</p>
+                                    </div>
+                                    <div class="ptk-cardIconStats">
 
-        {#                                        <img src="{{ asset('build/images/view.png') }}" alt="Views"> #}
-        {#                                        <p class="ptk-cardStatsNo"> #}
-        {#                                            {{ projectIdea.views is null ? 0 : projectIdea.views }}</p> #}
-        {#                                    </div> #}
-        {#                                </div> #}
-        {#                            </div> #}
-        {#                        </a> #}
-        {#                    </div> #}
-        {#                {% endif %} #}
-        {% endfor %}
-    </div>
+                                        <img src="{{ asset('build/images/view.png') }}" alt="Views">
+                                        <p class="ptk-cardStatsNo">
+                                            {{ projectIdea.views is null ? 0 : projectIdea.views }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
 
     </div>
 {% endblock %}
