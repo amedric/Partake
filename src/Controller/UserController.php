@@ -32,23 +32,23 @@ class UserController extends AbstractController
     ): Response {
         $form = $this->createForm(SearchContentType::class);
         $form->handleRequest($request);
+        // -------------------- set where clause parameters --------------------
+        switch ($dataType) {
+            case 'all':
+                $wherePara = "allData.dataType";
+                break;
+            case 'project':
+                $wherePara = "'project'";
+                break;
+            case 'idea':
+                $wherePara = "'idea'";
+                break;
+        }
             if ($form->isSubmitted() && $form->isValid()) {
                 $search = $form->getData()['search'];
-                $projectsIdeas = $userRepository->findProjectsIdeasForUser($user->getId(), 'createdAt', 'ASC');
+                $projectsIdeas = $userRepository->findProjectsIdeasForUser($user->getId(), 'createdAt', 'ASC', $wherePara);
             } else {
-
-                switch ($dataType) {
-                    case 'all':
-                        $wherePara = "allData.dataType";
-                        break;
-                    case 'project':
-                        $wherePara = "'project'";
-                        break;
-                    case 'idea':
-                        $wherePara = "'idea'";
-                        break;
-                }
-
+                // -------------------- set order by parameters --------------------
                 switch ($orderBy) {
                     case 'newest':
                         $projectsIdeas = $userRepository->findProjectsIdeasForUser($user->getId(), 'createdAt', 'DESC', $wherePara);

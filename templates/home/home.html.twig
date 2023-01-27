@@ -22,6 +22,8 @@
         <p class="ptk-filterSeparators ptk-filtersWhite"> Order by: </p>
         <a href="{{ path('app_home_orderBy', {'orderBy': 'views'}) }}" class="ptk-filterLinks">most viewed</a>
         <p class="ptk-filterSeparators"> / </p>
+        <a href="{{ path('app_home_orderBy', {'orderBy': 'ideas'}) }}" class="ptk-filterLinks">ideas</a>
+        <p class="ptk-filterSeparators"> / </p>
         <a href="{{ path('app_home_orderBy', {'orderBy': 'newest'}) }}" class="ptk-filterLinks">newest</a>
         <p class="ptk-filterSeparators"> / </p>
         <a href="{{ path('app_home_orderBy', {'orderBy': 'oldest'}) }}" class="ptk-filterLinks">oldest</a>
@@ -51,12 +53,12 @@
                     <div class="ptk-cardsContainer" id="ptk-cardsContainerId">
 
                         {% for project in projects %}
-                            {% if category.id == project.category_id %}
-                                {% if project.is_archived != true %}
+                            {% if category.id == project.categoryId %}
+                                {% if project.isArchived != true %}
                                     <a href="{{ path('app_project_show', {'id': project.id,'orderBy': 'show'}) }}"
                                        class="ptk-cardsLink">
                                         {% set unauthorizedColor = 'grey' %}
-                                        {% if (app.user.id == project.user_id) %}
+                                        {% if (app.user.id == project.userId) %}
                                             {% set unauthorizedColor = category.categoryColor %}
                                         {% else %}
                                             {% for authorizedProject in authorizedProjects %}
@@ -78,7 +80,7 @@
                                                 </div>
                                                 <div class="ptk-cardIconStats">
                                                     <img src="{{ asset('build/images/view.png') }}" alt="Views">
-                                                    <p class="ptk-cardStatsNo">{{ project.project_views is null ? 0 : project.project_views }}</p>
+                                                    <p class="ptk-cardStatsNo">{{ project.views is null ? 0 : project.views }}</p>
                                                 </div>
                                             </div>
                                         </div>
