@@ -39,9 +39,21 @@
     align-items: center;
 }
 
+#ptk-createProject{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+#ptk-createProject:hover{
+    color: $primaryYellow;
+
+    transform: scale(1.05);
+}
+
 #ptk-addProjectIcon{
-    margin: 0;
-    margin-right: 10px;
+    margin: 0 10px 0 0;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -54,6 +66,7 @@
 }
 
 #ptk-createProjectLink{
+    margin: 0;
     font-style: normal;
     font-weight: 700;
     font-size: 2.3rem;
@@ -65,24 +78,38 @@
     text-decoration: none;
 }
 
+#ptk-createProjectLink:hover {
+    color: $secondaryYellow;
+}
+
 .ptk-filterContainer{
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
     width: 50%;
     margin-right: 20px;
+    gap: 10px;
 }
 
 .ptk-filterLinks{
+    margin: 0;
     font-style: normal;
     font-weight: 600;
     font-size: 1.3rem;
-    color: $primaryGrey;
+    color: $secondaryPurple;
 }
 
+.ptk-filterSeparators{
+    margin: 0;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 1.3rem;
+    color: white;
+}
+
+
 .ptk-filterLinks:hover {
-    background-color: $primaryYellow;
-    border-radius: 15px 15px;
+    color: $secondaryYellow;
 }
 
 .ptk-blockDescription{
@@ -153,6 +180,8 @@
 .ptk-cardsLink{
     display: flex;
     align-items: center;
+    margin: 0;
+    padding: 0;
 }
 
 .ptk-cards {
@@ -206,6 +235,7 @@
 .ptk-cardIconStats{
     display: flex;
     flex-direction: column;
+    justify-content: flex-start;
     align-items: center;
 }
 
@@ -251,7 +281,7 @@
     margin-left: 15px;
     font-weight: 550;
     font-size: 20px;
-    color: $primaryGrey;
+    color: #a9a9a9;
 }
 
 .ptk-addIdeaContainer{
@@ -283,6 +313,14 @@
     font-weight: 700;
     font-size: 1.8rem;
     color: $primaryBlue;
+}
+
+.ptk-addIdea:hover{
+    transform: scale(1.05);
+}
+
+#ptk-addIdeaLink:hover{
+    transform: scale(1.05);
 }
 
 .ptk-cardIdeaTitleContainer{
@@ -437,6 +475,7 @@
     right: 10px;
     width: 30px;
     aspect-ratio: 1/1;
+    cursor: pointer;
 }
 
 .ptk-profileCardContainer{
@@ -455,404 +494,3 @@
     font-size: 1.5rem;
     color: #adadad;
 }
-
-//.ptk-titleBlock{
-//    display: flex;
-//    justify-content: center;
-//    align-items: center;
-//    width: 100%;
-//
-//    .ptk-titleContainer{
-//        display: flex;
-//        justify-content: center;
-//        align-items: center;
-//        width: 70vw;
-//        height: 160px;
-//        padding: 25px;
-//        border: 5px solid $primaryWhite;
-//        border-radius: 10px;
-//        background-image: url(../images/ideaRocket.jpg);
-//        background-size: cover;
-//        background-repeat: no-repeat;
-//
-//        .ptk-titleHeader{
-//            font-style: normal;
-//            font-weight: 700;
-//            font-size: 40px;
-//            color: $primaryWhite;
-//            text-shadow: 2px 0 $primaryBlue, -2px 0 $primaryBlue, 0 2px $primaryBlue, 0 -2px $primaryBlue,
-//            1px 1px $primaryBlue, -1px -1px $primaryBlue, 1px -1px $primaryBlue, -1px 1px $primaryBlue;
-//        }
-//    }
-//}
-//
-//.ptk-underTitleBlock{
-//    display: flex;
-//    justify-content: center;
-//    align-items: center;
-//    margin: 10px 0 10px 0;
-//    padding: 0 50px 0 50px;
-//    width: 100%;
-//
-//    .ptk-projectContent{
-//        margin: 0;
-//        font-size: 20px;
-//    }
-//
-//    .ptk-createProjectContainer{
-//        display: flex;
-//        flex-direction: row;
-//        justify-content: space-around;
-//        align-items: center;
-//        transition-duration: 0.2s;
-//
-//        #ptk-addProjectIcon{
-//            margin: 0;
-//            margin-right: 10px;
-//            display: flex;
-//            justify-content: center;
-//            align-items: center;
-//            width: 35px;
-//            height: 35px;
-//            border-radius: 25px;
-//            background: $primaryBlue;
-//            font-size: 35px;
-//            color: $primaryWhite;
-//        }
-//
-//        #ptk-createProjectBttn{
-//            font-style: normal;
-//            font-weight: 700;
-//            font-size: 36px;
-//            display: flex;
-//            align-items: center;
-//            text-align: center;
-//            letter-spacing: 0.15em;
-//            color: $primaryBlue;
-//            text-decoration: none;
-//        }
-//    }
-//}
-//
-//.ptk-createProjectContainer:hover {
-//    background-color: $primaryYellow;
-//    border-radius: 15px 15px;
-//}
-//
-//.ptk-filterBlock{
-//    display: flex;
-//    flex-direction: row;
-//    justify-content: flex-end;
-//    width: 100%;
-//
-//    .ptk-filterContainer{
-//        margin-right: 20px;
-//
-//        .ptk-filterBttns{
-//            font-style: normal;
-//            font-weight: 600;
-//            font-size: 20px;
-//            color: $primaryBlue;
-//            text-decoration: None;
-//        }
-//    }
-//}
-//
-//.ptk-filterBttns:hover {
-//    background-color: $primaryYellow;
-//    border-radius: 15px 15px;
-//}
-//
-//.ptk-createdAt{
-//    display: inline-block;
-//    margin: 0;
-//    margin-left: 15px;
-//    font-weight: 550;
-//    font-size: 20px;
-//    color: $primaryGrey;
-//}
-//
-//.ptk-ideaCardsBlock{
-//    display: flex;
-//    flex-direction: row;
-//    height: 53%;
-//    width: 98%;
-//    margin: 10px 10px 0 10px;
-//
-//}
-//
-//.ptk-ideaCardsContainer{
-//    display: flex;
-//    flex-direction: row;
-//    flex-wrap: wrap;
-//    width: 90%;
-//    overflow-y: auto;
-//}
-//
-//.ptk-cardsBlock{
-//    display: flex;
-//    flex-direction: column;
-//    height: 65%;
-//    width: 98%;
-//    margin: 10px;
-//    overflow-y: auto;
-//}
-//
-////------------------------------- Custom scrollbar for cards block --------------------------------
-//.ptk-cardsBlock::-webkit-scrollbar-track
-//{
-//    background-color: $primaryGrey;
-//}
-//
-//.ptk-cardsBlock::-webkit-scrollbar
-//{
-//    width: 10px;
-//    background-color: #F5F5F5;
-//}
-//
-//.ptk-cardsBlock::-webkit-scrollbar-thumb
-//{
-//    background-color: #d2d2d2;
-//}
-//
-//.ptk-cardsBlock::-webkit-scrollbar-thumb:hover
-//{
-//    background-color: #989898;
-//}
-//
-//.ptk-categorySection{
-//    display: flex;
-//    flex-direction: Row;
-//    align-items: center;
-//}
-//
-//.ptk-categoryContainer {
-//    margin-right: 10px;
-//    width: 180px;
-//}
-//
-//.ptk-leftRightBttn{
-//    background-color: transparent;
-//    box-shadow: none;
-//    border: 0;
-//    cursor: pointer;
-//}
-//
-//.ptk-arrowBttn{
-//    width: 30px;
-//    aspect-ratio: 1/1;
-//}
-//
-//.rightBttn{
-//    transform: rotate(180deg);
-//}
-//
-//.ptk-category {
-//    overflow-wrap: break-word;
-//    font-style: normal;
-//    font-weight: 700;
-//    font-size: 30px;
-//    color: $primaryWhite;
-//}
-//
-//.ptk-cardsContainer {
-//    display: flex;
-//    flex-direction: row;
-//    align-items: center;
-//    overflow-x: auto;
-//    overflow-y: hidden;
-//    scrollbar-gutter: stable;
-//    width: 100%;
-//    height: 200px;
-//    padding: 0 18px 18px 0;
-//    cursor: grab;
-//}
-//
-//.ptk-cardsLink{
-//    text-decoration: none;
-//}
-//
-//.ptk-cards {
-//    position: relative;
-//    margin-left: 50px;
-//    border-radius: 10px;
-//    width: 215px;
-//    height: 155px;
-//    text-decoration: none;
-//    background-color: $primaryWhite;
-//    transition: transform .2s;
-//}
-//
-//.ptk-cards:hover{
-//    transform: scale(1.05);
-//}
-//
-//.ptk-ideaCards {
-//    position: relative;
-//    margin-left: 50px;
-//    border-radius: 10px;
-//    width: 225px;
-//    height: 155px;
-//    text-decoration: none;
-//    background-color: $primaryWhite;
-//    transition: transform .2s;
-//}
-//
-//.ptk-ideaCards:hover {
-//    transform: scale(1.05);
-//}
-//
-//.ptk-cardTitleContainer{
-//    display: flex;
-//    justify-content: center;
-//    align-items: center;
-//    text-align: center;
-//    height: 95px;
-//    width: 215px;
-//    background-color: $primaryWhite;
-//    border-radius: 10px 10px 0 0;
-//}
-//
-//.ptk-cardIdeaTitleContainer{
-//    display: flex;
-//    justify-content: center;
-//    align-items: center;
-//    text-align: center;
-//    height: 95px;
-//    border-radius: 10px 10px 0 0;
-//}
-//
-//.ptk-cardTitle{
-//    margin: 0;
-//    font-style: normal;
-//    font-weight: 500;
-//    font-size: 24px;
-//    color: black;
-//}
-//
-//.ptk-cardIdeaTitle{
-//    font-style: normal;
-//    font-weight: 500;
-//    font-size: 20px;
-//    padding: 5px;
-//    color: black;
-//}
-//
-//.ptk-cardStatsContainer{
-//    display: flex;
-//    flex-direction: row;
-//    justify-content: space-around;
-//    align-items: center;
-//    height: 65px;
-//    width: 215px;
-//    background-color: $primaryWhite;
-//    border-radius: 0 0 10px 10px;
-//}
-//
-//.ptk-cardIdeaStatsContainer{
-//    display: flex;
-//    flex-direction: column;
-//    align-items: center;
-//    height: 50px;
-//    border-radius: 0 0 10px 10px;
-//}
-//
-//.ptk-cardIconStats{
-//    display: flex;
-//    flex-direction: column;
-//    align-items: center;
-//}
-//
-//.ptk-ideaCardIconStats{
-//    display: flex;
-//    flex-direction: column;
-//    align-items: center;
-//}
-//
-//.ptk-cardIcons{
-//    display: flex;
-//    flex-direction: row;
-//    justify-content: space-between;
-//}
-//
-//.ptk-ideaInfoIcons{
-//    width: 17px;
-//    height: 17px;
-//}
-//
-//.ptk-ideaStatsNo{
-//    margin: 0;
-//}
-//
-//.ptk-cardStats{
-//    display: flex;
-//    flex-direction: row;
-//    justify-content: center;
-//    align-items: center;
-//    gap: 45px;
-//}
-//
-//.ptk-cardStatsNo{
-//    margin: 0;
-//    color: black;
-//}
-//
-//.ptk-addIdeaBlock{
-//    display: flex;
-//    align-items: flex-end;
-//    height: 100%;
-//}
-//
-//#ptk-ideaCat{
-//    margin: 0;
-//    font-size: 40px;
-//    color: $primaryWhite;
-//}
-//
-//#ptk-addIdeaIcon{
-//    margin: 0;
-//    margin-right: 10px;
-//    display: flex;
-//    justify-content: center;
-//    align-items: center;
-//    width: 60px;
-//    height: 60px;
-//    border-radius: 30px;
-//    background: $primaryBlue;
-//    font-size: 50px;
-//    color: $primaryWhite;
-//    text-decoration: none;
-//    transition: transform .2s;
-//}
-//
-//#ptk-addIdeaIcon:hover {
-//    background: $primaryWhite;
-//    color: $primaryBlue;
-//    transform: scale(1.5);
-//}
-//
-//.ptk-formHiddenElement{
-//    display: none;
-//}
-//
-//.archive-button {
-//    border-radius: 10px;
-//    border-color: $primaryBlue;
-//    background-color: $primaryBlue;
-//    cursor: pointer;
-//    font-family: Rajdhani;
-//    font-weight: 600;
-//    font-size: 15px;
-//    color: $primaryWhite;
-//    margin-left: 1vh;
-//    align-self: end;
-//}
-//
-//.ptk-project-archived {
-//    color: red;
-//    display: flex;
-//    justify-content: center;
-//}
-
-
-

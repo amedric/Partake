@@ -22,7 +22,10 @@ class Project1Type extends AbstractType
             ->add('createdAt')
             ->add('projectViews')
             ->add('projectColor')
-            ->add('category', null, ['choice_label' => 'title'])
+            ->add('category', null, [
+                'placeholder' => 'Choose a department',
+                'choice_label' => 'title'
+            ])
             ->add('usersSelectOnProject', EntityType::class, [
                 'class' => User::class,
                 'required' => true,

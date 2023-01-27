@@ -1,0 +1,45 @@
+{% extends '/adminBase.html.twig' %}
+
+{% block title %}Admin - New user{% endblock %}
+
+{% block adminTitle %}<h1 class="ptk-adminTitle">Add new user</h1>{% endblock %}
+
+{% block adminBody %}
+
+    <div class="ptk-adminViewInfoContainer">
+        <div class="ptk-adminFormContainer">
+            {{ form_start(form, {'attr': {'class': 'ptk-teamForm'}}) }}
+
+            <div class="ptk-formErrors ptk-formContainerMargins">
+                {{ form_errors(form) }}
+            </div>
+
+            <div class="ptk-teamFormRow ptk-formContainerMargins">
+                {{ form_label(form.firstname, 'Firstname', {'label_attr': {'class': 'ptk-teamFormLabels'}}) }}
+                {{ form_widget(form.firstname, {'attr': {'class': 'ptk-teamFormTitleInput'}}) }}
+            </div>
+            <div class="ptk-teamFormRow ptk-formContainerMargins">
+                {{ form_label(form.lastname, 'Lastname', {'label_attr': {'class': 'ptk-teamFormLabels'}}) }}
+                {{ form_widget(form.lastname, {'attr': {'class': 'ptk-teamFormTitleInput'}}) }}
+            </div>
+            <div class="ptk-teamFormRow ptk-formContainerMargins">
+                {{ form_label(form.category, 'Department', {'label_attr': {'class': 'ptk-teamFormLabels'}}) }}
+                {{ form_widget(form.category, {'attr': {'class': 'ptk-teamFormTitleInput'}}) }}
+            </div>
+            <div class="ptk-teamFormRow ptk-formContainerMargins">
+                {{ form_label(form.email, 'Email', {'label_attr': {'class': 'ptk-teamFormLabels'}}) }}
+                {{ form_widget(form.email, {'attr': {'class': 'ptk-teamFormTitleInput'}}) }}
+            </div>
+
+            {{ form_row(form._token) }}
+
+            <div class="ptk-formBttnsContainer">
+                <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+                <button class="ptk-bttns">{{ button_label|default('Save') }}</button>
+            </div>
+        </div>
+
+            {{ form_end(form, {'render_rest': false }) }}
+    </div>
+
+{% endblock %}

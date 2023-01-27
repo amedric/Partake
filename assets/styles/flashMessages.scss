@@ -1,0 +1,31 @@
+.ptk-flashMessagesContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.ptk-adminFlashMessagesContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 10px;
+    background-color: $primaryGrey;
+}
+
+.ptk-flashMessages{
+    font-size: 1.5rem;
+    padding: 10px 50px 10px 50px;
+    border-radius: 5px;
+}
+
+.alert-success{
+    background: #a6ffa6;
+}
+
+.alert-notice{
+    background: #ffba31;
+}
+
+.alert-danger{
+    background: #ff5858;
+}

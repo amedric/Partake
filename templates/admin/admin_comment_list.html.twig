@@ -10,16 +10,16 @@
         <table>
             <thead>
             <tr>
-                <th class="ptk-adminTableGap ptk-adminTableHeader">Comment</th>
-                <th class="ptk-adminTableGap ptk-adminTableHeader">Created At</th>
-                <th class="ptk-adminTableGap ptk-adminTableHeader">Actions</th>
+                <th class="ptk-adminTableHeader">Comment</th>
+                <th class="ptk-adminTableHeader">Created At</th>
+                <th class="ptk-adminTableHeader">Actions</th>
             </tr>
             </thead>
             <tbody>
             {% for comment in comments %}
                 <tr class="ptk-adminDataRow">
-                    <td class="ptk-adminTableGap ptk-adminTableData">{{ comment.content|striptags|length > 80 ? comment.content|striptags|slice(0, 80) ~ '...' : comment.content|striptags }}</td>
-                    <td class="ptk-adminTableGap ptk-adminTableData ptk-adminCenter">{{ comment.createdAt ? comment.createdAt|date('d-m-Y') : '' }}</td>
+                    <td class="ptk-adminTableData">{{ comment.content|striptags|length > 80 ? comment.content|striptags|slice(0, 80) ~ '...' : comment.content|striptags }}</td>
+                    <td class="ptk-adminTableData ptk-adminCenter">{{ comment.createdAt ? comment.createdAt|date('d-m-Y') : '' }}</td>
                     <td class="ptk-teamBttns ptk-adminCenter">
                         <a href="{{ path('app_admin_comment_view', {'id': comment.id}) }}" class="btn ptk-bttns ptk-smlBttns">View</a>
                         <form method="post" action="{{ path('app_admin_comment_delete', {'id': comment.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">

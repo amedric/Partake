@@ -1,94 +1,67 @@
-.ptk-adminBlock{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-}
-
 .ptk-adminContainer{
     display: flex;
     flex-direction: row;
     height: 85vh;
     border: 3px solid $primaryGreen;
     border-radius: 10px;
+}
 
-    .ptk-adminSideMenuContainer{
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-start;
-        align-items: flex-start;
-        padding: 30px 15px 15px 25px;
-        width: 150px;
-        border-radius: 10px 0 0 10px;
-        border-right: 3px solid $primaryGreen;
-        background: $primaryWhite;
+.ptk-adminViewContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 1050px;
+    border-radius: 0 10px 10px 0;
+    background: $primaryWhite;
+}
 
-        .ptk-SideMenuLink{
-            margin: 0;
-            text-decoration: none;
-            font-size: 25px;
-            font-weight: 550;
-            color: $primaryBlue;
-        }
+.ptk-adminTableGap{
+    padding-left: 15px;
+    padding-right: 15px;
+}
 
-        .ptk-SideMenuLink:hover{
-            color: white;
-            background-color: $primaryGreen;
-            border-radius: 15px 15px;
-            padding: 0 5px 0 5px;
-        }
-    }
+.ptk-adminTitle{
+    display: flex;
+    justify-content: center;
+    color: black;
+    background: linear-gradient(180deg, $primaryGrey 55%, $primaryGreen 45%);
+}
 
-    .ptk-adminViewContainer{
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        width: 1050px;
-        border-radius: 0 10px 10px 0;
-        background: $primaryWhite;
+.ptk-adminViewInfoContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    padding: 0 150px 0 150px;
+    overflow-y: auto;
+}
 
-        .ptk-adminTitle{
-            display: flex;
-            justify-content: center;
-            color: black;
-            background: linear-gradient(180deg, $primaryWhite 55%, $primaryGreen 45%);
-        }
+.ptk-adminTables{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 
-        .ptk-adminViewInfoContainer{
-            display: flex;
-            flex-direction: column;
-            height: 90%;
-            width: 100%;
-            overflow-y: auto;
+.ptk-teamTable{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
 
-            .ptk-teamTable{
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                width: 100%;
-            }
+.ptk-adminTableHeader{
+    font-size: 22px;
+}
 
-            .ptk-adminTableHeader{
-                font-size: 22px;
-            }
+.ptk-adminTableData{
+    font-size: 19px;
+}
 
-            .ptk-adminTableData{
-                font-size: 19px;
-            }
-
-            .ptk-teamAddEditContainer{
-                display: flex;
-                align-items: center;
-                height: 50%;
-                width: 100%;
-            }
-        }
-
-        .ptk-adminTableGap{
-            padding-left: 15px;
-            padding-right: 15px;
-        }
-    }
+.ptk-teamAddEditContainer{
+    display: flex;
+    align-items: center;
+    height: 50%;
+    width: 50%;
 }
 
 .ptk-adminDataRow{
@@ -103,10 +76,11 @@
 //----------------------- Team section --------------------------------
 .ptk-teamListContainer{
     display: flex;
-    height: 50%;
-    width: 100%;
-    border-bottom: 3px solid $primaryGreen;
+    justify-content: center;
+    height: 55%;
+    width: 50%;
     overflow-y: auto;
+    border-right: 3px solid #a8a8a8;
 }
 
 
@@ -146,6 +120,7 @@
 .ptk-teamBttns{
     display: flex;
     flex-direction: row;
+    justify-content: center;
     align-items: center;
     gap: 10px;
 }
@@ -164,6 +139,15 @@
 .ptk-teamTableGap{
     padding-left: 15px;
     padding-right: 85px;
+}
+
+.ptk-departmentFlex{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    padding: 0;
+    overflow-y: auto;
 }
 
 //-------------------------- Projects section --------------------------------
@@ -199,6 +183,13 @@
     display: flex;
     flex-direction: row;
     gap: 15px;
+    justify-content: center;
+    width: 100%;
+}
+
+//-------------------------- Users section --------------------------------
+.ptk-adminFormContainer{
+    display: flex;
     justify-content: center;
     width: 100%;
 }

@@ -1,31 +1,57 @@
-{% extends 'base.html.twig' %}
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="icon" type="image/png" href="{{ asset('build/images/favicon32.png') }}"/>
+    <title>
+        {% block title %}Partake - Admin{% endblock %}
+    </title>
+    {% block stylesheets %}
+        {{ encore_entry_link_tags('app') }}
+    {% endblock %}
 
-{% block title %}Admin page{% endblock %}
-
-{% block body %}
-
-    <div class="ptk-adminBlock">
-
-        <div class="ptk-adminContainer">
-
-            <div class="ptk-adminSideMenuContainer">
-                <a href="{{ path('app_user_new') }}" class="ptk-SideMenuLink">Add User</a>
-                <a href="{{ path('app_user_index') }}" class="ptk-SideMenuLink">Users</a>
-                <a href="{{ path('app_admin_project_list') }}" class="ptk-SideMenuLink">Projects</a>
-                <a href="{{ path('app_admin_idea_list') }}" class="ptk-SideMenuLink">Ideas</a>
-                <a href="{{ path('app_admin_comment_list') }}" class="ptk-SideMenuLink">Comments</a>
-                <a href="{{ path('app_category_index') }}" class="ptk-SideMenuLink">Teams</a>
-            </div>
-
-            <div class="ptk-adminViewContainer">
-                <div class="ptk-adminTitleContainer">
-                    {% block adminTitle %}{% endblock %}
-                </div>
-                {% block adminBody %}{% endblock %}
-            </div>
-
+    {% block javascripts %}
+        {{ encore_entry_script_tags('app') }}
+    {% endblock %}
+</head>
+<body>
+    <div class="ptk-stickyContainer">
+        <div class="ptk-navbarContainer">
+            {% include '/_includes/_navbar.html.twig' %}
+        </div>
+        <div class="ptk-adminHeaderContainer">
+            <h1 class="ptk-adminHeaderTitle">Admin</h1>
+        </div>
+        <div class="ptk-adminSideMenuContainer">
+            <a href="{{ path('app_admin_user_new') }}" class="ptk-SideMenuLink">Add User</a>
+            <a href="{{ path('app_admin_user_list') }}" class="ptk-SideMenuLink">Users</a>
+            <a href="{{ path('app_admin_project_list') }}" class="ptk-SideMenuLink">Projects</a>
+            <a href="{{ path('app_admin_idea_list') }}" class="ptk-SideMenuLink">Ideas</a>
+            <a href="{{ path('app_admin_comment_list') }}" class="ptk-SideMenuLink">Comments</a>
+            <a href="{{ path('app_admin_category_index') }}" class="ptk-SideMenuLink">Departments</a>
+        </div>
+        <div class="ptk-adminFlashMessagesContainer">
+            {% for category, messages in app.flashes %}
+                {% for message in messages %}
+                    <div class="alert ptk-flashMessages alert-{{ category }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endfor %}
         </div>
     </div>
+        <div class="ptk-adminHeader">
+            {% block adminTitle %}{% endblock %}
+        </div>
+    <div class="ptk-adminBlockContainer">
 
-    {#    <a href="{{ path('app_user_new') }}">Create new</a>#}
-{% endblock %}
+        <div class="ptk-adminBodyContainer">
+
+            <div class="ptk-adminBody">
+                {% block adminBody %}{% endblock %}
+            </div>
+        </div>
+    </div>
+</body>
+</html>

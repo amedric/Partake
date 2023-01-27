@@ -1,0 +1,42 @@
+{% extends 'adminBase.html.twig' %}
+
+{% block title %}Admin - Users{% endblock %}
+
+{% block adminTitle %}<h1 class="ptk-adminTitle">Users</h1>{% endblock %}
+
+{% block adminBody %}
+
+    <div class="ptk-adminViewInfoContainer">
+        <table>
+            <thead>
+            <tr>
+                <th class="ptk-adminTableHeader">Firstname</th>
+                <th class="ptk-adminTableHeader">Lastname</th>
+                <th class="ptk-adminTableHeader">Role</th>
+                <th class="ptk-adminTableHeader">Team</th>
+                <th class="ptk-adminTableHeader">Email</th>
+                <th class="ptk-adminTableHeader">Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for user in users %}
+                <tr class="ptk-adminDataRow">
+                    <td class="ptk-adminTableData">{{ user.firstname }}</td>
+                    <td class="ptk-adminTableData">{{ user.lastname }}</td>
+                    <td class="ptk-adminTableData">{{ user.roles[0] }}</td>
+                    <td class="ptk-adminTableData">{{ user.team }}</td>
+                    <td class="ptk-adminTableData">{{ user.email }}</td>
+                    <td class="ptk-teamBttns">
+                        {% include '/admin/admin_delete_form.html.twig' %}
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="9">no records found</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+{% endblock %}

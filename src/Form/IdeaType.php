@@ -22,9 +22,8 @@ class IdeaType extends AbstractType
             ->add('title', TextType::class)
             ->add('content', TextareaType::class)
             ->add('ideaColor', ChoiceType::class, [
-                'expanded' => true,
-                'multiple' => false,
-                'placeholder' => false,
+                'placeholder' => 'Choose a color for your idea',
+                'required' => true,
                 'choices' => [
                     'Pink' => 'rgb(255, 180, 180)',
                     'Yellow' => 'rgb(255, 238, 83)',
