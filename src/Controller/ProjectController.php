@@ -14,13 +14,15 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Email;
 
 #[Route('/project')]
 class ProjectController extends AbstractController
 {
 
     #[Route('/new', name: 'app_project_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, ProjectRepository $projectRepository): Response
+    public function new(Request $request, ProjectRepository $projectRepository, MailerInterface $mailer,): Response
     {
         $project = new Project();
         $form = $this->createForm(Project1Type::class, $project);
@@ -36,6 +38,7 @@ class ProjectController extends AbstractController
             $project->setCreatedAt($today);
             $projectRepository->save($project, true);
             $this->addFlash('success', 'Success: New project created');
+
             return $this->redirectToRoute('app_home', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -51,38 +54,34 @@ class ProjectController extends AbstractController
         Project $project,
         IdeaRepository $ideaRepository,
         ProjectRepository $projectRepository,
+        int $id,
         string $orderBy
     ): Response {
         $currentUser = $this->getUser();
         $projectCreateBy = $project->getUser();
         $userAuthorized = $project->getUsersSelectOnProject()->contains($currentUser);
+        $ideas = $ideaRepository->findAllIdeasByProjectId($project->getId(), 'createdAt', 'ASC');
         if ($currentUser === $projectCreateBy || $currentUser == $userAuthorized) {
-            $ideas = $ideaRepository->findBy(['project' => $project->getId()]);
-
             switch ($orderBy) {
                 case 'show':
-                    $ideas = $ideaRepository->findBy(['project' => $project->getId()]);
+                    $ideas = $ideaRepository->findAllIdeasByProjectId($project->getId(), 'createdAt', 'ASC');
                     $project->setProjectViews($project->getProjectViews() + 1);
                     $projectRepository->save($project, true);
                     break;
                 case 'newest':
-                    $ideas = $ideaRepository->findBy(['project' => $project->getId()], ['createdAt' => 'DESC']);
+                    $ideas = $ideaRepository->findAllIdeasByProjectId($project->getId(), 'createdAt', 'DESC');
                     break;
                 case 'oldest':
-                    $ideas = $ideaRepository->findBy(['project' => $project->getId()], ['createdAt' => 'ASC']);
+                    $ideas = $ideaRepository->findAllIdeasByProjectId($project->getId(), 'createdAt', 'ASC');
                     break;
                 case 'likes':
-                    $ideas = $projectRepository->findIdeasCountLikes(
-                        $project->getId()
-                    );
+                    $ideas = $ideaRepository->findAllIdeasByProjectId($project->getId(), 'ideaLikes', 'DESC');
                     break;
                 case 'comments':
-                    $ideas = $projectRepository->findIdeasCountComments(
-                        $project->getId()
-                    );
+                    $ideas = $ideaRepository->findAllIdeasByProjectId($project->getId(), 'ideaComments', 'DESC');
                     break;
                 case 'views':
-                    $ideas = $ideaRepository->findBy(['project' => $project->getId()], ['ideaViews' => 'Desc']);
+                    $ideas = $ideaRepository->findAllIdeasByProjectId($project->getId(), 'ideaViews', 'DESC');
                     break;
             }
 

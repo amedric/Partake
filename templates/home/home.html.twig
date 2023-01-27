@@ -15,10 +15,9 @@
         <p id="ptk-createProjectLink">Create a project</p>
         </a>
     </div>
-
 {% endblock %}
-{% block filters %}
 
+{% block filters %}
     <div class="ptk-filterContainer">
         <p class="ptk-filterSeparators ptk-filtersWhite"> Order by: </p>
         <a href="{{ path('app_home_orderBy', {'orderBy': 'views'}) }}" class="ptk-filterLinks">most viewed</a>

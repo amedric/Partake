@@ -1,0 +1,31 @@
+{% extends 'base.html.twig'%}
+
+{% block title %}Search Results{% endblock %}
+
+{% block header %}
+    <div class="ptk-titleContainer">
+        <h1 class="ptk-titleHeader">Results</h1>
+    </div>
+{% endblock %}
+
+{% block underFilters %}
+    <p class="ptk-blockDescription">Search results :</p>
+{% endblock %}
+
+{% block body %}
+
+    <p>Users :</p>
+    <ul>{% for user in users %}
+            <li><a href="{{ path('app_user_show', {'id': user.id}) }}">{{ user.lastname }}</li>
+        {% endfor %}</ul>
+    <p>Projects :</p>
+    <ul>{% for project in projects %}
+         <li><a href="{{ path('app_project_show', {'id': project.id,'orderBy':'show'}) }}">{{ project.title }}</li>
+        {% endfor %}</ul>
+    <p>Ideas :</p>
+    <ul>{% for idea in ideas %}
+            <li><a href="{{ path('app_idea_show', {'id': idea.id}) }}">{{ idea.title }}</li>
+        {% endfor %}</ul>
+
+{% endblock %}
+

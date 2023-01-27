@@ -19,7 +19,7 @@
                 {{ app.user.lastname }} {{ app.user.firstname }}
             </label>
         <div class="ptk-navbarLinksContainer">
-            <a href="{{ path('app_user_show', {'id': app.user.id}) }}" class="ptk-navbarLinks">Profile</a>
+            <a href="{{ path('app_user_show', {'id': app.user.id, 'orderBy': 'oldest', 'dataType': 'all'}) }}" class="ptk-navbarLinks">Profile</a>
             {% if app.user.roles[0] == "ROLE_ADMIN" %}
             <a href="{{ path('app_admin_user_list') }}" class="ptk-navbarLinks">Admin</a>
             {% endif %}
