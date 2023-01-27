@@ -44,14 +44,12 @@
                     <div class="ptk-categoryContainer">
                         <h1 class="ptk-category">{{ category.title }}</h1>
                     </div>
-
                     <div class="ptk-homeCategoryBttns">
-                        <button class="ptk-leftRightBttn" id="ptk-leftBttnId" type="button"><img class="ptk-arrowBttn"
-                                                                                                 src="{{ asset('build/images/arrow.png') }}"
-                                                                                                 alt="left"></button>
+                        <button class="ptk-leftRightBttn" id="ptk-leftBttnId" type="button">
+                            <img class="ptk-arrowBttn" src="{{ asset('build/images/arrow.png') }}" alt="left">
+                        </button>
                     </div>
                     <div class="ptk-cardsContainer" id="ptk-cardsContainerId">
-
                         {% for project in projects %}
                             {% if category.id == project.categoryId %}
                                 {% if project.isArchived != true %}
@@ -75,8 +73,7 @@
                                                  style="background-color: {{ unauthorizedColor }}">
                                                 <div class="ptk-cardIconStats">
                                                     <img src="{{ asset('build/images/idea.png') }}" alt="idea">
-
-                                                    <p class="ptk-cardStatsNo">{{ project.ideaCount }}</p>
+                                                    <p class="ptk-cardStatsNo">{{ project.ideaCount is null ? 0 : project.ideaCount }}</p>
                                                 </div>
                                                 <div class="ptk-cardIconStats">
                                                     <img src="{{ asset('build/images/view.png') }}" alt="Views">
@@ -90,9 +87,10 @@
                         {% endfor %}
                     </div>
                     <div class="ptk-homeCategoryBttns">
-                        <button class="ptk-leftRightBttn" id="ptk-rightBttnId" type="button"><img
-                                class="ptk-arrowBttn rightBttn" src="{{ asset('build/images/arrow.png') }}" alt="left"
-                                id="ptk-rightBttnId"></button>
+                        <button class="ptk-leftRightBttn" id="ptk-rightBttnId" type="button">
+                            <img class="ptk-arrowBttn rightBttn" src="{{ asset('build/images/arrow.png') }}" alt="left"
+                                id="ptk-rightBttnId">
+                        </button>
                     </div>
                 </div>
             </div>

@@ -119,16 +119,12 @@
                                     <div class="ptk-cardStatsContainer" style="background-color: {{ projectIdea.color }}">
                                         <div class="ptk-cardIconStats">
                                             <img src="{{ asset('build/images/idea.png') }}" alt="idea">
-                                            {% if projectIdea.counts is null %}
-                                                    <p class="ptk-cardStatsNo">0</p>
-                                                {% else %}
-                                                    <p class="ptk-cardStatsNo">{{ projectIdea.counts }}</p>
-                                            {% endif %}
+                                            <p class="ptk-cardStatsNo">{{ projectIdea.counts is null ? 0 : projectIdea.counts }}</p>
                                         </div>
                                         <div class="ptk-cardIconStats">
                                             <img src="{{ asset('build/images/view.png') }}" class="ptk-ideaInfoIcons"
                                                  alt="Views">
-                                            <p class="ptk-cardStatsNo">{{ projectIdea.views }}</p>
+                                            <p class="ptk-cardStatsNo">{{ projectIdea.views is null ? 0 : projectIdea.views }}</p>
                                         </div>
                                     </div>
                                 </div>
