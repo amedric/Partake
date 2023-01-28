@@ -38,25 +38,6 @@
     clip-path: inset(-1% -1% 50% -1%); // Added the negative values to prevent "bleed" in Chrome
 }
 
-//.ptk-titleContainer{
-//    display: flex;
-//    justify-content: center;
-//    align-items: center;
-//}
-//
-//.ptk-titleHeader{
-//    display: flex;
-//    justify-content: center;
-//    align-items: center;
-//    margin: 0;
-//    font-style: normal;
-//    font-weight: 700;
-//    font-size: 4.5rem;
-//    color: $primaryWhite;
-//    width: 7ch;
-//    background: linear-gradient(180deg, $primaryBlue 55%, $primaryPurple 45%);
-//}
-
 .ptk-underTitleContainer{
     display: flex;
     flex-direction: row;
@@ -271,15 +252,22 @@
 }
 
 //-------------------------------- Project page ------------------------------------------------------
-.ptk-ideaTitleHeader{
-    margin: 0;
-    padding: 0 5px 0 5px;
-    font-style: normal;
-    font-size: 2.5rem;
+.ptk-ideaTitleHeader {
+    ffont-size: 2.5rem;
+    font-weight: 700;
+    background-color: $primaryYellow;
     color: white;
-    background: linear-gradient(180deg, $primaryBlue 55%, $primaryYellow 45%);
     text-shadow: 2px 0 $primaryBlue, -2px 0 $primaryBlue, 0 2px $primaryBlue, 0 -2px $primaryBlue,
-                1px 1px $primaryBlue, -1px -1px $primaryBlue, 1px -1px $primaryBlue, -1px 1px $primaryBlue;
+                    1px 1px $primaryBlue, -1px -1px $primaryBlue, 1px -1px $primaryBlue, -1px 1px $primaryBlue;
+    display: block;
+    padding: 0 5px 0 10px;
+}
+
+.ptk-ideaTitleHeader:nth-child(2) {
+    position: absolute;
+    background-color: $primaryBlue;
+    color: white;
+    clip-path: inset(-1% -1% 50% -1%); // Added the negative values to prevent "bleed" in Chrome
 }
 
 .ptk-underTitleBlock {
