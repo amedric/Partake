@@ -31,7 +31,7 @@
 {% endblock %}
 
 {% block underFilters %}
-    <p class="ptk-blockDescription">Projects by departments</p>
+    <p class="ptk-blockDescription">Projects by department</p>
 {% endblock %}
 
 {% block body %}
@@ -39,6 +39,7 @@
     <div class="ptk-cardsBlock">
 
         {% for category in categories %}
+{#          ----- checks if there are projects in the category ----- #}
             {% set noProjects = 0 %}
             {% for project in projects %}
                 {% if category.id == project.categoryId %}
@@ -57,6 +58,7 @@
                     </div>
                     <div class="ptk-cardsContainer" id="ptk-cardsContainerId">
                         {% if noProjects > 0 %}
+{#                          ------- if there are projects in category -----------------#}
                             {% for project in projects %}
                                 {% if category.id == project.categoryId %}
                                     {% if project.isArchived != true %}
@@ -93,8 +95,9 @@
                                 {% endif %}
                             {% endfor %}
                         {% else %}
+{#                          --------- if there are no projects in category show no pojects message -------#}
                             <div class="ptk-ideaNoDataContainer">
-                                <h1 class="ptk-noDataTitle">NO PROJECTS IN {{ category.title }}</h1>
+                                <h1 class="ptk-noDataTitle">No projects in {{ category.title }}</h1>
                             </div>
                         {% endif %}
                     </div>
