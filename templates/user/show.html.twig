@@ -48,12 +48,12 @@
         <div class="ptk-filterDataType">
             <div class="ptk-dropdownDatatype">
                 <div class="ptk-ptk-dropDownbtnContainer">
-                    <button class="ptk-dropDownbtn">Filter by</button>
+                    <button class="ptk-dropDownbtn">Filter by: <span> {{app.request.get('dataType')}}</span></button>
                 </div>
                 <div class="ptk-dropdownContent">
-                    <a href="{{ path('app_user_show', {id: user.id, 'orderBy': app.request.get('orderBy'), 'dataType': 'all'}) }}">All</a>
-                    <a href="{{ path('app_user_show', {id: user.id, 'orderBy': app.request.get('orderBy'), 'dataType': 'project'}) }}">Projects</a>
-                    <a href="{{ path('app_user_show', {id: user.id, 'orderBy': app.request.get('orderBy'), 'dataType': 'idea'}) }}">Ideas</a>
+                    <a href="{{ path('app_user_show', {id: user.id, 'orderBy': app.request.get('orderBy'), 'dataType': 'Projects and Ideas'}) }}">Projects and Ideas</a>
+                    <a href="{{ path('app_user_show', {id: user.id, 'orderBy': app.request.get('orderBy'), 'dataType': 'Projects'}) }}">Projects</a>
+                    <a href="{{ path('app_user_show', {id: user.id, 'orderBy': app.request.get('orderBy'), 'dataType': 'Ideas'}) }}">Ideas</a>
                 </div>
             </div>
         </div>

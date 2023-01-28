@@ -34,13 +34,13 @@ class UserController extends AbstractController
         $form->handleRequest($request);
         // -------------------- set where clause parameters --------------------
         switch ($dataType) {
-            case 'all':
+            case 'Projects and Ideas':
                 $wherePara = "allData.dataType";
                 break;
-            case 'project':
+            case 'Projects':
                 $wherePara = "'project'";
                 break;
-            case 'idea':
+            case 'Ideas':
                 $wherePara = "'idea'";
                 break;
         }
