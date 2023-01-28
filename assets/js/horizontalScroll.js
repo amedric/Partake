@@ -7,6 +7,8 @@ let rightButton = document.querySelectorAll(".rightBttn");
 // querySelectorAll will return and node list of button with classname .leftBttn
 let leftButton = document.querySelectorAll(".leftBttn");
 
+let scrollButtons = document.querySelectorAll(".ptk-arrowBttn");
+
 rightButton.forEach((rBtn, index) => {// index will be current button index
     rBtn.addEventListener("click", function(e) {
         sideScroll(container[index],'right',10,280,10);
@@ -41,6 +43,8 @@ let startX;
 let scrollLeft;
 
 container.forEach((ctn, index) => {
+
+    // --------- draggable for each container -----------
     ctn.addEventListener('mousedown', (e) => {
         isDown = true;
         ctn.classList.add('active');
@@ -61,6 +65,12 @@ container.forEach((ctn, index) => {
         const x = e.pageX - ctn.offsetLeft;
         const walk = (x - startX) * 3; //scroll-fast
         ctn.scrollLeft = scrollLeft - walk;
-        console.log(walk);
     });
+
+    // ------- checks if container has not overflowed and hides buttons --------------------------------
+    if (ctn.clientWidth < ctn.scrollWidth) {
+        ctn.previousElementSibling.classList.add("showButtons");
+        ctn.nextElementSibling.classList.add("showButtons");
+    }
+
 })
