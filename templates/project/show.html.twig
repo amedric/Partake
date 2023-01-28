@@ -22,7 +22,7 @@
     <div class="ptk-createdAtContainer">
         <p class="ptk-createdAt">Created by:</p>
         <p class="ptk-createdAtContent">{{ project.user.fullName }}</p>
-        <p class="ptk-createdAt">at:</p>
+        <p class="ptk-createdAt">on:</p>
         <p class="ptk-createdAtContent">{{ project.createdAt ? project.createdAt|date('d-m-Y') : '' }}</p>
     </div>
     <div class="ptk-filterContainer">
@@ -61,7 +61,7 @@
                 {% for idea in ideas %}
                     {% if idea.id is not null %}
                         <a href="{{ path('app_idea_show', {'id': idea.id is null ? 0 : idea.id}) }}" class="ptk-cardsLink">
-                            <div class="ptk-ideaCards ptk-cardMarginRight" style="border: 2.5px solid {{idea.ideaColor}}">
+                            <div class="ptk-ideaCards" style="border: 2.5px solid {{idea.ideaColor}}">
                                 <div class="ptk-cardIdeaTitleContainer">
                                     <h1 class="ptk-cardIdeaTitle">{{ idea.title|striptags|length > 40 ? idea.title|striptags|slice(0, 40) ~ '...' : idea.title|striptags }}</h1>
                                 </div>
