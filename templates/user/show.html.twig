@@ -48,7 +48,9 @@
         <div class="ptk-filterDataType">
             <div class="ptk-dropdownDatatype">
                 <div class="ptk-ptk-dropDownbtnContainer">
-                    <button class="ptk-dropDownbtn">Filter by: <span> {{app.request.get('dataType')}}</span></button>
+                    <button class="ptk-dropDownbtn">
+                        <span class="ptk-linksHover">Filter by: <span class="ptk-dropDownLabel"> {{app.request.get('dataType')}}</span></span>
+                    </button>
                 </div>
                 <div class="ptk-dropdownContent">
                     <a href="{{ path('app_user_show', {id: user.id, 'orderBy': app.request.get('orderBy'), 'dataType': 'Projects and Ideas'}) }}">Projects and Ideas</a>
@@ -59,11 +61,14 @@
         </div>
         <div class="ptk-filtersOrderBy">
             <p class="ptk-filterSeparators ptk-filtersWhite"> Order by: </p>
-            <a href="{{ path('app_user_show', {id: user.id, 'orderBy': 'newest', 'dataType': app.request.get('dataType')}) }}" class="ptk-filterLinks">newest</a>
+            <a href="{{ path('app_user_show', {id: user.id, 'orderBy': 'newest', 'dataType': app.request.get('dataType')}) }}" class="ptk-filterLinks">
+                <span class="ptk-linksHover">newest</span></a>
             <p class="ptk-filterSeparators"> / </p>
-            <a href="{{ path('app_user_show', {id: user.id, 'orderBy': 'oldest', 'dataType': app.request.get('dataType')}) }}" class="ptk-filterLinks">oldest</a>
+            <a href="{{ path('app_user_show', {id: user.id, 'orderBy': 'oldest', 'dataType': app.request.get('dataType')}) }}" class="ptk-filterLinks">
+                <span class="ptk-linksHover">oldest</span></a>
             <p class="ptk-filterSeparators"> / </p>
-            <a href="{{ path('app_user_show', {id: user.id, 'orderBy': 'views', 'dataType': app.request.get('dataType')}) }}" class="ptk-filterLinks">views</a>
+            <a href="{{ path('app_user_show', {id: user.id, 'orderBy': 'views', 'dataType': app.request.get('dataType')}) }}" class="ptk-filterLinks">
+                <span class="ptk-linksHover">views</span></a>
         </div>
     </div>
 {% endblock %}
@@ -76,7 +81,7 @@
                     {% if projectIdea.dataType == 'idea' %}
                         {# ------------ Idea cards --------------------------------------------------------------- #}
                         <div class="ptk-profileCardContainer">
-                            <p class="ptk-profileCardTypeLabel">{{projectIdea.dataType}}</p>
+                            <p class="ptk-profileCardTypeLabel">Idea</p>
                                 <div class="ptk-ideaCards" style="border: 2.5px solid {{projectIdea.color}}">
                                     <a href="{{ path('app_idea_show', {'id': projectIdea.id}) }}" class="ptk-cardsLink">
                                     <div class="ptk-cardIdeaTitleContainer">
@@ -113,7 +118,7 @@
                         {% if projectIdea.dataType == 'project' %}
                             {# ------------ Project cards --------------------------------------------------------------- #}
                             <div class="ptk-profileCardContainer">
-                                <p class="ptk-profileCardTypeLabel">{{projectIdea.dataType}}</p>
+                                <p class="ptk-profileCardTypeLabel">Project</p>
                                 <a href="{{ path('app_project_show', {'id': projectIdea.id, 'orderBy': 'show'}) }}" class="ptk-cardsLink">
                                     <div class="ptk-cards">
                                         <div class="ptk-cardTitleContainer">

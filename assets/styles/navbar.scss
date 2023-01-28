@@ -40,13 +40,36 @@
     color: $secondaryPurple;
 }
 
-.ptk-navbarContainer a:hover{
+.ptk-linksHover {
+    background-image: linear-gradient(
+            transparent calc(65% - 5px),
+            darken($primaryBlue, 10%) 5px,
+    );
+    background-size: 0;
+    background-repeat: no-repeat;
+    display: inline;
+    transition: 0.2s ease;
+    color: $secondaryPurple;
+}
+
+.ptk-linksHover:hover {
+    text-shadow: 2px 0 $primaryBlue, -2px 0 $primaryBlue, 0 2px $primaryBlue, 0 -2px $primaryBlue,
+    1px 1px $primaryBlue, -1px -1px $primaryBlue, 1px -1px $primaryBlue, -1px 1px $primaryBlue;
+    background-size: 100%;
     color: $secondaryYellow;
 }
 
-.ptk-navbarLinks:hover{
+.ptk-linksHover:hover .ptk-dropDownLabel{
     color: $secondaryYellow;
 }
+
+//.ptk-navbarContainer a:hover{
+//    color: $secondaryYellow;
+//}
+//
+//.ptk-navbarLinks:hover{
+//    color: $secondaryYellow;
+//}
 
 .inputSearchBar{
     display: flex;

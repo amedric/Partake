@@ -1,7 +1,7 @@
 {% if app.user %}
 
     <div class="ptk-navbarLogoContainer">
-        <p class="ptk-logo"><a href="{{ path('app_home') }}">PARTAKE</a></p>
+        <p class="ptk-logo"><a href="{{ path('app_home') }}"><span class="ptk-linksHover">PARTAKE</span></a></p>
     </div>
 
     {% if (form is defined) and (edit is not defined) %}
@@ -16,27 +16,36 @@
             <input type="checkbox" class="ptk-expand-menu-checkbox" id="ptk-expand-menu"/>
             <label class="ptk-navbarLinks ptk-menuLabel" for="ptk-expand-menu">
                 <img src="{{ asset('build/images/purpleArrow.png') }}" class="ptk-expandArrow" alt="Expand">
-                {{ app.user.lastname }} {{ app.user.firstname }}
+                <span class="ptk-linksHover">{{ app.user.lastname }} {{ app.user.firstname }}</span>
             </label>
         <div class="ptk-navbarLinksContainer">
-            <a href="{{ path('app_user_show', {'id': app.user.id, 'orderBy': 'oldest', 'dataType': 'Projects and Ideas'}) }}" class="ptk-navbarLinks">Profile</a>
+            <a href="{{ path('app_user_show', {'id': app.user.id, 'orderBy': 'oldest', 'dataType': 'Projects and Ideas'}) }}" class="ptk-navbarLinks"><span class="ptk-linksHover">Profile</span></a>
             {% if app.user.roles[0] == "ROLE_ADMIN" %}
-            <a href="{{ path('app_admin_user_list') }}" class="ptk-navbarLinks">Admin</a>
+                <a href="{{ path('app_admin_user_list') }}" class="ptk-navbarLinks">
+                    <span class="ptk-linksHover">Admin</span>
+                </a>
             {% endif %}
-            <a href="{{ path('app_logout') }}" class="ptk-navbarLinks">Logout</a>
+            <a href="{{ path('app_logout') }}" class="ptk-navbarLinks">
+                <span class="ptk-linksHover">Logout</span>
+            </a>
         </div>
     </div>
 
 {% else %}
 
     <div class="ptk-navbarLogoContainer">
-        <p class="ptk-logo"><a href="{{ path('app_home') }}">PARTAKE</a></p>
+        <p class="ptk-logo">
+            <a href="{{ path('app_home') }}">
+                <span class="ptk-linksHover">PARTAKE</span>
+            </a>
+        </p>
     </div>
     <div class="ptk-searchContainer">
     </div>
-
     <div class="ptk-expandMenuContainer">
-        <a href="{{ path('app_login') }}" class="ptk-navbarLinks">Login</a>
+        <a href="{{ path('app_login') }}" class="ptk-navbarLinks">
+            <span class="ptk-linksHover">Login</span>
+        </a>
     </div>
 
 {% endif %}
