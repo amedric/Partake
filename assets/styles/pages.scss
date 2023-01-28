@@ -13,24 +13,49 @@
 .ptk-mobileFooter {
     display: none;
 }
-.ptk-titleContainer{
+
+.ptk-titleContainer {
+    position: relative;
     display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
+    margin: 10px 0 0 0;
 }
 
-.ptk-titleHeader{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 0;
-    font-style: normal;
-    font-weight: 700;
+.ptk-titleHeader {
     font-size: 4.5rem;
-    color: $primaryWhite;
-    width: 7ch;
-    background: linear-gradient(180deg, $primaryBlue 55%, $primaryPurple 45%);
+    font-weight: 700;
+    background-color: $primaryPurple;
+    color: white;
+    display: block;
+    padding: 0 10px 0 10px;
 }
+
+.ptk-titleHeader:nth-child(2) {
+    position: absolute;
+    background-color: $primaryBlue;
+    color: $secondaryPurple;
+    clip-path: inset(-1% -1% 50% -1%); // Added the negative values to prevent "bleed" in Chrome
+}
+
+//.ptk-titleContainer{
+//    display: flex;
+//    justify-content: center;
+//    align-items: center;
+//}
+//
+//.ptk-titleHeader{
+//    display: flex;
+//    justify-content: center;
+//    align-items: center;
+//    margin: 0;
+//    font-style: normal;
+//    font-weight: 700;
+//    font-size: 4.5rem;
+//    color: $primaryWhite;
+//    width: 7ch;
+//    background: linear-gradient(180deg, $primaryBlue 55%, $primaryPurple 45%);
+//}
 
 .ptk-underTitleContainer{
     display: flex;
@@ -191,6 +216,7 @@
     height: 155px;
     text-decoration: none;
     background-color: $primaryWhite;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     transition: transform .2s;
 }
 
@@ -339,15 +365,6 @@
     color: #bbbbbb;
 }
 
-//#ptk-addIdeaLink {
-//    transition: transform .2s;
-//}
-//
-//#ptk-addIdeaLink:hover{
-//    transition: transform .2s;
-//    transform: scale(1.05);
-//}
-
 .ptk-cardIdeaTitleContainer{
     display: flex;
     justify-content: center;
@@ -389,6 +406,7 @@
     height: 155px;
     text-decoration: none;
     background-color: $primaryWhite;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     transition: transform .2s;
 }
 
@@ -428,29 +446,33 @@
     position: relative;
     height:200px;
     width: 700px;
-    background-color: white;
+    background-color: $primaryBlue;
+    box-shadow: rgba(0, 0, 0, 0.35) 0 5px 15px;
     border-radius: 10px;
 }
 
-.ptk-profileTitleContainer{
-    margin: 0 0 10px 0;
+.ptk-profileTitleContainer {
+    position: relative;
     display: flex;
+    align-items: center;
     justify-content: center;
+    margin: 10px 0 0 0;
 }
 
-.ptk-profileHeader{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 0;
-    padding: 0 5px 0 5px;
-    font-style: normal;
+.ptk-profileHeader {
+    font-size: 2.9rem;
     font-weight: 700;
-    font-size: 2.5rem;
-    color: $primaryWhite;
-    background: linear-gradient(180deg, $primaryWhite 55%, $primaryPurple 45%);
-    text-shadow: 2px 0 $primaryBlue, -2px 0 $primaryBlue, 0 2px $primaryBlue, 0 -2px $primaryBlue,
-    1px 1px $primaryBlue, -1px -1px $primaryBlue, 1px -1px $primaryBlue, -1px 1px $primaryBlue;
+    background-color: $primaryPurple;
+    color: white;
+    display: block;
+    padding: 0 10px 0 10px;
+}
+
+.ptk-profileHeader:nth-child(2) {
+    position: absolute;
+    background-color: $primaryBlue;
+    color: $secondaryPurple;
+    clip-path: inset(-1% -1% 50% -1%); // Added the negative values to prevent "bleed" in Chrome
 }
 
 .ptk-profileDetailsContainer{
@@ -474,28 +496,28 @@
 }
 
 .ptk-profileLabels{
-    margin: 0 0 10px 10px;
+    margin: 0 0 5px 10px;
     font-style: normal;
     font-weight: 550;
     font-size: 1.5rem;
-    color: $primaryBlue;
+    color: #d0d0d0;
     width: 125px;
 }
 
 .ptk-profileLabelsR{
-    margin: 0 0 10px 10px;
+    margin: 0 0 5px 10px;
     font-style: normal;
     font-weight: 550;
     font-size: 1.5rem;
-    color: $primaryBlue;
+    color: $primaryGrey;
     width: 60px;
 }
 
 .ptk-profileDetails{
-    margin: 0 0 10px 10px;
+    margin: 0 0 5px 10px;
     font-style: normal;
     font-size: 1.5rem;
-    color: black;
+    color: white;
 }
 
 .ptk-editProfileIcon{
