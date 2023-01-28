@@ -24,43 +24,44 @@ class UserController extends AbstractController
      */
     #[Route('/{id}/{orderBy}/{dataType}', name: 'app_user_show', methods: ['GET', 'POST'])]
     public function show(
-        Request $request,
-        User $user,
+        Request        $request,
+        User           $user,
         UserRepository $userRepository,
-        string $orderBy,
-        string $dataType
-    ): Response {
+        string         $orderBy,
+        string         $dataType
+    ): Response
+    {
         $form = $this->createForm(SearchContentType::class);
         $form->handleRequest($request);
-            if ($form->isSubmitted() && $form->isValid()) {
-                $search = $form->getData()['search'];
-                $projectsIdeas = $userRepository->findProjectsIdeasForUser($user->getId(), 'createdAt', 'ASC');
-            } else {
+        if ($form->isSubmitted() && $form->isValid()) {
+            $search = $form->getData()['search'];
+            $projectsIdeas = $userRepository->findProjectsIdeasForUser($user->getId(), 'createdAt', 'ASC');
+        } else {
 
-                switch ($dataType) {
-                    case 'all':
-                        $wherePara = "allData.dataType";
-                        break;
-                    case 'project':
-                        $wherePara = "'project'";
-                        break;
-                    case 'idea':
-                        $wherePara = "'idea'";
-                        break;
-                }
-
-                switch ($orderBy) {
-                    case 'newest':
-                        $projectsIdeas = $userRepository->findProjectsIdeasForUser($user->getId(), 'createdAt', 'DESC', $wherePara);
-                        break;
-                    case 'oldest':
-                        $projectsIdeas = $userRepository->findProjectsIdeasForUser($user->getId(), 'createdAt', 'ASC', $wherePara);
-                        break;
-                    case 'views':
-                        $projectsIdeas = $userRepository->findProjectsIdeasForUser($user->getId(), 'views', 'DESC', $wherePara);
-                        break;
-                }
+            switch ($dataType) {
+                case 'all':
+                    $wherePara = "allData.dataType";
+                    break;
+                case 'project':
+                    $wherePara = "'project'";
+                    break;
+                case 'idea':
+                    $wherePara = "'idea'";
+                    break;
             }
+
+            switch ($orderBy) {
+                case 'newest':
+                    $projectsIdeas = $userRepository->findProjectsIdeasForUser($user->getId(), 'createdAt', 'DESC', $wherePara);
+                    break;
+                case 'oldest':
+                    $projectsIdeas = $userRepository->findProjectsIdeasForUser($user->getId(), 'createdAt', 'ASC', $wherePara);
+                    break;
+                case 'views':
+                    $projectsIdeas = $userRepository->findProjectsIdeasForUser($user->getId(), 'views', 'DESC', $wherePara);
+                    break;
+            }
+        }
 
         return $this->render('user/show.html.twig', [
             'user' => $user,
