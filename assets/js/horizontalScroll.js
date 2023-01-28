@@ -33,30 +33,32 @@ function sideScroll(element,direction,speed,distance,step){
 }
 
 // ----------------------- Draggable cards container --------------------------------
-const slider = document.querySelector('.ptk-cardsContainer');
+// const slider = document.querySelector('.ptk-cardsContainer');
 let isDown = false;
 let startX;
 let scrollLeft;
 
-slider.addEventListener('mousedown', (e) => {
-    isDown = true;
-    slider.classList.add('active');
-    startX = e.pageX - slider.offsetLeft;
-    scrollLeft = slider.scrollLeft;
-});
-slider.addEventListener('mouseleave', () => {
-    isDown = false;
-    slider.classList.remove('active');
-});
-slider.addEventListener('mouseup', () => {
-    isDown = false;
-    slider.classList.remove('active');
-});
-slider.addEventListener('mousemove', (e) => {
-    if(!isDown) return;
-    e.preventDefault();
-    const x = e.pageX - slider.offsetLeft;
-    const walk = (x - startX) * 3; //scroll-fast
-    slider.scrollLeft = scrollLeft - walk;
-    console.log(walk);
-});
+container.forEach((ctn, index) => {
+    ctn.addEventListener('mousedown', (e) => {
+        isDown = true;
+        ctn.classList.add('active');
+        startX = e.pageX - ctn.offsetLeft;
+        scrollLeft = ctn.scrollLeft;
+    });
+    ctn.addEventListener('mouseleave', () => {
+        isDown = false;
+        ctn.classList.remove('active');
+    });
+    ctn.addEventListener('mouseup', () => {
+        isDown = false;
+        ctn.classList.remove('active');
+    });
+    ctn.addEventListener('mousemove', (e) => {
+        if (!isDown) return;
+        e.preventDefault();
+        const x = e.pageX - ctn.offsetLeft;
+        const walk = (x - startX) * 3; //scroll-fast
+        ctn.scrollLeft = scrollLeft - walk;
+        console.log(walk);
+    });
+})
