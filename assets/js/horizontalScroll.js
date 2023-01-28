@@ -1,15 +1,20 @@
 // ------------------ functions for scrolling left and right --------------------------------
-var rightButton = document.getElementById('ptk-rightBttnId');
-rightButton.onclick = function () {
-    var container = document.getElementById('ptk-cardsContainerId');
-    sideScroll(container,'right',10,280,10);
-};
+let rightButton = document.querySelectorAll(".rightBttn"); // quaryselectorall will return and nodelist of button with classnaem .rightBttn
+let container = document.querySelectorAll(".ptk-cardsContainer");
+rightButton.forEach((rBtn, index) => {// index will be current button index
+    rBtn.addEventListener("click", function(e) {
+        sideScroll(container[index],'right',10,280,10);
+        console.log(e.target, index);
+    });
+})
 
-var leftButton = document.getElementById('ptk-leftBttnId');
-leftButton.onclick = function () {
-    var container = document.getElementById('ptk-cardsContainerId');
-    sideScroll(container,'left',10,280,10);
-};
+let leftButton = document.querySelectorAll(".leftBttn"); // quaryselectorall will return and nodelist of button with classnaem .rightBttn
+leftButton.forEach((lBtn, index) => {// index will be current button index
+    lBtn.addEventListener("click", function(e) {
+        sideScroll(container[index],'left',10,280,10);
+        console.log(e.target, index);
+    });
+})
 
 // -------------------Smooth scrolling --------------------------------
 function sideScroll(element,direction,speed,distance,step){
