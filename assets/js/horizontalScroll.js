@@ -69,8 +69,9 @@ container.forEach((ctn, index) => {
 
     // ------- checks if container has not overflowed and hides buttons --------------------------------
     if (ctn.clientWidth < ctn.scrollWidth) {
-        ctn.previousElementSibling.classList.add("showButtons");
-        ctn.nextElementSibling.classList.add("showButtons");
+        ctn.previousElementSibling.lastElementChild.classList.add("showButtons");
+        ctn.nextElementSibling.firstElementChild.classList.add("showButtons");
+        console.log(ctn.nextElementSibling.firstElementChild);
     }
 
 })

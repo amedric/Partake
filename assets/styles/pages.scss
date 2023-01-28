@@ -161,10 +161,11 @@
 }
 
 .ptk-homeCategoryBttns{
-    display: none;
+    width: 30px;
 }
 
 .ptk-leftRightBttn{
+    display: none;
     background-color: transparent;
     box-shadow: none;
     border: 0;
@@ -182,6 +183,10 @@
 
 .showButtons{
     display: unset;
+}
+
+.hide{
+    display: none;
 }
 
 .ptk-cardsContainer {
