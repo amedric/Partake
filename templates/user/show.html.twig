@@ -84,11 +84,11 @@
                                     <div class="ptk-cardStatsContainer">
                                         <div class="ptk-cardIconStats">
                                             {% if projectIdea.liked == 1 %}
-                                                <a href="{{ path('app_idea_dislike', {'id': projectIdea.id}) }}" class="ptk-cardsLink">
+                                                <a href="{{ path('app_idea_dislike', {'id': projectIdea.id, 'orderBy': app.request.get('orderBy'), 'dataType': app.request.get('dataType')}) }}" class="ptk-cardsLink">
                                                     <img src="{{ asset('build/images/blackheart.png') }}" class="ptk-ideaInfoIcons" alt="Dislike">
                                                 </a>
                                             {% else %}
-                                                <a href="{{ path('app_idea_like', {'id': projectIdea.id}) }}" class="ptk-cardsLink">
+                                                <a href="{{ path('app_idea_like', {'id': projectIdea.id, 'orderBy': app.request.get('orderBy'), 'dataType': app.request.get('dataType')}) }}" class="ptk-cardsLink">
                                                     <img src="{{ asset('build/images/like.png') }}" class="ptk-ideaInfoIcons" alt="Like">
                                                 </a>
                                             {% endif %}

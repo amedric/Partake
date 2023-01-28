@@ -129,27 +129,44 @@ class IdeaController extends AbstractController
         ], Response::HTTP_SEE_OTHER);
     }
 
-    #[Route('/{id}/like', name: 'app_idea_like', methods: ['GET','POST'])]
-    public function like(Idea $idea, LikeRepository $likeRepository): Response
-    {
+    #[Route('/{id}/{orderBy}/{dataType}/like', name: 'app_idea_like', methods: ['GET','POST'])]
+    public function like(
+        Idea $idea,
+        LikeRepository $likeRepository,
+        int $id,
+        string $orderBy,
+        string $dataType
+    ): Response {
         $like = new Like();
         $like->setIdea($idea);
         $like->setUser($this->getUser());
         $likeRepository->save($like, true);
         return $this->redirectToRoute(
-            'app_user_show',
-            ['id' => $this->getUser()->getId()],
+            'app_user_show', [
+                'id' => $this->getUser()->getId(),
+                'orderBy' => $orderBy,
+                'dataType' => $dataType
+            ],
             Response::HTTP_SEE_OTHER
         );
     }
-    #[Route('/{id}/dislike', name: 'app_idea_dislike', methods: ['GET','POST'])]
-    public function dislike(LikeRepository $likeRepository, Idea $idea): Response
+    #[Route('/{id}/{orderBy}/{dataType}/dislike', name: 'app_idea_dislike', methods: ['GET','POST'])]
+    public function dislike(
+        LikeRepository $likeRepository,
+        Idea $idea,
+        int $id,
+        string $orderBy,
+        string $dataType
+    ): Response
     {
         $ideaUser = $likeRepository->findOneBy(['user' => $this->getUser(), 'idea' => $idea->getId()]);
         $likeRepository->remove($ideaUser, true);
         return $this->redirectToRoute(
-            'app_user_show',
-            ['id' => $this->getUser()->getId()],
+            'app_user_show', [
+                'id' => $this->getUser()->getId(),
+                'orderBy' => $orderBy,
+                'dataType' => $dataType
+            ],
             Response::HTTP_SEE_OTHER
         );
     }
