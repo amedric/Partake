@@ -1,6 +1,12 @@
 // ------------------ functions for scrolling left and right --------------------------------
-let rightButton = document.querySelectorAll(".rightBttn"); // quaryselectorall will return and nodelist of button with classnaem .rightBttn
+
+// quaryselectorall will return and nodelist of container with classnaem .ptk-cardsContainer
 let container = document.querySelectorAll(".ptk-cardsContainer");
+// quaryselectorall will return and nodelist of button with classnaem .rightBttn
+let rightButton = document.querySelectorAll(".rightBttn");
+// quaryselectorall will return and nodelist of button with classnaem .leftBttn
+let leftButton = document.querySelectorAll(".leftBttn");
+
 rightButton.forEach((rBtn, index) => {// index will be current button index
     rBtn.addEventListener("click", function(e) {
         sideScroll(container[index],'right',10,280,10);
@@ -8,7 +14,6 @@ rightButton.forEach((rBtn, index) => {// index will be current button index
     });
 })
 
-let leftButton = document.querySelectorAll(".leftBttn"); // quaryselectorall will return and nodelist of button with classnaem .rightBttn
 leftButton.forEach((lBtn, index) => {// index will be current button index
     lBtn.addEventListener("click", function(e) {
         sideScroll(container[index],'left',10,280,10);
@@ -33,7 +38,6 @@ function sideScroll(element,direction,speed,distance,step){
 }
 
 // ----------------------- Draggable cards container --------------------------------
-// const slider = document.querySelector('.ptk-cardsContainer');
 let isDown = false;
 let startX;
 let scrollLeft;
