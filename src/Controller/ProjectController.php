@@ -89,6 +89,7 @@ class ProjectController extends AbstractController
                 'ideas' => $ideas,
             ]);
         } else {
+            $this->addFlash('notice', 'You do not have permission to access this project, please contact your administrator');
             return $this->redirectToRoute('app_home');
         }
     }

@@ -71,7 +71,5 @@ container.forEach((ctn, index) => {
     if (ctn.clientWidth < ctn.scrollWidth) {
         ctn.previousElementSibling.lastElementChild.classList.add("showButtons");
         ctn.nextElementSibling.firstElementChild.classList.add("showButtons");
-        console.log(ctn.nextElementSibling.firstElementChild);
     }
-
 })
