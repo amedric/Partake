@@ -12,21 +12,23 @@
         </div>
     {% endif %}
 
-    <div class="ptk-expandMenuContainer">
-            <input type="checkbox" class="ptk-expand-menu-checkbox" id="ptk-expand-menu"/>
-            <label class="ptk-navbarLinks ptk-menuLabel" for="ptk-expand-menu">
-                <img src="{{ asset('build/images/purpleArrow.png') }}" class="ptk-expandArrow" alt="Expand">
+    <div class="ptk-navDropdownDatatype">
+        <div class="ptk-navDropDownBtnContainer">
+            <button class="ptk-navDropDownbtn">
                 <span class="ptk-linksHover">{{ app.user.lastname }} {{ app.user.firstname }}</span>
-            </label>
-        <div class="ptk-navbarLinksContainer">
-            <a href="{{ path('app_user_show', {'id': app.user.id, 'orderBy': 'oldest', 'dataType': 'Projects and Ideas'}) }}" class="ptk-navbarLinks"><span class="ptk-linksHover">Profile</span></a>
+            </button>
+        </div>
+        <div class="ptk-navDropdownContent">
+            <a href="{{ path('app_user_show', {'id': app.user.id, 'orderBy': 'oldest', 'dataType': 'Projects and Ideas'}) }}">
+                Profile
+            </a>
             {% if app.user.roles[0] == "ROLE_ADMIN" %}
-                <a href="{{ path('app_admin_user_list') }}" class="ptk-navbarLinks">
-                    <span class="ptk-linksHover">Admin</span>
+                <a href="{{ path('app_admin_user_list') }}">
+                    Admin
                 </a>
             {% endif %}
-            <a href="{{ path('app_logout') }}" class="ptk-navbarLinks">
-                <span class="ptk-linksHover">Logout</span>
+            <a href="{{ path('app_logout') }}">
+                Logout
             </a>
         </div>
     </div>

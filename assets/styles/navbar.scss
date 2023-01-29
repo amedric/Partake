@@ -103,27 +103,74 @@
     transition: 0.4s ease-out;
 }
 
-.ptk-expand-menu-checkbox{
-    display: none;
-}
-
-.ptk-menuLabel{
+//-------------------- dropdown nav menu --------------------
+.ptk-navDropDownBtnContainer{
     display: flex;
-    align-items: center;
+    flex-direction: row;
+    justify-content: flex-start;
+    height: 65%;
+}
+
+.ptk-navDropDownbtn {
+    display: flex;
+    justify-content: flex-start;
+    margin: 10px 0 10px 5px;
+    gap: 10px;
+    background-color: transparent;
+    color: $secondaryPurple;
+    font-size: 1.3rem;
+    font-family: Rajdhani;
+    font-weight: 550;
+    height: 100%;
+    min-width: 100px;
     cursor: pointer;
+    border: none;
 }
 
-.ptk-expand-menu-checkbox:checked~.ptk-navbarLinksContainer{
-    width: 230px;
+.ptk-navDropDownLabel{
+    color: white;
 }
 
-.ptk-expandArrow{
-    margin: 0 10px 0 0;
-    width: 10px;
-    height: 10px;
-    transition: 0.4s ease;
+.ptk-navDropdownDatatype {
+    margin-right: 20px;
+    position: relative;
+    display: inline-block;
+    height: 100%;
 }
 
-.ptk-expand-menu-checkbox:checked ~ .ptk-menuLabel .ptk-expandArrow{
-    transform: rotate(180deg);
+.ptk-navDropdownContent {
+    margin-top: 15px;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    background-color: $primaryBlue;
+    min-width: 140px;
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+    z-index: 1;
+    border-radius: 0 0 15px 15px;
 }
+.ptk-navDropdownContent a {
+    font-style: normal;
+    font-weight: 600;
+    font-size: 1.3rem;
+    color: $secondaryPurple;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+.ptk-navDropdownDatatype a:hover {
+    color: $secondaryYellow;
+}
+
+.ptk-navDropDownbtn:hover {
+    color: $secondaryYellow;
+}
+
+.ptk-navDropdownDatatype:hover .ptk-navDropdownContent {
+    display: block;
+}
+
+//.ptk-navDropdownDatatype:hover .ptk-navDropDownbtn {
+//    background-color: $primaryBlue;
+//}
