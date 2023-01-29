@@ -1,8 +1,8 @@
-{{ form_start(form) }}
+{{ form_start(formComm) }}
 <div class="lolo">
-    {{ form_widget(form.content, {'attr': {'class': 'ptk-commentFormWidget'}}) }}
+    {{ form_widget(formComm.content, {'attr': {'class': 'ptk-commentFormWidget'}}) }}
 </div>
 <div>
 <button class="ptk-commentButton">{{ button_label|default('Save') }}</button>
 </div>
-{{ form_end(form) }}
+{{ form_end(formComm) }}

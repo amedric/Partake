@@ -1,47 +1,31 @@
-{% extends 'base.html.twig' %}
-
-{% block title %}New Idea{% endblock %}
-
-{% block body %}
-    <div class="ptk-formBlock">
 
         <div class="ptk-formContainer">
-
             <div class="ptk-formCloseContainer">
-                <a href="{{ path('app_project_show', {id: project.id, 'orderBy': 'show'})}}" class="ptk-formCloseBttn">X</a>
+                <a class="ptk-formCloseBttn">X</a>
             </div>
-
             <div class="ptk-formTitleContainer">
                 <h1 class="ptk-formTitle">New Idea</h1>
             </div>
-
-            {{ form_start(form) }}
-
+            {{ form_start(formNew) }}
             <div class="ptk-formErrors ptk-formContainerMargins">
-                {{ form_errors(form) }}
-            </div>
-
-            <div class="ptk-formRow ptk-formContainerMargins">
-                {{ form_label(form.title, null, {'label_attr': {'class': 'ptk-formLabels'}}) }}
-                {{ form_widget(form.title, {'attr': {'class': 'ptk-formTitleInput'}}) }}
+                {{ form_errors(formNew) }}
             </div>
             <div class="ptk-formRow ptk-formContainerMargins">
-                {{ form_label(form.content, 'Desciption', {'label_attr': {'class': 'ptk-formLabels'}}) }}
-                {{ form_widget(form.content, {'attr': {'class': 'ptk-formContentInput'}}) }}
+                {{ form_label(formNew.title, null, {'label_attr': {'class': 'ptk-formLabels'}}) }}
+                {{ form_widget(formNew.title, {'attr': {'class': 'ptk-formTitleInput'}}) }}
             </div>
             <div class="ptk-formRow ptk-formContainerMargins">
-                {{ form_label(form.ideaColor, null, {'label_attr': {'class': 'ptk-formLabels'}}) }}
-                {{ form_widget(form.ideaColor, {'attr': {'class': 'ptk-formIdeaColours'}}) }}
+                {{ form_label(formNew.content, 'Desciption', {'label_attr': {'class': 'ptk-formLabels'}}) }}
+                {{ form_widget(formNew.content, {'attr': {'class': 'ptk-formContentInput'}}) }}
             </div>
-
-            {{ form_row(form._token) }}
-
+            <div class="ptk-formRow ptk-formContainerMargins">
+                {{ form_label(formNew.ideaColor, null, {'label_attr': {'class': 'ptk-formLabels'}}) }}
+                {{ form_widget(formNew.ideaColor, {'attr': {'class': 'ptk-formIdeaColours'}}) }}
+            </div>
+            {{ form_row(formNew._token) }}
             <div class="ptk-formBttnsContainer">
                 <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
                 <button class="ptk-formBttns">{{ button_label|default('Save') }}</button>
             </div>
-
-            {{ form_end(form, {'render_rest': false }) }}
+            {{ form_end(formNew, {'render_rest': false }) }}
         </div>
-    </div>
-{% endblock %}

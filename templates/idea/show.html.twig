@@ -1,6 +1,100 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Idea{% endblock %}
+{% block title %}Project{% endblock %}
+
+{% block header %}
+    <div class="ptk-titleContainer">
+        <h1 class="ptk-ideaTitleHeader">{{ project.title }}</h1>
+        <h1 class="ptk-ideaTitleHeader">{{ project.title }}</h1>
+    </div>
+    <div class="ptk-underTitleBlock">
+        <p class="ptk-projectContent">{{ project.content }}</p>
+    </div>
+    {% if project.user.id == app.user.id %}
+        <form method="post" action="{{ path('app_project_archived', {'id': project.id}) }}" onsubmit="return confirm('Are you sure you want to archive this project?');">
+            <input type="hidden" name="_token" value="{{ csrf_token('archive' ~ project.id) }}">
+            <button class="archive-button" type="submit">Archive project</button>
+        </form>
+    {% endif %}
+{% endblock %}
+
+{% block filters %}
+    <div class="ptk-createdAtContainer">
+        <p class="ptk-createdAt">Created by:</p>
+        <p class="ptk-createdAtContent">{{ project.user.fullName }}</p>
+        <p class="ptk-createdAt">on:</p>
+        <p class="ptk-createdAtContent">{{ project.createdAt ? project.createdAt|date('d-m-Y') : '' }}</p>
+    </div>
+    <div class="ptk-filterContainer">
+        <p class="ptk-filterSeparators"> Order by: </p>
+        <a href="{{ path('app_project_show', {'id': project.id, 'orderBy': 'newest'}) }}" class="ptk-filterLinks">
+            <span class="ptk-linksHover">newest</span></a>
+        <p class="ptk-filterSeparators">/</p>
+        <a href="{{ path('app_project_show', {'id': project.id, 'orderBy': 'oldest'}) }}" class="ptk-filterLinks">
+            <span class="ptk-linksHover">oldest</span></a>
+        <p class="ptk-filterSeparators">/</p>
+        <a href="{{ path('app_project_show', {'id': project.id, 'orderBy': 'likes'}) }}" class="ptk-filterLinks">
+            <span class="ptk-linksHover">likes</span></a>
+        <p class="ptk-filterSeparators">/</p>
+        <a href="{{ path('app_project_show', {'id': project.id, 'orderBy': 'comments'}) }}" class="ptk-filterLinks">
+            <span class="ptk-linksHover">comments</span></a>
+        <p class="ptk-filterSeparators">/</p>
+        <a href="{{ path('app_project_show', {'id': project.id, 'orderBy': 'views'}) }}" class="ptk-filterLinks">
+            <span class="ptk-linksHover">views</span></a>
+    </div>
+{% endblock %}
+
+{% block underFilters %}
+    <p class="ptk-blockDescription">Ideas</p>
+    <a class="ptk-modalShow">
+        <div class="ptk-addIdeaContainer">
+            <p id="ptk-addIdeaIcon">+</p>
+            <p class="ptk-addIdea">Add Idea</p>
+        </div>
+    </a>
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        let modals = document.querySelectorAll(".ptk-modalContainer");
+        let showModalsLink = document.querySelectorAll(".ptk-modalShow");
+        let hideModalsLink = document.querySelectorAll(".ptk-formCloseBttn");
+        let formLoad = document.querySelectorAll(".ptk-formContainer");
+        let formClose = document.querySelectorAll(".ptk-formBttns");
+
+        hideModalsLink.forEach((hlink, index) => {
+            hlink.addEventListener("click", function(e) {
+                modals[0].classList.remove("ptk-modalContainerShow");
+                formLoad[0].classList.remove("ptk-formContainerShow");
+                console.log(hideModalsLink);
+            });
+        })
+
+        showModalsLink.forEach((link, index) => {
+            link.addEventListener("click", function(e) {
+                modals[0].classList.add("ptk-modalContainerShow");
+                formLoad[0].classList.add("ptk-formContainerShow");
+                console.log(modals);
+            });
+        })
+
+        let flashMessages = document.querySelectorAll(".ptk-flashMessages");
+        function fadeOutEffect() {
+            flashMessages.forEach((msgs, index) => {// index will be current button index
+
+                let fadeEffect = setInterval(function () {
+                    if (!msgs.style.opacity) {
+                        msgs.style.opacity = 1;
+                    }
+                    if (msgs.style.opacity > 0) {
+                        msgs.style.opacity = 0;
+                    }
+                }, 2500);
+            })
+        }
+        window.onload = fadeOutEffect;
+    </script>
+{% endblock %}
 
 {% block body %}
 <div class="ptk-ideaShowBlock">
@@ -61,12 +155,9 @@
             {% endfor %}
         </div>
 
-
         <div class="ptk-ideaPostCommentContainer">
             <h3 style="text-align: center;">Leave a comment</h3>
-
             {{ include('comment/_form.html.twig') }}
-
         </div>
 
     </div>

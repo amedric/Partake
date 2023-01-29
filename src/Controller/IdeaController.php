@@ -60,10 +60,10 @@ class IdeaController extends AbstractController
         $ideaRepository->save($idea, true);
 
         $comment = new Comment();
-        $form = $this->createForm(CommentType::class, $comment);
-        $form->handleRequest($request);
+        $formComm = $this->createForm(CommentType::class, $comment);
+        $formComm->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($formComm->isSubmitted() && $formComm->isValid()) {
             $comment->setUser($this->getUser());
             $comment->setIdea($idea);
             $date = new DateTime('now');
@@ -79,7 +79,7 @@ class IdeaController extends AbstractController
         return $this->render('idea/show.html.twig', [
             'idea' => $idea,
             'user' => $user,
-            'form' => $form->createView(),
+            'formComm' => $formComm->createView(),
             'edit' => true,
             'comments' => $comments,
         ]);

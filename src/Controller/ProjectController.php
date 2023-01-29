@@ -2,11 +2,15 @@
 
 namespace App\Controller;
 
+use App\Entity\Comment;
 use App\Entity\Project;
 use App\Entity\Idea;
 use App\Entity\User;
+use App\Form\CommentType;
+use App\Form\IdeaType;
 use App\Form\Project1Type;
 use App\Form\ProjectEditType;
+use App\Repository\CommentRepository;
 use App\Repository\IdeaRepository;
 use App\Repository\ProjectRepository;
 use DateTime;
@@ -51,6 +55,7 @@ class ProjectController extends AbstractController
 
     #[Route('/{id}/{orderBy}', name: 'app_project_show', methods: ['GET', 'POST'])]
     public function show(
+        Request $request,
         Project $project,
         IdeaRepository $ideaRepository,
         ProjectRepository $projectRepository,
@@ -61,7 +66,23 @@ class ProjectController extends AbstractController
         $projectCreateBy = $project->getUser();
         $userAuthorized = $project->getUsersSelectOnProject()->contains($currentUser);
         $ideas = $ideaRepository->findAllIdeasByProjectId($project->getId(), 'createdAt', 'ASC');
+
+        $idea = new Idea();
+        $formNew = $this->createForm(IdeaType::class, $idea);
+        $formNew->handleRequest($request);
+
         if ($currentUser === $projectCreateBy || $currentUser == $userAuthorized) {
+            if ($formNew->isSubmitted() && $formNew->isValid()) {
+                $idea->setUser($this->getUser());
+                $idea->setProject($project);
+                $ideaRepository->save($idea, true);
+                $this->addFlash('success', 'Success:  New idea created');
+                return $this->redirectToRoute('app_project_show', [
+                    'id' => $project->getId(),
+                    'orderBy' => 'show',
+                ], Response::HTTP_SEE_OTHER);
+            }
+
             switch ($orderBy) {
                 case 'show':
                     $ideas = $ideaRepository->findAllIdeasByProjectId($project->getId(), 'createdAt', 'ASC');
@@ -84,9 +105,12 @@ class ProjectController extends AbstractController
                     $ideas = $ideaRepository->findAllIdeasByProjectId($project->getId(), 'ideaViews', 'DESC');
                     break;
             }
+
             return $this->render('project/show.html.twig', [
                 'project' => $project,
                 'ideas' => $ideas,
+                'formNew' => $formNew->createView(),
+                'edit' => true,
             ]);
         } else {
             $this->addFlash('notice', 'You do not have permission to access this project, please contact your administrator');

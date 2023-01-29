@@ -54,6 +54,23 @@
 
 }
 
+.ptk-modalContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    opacity: 0;
+    z-index: 0;
+    transition: ease-out 0.2s;
+}
+
+.ptk-modalContainerShow{
+    opacity: 1;
+    z-index: 5;
+}
+
 .ptk-bodyContainer{
     position: relative;
     width: 100vw;
