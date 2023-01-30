@@ -68,11 +68,18 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
     }
 
     /**
+     * @param $id
+     * @param $column
+     * @param $orderBy
+     * @param $wherePara
+     * @return array
      * @throws Exception
+     * retireves all projects and ideas into one table
+     * can be filtered by projects and ideas
      */
     public function findProjectsIdeasForUser($id, $column, $orderBy, $wherePara): array
     {
-        $order = $column . " " . $orderBy;
+        $orderByPara = $column . " " . $orderBy;
         $conn = $this->getEntityManager()->getConnection();
         // query to find data for projects and ideas
         $sql = "
@@ -112,7 +119,7 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
                         i3.created_at as createdAt
                 from idea as i3
                 where i3.user_id = :id
-                order by " . $order . ") as allData
+                order by " . $orderByPara . ") as allData
                 where allData.dataType = " . $wherePara
             ;
 
