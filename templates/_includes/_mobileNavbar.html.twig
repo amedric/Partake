@@ -1,5 +1,5 @@
 {% if app.user %}
     <a href="{{ path('app_user_show', {'id': app.user.id, 'orderBy': 'oldest', 'dataType': 'all'}) }}"> {{ app.user.lastname }} {{ app.user.firstname }}</a>
-    <a href="{{ path('app_logout') }}"> Se déconnecter </a>
+    <a href="{{ path('app_logout') }}"> Logout </a>
 {% endif %}
 
