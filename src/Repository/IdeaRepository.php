@@ -131,21 +131,21 @@ class IdeaRepository extends ServiceEntityRepository
         $conn = $this->getEntityManager()->getConnection();
         $sql = '
             select
-                i.id as id,
+                i.id,
                 i.title,
                 i.content,
                 i.idea_color as ideaColor,
                 i.idea_views as ideaViews,
+                i.project_id as projectId,
                 (select count(l.id)
                     FROM `like` as l
                     where l.idea_id = i.id) as ideaLikes,
                 (select count(c.id)
                     FROM comment as c
                     where c.idea_id = i.id) as ideaComments,
-                i.created_at as createdAt,
-                p.id as projectId
-            from idea as i
-            right join project as p on i.project_id = p.id
+                i.created_at as createdAt
+            from project as p
+            left join idea as i on p.id = i.project_id
             where p.id = :id
             order by' . $order
             ;

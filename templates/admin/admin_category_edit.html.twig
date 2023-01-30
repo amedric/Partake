@@ -61,15 +61,14 @@
                 </div>
 
                 {{ form_row(form._token) }}
-                {{ form_end(form, {'render_rest': false }) }}
+
 
                 <div class="ptk-teamBttnsContainer">
                     <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
                     <button class="ptk-bttns">{{ button_label|default('Save') }}</button>
                     <a href="{{ path('app_admin_category_index') }}" class="ptk-bttns">Back</a>
                 </div>
-
-
+                {{ form_end(form, {'render_rest': false }) }}
             </div>
         </div>
 

@@ -84,7 +84,6 @@ class ProjectController extends AbstractController
                     $ideas = $ideaRepository->findAllIdeasByProjectId($project->getId(), 'ideaViews', 'DESC');
                     break;
             }
-
             return $this->render('project/show.html.twig', [
                 'project' => $project,
                 'ideas' => $ideas,

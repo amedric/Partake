@@ -5,6 +5,7 @@
 {% block header %}
     <div class="ptk-titleContainer">
         <h1 class="ptk-ideaTitleHeader">{{ project.title }}</h1>
+        <h1 class="ptk-ideaTitleHeader">{{ project.title }}</h1>
     </div>
     <div class="ptk-underTitleBlock">
         <p class="ptk-projectContent">{{ project.content }}</p>
@@ -19,8 +20,10 @@
 
 {% block filters %}
     <div class="ptk-createdAtContainer">
-        <p class="ptk-createdAt">Created at:</p>
-        <p class="ptk-createdAt">{{ project.createdAt ? project.createdAt|date('d-m-Y') : '' }}</p>
+        <p class="ptk-createdAt">Created by:</p>
+        <p class="ptk-createdAtContent">{{ project.user.fullName }}</p>
+        <p class="ptk-createdAt">at:</p>
+        <p class="ptk-createdAtContent">{{ project.createdAt ? project.createdAt|date('d-m-Y') : '' }}</p>
     </div>
     <div class="ptk-filterContainer">
         <p class="ptk-filterSeparators"> Order by: </p>
@@ -51,33 +54,39 @@
         <div class="ptk-cardsBlock">
             <div class="ptk-ideaCardsContainer">
                 {% for idea in ideas %}
-                    <a href="{{ path('app_idea_show', {'id': idea.id}) }}" class="ptk-cardsLink">
-                        <div class="ptk-ideaCards ptk-cardMarginRight" style="border: 2.5px solid {{idea.ideaColor}}">
-                            <div class="ptk-cardIdeaTitleContainer">
-                                <h1 class="ptk-cardIdeaTitle">{{ idea.title|striptags|length > 40 ? idea.title|striptags|slice(0, 40) ~ '...' : idea.title|striptags }}</h1>
-                            </div>
-
-                            <div class="ptk-cardIdeaStatsContainer">
-                                <div class="ptk-cardStatsContainer">
-                                    <div class="ptk-cardIconStats">
-                                        <img src="{{ asset('build/images/like.png') }}" class="ptk-ideaInfoIcons" alt="like">
-                                        <p class="ptk-cardStatsNo">{{ idea.ideaLikes }}</p>
-                                    </div>
-                                    <div class="ptk-cardIconStats">
-                                        <img src="{{ asset('build/images/comment.png') }}" class="ptk-ideaInfoIcons" alt="Comments">
-                                        <p class="ptk-cardStatsNo">{{ idea.ideaComments }}</p>
-                                    </div>
-                                    <div class="ptk-cardIconStats">
-                                        <img src="{{ asset('build/images/view.png') }}" class="ptk-ideaInfoIcons" alt="Views">
-                                        <p class="ptk-cardStatsNo">{{ idea.ideaViews }}</p>
-                                    </div>
+                    {% if idea.id is not null %}
+                        <a href="{{ path('app_idea_show', {'id': idea.id is null ? 0 : idea.id}) }}" class="ptk-cardsLink">
+                            <div class="ptk-ideaCards ptk-cardMarginRight" style="border: 2.5px solid {{idea.ideaColor}}">
+                                <div class="ptk-cardIdeaTitleContainer">
+                                    <h1 class="ptk-cardIdeaTitle">{{ idea.title|striptags|length > 40 ? idea.title|striptags|slice(0, 40) ~ '...' : idea.title|striptags }}</h1>
+                                </div>
+                                <div class="ptk-cardIdeaStatsContainer">
+                                    <div class="ptk-cardStatsContainer">
+                                        <div class="ptk-cardIconStats">
+                                            <img src="{{ asset('build/images/like.png') }}" class="ptk-ideaInfoIcons" alt="like">
+                                            <p class="ptk-cardStatsNo">{{ idea.ideaLikes is null ? 0 : idea.ideaLikes }}</p>
                                         </div>
-                                    </div>
-                            </div>
-                    </a>
-                {% endfor %}
+                                        <div class="ptk-cardIconStats">
+                                            <img src="{{ asset('build/images/comment.png') }}" class="ptk-ideaInfoIcons" alt="Comments">
+                                            <p class="ptk-cardStatsNo">{{ idea.ideaComments is null ? 0 : idea.ideaComments }}</p>
+                                        </div>
+                                        <div class="ptk-cardIconStats">
+                                            <img src="{{ asset('build/images/view.png') }}" class="ptk-ideaInfoIcons" alt="Views">
+                                            <p class="ptk-cardStatsNo">{{ idea.ideaComments is null ? 0 : idea.ideaComments }}</p>
+                                        </div>
+                                            </div>
+                                        </div>
+                                </div>
+                        </a>
+                        {% else %}
+                        <div class="ptk-ideaNoDataContainer">
+                            <h1 class="ptk-noDataTitle">THERE ARE NO IDEAS FOR THIS PROJECT</h1>
+                            <h1 class="ptk-noDataTitle">CLICK ON 'ADD IDEA'</h1>
                         </div>
+                    {% endif %}
+                {% endfor %}
             </div>
+        </div>
                 {% else %}
             <div class="ptk-titleBlock">
                 <div class="ptk-titleContainer">

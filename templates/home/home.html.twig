@@ -8,6 +8,7 @@
     </div>
     <div class="ptk-titleContainer">
         <h1 class="ptk-titleHeader">Projects</h1>
+        <h1 class="ptk-titleHeader">Projects</h1>
     </div>
     <div class="ptk-underTitleContainer">
         <a href="{{ path('app_project_new') }}" id="ptk-createProject">
@@ -31,7 +32,7 @@
 {% endblock %}
 
 {% block underFilters %}
-    <p class="ptk-blockDescription">Projects by departments</p>
+    <p class="ptk-blockDescription">Projects by department</p>
 {% endblock %}
 
 {% block body %}
@@ -39,60 +40,73 @@
     <div class="ptk-cardsBlock">
 
         {% for category in categories %}
+{#          ----- checks if there are projects in the category ----- #}
+            {% set noProjects = 0 %}
+            {% for project in projects %}
+                {% if category.id == project.categoryId %}
+                {% set noProjects = noProjects + 1 %}
+                {% endif %}
+            {% endfor %}
             <div class="ptk-categoryCardsContainer">
                 <div class="ptk-categorySection">
                     <div class="ptk-categoryContainer">
                         <h1 class="ptk-category">{{ category.title }}</h1>
                     </div>
-
                     <div class="ptk-homeCategoryBttns">
-                        <button class="ptk-leftRightBttn" id="ptk-leftBttnId" type="button"><img class="ptk-arrowBttn"
-                                                                                                 src="{{ asset('build/images/arrow.png') }}"
-                                                                                                 alt="left"></button>
+                        <button class="ptk-leftRightBttn" id="ptk-leftBttnId" type="button">
+                            <img class="ptk-arrowBttn" src="{{ asset('build/images/arrow.png') }}" alt="left">
+                        </button>
                     </div>
                     <div class="ptk-cardsContainer" id="ptk-cardsContainerId">
-
-                        {% for project in projects %}
-                            {% if category.id == project.categoryId %}
-                                {% if project.isArchived != true %}
-                                    <a href="{{ path('app_project_show', {'id': project.id,'orderBy': 'show'}) }}"
-                                       class="ptk-cardsLink">
-                                        {% set unauthorizedColor = 'grey' %}
-                                        {% if (app.user.id == project.user) %}
-                                            {% set unauthorizedColor = category.categoryColor %}
-                                        {% else %}
-                                            {% for authorizedProject in authorizedProjects %}
-                                                {% if (project.id in authorizedProject) %}
-                                                    {% set unauthorizedColor = category.categoryColor %}
-                                                {% endif %}
-                                            {% endfor %}
-                                        {% endif %}
-                                        <div class="ptk-cards ptk-cardMarginRight">
-                                            <div class="ptk-cardTitleContainer">
-                                                <h1 class="ptk-cardTitle">{{ project.title|striptags|length > 40 ? project.title|striptags|slice(0, 40) ~ '...' : project.title|striptags }}</h1>
-                                            </div>
-                                            <div class="ptk-cardStatsContainer"
-                                                 style="background-color: {{ unauthorizedColor }}">
-                                                <div class="ptk-cardIconStats">
-                                                    <img src="{{ asset('build/images/idea.png') }}" alt="idea">
-
-                                                    <p class="ptk-cardStatsNo">{{ project.ideaCount }}</p>
+                        {% if noProjects > 0 %}
+{#                          ------- if there are projects in category -----------------#}
+                            {% for project in projects %}
+                                {% if category.id == project.categoryId %}
+                                    {% if project.isArchived != true %}
+                                        <a href="{{ path('app_project_show', {'id': project.id,'orderBy': 'show'}) }}"
+                                           class="ptk-cardsLink">
+                                            {% set unauthorizedColor = 'grey' %}
+                                            {% if (app.user.id == project.user) %}
+                                                {% set unauthorizedColor = category.categoryColor %}
+                                            {% else %}
+                                                {% for authorizedProject in authorizedProjects %}
+                                                    {% if (project.id in authorizedProject) %}
+                                                        {% set unauthorizedColor = category.categoryColor %}
+                                                    {% endif %}
+                                                {% endfor %}
+                                            {% endif %}
+                                            <div class="ptk-cards ptk-cardMarginRight">
+                                                <div class="ptk-cardTitleContainer">
+                                                    <h1 class="ptk-cardTitle">{{ project.title|striptags|length > 40 ? project.title|striptags|slice(0, 40) ~ '...' : project.title|striptags }}</h1>
                                                 </div>
-                                                <div class="ptk-cardIconStats">
-                                                    <img src="{{ asset('build/images/view.png') }}" alt="Views">
-                                                    <p class="ptk-cardStatsNo">{{ project.views is null ? 0 : project.views }}</p>
+                                                <div class="ptk-cardStatsContainer"
+                                                     style="background-color: {{ unauthorizedColor }}">
+                                                    <div class="ptk-cardIconStats">
+                                                        <img src="{{ asset('build/images/idea.png') }}" alt="idea">
+                                                        <p class="ptk-cardStatsNo">{{ project.ideaCount is null ? 0 : project.ideaCount }}</p>
+                                                    </div>
+                                                    <div class="ptk-cardIconStats">
+                                                        <img src="{{ asset('build/images/view.png') }}" alt="Views">
+                                                        <p class="ptk-cardStatsNo">{{ project.views is null ? 0 : project.views }}</p>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </a>
+                                        </a>
+                                    {% endif %}
                                 {% endif %}
-                            {% endif %}
-                        {% endfor %}
+                            {% endfor %}
+                        {% else %}
+{#                          --------- if there are no projects in category show no pojects message -------#}
+                            <div class="ptk-ideaNoDataContainer">
+                                <h1 class="ptk-noDataTitle">No projects in {{ category.title }}</h1>
+                            </div>
+                        {% endif %}
                     </div>
                     <div class="ptk-homeCategoryBttns">
-                        <button class="ptk-leftRightBttn" id="ptk-rightBttnId" type="button"><img
-                                class="ptk-arrowBttn rightBttn" src="{{ asset('build/images/arrow.png') }}" alt="left"
-                                id="ptk-rightBttnId"></button>
+                        <button class="ptk-leftRightBttn" id="ptk-rightBttnId" type="button">
+                            <img class="ptk-arrowBttn rightBttn" src="{{ asset('build/images/arrow.png') }}" alt="left"
+                                id="ptk-rightBttnId">
+                        </button>
                     </div>
                 </div>
             </div>
