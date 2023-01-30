@@ -6,6 +6,7 @@
     <div class="ptk-profileContainer">
         <div class="ptk-profileTitleContainer">
             <h1 class="ptk-profileHeader">Profile</h1>
+            <h1 class="ptk-profileHeader">Profile</h1>
         </div>
         <div class="ptk-profileDetailsContainer">
             <div class="ptk-profileDetailsLeft">
@@ -42,26 +43,32 @@
 {% endblock %}
 
 {% block filters %}
+
     <div class="ptk-userFilterContainer">
         <div class="ptk-filterDataType">
             <div class="ptk-dropdownDatatype">
                 <div class="ptk-ptk-dropDownbtnContainer">
-                    <button class="ptk-dropDownbtn">Filter by</button>
+                    <button class="ptk-dropDownbtn">
+                        <span class="ptk-linksHover">Filter by: <span class="ptk-dropDownLabel"> {{app.request.get('dataType')}}</span></span>
+                    </button>
                 </div>
                 <div class="ptk-dropdownContent">
-                    <a href="{{ path('app_user_show', {id: user.id, 'orderBy': app.request.get('orderBy'), 'dataType': 'all'}) }}">All</a>
-                    <a href="{{ path('app_user_show', {id: user.id, 'orderBy': app.request.get('orderBy'), 'dataType': 'project'}) }}">Projects</a>
-                    <a href="{{ path('app_user_show', {id: user.id, 'orderBy': app.request.get('orderBy'), 'dataType': 'idea'}) }}">Ideas</a>
+                    <a href="{{ path('app_user_show', {id: user.id, 'orderBy': app.request.get('orderBy'), 'dataType': 'Projects and Ideas'}) }}">Projects and Ideas</a>
+                    <a href="{{ path('app_user_show', {id: user.id, 'orderBy': app.request.get('orderBy'), 'dataType': 'Projects'}) }}">Projects</a>
+                    <a href="{{ path('app_user_show', {id: user.id, 'orderBy': app.request.get('orderBy'), 'dataType': 'Ideas'}) }}">Ideas</a>
                 </div>
             </div>
         </div>
         <div class="ptk-filtersOrderBy">
             <p class="ptk-filterSeparators ptk-filtersWhite"> Order by: </p>
-            <a href="{{ path('app_user_show', {id: user.id, 'orderBy': 'newest', 'dataType': app.request.get('dataType')}) }}" class="ptk-filterLinks">newest</a>
+            <a href="{{ path('app_user_show', {id: user.id, 'orderBy': 'newest', 'dataType': app.request.get('dataType')}) }}" class="ptk-filterLinks">
+                <span class="ptk-linksHover">newest</span></a>
             <p class="ptk-filterSeparators"> / </p>
-            <a href="{{ path('app_user_show', {id: user.id, 'orderBy': 'oldest', 'dataType': app.request.get('dataType')}) }}" class="ptk-filterLinks">oldest</a>
+            <a href="{{ path('app_user_show', {id: user.id, 'orderBy': 'oldest', 'dataType': app.request.get('dataType')}) }}" class="ptk-filterLinks">
+                <span class="ptk-linksHover">oldest</span></a>
             <p class="ptk-filterSeparators"> / </p>
-            <a href="{{ path('app_user_show', {id: user.id, 'orderBy': 'views', 'dataType': app.request.get('dataType')}) }}" class="ptk-filterLinks">views</a>
+            <a href="{{ path('app_user_show', {id: user.id, 'orderBy': 'views', 'dataType': app.request.get('dataType')}) }}" class="ptk-filterLinks">
+                <span class="ptk-linksHover">views</span></a>
         </div>
     </div>
 {% endblock %}
@@ -69,73 +76,76 @@
 {% block body %}
     <div class="ptk-cardsBlock">
         <div class="ptk-ideaCardsContainer">
-            {% for projectIdea in projectsIdeas %}
-                {% if projectIdea.dataType == 'idea' %}
-                    {# ------------ Idea cards --------------------------------------------------------------- #}
-                    <div class="ptk-profileCardContainer">
-                        <p class="ptk-profileCardTypeLabel">{{projectIdea.dataType}}</p>
-                            <div class="ptk-ideaCards" style="border: 2.5px solid {{projectIdea.color}}">
-                                <a href="{{ path('app_idea_show', {'id': projectIdea.id}) }}" class="ptk-cardsLink">
-                                <div class="ptk-cardIdeaTitleContainer">
-                                    <h1 class="ptk-cardIdeaTitle">{{ projectIdea.title|striptags|length > 40 ? projectIdea.title|striptags|slice(0, 40) ~ '...' : projectIdea.title|striptags }}</h1>
-                                </div>
-                                </a>
-                                <div class="ptk-cardIdeaStatsContainer">
-                                    <div class="ptk-cardStatsContainer">
-                                        <div class="ptk-cardIconStats">
-                                            {% if projectIdea.liked == 1 %}
-                                                <a href="{{ path('app_idea_dislike', {'id': projectIdea.id}) }}" class="ptk-cardsLink">
-                                                    <img src="{{ asset('build/images/blackheart.png') }}" class="ptk-ideaInfoIcons" alt="Dislike">
-                                                </a>
-                                            {% else %}
-                                                <a href="{{ path('app_idea_like', {'id': projectIdea.id}) }}" class="ptk-cardsLink">
-                                                    <img src="{{ asset('build/images/like.png') }}" class="ptk-ideaInfoIcons" alt="Like">
-                                                </a>
-                                            {% endif %}
-                                            <p class="ptk-cardStatsNo">{{ projectIdea.likes }}</p>
-                                        </div>
-                                        <div class="ptk-cardIconStats">
-                                            <img src="{{ asset('build/images/comment.png') }}" class="ptk-ideaInfoIcons" alt="Comments">
-                                            <p class="ptk-cardStatsNo">{{ projectIdea.counts }}</p>
-                                        </div>
-                                        <div class="ptk-cardIconStats">
-                                            <img src="{{ asset('build/images/view.png') }}" class="ptk-ideaInfoIcons" alt="Views">
-                                            <p class="ptk-cardStatsNo">{{ projectIdea.views }}</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                    </div>
-                    {% endif %}
-                    {% if projectIdea.dataType == 'project' %}
-                        {# ------------ Project cards --------------------------------------------------------------- #}
+            {% if projectsIdeas|length > 0 %}
+                {% for projectIdea in projectsIdeas %}
+                    {% if projectIdea.dataType == 'idea' %}
+                        {# ------------ Idea cards --------------------------------------------------------------- #}
                         <div class="ptk-profileCardContainer">
-                            <p class="ptk-profileCardTypeLabel">{{projectIdea.dataType}}</p>
-                            <a href="{{ path('app_project_show', {'id': projectIdea.id, 'orderBy': 'show'}) }}" class="ptk-cardsLink">
-                                <div class="ptk-cards">
-                                    <div class="ptk-cardTitleContainer">
-                                        <h1 class="ptk-cardTitle">{{ projectIdea.title|striptags|length > 40 ? projectIdea.title|striptags|slice(0, 40) ~ '...' : projectIdea.title|striptags }}</h1>
+                            <p class="ptk-profileCardTypeLabel">Idea</p>
+                                <div class="ptk-ideaCards" style="border: 2.5px solid {{projectIdea.color}}">
+                                    <a href="{{ path('app_idea_show', {'id': projectIdea.id}) }}" class="ptk-cardsLink">
+                                    <div class="ptk-cardIdeaTitleContainer">
+                                        <h1 class="ptk-cardIdeaTitle">{{ projectIdea.title|striptags|length > 40 ? projectIdea.title|striptags|slice(0, 40) ~ '...' : projectIdea.title|striptags }}</h1>
                                     </div>
-                                    <div class="ptk-cardStatsContainer" style="background-color: {{ projectIdea.color }}">
-                                        <div class="ptk-cardIconStats">
-                                            <img src="{{ asset('build/images/idea.png') }}" alt="idea">
-                                            {% if projectIdea.counts is null %}
-                                                    <p class="ptk-cardStatsNo">0</p>
+                                    </a>
+                                    <div class="ptk-cardIdeaStatsContainer">
+                                        <div class="ptk-cardStatsContainer">
+                                            <div class="ptk-cardIconStats">
+                                                {% if projectIdea.liked == 1 %}
+                                                    <a href="{{ path('app_idea_dislike', {'id': projectIdea.id, 'orderBy': app.request.get('orderBy'), 'dataType': app.request.get('dataType')}) }}" class="ptk-cardsLink">
+                                                        <img src="{{ asset('build/images/blackheart.png') }}" class="ptk-ideaInfoIcons" alt="Dislike">
+                                                    </a>
                                                 {% else %}
-                                                    <p class="ptk-cardStatsNo">{{ projectIdea.counts }}</p>
-                                            {% endif %}
-                                        </div>
-                                        <div class="ptk-cardIconStats">
-                                            <img src="{{ asset('build/images/view.png') }}" class="ptk-ideaInfoIcons"
-                                                 alt="Views">
-                                            <p class="ptk-cardStatsNo">{{ projectIdea.views }}</p>
+                                                    <a href="{{ path('app_idea_like', {'id': projectIdea.id, 'orderBy': app.request.get('orderBy'), 'dataType': app.request.get('dataType')}) }}" class="ptk-cardsLink">
+                                                        <img src="{{ asset('build/images/like.png') }}" class="ptk-ideaInfoIcons" alt="Like">
+                                                    </a>
+                                                {% endif %}
+                                                <p class="ptk-cardStatsNo">{{ projectIdea.likes }}</p>
+                                            </div>
+                                            <div class="ptk-cardIconStats">
+                                                <img src="{{ asset('build/images/comment.png') }}" class="ptk-ideaInfoIcons" alt="Comments">
+                                                <p class="ptk-cardStatsNo">{{ projectIdea.counts }}</p>
+                                            </div>
+                                            <div class="ptk-cardIconStats">
+                                                <img src="{{ asset('build/images/view.png') }}" class="ptk-ideaInfoIcons" alt="Views">
+                                                <p class="ptk-cardStatsNo">{{ projectIdea.views }}</p>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </a>
                         </div>
-                {% endif %}
-            {% endfor %}
+                        {% endif %}
+                        {% if projectIdea.dataType == 'project' %}
+                            {# ------------ Project cards --------------------------------------------------------------- #}
+                            <div class="ptk-profileCardContainer">
+                                <p class="ptk-profileCardTypeLabel">Project</p>
+                                <a href="{{ path('app_project_show', {'id': projectIdea.id, 'orderBy': 'show'}) }}" class="ptk-cardsLink">
+                                    <div class="ptk-cards">
+                                        <div class="ptk-cardTitleContainer">
+                                            <h1 class="ptk-cardTitle">{{ projectIdea.title|striptags|length > 40 ? projectIdea.title|striptags|slice(0, 40) ~ '...' : projectIdea.title|striptags }}</h1>
+                                        </div>
+                                        <div class="ptk-cardStatsContainer" style="background-color: {{ projectIdea.color }}">
+                                            <div class="ptk-cardIconStats">
+                                                <img src="{{ asset('build/images/idea.png') }}" alt="idea">
+                                                <p class="ptk-cardStatsNo">{{ projectIdea.counts is null ? 0 : projectIdea.counts }}</p>
+                                            </div>
+                                            <div class="ptk-cardIconStats">
+                                                <img src="{{ asset('build/images/view.png') }}" class="ptk-ideaInfoIcons"
+                                                     alt="Views">
+                                                <p class="ptk-cardStatsNo">{{ projectIdea.views is null ? 0 : projectIdea.views }}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                    {% endif %}
+                {% endfor %}
+            {% else %}
+{#             ----------- if there are no Ideas or projects --- -------#}
+                <div class="ptk-ideaNoDataContainer">
+                    <h1 class="ptk-noDataTitle">No projects or ideas yet</h1>
+                </div>
+            {% endif %}
         </div>
 
     </div>

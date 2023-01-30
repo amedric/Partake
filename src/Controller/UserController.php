@@ -33,33 +33,35 @@ class UserController extends AbstractController
     {
         $form = $this->createForm(SearchContentType::class);
         $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-            $search = $form->getData()['search'];
-            $projectsIdeas = $userRepository->findProjectsIdeasForUser($user->getId(), 'createdAt', 'ASC');
-        } else {
 
-            switch ($dataType) {
-                case 'all':
-                    $wherePara = "allData.dataType";
-                    break;
-                case 'project':
-                    $wherePara = "'project'";
-                    break;
-                case 'idea':
-                    $wherePara = "'idea'";
-                    break;
-            }
-
-            switch ($orderBy) {
-                case 'newest':
-                    $projectsIdeas = $userRepository->findProjectsIdeasForUser($user->getId(), 'createdAt', 'DESC', $wherePara);
-                    break;
-                case 'oldest':
-                    $projectsIdeas = $userRepository->findProjectsIdeasForUser($user->getId(), 'createdAt', 'ASC', $wherePara);
-                    break;
-                case 'views':
-                    $projectsIdeas = $userRepository->findProjectsIdeasForUser($user->getId(), 'views', 'DESC', $wherePara);
-                    break;
+        // -------------------- set where clause parameters --------------------
+        switch ($dataType) {
+            case 'Projects and Ideas':
+                $wherePara = "allData.dataType";
+                break;
+            case 'Projects':
+                $wherePara = "'project'";
+                break;
+            case 'Ideas':
+                $wherePara = "'idea'";
+                break;
+        }
+            if ($form->isSubmitted() && $form->isValid()) {
+                $search = $form->getData()['search'];
+                $projectsIdeas = $userRepository->findProjectsIdeasForUser($user->getId(), 'createdAt', 'ASC', $wherePara);
+            } else {
+                // -------------------- set order by parameters --------------------
+                switch ($orderBy) {
+                    case 'newest':
+                        $projectsIdeas = $userRepository->findProjectsIdeasForUser($user->getId(), 'createdAt', 'DESC', $wherePara);
+                        break;
+                    case 'oldest':
+                        $projectsIdeas = $userRepository->findProjectsIdeasForUser($user->getId(), 'createdAt', 'ASC', $wherePara);
+                        break;
+                    case 'views':
+                        $projectsIdeas = $userRepository->findProjectsIdeasForUser($user->getId(), 'views', 'DESC', $wherePara);
+                        break;
+                }
             }
         }
 
