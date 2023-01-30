@@ -21,13 +21,21 @@
 {% block filters %}
     <div class="ptk-filterContainer">
         <p class="ptk-filterSeparators ptk-filtersWhite"> Order by: </p>
-        <a href="{{ path('app_home_orderBy', {'orderBy': 'views'}) }}" class="ptk-filterLinks">most viewed</a>
+        <a href="{{ path('app_home_orderBy', {'orderBy': 'views'}) }}" class="ptk-filterLinks">
+            <span class="ptk-linksHover">most viewed</span>
+        </a>
         <p class="ptk-filterSeparators"> / </p>
-        <a href="{{ path('app_home_orderBy', {'orderBy': 'ideas'}) }}" class="ptk-filterLinks">ideas</a>
+        <a href="{{ path('app_home_orderBy', {'orderBy': 'ideas'}) }}" class="ptk-filterLinks">
+            <span class="ptk-linksHover">ideas</span>
+        </a>
         <p class="ptk-filterSeparators"> / </p>
-        <a href="{{ path('app_home_orderBy', {'orderBy': 'newest'}) }}" class="ptk-filterLinks">newest</a>
+        <a href="{{ path('app_home_orderBy', {'orderBy': 'newest'}) }}" class="ptk-filterLinks">
+            <span class="ptk-linksHover">newest</span>
+        </a>
         <p class="ptk-filterSeparators"> / </p>
-        <a href="{{ path('app_home_orderBy', {'orderBy': 'oldest'}) }}" class="ptk-filterLinks">oldest</a>
+        <a href="{{ path('app_home_orderBy', {'orderBy': 'oldest'}) }}" class="ptk-filterLinks">
+            <span class="ptk-linksHover">oldest</span>
+        </a>
     </div>
 {% endblock %}
 
@@ -54,7 +62,7 @@
                     </div>
                     <div class="ptk-homeCategoryBttns">
                         <button class="ptk-leftRightBttn" id="ptk-leftBttnId" type="button">
-                            <img class="ptk-arrowBttn" src="{{ asset('build/images/arrow.png') }}" alt="left">
+                            <img class="ptk-arrowBttn leftBttn" src="{{ asset('build/images/arrow.png') }}" alt="left">
                         </button>
                     </div>
                     <div class="ptk-cardsContainer" id="ptk-cardsContainerId">

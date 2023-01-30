@@ -1,6 +1,9 @@
 //------------------- Base Template -------------------------------------------------------
 .ptk-stickyContainer{
-    background-color: $primaryBlue;
+    background: #0042BF;
+    background: -webkit-linear-gradient(bottom, #0042BF, #013DB1);
+    background: -moz-linear-gradient(bottom, #0042BF, #013DB1);
+    background: linear-gradient(to top, #0042BF, #013DB1);
     position: sticky;
     top: 0;
     z-index: 2;
@@ -11,10 +14,11 @@
     justify-content: space-between;
     align-items: center;
     height: 65px;
-    background-color: $primaryBlue;
     font-size: 20px;
     width: 100vw;
     border-bottom: 2px solid #003ea8;
+    border-radius: 15px 15px 0 0;
+    box-shadow: rgba(0, 0, 0, 0.35) 0 1px 10px;
 }
 
 .ptk-headerContainer{
@@ -22,7 +26,6 @@
     justify-content: center;
     align-items: center;
     height: 220px;
-    background-color: $primaryBlue;
     width: 100vw;
 }
 
@@ -31,10 +34,11 @@
     justify-content: flex-end;
     align-items: center;
     height: 50px;
-    background-color: $primaryBlue;
     width: 100vw;
     margin: auto;
     border-top: 2px solid #003ea8;
+    border-radius: 15px 15px 0 0;
+    box-shadow: rgba(0, 0, 0, 0.35) 0 5px 15px;
 }
 
 .ptk-containerSpaceBetween{
@@ -47,6 +51,7 @@
     justify-content: space-between;
     height: 50px;
     background-color: $primaryGrey;
+
 }
 
 .ptk-bodyContainer{
@@ -78,8 +83,9 @@
     color: $primaryWhite;
     padding: 0 5px 0 5px;
     background: linear-gradient(180deg, $primaryBlue 55%, $primaryGreen 45%);
-    text-shadow: 2px 0 $primaryBlue, -2px 0 $primaryBlue, 0 2px $primaryBlue, 0 -2px $primaryBlue,
-    1px 1px $primaryBlue, -1px -1px $primaryBlue, 1px -1px $primaryBlue, -1px 1px $primaryBlue;
+    text-shadow: 0px 4px 3px rgba(0,0,0,0.3),
+    0px 8px 13px rgba(0,0,0,0.1),
+    0px 18px 23px rgba(0,0,0,0.1);
 }
 
 .ptk-adminSideMenuContainer{

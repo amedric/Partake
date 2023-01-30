@@ -29,12 +29,15 @@
     color: white;
     display: block;
     padding: 0 10px 0 10px;
+    text-shadow: 0px 4px 3px rgba(0,0,0,0.3),
+    0px 8px 13px rgba(0,0,0,0.1),
+    0px 18px 23px rgba(0,0,0,0.1);
 }
 
 .ptk-titleHeader:nth-child(2) {
     position: absolute;
-    background-color: $primaryBlue;
-    color: $secondaryPurple;
+    background-color: #013DB1;
+    color: white;
     clip-path: inset(-1% -1% 50% -1%); // Added the negative values to prevent "bleed" in Chrome
 }
 
@@ -81,6 +84,9 @@
     text-align: center;
     letter-spacing: 0.15em;
     color: $primaryGrey;
+    text-shadow: 0px 4px 3px rgba(0,0,0,0.3),
+    0px 8px 13px rgba(0,0,0,0.1),
+    0px 18px 23px rgba(0,0,0,0.1);
     text-decoration: none;
 }
 
@@ -154,7 +160,12 @@
     color: $secondaryGrey;
 }
 
+.ptk-homeCategoryBttns{
+    width: 30px;
+}
+
 .ptk-leftRightBttn{
+    display: none;
     background-color: transparent;
     box-shadow: none;
     border: 0;
@@ -168,6 +179,10 @@
 
 .rightBttn{
     transform: rotate(180deg);
+}
+
+.showButtons{
+    display: unset;
 }
 
 .ptk-cardsContainer {
@@ -257,15 +272,16 @@
     font-weight: 700;
     background-color: $primaryYellow;
     color: white;
-    text-shadow: 2px 0 $primaryBlue, -2px 0 $primaryBlue, 0 2px $primaryBlue, 0 -2px $primaryBlue,
-                    1px 1px $primaryBlue, -1px -1px $primaryBlue, 1px -1px $primaryBlue, -1px 1px $primaryBlue;
+    text-shadow: 0px 4px 3px rgba(0,0,0,0.5),
+    0px 8px 13px rgba(0,0,0,0.1),
+    0px 18px 23px rgba(0,0,0,0.1);
     display: block;
     padding: 0 5px 0 10px;
 }
 
 .ptk-ideaTitleHeader:nth-child(2) {
     position: absolute;
-    background-color: $primaryBlue;
+    background-color: #013DB1;
     color: white;
     clip-path: inset(-1% -1% 50% -1%); // Added the negative values to prevent "bleed" in Chrome
 }
@@ -283,6 +299,9 @@
     margin: 0;
     color: white;
     font-size: 1.5rem;
+    text-shadow: 0px 4px 3px rgba(0,0,0,0.6),
+    0px 8px 13px rgba(0,0,0,0.2),
+    0px 18px 23px rgba(0,0,0,0.2);
 }
 
 .ptk-createdAtContainer{
@@ -381,10 +400,13 @@
 .ptk-ideaCardsContainer{
     display: flex;
     flex-direction: row;
+    justify-content: flex-start;
     flex-wrap: wrap;
     padding: 25px 25px 25px 25px;
     height: 100%;
     width: 100%;
+    gap: 40px;
+
 }
 
 .ptk-ideaCards {
@@ -402,8 +424,8 @@
     transform: scale(1.05);
 }
 
-.ptk-ideaCards:hover .ptk-profileCardTypeLabel{
-    color: #b7b7b7;
+.ptk-profileCardContainer:hover .ptk-profileCardTypeLabel{
+    color: #a1a1a1;
 }
 
 .ptk-cardIdeaStatsContainer{
@@ -434,9 +456,9 @@
     position: relative;
     height:200px;
     width: 700px;
-    background-color: $primaryBlue;
-    box-shadow: rgba(0, 0, 0, 0.35) 0 5px 15px;
-    border-radius: 10px;
+    //background-color: #004cdb;
+    background-color: $primaryGrey;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;    border-radius: 15px;
 }
 
 .ptk-profileTitleContainer {
@@ -451,15 +473,18 @@
     font-size: 2.9rem;
     font-weight: 700;
     background-color: $primaryPurple;
-    color: white;
+    color: $secondaryBlue;
     display: block;
     padding: 0 10px 0 10px;
+    text-shadow: 0px 4px 3px rgba(0,0,0,0.5),
+    0 8px 13px rgba(0,0,0,0.2),
+    0 18px 23px rgba(0,0,0,0.2);
 }
 
 .ptk-profileHeader:nth-child(2) {
     position: absolute;
-    background-color: $primaryBlue;
-    color: $secondaryPurple;
+    background-color: $primaryGrey;
+    color: $secondaryBlue;
     clip-path: inset(-1% -1% 50% -1%); // Added the negative values to prevent "bleed" in Chrome
 }
 
@@ -488,7 +513,7 @@
     font-style: normal;
     font-weight: 550;
     font-size: 1.5rem;
-    color: #d0d0d0;
+    color: darken($primaryBlue, 15);
     width: 125px;
 }
 
@@ -497,7 +522,7 @@
     font-style: normal;
     font-weight: 550;
     font-size: 1.5rem;
-    color: $primaryGrey;
+    color: darken($primaryBlue, 15);
     width: 60px;
 }
 
@@ -505,7 +530,7 @@
     margin: 0 0 5px 10px;
     font-style: normal;
     font-size: 1.5rem;
-    color: white;
+    color: black;
 }
 
 .ptk-editProfileIcon{
@@ -520,19 +545,18 @@
 .ptk-profileCardContainer{
     display: flex;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
-    padding: 10px;
-    width: 300px;
-    height: 200px;
+    padding: 0 10px 0 10px;
 }
 
 .ptk-profileCardTypeLabel{
-    margin: 0;
+    margin: 0 0 5px 0;
     font-style: normal;
     font-weight: 550;
     font-size: 1.3rem;
-    color: #c5c5c5;
-    transition: 0.2s ease;
+    color: $primaryGrey;
+    transition: 0.5s ease-out;
 }
 
 .ptk-userFilterContainer{
@@ -563,37 +587,44 @@
 .ptk-ptk-dropDownbtnContainer{
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: flex-start;
     height: 65%;
 }
 
 .ptk-dropDownbtn {
-    margin: 10px 0 10px 0;
+    display: flex;
+    justify-content: flex-start;
+    margin: 10px 0 10px 5px;
+    gap: 10px;
     background-color: $primaryBlue;
     color: $secondaryPurple;
     font-size: 1.3rem;
     font-family: Rajdhani;
     font-weight: 550;
     height: 100%;
-    width: 100px;
+    width: 255px;
     cursor: pointer;
     border: none;
-    border-right: 2px solid white ;
-    border-left: 2px solid white ;
 }
+
+.ptk-dropDownLabel{
+    color: white;
+}
+
 .ptk-dropdownDatatype {
     margin-left: 15px;
     position: relative;
     display: inline-block;
     height: 100%;
 }
+
 .ptk-dropdownContent {
-    margin-top: 12px;
+    margin-top: 15px;
     display: none;
     position: absolute;
     background-color: #f1f1f1;
-    min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    min-width: 255px;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
     z-index: 1;
 }
 .ptk-dropdownContent a {
@@ -603,14 +634,18 @@
     text-decoration: none;
     display: block;
 }
-.dropdown-content a:hover {
-    background-color: #969696;
+.ptk-dropdownDatatype a:hover {
+    background-color: #d2d2d2;
 }
 
 .ptk-dropDownbtn:hover {
     color: $secondaryYellow;
 }
 
-.ptk-dropdownDatatype:hover .ptk-dropdownContent {display: block;}
+.ptk-dropdownDatatype:hover .ptk-dropdownContent {
+    display: block;
+}
 
-.ptk-dropdownDatatype:hover .ptk-dropDownbtn {background-color: $primaryBlue;}
+.ptk-dropdownDatatype:hover .ptk-dropDownbtn {
+    background-color: $primaryBlue;
+}
