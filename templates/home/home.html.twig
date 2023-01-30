@@ -74,12 +74,15 @@
                                         <a href="{{ path('app_project_show', {'id': project.id,'orderBy': 'show'}) }}"
                                            class="ptk-cardsLink">
                                             {% set unauthorizedColor = 'grey' %}
+                                            {% set lockIcon = 'block' %}
                                             {% if (app.user.id == project.user) %}
                                                 {% set unauthorizedColor = category.categoryColor %}
+                                                {% set lockIcon = 'none' %}
                                             {% else %}
                                                 {% for authorizedProject in authorizedProjects %}
                                                     {% if (project.id in authorizedProject) %}
                                                         {% set unauthorizedColor = category.categoryColor %}
+                                                        {% set lockIcon = 'none' %}
                                                     {% endif %}
                                                 {% endfor %}
                                             {% endif %}
@@ -92,6 +95,9 @@
                                                     <div class="ptk-cardIconStats">
                                                         <img src="{{ asset('build/images/idea.png') }}" alt="idea">
                                                         <p class="ptk-cardStatsNo">{{ project.ideaCount is null ? 0 : project.ideaCount }}</p>
+                                                    </div>
+                                                    <div class="ptk-cardIconStats" style="display: {{ lockIcon }}">
+                                                        <img src="{{ asset('build/images/lockBlack24.png') }}" alt="idea">
                                                     </div>
                                                     <div class="ptk-cardIconStats">
                                                         <img src="{{ asset('build/images/view.png') }}" alt="Views">
