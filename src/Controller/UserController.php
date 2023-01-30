@@ -30,8 +30,12 @@ class UserController extends AbstractController
         string $orderBy,
         string $dataType
     ): Response {
+
         $form = $this->createForm(SearchContentType::class);
         $form->handleRequest($request);
+
+        $formEdit = $this->createForm(UserType::class, $user);
+        $formEdit->handleRequest($request);
         // -------------------- set where clause parameters --------------------
         switch ($dataType) {
             case 'Projects and Ideas':
@@ -60,12 +64,26 @@ class UserController extends AbstractController
                         $projectsIdeas = $userRepository->findProjectsIdeasForUser($user->getId(), 'views', 'DESC', $wherePara);
                         break;
                 }
+                if ($formEdit->isSubmitted() && $formEdit->isValid()) {
+                    $passwordUser = $user->getPassword();
+                    $user->setEmail($user->getEmail());
+                    $user->setPassword(password_hash($passwordUser, PASSWORD_DEFAULT));
+                    $userRepository->save($user, true);
+
+                    return $this->redirectToRoute('app_user_index', [
+                        'user' => $user,
+                        'projectsIdeas' => $projectsIdeas,
+                        'form' => $form->createView(),
+                        'formEdit' => $formEdit->createView()
+                    ], Response::HTTP_SEE_OTHER);
+                }
             }
 
         return $this->render('user/show.html.twig', [
             'user' => $user,
             'projectsIdeas' => $projectsIdeas,
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'formEdit' => $formEdit->createView()
         ]);
     }
 

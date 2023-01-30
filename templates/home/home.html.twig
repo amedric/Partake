@@ -21,19 +21,19 @@
 {% block filters %}
     <div class="ptk-filterContainer">
         <p class="ptk-filterSeparators ptk-filtersWhite"> Order by: </p>
-        <a href="{{ path('app_home_orderBy', {'orderBy': 'views'}) }}" class="ptk-filterLinks">
+        <a href="{{ path('app_home', {'orderBy': 'views'}) }}" class="ptk-filterLinks">
             <span class="ptk-linksHover">most viewed</span>
         </a>
         <p class="ptk-filterSeparators"> / </p>
-        <a href="{{ path('app_home_orderBy', {'orderBy': 'ideas'}) }}" class="ptk-filterLinks">
+        <a href="{{ path('app_home', {'orderBy': 'ideas'}) }}" class="ptk-filterLinks">
             <span class="ptk-linksHover">ideas</span>
         </a>
         <p class="ptk-filterSeparators"> / </p>
-        <a href="{{ path('app_home_orderBy', {'orderBy': 'newest'}) }}" class="ptk-filterLinks">
+        <a href="{{ path('app_home', {'orderBy': 'newest'}) }}" class="ptk-filterLinks">
             <span class="ptk-linksHover">newest</span>
         </a>
         <p class="ptk-filterSeparators"> / </p>
-        <a href="{{ path('app_home_orderBy', {'orderBy': 'oldest'}) }}" class="ptk-filterLinks">
+        <a href="{{ path('app_home', {'orderBy': 'oldest'}) }}" class="ptk-filterLinks">
             <span class="ptk-linksHover">oldest</span>
         </a>
     </div>
@@ -41,6 +41,10 @@
 
 {% block underFilters %}
     <p class="ptk-blockDescription">Projects by department</p>
+{% endblock %}
+
+{% block modal %}
+    {% include '/project/new.html.twig' %}
 {% endblock %}
 
 {% block body %}

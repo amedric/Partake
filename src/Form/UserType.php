@@ -31,7 +31,7 @@ class UserType extends AbstractType
                 'widget' => 'choice',
                 'years' => range(date('Y'), date('Y') - 100),
                 'months' => range(date('m'), 12),
-                'days' => range(date('d'), 31),
+                'days' => range(1, 31)
             ));
         ;
     }

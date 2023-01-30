@@ -17,9 +17,54 @@
     width: 600px;
     padding: 15px 25px 25px 25px;
     background-color: $primaryGrey;
-    border: 3px solid $secondaryGrey;
+    border: 3px solid #d0d0d0;
     border-radius: 10px;
-    box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+    box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
+    opacity: 0;
+    transition: ease-in 0.2s;
+}
+
+.ptk-formContainerShow {
+    opacity: 1;
+}
+
+.ptk-newProjectFormContainer{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    height: 650px;
+    width: 900px;
+    padding: 15px 25px 25px 25px;
+    background-color: $primaryGrey;
+    border: 3px solid #d0d0d0;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
+    transition: ease-in 0.2s;
+}
+
+.ptk-newProjectFormSection{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.ptk-newProjectForm{
+    height: 100%;
+    width: 45%;
+}
+
+.ptk-profileFormContainer{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    height: 650px;
+    width: 500px;
+    padding: 15px 25px 25px 25px;
+    background-color: $primaryGrey;
+    border: 3px solid #d0d0d0;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
     opacity: 0;
     transition: ease-in 0.2s;
 }
@@ -90,6 +135,31 @@
     resize: none;
 }
 
+.ptk-formUserInput{
+    display: flex;
+    flex-wrap: wrap !important;
+    word-break: break-word !important;
+    border: 1.5px solid $secondaryGrey;
+    border-radius: 5px;
+    height: 380px;
+    font-family: Rajdhani;
+    font-size: 20px;
+    overflow-y: auto;
+    resize: none;
+}
+
+.ptk-formBirthdayInput{
+    display: flex;
+    flex-wrap: wrap !important;
+    word-break: break-word !important;
+    border-radius: 5px;
+    height: 30px;
+    font-family: Rajdhani;
+    font-size: 20px;
+    overflow-y: auto;
+    resize: none;
+}
+
 .ptk-formHiddenRows{
     display: none;
 }
@@ -123,7 +193,7 @@
 }
 
 .ptk-formContainerMargins{
-    margin-bottom: 30px;
+    margin-bottom: 20px;
 }
 
 .ptk-formIdeaColours{
