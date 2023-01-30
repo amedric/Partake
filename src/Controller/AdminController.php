@@ -18,7 +18,10 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
+use Symfony\Component\Mime\Email;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Mailer\MailerInterface;
 
 #[Route('/Admin')]
 class AdminController extends AbstractController
@@ -239,9 +242,10 @@ class AdminController extends AbstractController
      * @param UserRepository $userRepository
      * @return Response
      * adds new user
+     * @throws TransportExceptionInterface
      */
     #[Route('/new_user', name: 'app_admin_user_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, UserRepository $userRepository): Response
+    public function new(Request $request, UserRepository $userRepository, MailerInterface $mailer): Response
     {
         if ($this->isGranted('ROLE_ADMIN')) {
             $user = new User();
@@ -251,6 +255,15 @@ class AdminController extends AbstractController
                 $passwordUser = '1234';
                 $user->setPassword(password_hash($passwordUser, PASSWORD_DEFAULT));
                 $userRepository->save($user, true);
+                //Email
+                $email = (new Email())
+                    ->from('partake@partake.com')
+                    ->to($user->getEmail())
+                    ->subject('You have been invited to join Partake !')
+                    ->text('Hello ' . $user->getFullName() .
+                        ' ! You have been invited to join Partake.
+                        Please change your password (1234) !');
+                $mailer->send($email);
                 $this->addFlash('success', 'Success: User added - email sent');
                 return $this->redirectToRoute('app_admin_user_list', [], Response::HTTP_SEE_OTHER);
             }
