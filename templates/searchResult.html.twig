@@ -16,15 +16,15 @@
 
     <p>Users :</p>
     <ul>{% for user in users %}
-            <li><a href="{{ path('app_user_show', {'id': user.id}) }}">{{ user.lastname }}</li>
+            <li> <a href="{{ path('app_user_show', {id: user.id, 'orderBy':'oldest','dataType': 'Projects and Ideas'}) }}"> {{ user.lastname }} </a></li>
         {% endfor %}</ul>
     <p>Projects :</p>
     <ul>{% for project in projects %}
-         <li><a href="{{ path('app_project_show', {'id': project.id,'orderBy':'show'}) }}">{{ project.title }}</li>
+         <li> <a href="{{ path('app_project_show', {id: project.id, 'orderBy':'show'}) }}">{{ project.title }}</a> </li>
         {% endfor %}</ul>
     <p>Ideas :</p>
     <ul>{% for idea in ideas %}
-            <li><a href="{{ path('app_idea_show', {'id': idea.id}) }}">{{ idea.title }}</li>
+            <li><a href="{{ path('app_idea_show',{'id': idea.id}) }}">{{ idea.title }}</a></li>
         {% endfor %}</ul>
 
 {% endblock %}
