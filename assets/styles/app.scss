@@ -15,18 +15,19 @@ $secondaryBlue: rgb(83, 141, 255);
 $secondaryPurple: rgb(251, 71, 255);
 $secondaryOrange: rgb(255, 146, 46);
 $secondaryRed: rgb(255, 46, 46);
-$secondaryGrey: rgb(82, 82, 82);
+$secondaryGrey: rgb(100, 100, 100);
 
 * {
     box-sizing: border-box;
 }
 
 *::-webkit-scrollbar {
-    width: 12px;
+    width: 10px;
 }
 
 body {
     display: grid;
+    position: relative;
     margin: 0;
     padding: 0;
     font-family: Rajdhani;
@@ -43,16 +44,34 @@ a {
 .ptk-bttns {
     display: flex;
     justify-content: center;
-    padding: 10px 25px;
-    border-radius: 5px;
-    border-color: $primaryBlue;
-    background-color: $primaryBlue;
+    align-items: center;
+    outline: none;
+    border-width: 0px;
+    border-radius: 3px;
+    box-sizing: border-box;
+    font-weight: 500;
+    max-width: 100%;
+    text-align: center;
+    text-decoration: none;
+    transition: background 0.1s ease-out 0s,
+    box-shadow 0.15s cubic-bezier(0.47, 0.03, 0.49, 1.38) 0s;
+    background: rgb(0, 82, 204);
     cursor: pointer;
-    font-family: Rajdhani;
-    font-weight: 600;
+    height: 32px;
+    line-height: 32px;
+    padding: 0px 12px;
+    vertical-align: middle;
+    width: auto;
     font-size: 15px;
-    color: $primaryWhite;
+    color: rgb(255, 255, 255);
 }
+ptk-bttns:hover {
+    background: rgb(27, 118, 255);
+    text-decoration: inherit;
+    transition-duration: 0s, 0.15s;
+    color: rgb(255, 255, 255);
+}
+
 
 .ptk-smlBttns {
     padding: 5px 5px;
@@ -61,11 +80,6 @@ a {
 
 .ptk-logo{
     color: $primaryWhite;
-}
-
-.ptk-logo a, a:hover, a:visited, a:active {
-    color: inherit;
-    text-decoration: none;
 }
 
 // Login position

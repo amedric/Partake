@@ -84,12 +84,12 @@ class ProjectController extends AbstractController
                     $ideas = $ideaRepository->findAllIdeasByProjectId($project->getId(), 'ideaViews', 'DESC');
                     break;
             }
-
             return $this->render('project/show.html.twig', [
                 'project' => $project,
                 'ideas' => $ideas,
             ]);
         } else {
+            $this->addFlash('notice', 'You do not have permission to access this project, please contact your administrator');
             return $this->redirectToRoute('app_home');
         }
     }
