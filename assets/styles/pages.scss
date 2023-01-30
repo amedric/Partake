@@ -196,6 +196,7 @@
     height: 200px;
     padding: 0 15px 0 15px;
     cursor: grab;
+    transition: 0.5s ease-in-out;
 }
 
 .ptk-cardsLink{
@@ -410,7 +411,7 @@
     height: 100%;
     width: 100%;
     gap: 40px;
-
+    transition: 0.3s ease-in-out;
 }
 
 .ptk-ideaCards {

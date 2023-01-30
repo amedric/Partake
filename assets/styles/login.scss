@@ -1,26 +1,58 @@
 .formLogin {
-    z-index: 10;
-    position: fixed;
-    left: 40%;
-    top: 40%;
-    width: 400px;
-    height: 350px;
-    margin: 20px;
-    border: solid $primaryBlue 2px;
+    position: relative;
+    width: 450px;
+    height: 400px;
+    background-color: $primaryGrey;
+    border: solid $secondaryGrey 2px;
     border-radius: 10px;
-    box-shadow: 2px 5px 5px grey;
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+    padding: 15px;
     font-size: 20px;
+    opacity: 0;
+    z-index: -1;
+}
+
+.formLoginShow {
+    opacity: 1;
+    z-index: 5;
+}
+
+.formCloseContainer{
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+}
+
+.formCloseLink{
+    cursor: pointer;
 }
 
 .formLoginTitle {
+    position: relative;
     display: flex;
+    align-items: flex-start;
     justify-content: center;
+    border-radius: 10px;
 }
 
 .formLoginTitle h1 {
-    background-color: $primaryBlue;
-    height: 20px;
-    padding: 0 5px 20px 5px;
+    margin: 0;
+    font-size: 2.5rem;
+    font-weight: 700;
+    background-color: $primaryPurple;
+    color: black;
+    display: block;
+    padding: 0 10px 0 10px;
+    text-shadow: 0px 4px 3px rgba(0,0,0,0.3),
+    0px 8px 13px rgba(0,0,0,0.1),
+    0px 18px 23px rgba(0,0,0,0.1);
+}
+
+.formLoginTitle h1:nth-child(2) {
+    position: absolute;
+    background-color: $primaryGrey;
+    color: black;
+    clip-path: inset(-1% -1% 50% -1%); // Added the negative values to prevent "bleed" in Chrome
 }
 
 .formLoginBody form div {

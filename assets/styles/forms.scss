@@ -10,13 +10,14 @@
 }
 
 .ptk-formContainer {
+    position: relative;
     display: flex;
     flex-direction: column;
-    height: 80vh;
-    width: 50vw;
-    padding: 15px 50px 50px 50px;
-    background-color: $primaryWhite;
-    border: 3px solid $primaryYellow;
+    height: 660px;
+    width: 600px;
+    padding: 15px 25px 25px 25px;
+    background-color: $primaryGrey;
+    border: 3px solid $secondaryGrey;
     border-radius: 10px;
     box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
     opacity: 0;
@@ -54,7 +55,7 @@
     font-size: 40px;
     font-weight: 550;
     width: 10ch;
-    background: linear-gradient(180deg, $primaryWhite 55%, $primaryYellow 45%);
+    background: linear-gradient(180deg, $primaryGrey 55%, $primaryYellow 45%);
 }
 
 .ptk-formRow {
@@ -82,7 +83,7 @@
     word-break: break-word !important;
     border: 1.5px solid $secondaryGrey;
     border-radius: 5px;
-    height: 150px;
+    height: 200px;
     font-family: Rajdhani;
     font-size: 20px;
     overflow-y: auto;

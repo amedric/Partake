@@ -11,27 +11,50 @@
     {% block stylesheets %}
         {{ encore_entry_link_tags('app') }}
     {% endblock %}
-
-    {% block javascripts %}
-        {{ encore_entry_script_tags('app') }}
-    {% endblock %}
 </head>
-<body>
+<body style="position: relative">
 <div class="ptk-landingContainer">
     <div class="ptk-landingButton">
         <button type="button">
-            <a href="{{ path('app_login') }}">LOGIN</a>
+            <a class="ptk-loginModalShow">LOGIN</a>
         </button>
     </div>
-    <div class="ptk-landingFooter">
-        <ul>
-            {# TODO: put link to go on view #}
-            <li><a href="#">About</a></li>
-            <li><a href="#">FAQ</a></li>
-            <li><a href="#">Contact</a></li>
-            <li><a href="#">Policies</a></li>
-        </ul>
+    <div class="ptk-loginModalContainer">
+        {% include '/login/index.html.twig' %}
     </div>
+{#    <div class="ptk-landingFooter">#}
+{#        <ul>#}
+{#            <li><a href="#">About</a></li>#}
+{#            <li><a href="#">FAQ</a></li>#}
+{#            <li><a href="#">Contact</a></li>#}
+{#            <li><a href="#">Policies</a></li>#}
+{#        </ul>#}
+{#    </div>#}
+    {% block javascripts %}
+        <script>
+            let modals = document.querySelectorAll(".ptk-loginModalContainer");
+            let showModalsLink = document.querySelectorAll(".ptk-loginModalShow");
+            let hideModalsLink = document.querySelectorAll(".formCloseLink");
+            let formLoad = document.querySelectorAll(".formLogin");
+            // let formClose = document.querySelectorAll(".ptk-formBttns");
+
+            hideModalsLink.forEach((hlink, index) => {
+                hlink.addEventListener("click", function(e) {
+                    modals[0].classList.remove("ptk-loginModalContainerShow");
+                    formLoad[0].classList.remove("formLoginShow");
+                    console.log(hlink);
+                });
+            })
+
+            showModalsLink.forEach((link, index) => {
+                link.addEventListener("click", function(e) {
+                    modals[0].classList.add("ptk-loginModalContainerShow");
+                    formLoad[0].classList.add("formLoginShow");
+                    console.log(link);
+                });
+            })
+        </script>
+    {% endblock %}
 </div>
 </body>
 </html>

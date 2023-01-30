@@ -105,24 +105,45 @@ ptk-bttns:hover {
 }
 
 .ptk-landingButton {
-    margin-bottom: 2%;
+    margin-bottom: 5%;
 }
 
 .ptk-landingButton button {
-    width: 110px;
-    height: 50px;
+    width: 200px;
+    height: 80px;
     background-color: $primaryWhite;
     border: $primaryWhite;
     border-radius: 12px;
     font-family: Rajdhani;
+    box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+    cursor: pointer;
 }
+
 
 .ptk-landingButton a {
     text-decoration: none;
     color: $primaryBlue;
-    font-size: 20px;
+    font-size: 30px;
     font-weight: bold;
     letter-spacing: 0.1rem;
+}
+
+.ptk-loginModalContainer{
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgb($secondaryGrey, 0.5);
+    opacity: 0;
+    z-index: -1;
+    transition: ease-in-out 0.2s;
+}
+
+.ptk-loginModalContainerShow{
+    opacity: 1;
+    z-index: 5;
 }
 
 .ptk-landingFooter {
