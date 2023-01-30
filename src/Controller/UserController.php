@@ -24,14 +24,16 @@ class UserController extends AbstractController
      */
     #[Route('/{id}/{orderBy}/{dataType}', name: 'app_user_show', methods: ['GET', 'POST'])]
     public function show(
-        Request $request,
-        User $user,
+        Request        $request,
+        User           $user,
         UserRepository $userRepository,
-        string $orderBy,
-        string $dataType
-    ): Response {
+        string         $orderBy,
+        string         $dataType
+    ): Response
+    {
         $form = $this->createForm(SearchContentType::class);
         $form->handleRequest($request);
+
         // -------------------- set where clause parameters --------------------
         switch ($dataType) {
             case 'Projects and Ideas':
@@ -61,6 +63,7 @@ class UserController extends AbstractController
                         break;
                 }
             }
+        }
 
         return $this->render('user/show.html.twig', [
             'user' => $user,
