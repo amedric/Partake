@@ -11,7 +11,9 @@ use App\Form\IdeaType;
 use App\Repository\CommentRepository;
 use App\Repository\IdeaRepository;
 use App\Repository\LikeRepository;
+use App\Repository\UserRepository;
 use DateTime;
+use Doctrine\DBAL\Exception;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -48,17 +50,22 @@ class IdeaController extends AbstractController
         ]);
     }
 
+    /**
+     * @throws Exception
+     */
     #[Route('/{id}', name: 'app_idea_show', methods: ['GET', 'POST'])]
     public function show(
         Idea $idea,
         IdeaRepository $ideaRepository,
         Request $request,
-        CommentRepository $commentRepository
+        CommentRepository $commentRepository,
+        LikeRepository $likeRepository,
     ): Response {
         $user = $this->getUser();
         $idea->setIdeaViews($idea->getIdeaViews() + 1);
         $ideaRepository->save($idea, true);
-
+        $likedUser = $likeRepository->findLikeByUser($user->getId(), $idea->getId());
+        $ideaLikes = count($likeRepository->findBy(['idea' => $idea->getId()]));
         $comment = new Comment();
         $form = $this->createForm(CommentType::class, $comment);
         $form->handleRequest($request);
@@ -82,6 +89,8 @@ class IdeaController extends AbstractController
             'form' => $form->createView(),
             'edit' => true,
             'comments' => $comments,
+            'likedUser' => $likedUser,
+            'ideaLikes' => $ideaLikes
         ]);
     }
 
@@ -142,7 +151,8 @@ class IdeaController extends AbstractController
         $like->setUser($this->getUser());
         $likeRepository->save($like, true);
         return $this->redirectToRoute(
-            'app_user_show', [
+            'app_user_show',
+            [
                 'id' => $this->getUser()->getId(),
                 'orderBy' => $orderBy,
                 'dataType' => $dataType
@@ -157,12 +167,12 @@ class IdeaController extends AbstractController
         int $id,
         string $orderBy,
         string $dataType
-    ): Response
-    {
+    ): Response {
         $ideaUser = $likeRepository->findOneBy(['user' => $this->getUser(), 'idea' => $idea->getId()]);
         $likeRepository->remove($ideaUser, true);
         return $this->redirectToRoute(
-            'app_user_show', [
+            'app_user_show',
+            [
                 'id' => $this->getUser()->getId(),
                 'orderBy' => $orderBy,
                 'dataType' => $dataType
