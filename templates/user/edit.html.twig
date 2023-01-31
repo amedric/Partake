@@ -1,13 +1,16 @@
-
-{#    <div class="formUser">#}
-{#        <div class="formUserTitle">#}
-{#            <h1>Edit Profile</h1>#}
-{#        </div>#}
-{#        <div class="formUserBody">#}
-{#            {{ include('user/_form.html.twig', {'button_label': 'Save'}) }}#}
-{#        </div>#}
-{#        <a href="{{ path('app_user_show', {'id': app.user.id, 'orderBy': 'oldest', 'dataType': 'Projects and Ideas'}) }}" class="formUserClose">X</a>#}
-{#    </div>#}
+<div class="ptk-profileFormContainer">
+    <div class="ptk-formCloseContainer">
+        <a class="ptk-formCloseBttn">
+            <img src="{{ asset('build/images/closeBtn.png') }}" alt="Close"/>
+        </a>
+    </div>
+    <div class="ptk-formTitleContainer">
+        <h1 class="ptk-formTitle">Edit Profile</h1>
+    </div>
+    {{ form_start(formEdit) }}
+    <div class="ptk-formErrors ptk-formContainerMargins">
+        {{ form_errors(formEdit) }}
+    </div>
     <div>
         <div class="ptk-formRow ptk-formContainerMargins">
             {{ form_label(formEdit.firstname, null, {'label_attr': {'class': 'ptk-formLabels'}}) }}
@@ -22,14 +25,14 @@
             {{ form_widget(formEdit.birthday, {'attr': {'class': 'ptk-formBirthdayInput'}}) }}
         </div>
         <div class="ptk-formRow ptk-formContainerMargins">
-            {{ form_label(formEdit.email, null, {'label_attr': {'class': 'ptk-formLabels'}}) }}
-            {{ form_widget(formEdit.email, {'attr': {'class': 'ptk-formTitleInput', 'disabled': true}}) }}
+            <h2 class="ptk-formLabels">Department</h2>
+            <p class="ptk-formTitleInput">{{ user.category.title }}</p>
         </div>
     </div>
     <div>
         <div class="ptk-formRow ptk-formContainerMargins">
-            {{ form_label(formEdit.category, null, {'label_attr': {'class': 'ptk-formLabels'}}) }}
-            {{ form_widget(formEdit.category, {'attr': {'class': 'ptk-formTitleInput', 'disabled': true}}) }}
+            <h2 class="ptk-formLabels">Email</h2>
+            <p class="ptk-formTitleInput">{{ user.email }}</p>
         </div>
     </div>
     {{ form_row(formEdit._token) }}
@@ -39,4 +42,3 @@
     </div>
     {{ form_end(formEdit, {'render_rest': false }) }}
 </div>
-
