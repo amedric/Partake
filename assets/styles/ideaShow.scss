@@ -1,14 +1,14 @@
 .ptk-ideaShowBlock {
     display: flex;
     justify-content: center;
-    height: 90vh;
     width: 97vw;
 
     .ptk-ideaShowContainer{
         display: flex;
         flex-direction: column;
+        justify-content: space-between;
         height: 90vh;
-        width: 50vw;
+        width: 45%;
         background-color: $primaryWhite;
         border: 3px solid $primaryYellow;
         border-radius: 10px;
@@ -18,7 +18,7 @@
             display: flex;
             justify-content: space-between;
             padding: 10px 2vw 0 2vw;
-
+            border-bottom: 2px solid $primaryYellow;
 
             .ptk-ideaCloseBttn{
                 font-size: 20px;
@@ -40,21 +40,28 @@
                 font-weight: 550;
                 width: auto;
                 background: linear-gradient(180deg, $primaryWhite 55%, $primaryYellow 45%);
+                overflow-wrap: anywhere;
+                padding: 0 15px 0 15px;
             }
         }
 
         .ptk-ideaContentContainer{
             width: 100%;
             padding: 0 15px 0 15px;
+            display: flex;
+            justify-content: center;
+            flex-wrap: nowrap;
 
             .ptk-ideaContent{
                 font-size: 20px;
+                overflow-wrap: anywhere;
+                //scroll-behavior: auto;
             }
         }
 
         .ptk-ideaInfoContainer{
             display: flex;
-            flex-direction: column;
+            justify-content: flex-end;
             width: 100%;
             padding-left: 15px;
             margin-bottom: 5px;
@@ -85,7 +92,6 @@
         .ptk-ideaFilterContainer{
             padding: 5px 0 5px 0;
             border-top: 2px solid $primaryBlue;
-            border-bottom: 2px solid $primaryBlue;
             padding-left: 10px;
 
             .ptk-ideaFilters{
@@ -95,7 +101,8 @@
         }
 
         .ptk-ideaCommentsContainer{
-            height: 30%;
+            height: 100%;
+            border-top: 2px solid $primaryBlue;
             border-bottom: 2px solid $primaryBlue;
             overflow-y: auto;
 
@@ -126,4 +133,8 @@
             }
         }
     }
+}
+
+.ptk-ideaPostCommentContainer {
+    margin-bottom: 5px;
 }

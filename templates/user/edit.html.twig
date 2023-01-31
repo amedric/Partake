@@ -1,15 +1,15 @@
-<div class="ptk-profileFormContainer">
-    <div class="ptk-formCloseContainer">
-        <a class="ptk-formCloseBttn">
-            <img src="{{ asset('build/images/closeBtn.png') }}" alt="Close"/>
-        </a>
-    </div>
-    <div class="ptk-formTitleContainer">
-        <h1 class="ptk-formTitle">Edit Profile</h1>
-    </div>
-    {{ form_start(formEdit) }}
-    <div class="ptk-formErrors ptk-formContainerMargins">
-        {{ form_errors(formEdit) }}
+{% extends 'base.html.twig' %}
+{% block title %}Edit User{% endblock %}
+
+{% block body %}
+    <div class="formUser">
+        <div class="formUserTitle">
+            <h1>Edit Profile</h1>
+        </div>
+        <div class="formUserBody">
+            {{ include('user/_form.html.twig', {'button_label': 'Save'}) }}
+        </div>
+        <a href="{{ path('app_user_show', {'id': app.user.id}) }}" class="formUserClose">X</a>
     </div>
     <div>
         <div class="ptk-formRow ptk-formContainerMargins">
