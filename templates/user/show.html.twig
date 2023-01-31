@@ -20,7 +20,7 @@
                 </div>
                 <div class="ptk-profileDetailsRow">
                     <p class="ptk-profileLabels">Department:</p>
-                    <p class="ptk-profileDetails">{{ user.team }}</p>
+                    <p class="ptk-profileDetails">{{ user.category.title }}</p>
                 </div>
             </div>
             <div class="ptk-profileDetailsRight">
@@ -35,9 +35,9 @@
             </div>
         </div>
         {% if app.user.id == user.id %}
-        <a href="{{ path('app_user_edit', {id: user.id}) }}" class="ptk-cardsLink">
-            <img class="ptk-editProfileIcon" src="{{ asset('build/images/editProfile.png') }}" alt="edit profile"/>
-        </a>
+            <a class="ptk-modalShow">
+                <img class="ptk-editProfileIcon" src="{{ asset('build/images/editProfile.png') }}" alt="edit profile"/>
+            </a>
         {% endif %}
     </div>
 {% endblock %}
@@ -71,6 +71,52 @@
                 <span class="ptk-linksHover">views</span></a>
         </div>
     </div>
+{% endblock %}
+
+{% block modal %}
+    {% include '/user/edit.html.twig' %}
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        let modals = document.querySelectorAll(".ptk-modalContainer");
+        let showModalsLink = document.querySelectorAll(".ptk-modalShow");
+        let hideModalsLink = document.querySelectorAll(".ptk-formCloseBttn");
+        let formLoad = document.querySelectorAll(".ptk-profileFormContainer");
+        let formClose = document.querySelectorAll(".ptk-formBttns");
+
+        hideModalsLink.forEach((hlink, index) => {
+            hlink.addEventListener("click", function(e) {
+                modals[0].classList.remove("ptk-modalContainerShow");
+                formLoad[0].classList.remove("ptk-formContainerShow");
+                console.log(hideModalsLink);
+            });
+        })
+
+        showModalsLink.forEach((link, index) => {
+            link.addEventListener("click", function(e) {
+                modals[0].classList.add("ptk-modalContainerShow");
+                formLoad[0].classList.add("ptk-formContainerShow");
+                console.log(modals);
+            });
+        })
+
+        let flashMessages = document.querySelectorAll(".ptk-flashMessages");
+        function fadeOutEffect() {
+            flashMessages.forEach((msgs, index) => {// index will be current button index
+
+                let fadeEffect = setInterval(function () {
+                    if (!msgs.style.opacity) {
+                        msgs.style.opacity = 1;
+                    }
+                    if (msgs.style.opacity > 0) {
+                        msgs.style.opacity = 0;
+                    }
+                }, 2500);
+            })
+        }
+        window.onload = fadeOutEffect;
+    </script>
 {% endblock %}
 
 {% block body %}

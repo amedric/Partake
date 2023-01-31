@@ -11,10 +11,7 @@ use App\Form\IdeaType;
 use App\Repository\CommentRepository;
 use App\Repository\IdeaRepository;
 use App\Repository\LikeRepository;
-use App\Repository\ProjectRepository;
-use App\Repository\UserRepository;
 use DateTime;
-use Doctrine\DBAL\Exception;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -25,30 +22,31 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
 #[Route('/idea')]
 class IdeaController extends AbstractController
 {
-    #[Route('/new/{id}', name: 'app_idea_new', methods: ['GET', 'POST'])]
-    public function new(Project $project, Request $request, IdeaRepository $ideaRepository): Response
-    {
-        $idea = new Idea();
-        $form = $this->createForm(IdeaType::class, $idea);
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-            $idea->setUser($this->getUser());
-            $idea->setProject($project);
-            $ideaRepository->save($idea, true);
-            $this->addFlash('success', 'Success:  New idea created');
-            return $this->redirectToRoute('app_project_show', [
-                'id' => $project->getId(),
-                'orderBy' => 'show',
-            ], Response::HTTP_SEE_OTHER);
-        }
 
-        return $this->renderForm('idea/new.html.twig', [
-            'idea' => $idea,
-            'form' => $form,
-            'project' => $project,
-            'edit' => true,
-        ]);
-    }
+//    #[Route('/new/{id}', name: 'app_idea_new', methods: ['GET', 'POST'])]
+//    public function new(Project $project, Request $request, IdeaRepository $ideaRepository): Response
+//    {
+//        $idea = new Idea();
+//        $form = $this->createForm(IdeaType::class, $idea);
+//        $form->handleRequest($request);
+//        if ($form->isSubmitted() && $form->isValid()) {
+//            $idea->setUser($this->getUser());
+//            $idea->setProject($project);
+//            $ideaRepository->save($idea, true);
+//            $this->addFlash('success', 'Success:  New idea created');
+//            return $this->redirectToRoute('app_project_show', [
+//                'id' => $project->getId(),
+//                'orderBy' => 'show',
+//            ], Response::HTTP_SEE_OTHER);
+//        }
+//
+//        return $this->renderForm('idea/new.html.twig', [
+//            'idea' => $idea,
+//            'form' => $form,
+//            'project' => $project,
+//            'edit' => true,
+//        ]);
+//    }
 
     /**
      * @throws Exception
@@ -88,7 +86,7 @@ class IdeaController extends AbstractController
         return $this->render('idea/show.html.twig', [
             'idea' => $idea,
             'user' => $user,
-            'form' => $form->createView(),
+            'formComm' => $form->createView(),
             'edit' => true,
             'comments' => $comments,
             'nbComments' => $nbComments,

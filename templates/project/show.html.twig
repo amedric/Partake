@@ -10,12 +10,28 @@
     <div class="ptk-underTitleBlock">
         <p class="ptk-projectContent">{{ project.content }}</p>
     </div>
-    {% if project.user.id == app.user.id %}
-        <form method="post" action="{{ path('app_project_archived', {'id': project.id}) }}" onsubmit="return confirm('Are you sure you want to archive this project?');">
-            <input type="hidden" name="_token" value="{{ csrf_token('archive' ~ project.id) }}">
-            <button class="archive-button" type="submit">Archive project</button>
-        </form>
-    {% endif %}
+    <div class="ptk-linksContainer">
+        {% if project.user.id == app.user.id %}
+            {% if project.isArchived != true %}
+                <form method="post" action="{{ path('app_project_archived', {'id': project.id}) }}" onsubmit="return confirm('Are you sure you want to archive this project?');">
+                    <input type="hidden" name="_token" value="{{ csrf_token('archive' ~ project.id) }}">
+                    <button class="archive-button" type="submit" >
+                        <img src="{{ asset('build/images/archiveYellow.png') }}" alt="edit profile" title="Archive project"/>
+                    </button>
+                </form>
+            {% else %}
+                <form method="post" action="{{ path('app_project_unarchived', {'id': project.id}) }}" onsubmit="return confirm('Do you want to unarchive this project?');">
+                    <input type="hidden" name="_token" value="{{ csrf_token('unarchive' ~ project.id) }}">
+                    <button class="archive-button" type="submit">
+                        <img src="{{ asset('build/images/unarchiveYellow.png') }}" alt="edit profile" title="Unarchive project"/>
+                    </button>
+                </form>
+            {% endif %}
+            <a class="ptk-modalShow" id="ptk-editProfileModalLink">
+                <img src="{{ asset('build/images/editYellow.png') }}" alt="edit profile" title="Edit project"/>
+            </a>
+        {% endif %}
+    </div>
 {% endblock %}
 
 {% block filters %}
@@ -46,12 +62,78 @@
 
 {% block underFilters %}
     <p class="ptk-blockDescription">Ideas</p>
-    <a href="{{ path('app_idea_new', {'id': project.id}) }}" id="ptk-addIdeaLink">
+    <a id="ptk-NewIdeaModalLink">
         <div class="ptk-addIdeaContainer">
             <p id="ptk-addIdeaIcon">+</p>
             <p class="ptk-addIdea">Add Idea</p>
         </div>
     </a>
+{% endblock %}
+
+{% block modal %}
+    <div class="ptk-modalNewIdeaContainer">
+        {% include '/idea/new.html.twig' %}
+    </div>
+    <div class="ptk-modalEditProjectContainer">
+        {% include '/project/edit.html.twig' %}
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        let modal = document.getElementsByClassName("ptk-modalContainer");
+
+        //----------------- New idea modal -----------------------
+        let NewIdeaModalLink = document.getElementById("ptk-NewIdeaModalLink");
+        let closeNewIdeaModalLink = document.getElementById("ptk-closeNewIdeaModalLink");
+        let modalNewIdeaContainer = document.getElementsByClassName("ptk-modalNewIdeaContainer")
+        let formNewIdea = document.getElementById("ptk-newIdeaFormContainer")
+
+        NewIdeaModalLink.addEventListener("click", function(e) {
+            modal[0].classList.add("ptk-modalContainerShow");
+            modalNewIdeaContainer[0].classList.add("ptk-showModalContainers")
+            formNewIdea.classList.add("ptk-formContainerShow");
+        });
+        closeNewIdeaModalLink.addEventListener("click", function(e) {
+            modal[0].classList.remove("ptk-modalContainerShow");
+            modalNewIdeaContainer[0].classList.remove("ptk-showModalContainers")
+            formNewIdea.classList.remove("ptk-formContainerShow");
+        });
+
+        // ----------------- edit project modal -----------------------
+        let editProjectModalLink = document.getElementById("ptk-editProfileModalLink");
+        let closeEditProjectModalLink = document.getElementById("ptk-closeEditProjectModalLink");
+        let modalEditProjectContainer = document.getElementsByClassName("ptk-modalEditProjectContainer")
+        let formEditProfile = document.getElementById("ptk-editProfileFormContainer")
+
+        editProjectModalLink.addEventListener("click", function(e) {
+            modal[0].classList.add("ptk-modalContainerShow");
+            modalEditProjectContainer[0].classList.add("ptk-showModalContainers")
+            formEditProfile.classList.add("ptk-formContainerShow");
+            console.log(closeEditProjectModalLink, modalEditProjectContainer, formEditProfile)
+        });
+        closeEditProjectModalLink.addEventListener("click", function(e) {
+            modal[0].classList.remove("ptk-modalContainerShow");
+            modalEditProjectContainer[0].classList.remove("ptk-showModalContainers")
+            formEditProfile.classList.remove("ptk-formContainerShow");
+        });
+
+        let flashMessages = document.querySelectorAll(".ptk-flashMessages");
+        function fadeOutEffect() {
+            flashMessages.forEach((msgs, index) => {// index will be current button index
+
+                let fadeEffect = setInterval(function () {
+                    if (!msgs.style.opacity) {
+                        msgs.style.opacity = 1;
+                    }
+                    if (msgs.style.opacity > 0) {
+                        msgs.style.opacity = 0;
+                    }
+                }, 2500);
+            })
+        }
+        window.onload = fadeOutEffect;
+    </script>
 {% endblock %}
 
 {% block body %}
@@ -79,9 +161,9 @@
                                             <img src="{{ asset('build/images/view.png') }}" class="ptk-ideaInfoIcons" alt="Views">
                                             <p class="ptk-cardStatsNo">{{ idea.ideaComments is null ? 0 : idea.ideaComments }}</p>
                                         </div>
-                                            </div>
-                                        </div>
+                                    </div>
                                 </div>
+                            </div>
                         </a>
                         {% else %}
                         <div class="ptk-ideaNoDataContainer">
@@ -92,18 +174,12 @@
                 {% endfor %}
             </div>
         </div>
-                {% else %}
-            <div class="ptk-titleBlock">
-                <div class="ptk-titleContainer">
-                    <h1 style="color: red;">This project is archived</h1>
-                </div>
-                <form method="post" action="{{ path('app_project_unarchived', {'id': project.id}) }}" onsubmit="return confirm('Do you want to unarchive this project?');">
-                    <input type="hidden" name="_token" value="{{ csrf_token('unarchive' ~ project.id) }}">
-                    <button class="archive-button" style="align-items: center;" type="submit">Unarchive project</button>
-                </form>
+    {% else %}
+        <div class="ptk-titleBlock">
+            <div class="ptk-titleContainer">
+                <h1 style="color: red;">This project is archived</h1>
             </div>
-
-        {% endif %}
-
+        </div>
+    {% endif %}
 {% endblock %}
 

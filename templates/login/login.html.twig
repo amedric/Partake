@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="icon" type="image/png" href="{{ asset('build/images/favicon.png') }}"/>
+    <title>
+        {% block title %}Partake{% endblock %}
+    </title>
+    {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
+    {% block stylesheets %}
+        {{ encore_entry_link_tags('app') }}
+    {% endblock %}
+</head>
+<body style="position: relative">
+<div class="ptk-landingContainer">
+    <div class="ptk-landingButton">
+        <button type="button">
+            <a class="ptk-loginModalShow">LOGIN</a>
+        </button>
+    </div>
+    <div class="ptk-loginErrorModalContainer">
+        <div class="formLoginError">
+            <div class="formCloseContainer">
+                <a a href="{{ path('app_landing') }}" class="formCloseLink">
+                    <img src="{{ asset('build/images/closeBtn.png') }}" alt="Close"/>
+                </a>
+            </div>
+            <div class="formLoginTitle">
+                <h1>LOGIN</h1>
+                <h1>LOGIN</h1>
+            </div>
+            <div>
+                {% if error %}
+                    <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                {% endif %}
+            </div>
+            <div class="formLoginBody">
+                <form action="{{ path('app_login') }}" method="post" class="loginForm">
+                    <label for="username">Login ID:</label>
+                    <input type="text" id="username" name="_username" value="{{ last_username }}">
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="_password">
+                    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+                    <label class="formTextCheckbox">
+                        <input type="checkbox" name="_remember_me" id="formLoginCheckbox" checked/>
+                        Keep me logged in
+                    </label>
+                    <div class="formLoginLink">
+                        <a href="{{ path('app_forgot_password_request') }}">Forgot password</a>
+                    </div>
+                    <div class="loginBtnContainer">
+                        <button type="submit" class="ptk-bttns">LOGIN</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+{#    {% block javascripts %}#}
+{#        <script>#}
+{#            let modals = document.querySelectorAll(".ptk-loginModalContainer");#}
+{#            let showModalsLink = document.querySelectorAll(".ptk-loginModalShow");#}
+{#            let hideModalsLink = document.querySelectorAll(".formCloseLink");#}
+{#            let formLoad = document.querySelectorAll(".formLogin");#}
+{#            // let formClose = document.querySelectorAll(".ptk-formBttns");#}
+
+{#            hideModalsLink.forEach((hlink, index) => {#}
+{#                hlink.addEventListener("click", function(e) {#}
+{#                    modals[0].classList.remove("ptk-loginModalContainerShow");#}
+{#                    formLoad[0].classList.remove("formLoginShow");#}
+{#                    console.log(hlink);#}
+{#                });#}
+{#            })#}
+
+{#            showModalsLink.forEach((link, index) => {#}
+{#                link.addEventListener("click", function(e) {#}
+{#                    modals[0].classList.add("ptk-loginModalContainerShow");#}
+{#                    formLoad[0].classList.add("formLoginShow");#}
+{#                    console.log(link);#}
+{#                });#}
+{#            })#}
+{#        </script>#}
+{#    {% endblock %}#}
+</div>
+</body>
+</html>

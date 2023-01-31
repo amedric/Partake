@@ -1,12 +1,10 @@
 .ptk-navbarLogoContainer{
-    //background-color: $primaryBlue;
     width: calc(100% / 3);
 }
 
 .ptk-searchContainer{
     display: flex;
     justify-content: center;
-    //background-color: $primaryBlue;
     width: calc(100% / 3);
 }
 
@@ -14,7 +12,6 @@
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
-    //background-color: $primaryBlue;
     width: calc(100% / 3);
     gap: 30px;
 }
@@ -30,9 +27,9 @@
     text-align: center;
     letter-spacing: 0.15em;
     color: $secondaryPurple;
-    text-shadow: 0px 4px 3px rgba(0,0,0,0.4),
-    0px 8px 13px rgba(0,0,0,0.1),
-    0px 18px 23px rgba(0,0,0,0.1);
+    text-shadow: 0 4px 3px rgba(0,0,0,0.4),
+    0 8px 13px rgba(0,0,0,0.1),
+    0 18px 23px rgba(0,0,0,0.1);
 }
 
 .ptk-navbarLinks{
@@ -53,8 +50,8 @@
     display: inline;
     transition: 0.2s ease;
     color: $secondaryPurple;
-    text-shadow: 0px 4px 3px rgba(0,0,0,0.2),
-    0px 8px 10px rgba(0,0,0,0.1);
+    text-shadow: 0 4px 3px rgba(0,0,0,0.2),
+    0 8px 10px rgba(0,0,0,0.1);
 }
 
 .ptk-linksHover:hover {
@@ -132,22 +129,23 @@
 }
 
 .ptk-navDropdownDatatype {
-    margin-right: 20px;
     position: relative;
-    display: inline-block;
+    display: Flex;
+    justify-content: flex-end;
+    margin-right: 25px;
+    width: calc(100% / 3);
     height: 100%;
 }
 
 .ptk-navDropdownContent {
     margin-top: 15px;
     display: none;
-    justify-content: center;
-    align-items: center;
     position: absolute;
-    background-color: $primaryBlue;
-    min-width: 150px;
-    box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
-    z-index: 1;
+    top: 40px;
+    background-color: #003EA8;
+    min-width: 120px;
+    box-shadow: rgba(0, 0, 0, 0.3) 0 19px 38px, rgba(0, 0, 0, 0.22) 0 15px 12px;
+    z-index: 4;
     border-radius: 0 0 15px 15px;
 }
 .ptk-navDropdownContent a {
@@ -168,7 +166,10 @@
 }
 
 .ptk-navDropdownDatatype:hover .ptk-navDropdownContent {
-    display: block;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 //.ptk-navDropdownDatatype:hover .ptk-navDropDownbtn {

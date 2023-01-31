@@ -1,14 +1,44 @@
-{% extends 'base.html.twig' %}
-{% block title %}Edit User{% endblock %}
-
-{% block body %}
-    <div class="formUser">
-        <div class="formUserTitle">
-            <h1>Edit Profile</h1>
-        </div>
-        <div class="formUserBody">
-            {{ include('user/_form.html.twig', {'button_label': 'Save'}) }}
-        </div>
-        <a href="{{ path('app_user_show', {'id': app.user.id, 'orderBy': 'oldest', 'dataType': 'Projects and Ideas'}) }}" class="formUserClose">X</a>
+<div class="ptk-profileFormContainer">
+    <div class="ptk-formCloseContainer">
+        <a class="ptk-formCloseBttn">
+            <img src="{{ asset('build/images/closeBtn.png') }}" alt="Close"/>
+        </a>
     </div>
-{% endblock %}
+    <div class="ptk-formTitleContainer">
+        <h1 class="ptk-formTitle">Edit Profile</h1>
+    </div>
+    {{ form_start(formEdit) }}
+    <div class="ptk-formErrors ptk-formContainerMargins">
+        {{ form_errors(formEdit) }}
+    </div>
+    <div>
+        <div class="ptk-formRow ptk-formContainerMargins">
+            {{ form_label(formEdit.firstname, null, {'label_attr': {'class': 'ptk-formLabels'}}) }}
+            {{ form_widget(formEdit.firstname, {'attr': {'class': 'ptk-formTitleInput'}}) }}
+        </div>
+        <div class="ptk-formRow ptk-formContainerMargins">
+            {{ form_label(formEdit.lastname, null, {'label_attr': {'class': 'ptk-formLabels'}}) }}
+            {{ form_widget(formEdit.lastname, {'attr': {'class': 'ptk-formTitleInput'}}) }}
+        </div>
+        <div class="ptk-formRow ptk-formContainerMargins">
+            {{ form_label(formEdit.birthday, null, {'label_attr': {'class': 'ptk-formLabels'}}) }}
+            {{ form_widget(formEdit.birthday, {'attr': {'class': 'ptk-formBirthdayInput'}}) }}
+        </div>
+        <div class="ptk-formRow ptk-formContainerMargins">
+            <h2 class="ptk-formLabels">Department</h2>
+            <p class="ptk-formTitleInput">{{ user.category.title }}</p>
+        </div>
+    </div>
+    <div>
+        <div class="ptk-formRow ptk-formContainerMargins">
+            <h2 class="ptk-formLabels">Email</h2>
+            <p class="ptk-formTitleInput">{{ user.email }}</p>
+        </div>
+    </div>
+    {{ form_row(formEdit._token) }}
+    <div class="ptk-formBttnsContainer">
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+        <button class="ptk-formBttns">{{ button_label|default('Save') }}</button>
+    </div>
+    {{ form_end(formEdit, {'render_rest': false }) }}
+</div>

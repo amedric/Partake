@@ -7,104 +7,222 @@
     height: 100%;
     width: 100%;
     z-index: 5;
+}
 
-    .ptk-formContainer {
-        display: flex;
-        flex-direction: column;
-        height: 80vh;
-        width: 50vw;
-        padding: 15px 50px 50px 50px;
-        background-color: $primaryWhite;
-        border: 3px solid $primaryYellow;
-        border-radius: 10px;
+.ptk-formContainer {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    height: 660px;
+    width: 600px;
+    padding: 15px 25px 25px 25px;
+    background-color: $primaryGrey;
+    border: 3px solid #d0d0d0;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
+    opacity: 0;
+    transition: ease-in 0.2s;
+}
 
-        .ptk-formCloseContainer{
-            display: flex;
-            justify-content: flex-end;
-            width: 100%;
-            margin: 0;
+.ptk-formContainerShow {
+    opacity: 1;
+}
 
-            .ptk-formCloseBttn{
-                font-size: 20px;
-                font-weight: 550;
-                text-decoration: none;
-            }
-        }
+.ptk-newProjectFormContainer{
+    position: absolute;
+    top: -650px;
+    display: flex;
+    flex-direction: column;
+    height: 650px;
+    width: 900px;
+    padding: 15px 25px 25px 25px;
+    background-color: $primaryGrey;
+    border: 3px solid #d0d0d0;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
+    transition: ease-in 0.2s;
+}
 
-        .ptk-formTitleContainer{
-            display: flex;
-            justify-content: center;
-            width: 100%;
+.ptk-newProjectFormSection{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
 
-            .ptk-formTitle{
-                display: flex;
-                justify-content: center;
-                margin: 0;
-                font-size: 40px;
-                font-weight: 550;
-                width: 10ch;
-                background: linear-gradient(180deg, $primaryWhite 55%, $primaryYellow 45%);
-            }
-        }
+.ptk-newProjectForm{
+    height: 100%;
+    width: 45%;
+}
 
-        .ptk-formRow {
-            display: flex;
-            flex-direction: column;
+.ptk-profileFormContainer{
+    position: absolute;
+    top: -650px;
+    display: flex;
+    flex-direction: column;
+    height: 650px;
+    width: 500px;
+    padding: 15px 25px 25px 25px;
+    background-color: $primaryGrey;
+    border: 3px solid #d0d0d0;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.56) 0 22px 70px 4px;
+    opacity: 0;
+    transition: ease-in 0.2s;
+}
 
-            .ptk-formLabels {
-                color: $primaryBlue;
-                font-size: 25px;
-                font-weight: 550;
-            }
+.ptk-editFormContainer{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    height: 650px;
+    width: 500px;
+    padding: 15px 25px 25px 25px;
+    background-color: $primaryGrey;
+    border: 3px solid #d0d0d0;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.56) 0 22px 70px 4px;
+    opacity: 0;
+    transition: ease-in 0.2s;
+}
 
-            .ptk-formTitleInput{
-                border: 1.5px solid $secondaryGrey;
-                border-radius: 5px;
-                height: 30px;
-                font-family: Rajdhani;
-                font-size: 20px;
-            }
+.ptk-modalNewIdeaContainer{
+    position: absolute;
+    top: -650px;
+    opacity: 1;
+    transition: ease-in 0.2s;
+}
 
-            .ptk-formContentInput{
-                display: flex;
-                flex-wrap: wrap !important;
-                word-break: break-word !important;
-                border: 1.5px solid $secondaryGrey;
-                border-radius: 5px;
-                height: 150px;
-                font-family: Rajdhani;
-                font-size: 20px;
-                overflow-y: auto;
-                resize: none;
-            }
+.ptk-modalEditProjectContainer{
+    position: absolute;
+    top: -650px;
+    opacity: 1;
+    transition: ease-in 0.2s;
+}
 
-        }
+#ptk-NewIdeaModalLink{
+    cursor: pointer;
+}
 
-        .ptk-formHiddenRows{
-            display: none;
-        }
+.ptk-showModalContainers{
+    top: clamp(5%, 15%, 20%);
+    opacity: 1;
+}
 
-        .ptk-formBttnsContainer {
-            display: flex;
-            flex-direction: row;
-            justify-content: center;
-            gap: 10px;
-            width: 100%;
+.ptk-formContainerShow {
+    top: clamp(5%, 15%, 20%);
+    opacity: 1;
+}
 
-            .ptk-formBttns {
-                padding: 10px 25px;
-                border-radius: 5px;
-                border-color: $primaryBlue;
-                background-color: $primaryBlue;
-                cursor: pointer;
-                font-family: Rajdhani;
-                font-weight: 600;
-                font-size: 15px;
-                color: $primaryWhite;
-            }
+.ptk-formCloseContainer{
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    margin: 0;
+}
 
-        }
-    }
+.ptk-formCloseBttn{
+    font-size: 20px;
+    font-weight: 550;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.ptk-formTitleContainer{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.ptk-formTitle{
+    display: flex;
+    justify-content: center;
+    margin: 0;
+    font-size: 40px;
+    font-weight: 550;
+    width: 10ch;
+    background: linear-gradient(180deg, $primaryGrey 55%, $primaryYellow 45%);
+}
+
+.ptk-formRow {
+    display: flex;
+    flex-direction: column;
+}
+
+.ptk-formLabels {
+    color: $primaryBlue;
+    font-size: 25px;
+    font-weight: 550;
+}
+
+.ptk-formTitleInput{
+    border: 1.5px solid $secondaryGrey;
+    border-radius: 5px;
+    height: 30px;
+    font-family: Rajdhani;
+    font-size: 20px;
+}
+
+.ptk-formContentInput{
+    display: flex;
+    flex-wrap: wrap !important;
+    word-break: break-word !important;
+    border: 1.5px solid $secondaryGrey;
+    border-radius: 5px;
+    height: 200px;
+    font-family: Rajdhani;
+    font-size: 20px;
+    overflow-y: auto;
+    resize: none;
+}
+
+.ptk-formUserInput{
+    display: flex;
+    flex-wrap: wrap !important;
+    word-break: break-word !important;
+    border: 1.5px solid $secondaryGrey;
+    border-radius: 5px;
+    height: 380px;
+    font-family: Rajdhani;
+    font-size: 20px;
+    overflow-y: auto;
+    resize: none;
+}
+
+.ptk-formBirthdayInput{
+    display: flex;
+    flex-wrap: wrap !important;
+    word-break: break-word !important;
+    border-radius: 5px;
+    height: 30px;
+    font-family: Rajdhani;
+    font-size: 20px;
+    overflow-y: auto;
+    resize: none;
+}
+
+.ptk-formHiddenRows{
+    display: none;
+}
+
+.ptk-formBttnsContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+}
+
+.ptk-formBttns {
+    padding: 10px 25px;
+    border-radius: 5px;
+    border-color: $primaryBlue;
+    background-color: $primaryBlue;
+    cursor: pointer;
+    font-family: Rajdhani;
+    font-weight: 600;
+    font-size: 15px;
+    color: $primaryWhite;
 }
 
 .ptk-formCloseBttn:hover{
@@ -116,7 +234,7 @@
 }
 
 .ptk-formContainerMargins{
-    margin-bottom: 30px;
+    margin-bottom: 20px;
 }
 
 .ptk-formIdeaColours{

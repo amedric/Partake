@@ -1,51 +1,55 @@
-{% extends 'base.html.twig' %}
+{#{% extends 'base.html.twig' %}#}
 
-{% block title %}New Project{% endblock %}
+{#{% block title %}New Project{% endblock %}#}
 
-{% block body %}
-<div class="ptk-formBlock">
-    <div class="ptk-formContainer">
+{#{% block body %}#}
+
+    <div class="ptk-newProjectFormContainer">
 
         <div class="ptk-formCloseContainer">
-            <a href="{{ path('app_home')}}" class="ptk-formCloseBttn">X</a>
+            <a href="{{ path('app_home')}}" class="ptk-formCloseBttn">
+                <img src="{{ asset('build/images/closeBtn.png') }}" alt="Close"/>
+            </a>
         </div>
 
         <div class="ptk-formTitleContainer">
             <h1 class="ptk-formTitle">New Project</h1>
         </div>
 
-        {{ form_start(form) }}
-
-        <div class="ptk-formErrors ptk-formContainerMargins">
-            {{ form_errors(form) }}
+            {{ form_start(formNew) }}
+        <div class="ptk-newProjectFormSection">
+            <div class="ptk-newProjectForm">
+                <div class="ptk-formErrors ptk-formContainerMargins">
+                    {{ form_errors(formNew) }}
+                </div>
+                <div class="ptk-formRow ptk-formContainerMargins">
+                    {{ form_label(formNew.title, null, {'label_attr': {'class': 'ptk-formLabels'}}) }}
+                    {{ form_widget(formNew.title, {'attr': {'class': 'ptk-formTitleInput'}}) }}
+                </div>
+                <div class="ptk-formRow ptk-formContainerMargins">
+                    {{ form_label(formNew.category, 'Department', {'label_attr': {'class': 'ptk-formLabels'}}) }}
+                    {{ form_widget(formNew.category, {'attr': {'class': 'ptk-formTitleInput'}}) }}
+                </div>
+                <div class="ptk-formRow ptk-formContainerMargins">
+                    {{ form_label(formNew.content, 'Description', {'label_attr': {'class': 'ptk-formLabels'}}) }}
+                    {{ form_widget(formNew.content, {'attr': {'class': 'ptk-formContentInput'}}) }}
+                </div>
+            </div>
+            <div class="ptk-newProjectForm">
+                <div class="ptk-formRow ptk-formContainerMargins">
+                    {{ form_label(formNew.usersSelectOnProject, 'Authorize access', {'label_attr': {'class': 'ptk-formLabels'}}) }}
+                    {{ form_widget(formNew.usersSelectOnProject, {'attr': {'class': 'ptk-formUserInput'}}) }}
+                </div>
+            </div>
         </div>
-
-        <div class="ptk-formRow ptk-formContainerMargins">
-            {{ form_label(form.title, null, {'label_attr': {'class': 'ptk-formLabels'}}) }}
-            {{ form_widget(form.title, {'attr': {'class': 'ptk-formTitleInput'}}) }}
-        </div>
-        <div class="ptk-formRow ptk-formContainerMargins">
-            {{ form_label(form.category, 'Department', {'label_attr': {'class': 'ptk-formLabels'}}) }}
-            {{ form_widget(form.category, {'attr': {'class': 'ptk-formTitleInput'}}) }}
-        </div>
-        <div class="ptk-formRow ptk-formContainerMargins">
-            {{ form_label(form.content, 'Description', {'label_attr': {'class': 'ptk-formLabels'}}) }}
-            {{ form_widget(form.content, {'attr': {'class': 'ptk-formContentInput'}}) }}
-        </div>
-        <div class="ptk-formRow ptk-formContainerMargins">
-            {{ form_label(form.usersSelectOnProject, 'Authorize access', {'label_attr': {'class': 'ptk-formLabels'}}) }}
-            {{ form_widget(form.usersSelectOnProject, {'attr': {'class': 'ptk-formContentInput'}}) }}
-        </div>
-
-        {{ form_row(form._token) }}
-
+        {{ form_row(formNew._token) }}
         <div class="ptk-formBttnsContainer">
             <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
             <button class="ptk-formBttns">{{ button_label|default('Save') }}</button>
         </div>
+        {{ form_end(formNew, {'render_rest': false }) }}
 
-        {{ form_end(form, {'render_rest': false }) }}
     </div>
-</div>
-{% endblock %}
+
+{#{% endblock %}#}
 
