@@ -24,31 +24,33 @@ class UserController extends AbstractController
      */
     #[Route('/{id}/{orderBy}/{dataType}', name: 'app_user_show', methods: ['GET', 'POST'])]
     public function show(
-        Request $request,
-        User $user,
+        Request        $request,
+        User           $user,
         UserRepository $userRepository,
-        string $orderBy,
-        string $dataType
-    ): Response {
+        string         $orderBy,
+        string         $dataType
+    ): Response
+    {
         $form = $this->createForm(SearchContentType::class);
         $form->handleRequest($request);
+
+        // -------------------- set where clause parameters --------------------
+        switch ($dataType) {
+            case 'Projects and Ideas':
+                $wherePara = "allData.dataType";
+                break;
+            case 'Projects':
+                $wherePara = "'project'";
+                break;
+            case 'Ideas':
+                $wherePara = "'idea'";
+                break;
+        }
             if ($form->isSubmitted() && $form->isValid()) {
                 $search = $form->getData()['search'];
-                $projectsIdeas = $userRepository->findProjectsIdeasForUser($user->getId(), 'createdAt', 'ASC');
+                $projectsIdeas = $userRepository->findProjectsIdeasForUser($user->getId(), 'createdAt', 'ASC', $wherePara);
             } else {
-
-                switch ($dataType) {
-                    case 'all':
-                        $wherePara = "allData.dataType";
-                        break;
-                    case 'project':
-                        $wherePara = "'project'";
-                        break;
-                    case 'idea':
-                        $wherePara = "'idea'";
-                        break;
-                }
-
+                // -------------------- set order by parameters --------------------
                 switch ($orderBy) {
                     case 'newest':
                         $projectsIdeas = $userRepository->findProjectsIdeasForUser($user->getId(), 'createdAt', 'DESC', $wherePara);

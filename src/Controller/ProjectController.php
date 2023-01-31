@@ -13,6 +13,7 @@ use DateTime;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Mime\Email;
@@ -21,24 +22,34 @@ use Symfony\Component\Mime\Email;
 class ProjectController extends AbstractController
 {
 
+    /**
+     * @throws TransportExceptionInterface
+     */
     #[Route('/new', name: 'app_project_new', methods: ['GET', 'POST'])]
     public function new(Request $request, ProjectRepository $projectRepository, MailerInterface $mailer,): Response
     {
         $project = new Project();
         $form = $this->createForm(Project1Type::class, $project);
         $form->handleRequest($request);
-
         /** @var User $user */
         $user = $this->getUser();
-
-
         if ($form->isSubmitted() && $form->isValid()) {
             $project->setUser($user);
             $today = new DateTime();
             $project->setCreatedAt($today);
             $projectRepository->save($project, true);
+            $usersAuth = $project->getUsersSelectOnProject();
+            //Email
+            foreach ($usersAuth as $userAuth) {
+                $email = (new Email())
+                    ->from('partake@partake.com')
+                    ->to($userAuth->getEmail())
+                    ->subject('New Project created !')
+                    ->text('You have been invited by ' . $user->getFullName() . ' to join the Project : '
+                        . $project->getTitle() . ' !');
+                $mailer->send($email);
+            }
             $this->addFlash('success', 'Success: New project created');
-
             return $this->redirectToRoute('app_home', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -51,12 +62,13 @@ class ProjectController extends AbstractController
 
     #[Route('/{id}/{orderBy}', name: 'app_project_show', methods: ['GET', 'POST'])]
     public function show(
-        Project $project,
-        IdeaRepository $ideaRepository,
+        Project           $project,
+        IdeaRepository    $ideaRepository,
         ProjectRepository $projectRepository,
-        int $id,
-        string $orderBy
-    ): Response {
+        int               $id,
+        string            $orderBy
+    ): Response
+    {
         $currentUser = $this->getUser();
         $projectCreateBy = $project->getUser();
         $userAuthorized = $project->getUsersSelectOnProject()->contains($currentUser);
@@ -84,12 +96,12 @@ class ProjectController extends AbstractController
                     $ideas = $ideaRepository->findAllIdeasByProjectId($project->getId(), 'ideaViews', 'DESC');
                     break;
             }
-
             return $this->render('project/show.html.twig', [
                 'project' => $project,
                 'ideas' => $ideas,
             ]);
         } else {
+            $this->addFlash('notice', 'You do not have permission to access this project, please contact your administrator');
             return $this->redirectToRoute('app_home');
         }
     }

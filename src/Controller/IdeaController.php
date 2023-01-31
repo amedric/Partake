@@ -12,7 +12,9 @@ use App\Repository\CommentRepository;
 use App\Repository\IdeaRepository;
 use App\Repository\LikeRepository;
 use App\Repository\ProjectRepository;
+use App\Repository\UserRepository;
 use DateTime;
+use Doctrine\DBAL\Exception;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -48,6 +50,9 @@ class IdeaController extends AbstractController
         ]);
     }
 
+    /**
+     * @throws Exception
+     */
     #[Route('/{id}', name: 'app_idea_show', methods: ['GET', 'POST'])]
     public function show(
         Idea $idea,
@@ -55,11 +60,13 @@ class IdeaController extends AbstractController
         Request $request,
         CommentRepository $commentRepository,
         ProjectRepository $projectRepository,
+        LikeRepository $likeRepository,
     ): Response {
         $user = $this->getUser();
         $idea->setIdeaViews($idea->getIdeaViews() + 1);
         $ideaRepository->save($idea, true);
-
+        $likedUser = $likeRepository->findLikeByUser($user->getId(), $idea->getId());
+        $ideaLikes = count($likeRepository->findBy(['idea' => $idea->getId()]));
         $comment = new Comment();
         $form = $this->createForm(CommentType::class, $comment);
         $form->handleRequest($request);
@@ -85,6 +92,8 @@ class IdeaController extends AbstractController
             'edit' => true,
             'comments' => $comments,
             'nbComments' => $nbComments,
+            'likedUser' => $likedUser,
+            'ideaLikes' => $ideaLikes
         ]);
     }
 
@@ -132,27 +141,45 @@ class IdeaController extends AbstractController
         ], Response::HTTP_SEE_OTHER);
     }
 
-    #[Route('/{id}/like', name: 'app_idea_like', methods: ['GET','POST'])]
-    public function like(Idea $idea, LikeRepository $likeRepository): Response
-    {
+    #[Route('/{id}/{orderBy}/{dataType}/like', name: 'app_idea_like', methods: ['GET','POST'])]
+    public function like(
+        Idea $idea,
+        LikeRepository $likeRepository,
+        int $id,
+        string $orderBy,
+        string $dataType
+    ): Response {
         $like = new Like();
         $like->setIdea($idea);
         $like->setUser($this->getUser());
         $likeRepository->save($like, true);
         return $this->redirectToRoute(
             'app_user_show',
-            ['id' => $this->getUser()->getId()],
+            [
+                'id' => $this->getUser()->getId(),
+                'orderBy' => $orderBy,
+                'dataType' => $dataType
+            ],
             Response::HTTP_SEE_OTHER
         );
     }
-    #[Route('/{id}/dislike', name: 'app_idea_dislike', methods: ['GET','POST'])]
-    public function dislike(LikeRepository $likeRepository, Idea $idea): Response
-    {
+    #[Route('/{id}/{orderBy}/{dataType}/dislike', name: 'app_idea_dislike', methods: ['GET','POST'])]
+    public function dislike(
+        LikeRepository $likeRepository,
+        Idea $idea,
+        int $id,
+        string $orderBy,
+        string $dataType
+    ): Response {
         $ideaUser = $likeRepository->findOneBy(['user' => $this->getUser(), 'idea' => $idea->getId()]);
         $likeRepository->remove($ideaUser, true);
         return $this->redirectToRoute(
             'app_user_show',
-            ['id' => $this->getUser()->getId()],
+            [
+                'id' => $this->getUser()->getId(),
+                'orderBy' => $orderBy,
+                'dataType' => $dataType
+            ],
             Response::HTTP_SEE_OTHER
         );
     }

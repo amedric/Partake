@@ -39,35 +39,37 @@ class ProjectRepository extends ServiceEntityRepository
         }
     }
 
+//    public function findLikeProject(string $name): array
+//    {
+//        $queryBuilder = $this->createQueryBuilder('p')
+//            ->where('p.title LIKE :name')
+//            ->setParameter('name', '%' . $name . '%')
+//            ->orderBy('p.title', 'ASC')
+//            ->getQuery();
+//        return $queryBuilder->getResult();
+//    }
+
     public function findLikeProject(string $name): array
     {
-        $queryBuilder = $this->createQueryBuilder('p')
-            ->where('p.title LIKE :name')
-            ->setParameter('name', '%' . $name . '%')
-            ->orderBy('p.title', 'ASC')
-            ->getQuery();
-        return $queryBuilder->getResult();
-    }
-
-    public function findProjectDesc(): array
-    {
         $conn = $this->getEntityManager()->getConnection();
-
-        $sql = '
-            select project.id,
-                   project.title,
-                   project.category_id,
-                   project.content,
-                   project.project_views,
-                   project.project_color,
-                   project.created_at,
-                   project.is_archived,
-                   count(idea.id) as ideaCount
-            from project
-            left join idea on project.id = idea.project_id
-            group by project.id
-            order by project.created_at desc
-            ';
+        $sql = "
+            select
+                p.id,
+                p.user_id as user,
+                p.category_id as categoryId,
+                p.title,
+                p.content,
+                p.created_at as createdAt,
+                p.project_views as views,
+                    (select count(i.id)
+                        FROM idea as i
+                        where i.project_id = p.id
+                        group by p.id) as ideaCount,
+                    p.is_archived as isArchived
+                from project as p
+                where p.title like '%" . $name . "%'
+                order by p.title"
+        ;
         $stmt = $conn->prepare($sql);
         $resultSet = $stmt->executeQuery();
 
@@ -96,55 +98,143 @@ class ProjectRepository extends ServiceEntityRepository
             ';
         $stmt = $conn->prepare($sql);
         $resultSet = $stmt->executeQuery(['id' => $id]);
+        
+//    public function findProjectDesc(): array
+//    {
+//        $conn = $this->getEntityManager()->getConnection();
+//
+//        $sql = '
+//            select project.id,
+//                   project.title,
+//                   project.category_id,
+//                   project.content,
+//                   project.project_views,
+//                   project.project_color,
+//                   project.created_at,
+//                   project.is_archived,
+//                   count(idea.id) as ideaCount
+//            from project
+//            left join idea on project.id = idea.project_id
+//            group by project.id
+//            order by project.created_at desc
+//            ';
+//        $stmt = $conn->prepare($sql);
+//        $resultSet = $stmt->executeQuery();
+//
+//        // returns an array of arrays (i.e. a raw data set)
+//        return $resultSet->fetchAllAssociative();
+//    }
 
-        // returns an array of arrays (i.e. a raw data set)
-        return $resultSet->fetchAllAssociative();
-    }
+//    public function findIdeasCountLikes(int $id): array
+//    {
+//      $conn = $this->getEntityManager()->getConnection();
+//
+//        $sql = '
+//            select project.id,
+//                   idea.id,
+//                   idea.title,
+//                   idea.content,
+//                   idea.idea_color as "ideaColor",
+//                   idea.idea_views as "ideaViews",
+//                   count(`like`.idea_id) as ideaLikes
+//            from project
+//            left join idea on project.id = idea.project_id
+//            left join `like` on idea.id = `like`.idea_id
+//            where project.id = :id
+//            group by `like`.idea_id
+//            order by ideaLikes desc
+//            ';
+//        $stmt = $conn->prepare($sql);
+//        $resultSet = $stmt->executeQuery(['id' => $id]);
+//
+//        // returns an array of arrays (i.e. a raw data set)
+//        return $resultSet->fetchAllAssociative();
+//    }
 
-    public function findProjectAsc(): array
+//    public function findProjectAsc(): array
+//    {
+//        $conn = $this->getEntityManager()->getConnection();
+//
+//        $sql = '
+//            select project.id,
+//                   project.title,
+//                   project.category_id,
+//                   project.content,
+//                   project.project_views,
+//                   project.project_color,
+//                   project.created_at,
+//                   project.is_archived,
+//                   count(idea.id) as ideaCount
+//            from project
+//            left join idea on project.id = idea.project_id
+//            group by project.id
+//            order by project.created_at asc
+//            ';
+//        $stmt = $conn->prepare($sql);
+//        $resultSet = $stmt->executeQuery();
+//
+//        // returns an array of arrays (i.e. a raw data set)
+//        return $resultSet->fetchAllAssociative();
+//    }
+
+//    public function findProjectViewsDesc(): array
+//    {
+//        $conn = $this->getEntityManager()->getConnection();
+//
+//        $sql = '
+//            select project.id,
+//                   project.title,
+//                   project.category_id,
+//                   project.content,
+//                   project.project_views,
+//                   project.project_color,
+//                   project.created_at,
+//                   project.is_archived,
+//                   count(idea.id) as ideaCount
+//            from project
+//            left join idea on project.id = idea.project_id
+//            group by project.id
+//            order by project.project_views desc
+//            ';
+//        $stmt = $conn->prepare($sql);
+//        $resultSet = $stmt->executeQuery();
+//
+//        // returns an array of arrays (i.e. a raw data set)
+//        return $resultSet->fetchAllAssociative();
+//    }
+
+//    public function findIdeasCountComments(int $id): array
+//    {
+//        $conn = $this->getEntityManager()->getConnection();
+//
+//        $sql = '
+//            select project.id,
+//                   idea.id,
+//                   idea.title,
+//                   idea.content,
+//                   idea.idea_color as "ideaColor",
+//                   idea.idea_views as "ideaViews",
+//                   count(comment.idea_id) as ideaComments
+//            from project
+//            left join idea on project.id = idea.project_id
+//            left join comment on idea.id = comment.idea_id
+//            where project.id = :id
+//            group by comment.idea_id
+//            order by ideaComments desc
+//            ';
+//        $stmt = $conn->prepare($sql);
+//        $resultSet = $stmt->executeQuery(['id' => $id]);
+//
+//        // returns an array of arrays (i.e. a raw data set)
+//        return $resultSet->fetchAllAssociative();
+//    }
+
+    public function countNumberProjects(): array
     {
         $conn = $this->getEntityManager()->getConnection();
 
         $sql = '
-            select project.id,
-                   project.title,
-                   project.category_id,
-                   project.content,
-                   project.project_views,
-                   project.project_color,
-                   project.created_at,
-                   project.is_archived,
-                   count(idea.id) as ideaCount
-            from project
-            left join idea on project.id = idea.project_id
-            group by project.id
-            order by project.created_at asc
-            ';
-        $stmt = $conn->prepare($sql);
-        $resultSet = $stmt->executeQuery();
-
-        // returns an array of arrays (i.e. a raw data set)
-        return $resultSet->fetchAllAssociative();
-    }
-
-    public function findProjectViewsDesc(): array
-    {
-        $conn = $this->getEntityManager()->getConnection();
-
-        $sql = '
-            select project.id,
-                   project.title,
-                   project.category_id,
-                   project.content,
-                   project.project_views,
-                   project.project_color,
-                   project.created_at,
-                   project.is_archived,
-                   count(idea.id) as ideaCount
-            from project
-            left join idea on project.id = idea.project_id
-            group by project.id
-            order by project.project_views desc
+            select count(*) as nbProjects from project;
             ';
         $stmt = $conn->prepare($sql);
         $resultSet = $stmt->executeQuery();
@@ -178,7 +268,7 @@ class ProjectRepository extends ServiceEntityRepository
         return $resultSet->fetchAllAssociative();
     }
 
-    public function countNumberProjects(): array
+   public function countNumberProjects(): array
     {
         $conn = $this->getEntityManager()->getConnection();
 
@@ -191,7 +281,7 @@ class ProjectRepository extends ServiceEntityRepository
         // returns an array of arrays (i.e. a raw data set)
         return $resultSet->fetchAllAssociative();
     }
-
+    
     public function countTotalProjectViews(): array
     {
         $conn = $this->getEntityManager()->getConnection();
@@ -215,6 +305,35 @@ class ProjectRepository extends ServiceEntityRepository
             ';
         $stmt = $conn->prepare($sql);
         $resultSet = $stmt->executeQuery(['id' => $id]);
+
+        // returns an array of arrays (i.e. a raw data set)
+        return $resultSet->fetchAllAssociative();
+    }
+
+    // ----------------- find all projects with idea count ---------------------------------
+    public function findAllProjects($column, $orderBy): array
+    {
+        $orderByPara = $column . " " . $orderBy;
+        $conn = $this->getEntityManager()->getConnection();
+        $sql = '
+            select
+                p.id,
+                p.user_id as user,
+                p.category_id as categoryId,
+                p.title,
+                p.content,
+                p.created_at as createdAt,
+                p.project_views as views,
+                    (select count(i.id)
+                        FROM idea as i
+                        where i.project_id = p.id
+                        group by p.id) as ideaCount,
+                    p.is_archived as isArchived
+                from project as p
+                order by '. $orderByPara
+        ;
+        $stmt = $conn->prepare($sql);
+        $resultSet = $stmt->executeQuery();
 
         // returns an array of arrays (i.e. a raw data set)
         return $resultSet->fetchAllAssociative();
