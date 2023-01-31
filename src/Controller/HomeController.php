@@ -78,55 +78,67 @@ class HomeController extends AbstractController
         ]);
     }
 
-//    #[Route('/{orderBy}', name: 'app_home_orderBy')]
-//    public function orderBy(
-//        Request $request,
-//        ProjectRepository $projectRepository,
-//        CategoryRepository $categoryRepository,
-//        ChartStats $chartStats,
-//        string $orderBy,
-//    ): Response {
-//        $form = $this->createForm(SearchContentType::class);
-//        $form->handleRequest($request);
-//        if ($form->isSubmitted() && $form->isValid()) {
-//            $search = $form->getData()['search'];
-//            $projects = $projectRepository->findLikeProject($search);
-//            $categories = $categoryRepository->findAll();
-//        } else {
-//            switch ($orderBy) {
-//                case 'newest':
-//                    $projects = $projectRepository->findAllProjects('createdAt', 'DESC');
-//                    $categories = $categoryRepository->findAll();
-//                    break;
-//                case 'oldest':
-//                    $projects = $projectRepository->findAllProjects('createdAt', 'ASC');
-//                    $categories = $categoryRepository->findAll();
-//                    break;
-//                case 'views':
-//                    $projects = $projectRepository->findAllProjects('views', 'DESC');
-//                    $categories = $categoryRepository->findAll();
-//                    break;
-//                case 'ideas':
-//                    $projects = $projectRepository->findAllProjects('ideaCount', 'DESC');
-//                    $categories = $categoryRepository->findAll();
-//                    break;
-//            }
-//        }
-//        $projectChart1 = $chartStats->getMobileProjectChart1();
-//        $projectChart2 = $chartStats->getMobileProjectChart2();
-//        $ideaChart1 = $chartStats->getMobileIdeaChart1();
-//        $ideaChart2 = $chartStats->getMobileIdeaChart2();
-//        $authorizedProjects = $projectRepository->findProjectAuthorizedForUser($this->getUser()->getId());
-//
-//        return $this->render('home/home.html.twig', [
-//            'projects' => $projects,
-//            'categories' => $categories,
-//            'form' => $form->createView(),
-//            'projectChart1' => $projectChart1,
-//            'ideaChart1' => $ideaChart1,
-//            'projectChart2' => $projectChart2,
-//            'ideaChart2' => $ideaChart2,
-//            "authorizedProjects" => $authorizedProjects,
-//        ]);
-//    }
+    #[Route('/{orderBy}', name: 'app_home_orderBy')]
+    public function orderBy(
+        Request $request,
+        ProjectRepository $projectRepository,
+        CategoryRepository $categoryRepository,
+        IdeaRepository $ideaRepository,
+        ChartStats $chartStats,
+        MailerInterface $mailer,
+        string $orderBy
+    ): Response {
+        //----------------------- search bar form -----------------
+        $form = $this->createForm(SearchContentType::class);
+        $form->handleRequest($request);
+
+        //----------------------- new project form -----------------
+        /** @var User $user */
+        $user = $this->getUser();
+        $project = new Project();
+        $formNew = $this->createForm(Project1Type::class, $project);
+        $formNew->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $search = $form->getData()['search'];
+            $projects = $projectRepository->findLikeProject($search);
+            $categories = $categoryRepository->findAll();
+        } else {
+            switch ($orderBy) {
+                case 'newest':
+                    $projects = $projectRepository->findAllProjects('createdAt', 'DESC');
+                    $categories = $categoryRepository->findAll();
+                    break;
+                case 'oldest':
+                    $projects = $projectRepository->findAllProjects('createdAt', 'ASC');
+                    $categories = $categoryRepository->findAll();
+                    break;
+                case 'views':
+                    $projects = $projectRepository->findAllProjects('views', 'DESC');
+                    $categories = $categoryRepository->findAll();
+                    break;
+                case 'ideas':
+                    $projects = $projectRepository->findAllProjects('ideaCount', 'DESC');
+                    $categories = $categoryRepository->findAll();
+                    break;
+            }
+        }
+        $projectChart1 = $chartStats->getMobileProjectChart1();
+        $projectChart2 = $chartStats->getMobileProjectChart2();
+        $ideaChart1 = $chartStats->getMobileIdeaChart1();
+        $ideaChart2 = $chartStats->getMobileIdeaChart2();
+        $authorizedProjects = $projectRepository->findProjectAuthorizedForUser($this->getUser()->getId());
+
+        return $this->render('home/home.html.twig', [
+            'projects' => $projects,
+            'categories' => $categories,
+            'form' => $form->createView(),
+            'formNew' => $formNew->createView(),
+            'projectChart1' => $projectChart1,
+            'ideaChart1' => $ideaChart1,
+            'projectChart2' => $projectChart2,
+            'ideaChart2' => $ideaChart2,
+            "authorizedProjects" => $authorizedProjects,
+            'edit' => true
+        ]);
+    }
 }

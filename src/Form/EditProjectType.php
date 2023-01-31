@@ -21,9 +21,6 @@ class EditProjectType extends AbstractType
                 'class' => Category::class,
                 'choice_label' => 'title',
             ])
-            //            ->add('projectColor')
-//            ->add('createdAt')
-//            ->add('user')
         ;
     }
 

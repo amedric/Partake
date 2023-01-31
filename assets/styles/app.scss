@@ -23,6 +23,23 @@ $secondaryGrey: rgb(100, 100, 100);
 
 *::-webkit-scrollbar {
     width: 10px;
+    height: 10px;
+}
+
+/* Track */
+*::-webkit-scrollbar-track {
+    background: $primaryGrey;
+}
+
+/* Handle */
+*::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background: #c5c5c5;
+}
+
+/* Handle on hover */
+*::-webkit-scrollbar-thumb:hover {
+    background: $primaryPurple;
 }
 
 body {
@@ -34,6 +51,7 @@ body {
     background-color: $primaryGrey;
     height: 100%;
     width: 100%;
+    overflow-x: hidden;
 }
 
 a {
@@ -104,6 +122,18 @@ ptk-bttns:hover {
     flex-direction: column;
     justify-content: flex-end;
     align-items: center;
+}
+
+.ptk-loginLandingContainer{
+    background-image: url("../images/landing-page.png");
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    z-index: 0;
 }
 
 .ptk-landingButton {

@@ -29,7 +29,8 @@
 }
 
 .ptk-newProjectFormContainer{
-    position: relative;
+    position: absolute;
+    top: -650px;
     display: flex;
     flex-direction: column;
     height: 650px;
@@ -55,6 +56,22 @@
 }
 
 .ptk-profileFormContainer{
+    position: absolute;
+    top: -650px;
+    display: flex;
+    flex-direction: column;
+    height: 650px;
+    width: 500px;
+    padding: 15px 25px 25px 25px;
+    background-color: $primaryGrey;
+    border: 3px solid #d0d0d0;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.56) 0 22px 70px 4px;
+    opacity: 0;
+    transition: ease-in 0.2s;
+}
+
+.ptk-editFormContainer{
     position: relative;
     display: flex;
     flex-direction: column;
@@ -64,12 +81,36 @@
     background-color: $primaryGrey;
     border: 3px solid #d0d0d0;
     border-radius: 10px;
-    box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
+    box-shadow: rgba(0, 0, 0, 0.56) 0 22px 70px 4px;
     opacity: 0;
     transition: ease-in 0.2s;
 }
 
+.ptk-modalNewIdeaContainer{
+    position: absolute;
+    top: -650px;
+    opacity: 1;
+    transition: ease-in 0.2s;
+}
+
+.ptk-modalEditProjectContainer{
+    position: absolute;
+    top: -650px;
+    opacity: 1;
+    transition: ease-in 0.2s;
+}
+
+#ptk-NewIdeaModalLink{
+    cursor: pointer;
+}
+
+.ptk-showModalContainers{
+    top: clamp(5%, 15%, 20%);
+    opacity: 1;
+}
+
 .ptk-formContainerShow {
+    top: clamp(5%, 15%, 20%);
     opacity: 1;
 }
 

@@ -138,6 +138,7 @@
     flex-direction: column;
     height: 100%;
     margin: 10px;
+    overflow-x: hidden;
     overflow-y: auto;
 }
 
@@ -197,6 +198,17 @@
     padding: 0 15px 0 15px;
     cursor: grab;
     transition: 0.5s ease-in-out;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.ptk-cardsContainer::-webkit-scrollbar {
+    display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.ptk-cardsContainer {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
 }
 
 .ptk-cardsLink{
@@ -456,14 +468,35 @@
     margin: 0;
 }
 
+.ptk-linksContainer{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 5px;
+    z-index: 2;
+}
+
+.archive-button{
+    background: transparent;
+    border: none;
+    z-index: 1;
+}
+
 //-------------------------------- Profile page ------------------------------------------------------
 .ptk-profileContainer{
     position: relative;
     height:200px;
     width: 700px;
-    //background-color: #004cdb;
     background-color: $primaryGrey;
-    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;    border-radius: 15px;
+    box-shadow: rgba(0, 0, 0, 0.25) 0 54px 55px,
+    rgba(0, 0, 0, 0.12) 0 -12px 30px,
+    rgba(0, 0, 0, 0.12) 0 4px 6px,
+    rgba(0, 0, 0, 0.17) 0 12px 13px,
+    rgba(0, 0, 0, 0.09) 0 -3px 5px;
+    border-radius: 15px;
 }
 
 .ptk-profileTitleContainer {
@@ -481,7 +514,7 @@
     color: $secondaryBlue;
     display: block;
     padding: 0 10px 0 10px;
-    text-shadow: 0px 4px 3px rgba(0,0,0,0.5),
+    text-shadow: 0 4px 3px rgba(0,0,0,0.5),
     0 8px 13px rgba(0,0,0,0.2),
     0 18px 23px rgba(0,0,0,0.2);
 }

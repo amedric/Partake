@@ -1,15 +1,36 @@
 .formLogin {
     position: relative;
-    width: 450px;
-    height: 400px;
+    width: 400px;
+    height: 370px;
     background-color: $primaryGrey;
     border: solid $secondaryGrey 2px;
     border-radius: 10px;
-    box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+    box-shadow: rgba(0, 0, 0, 0.3) 0 19px 38px, rgba(0, 0, 0, 0.22) 0 15px 12px;
     padding: 15px;
     font-size: 20px;
     opacity: 0;
     z-index: -1;
+}
+
+.loginForm{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    //align-items: center;
+}
+
+.formLoginError {
+    position: relative;
+    width: 400px;
+    height: 370px;
+    background-color: $primaryGrey;
+    border: solid $secondaryGrey 2px;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.3) 0 19px 38px, rgba(0, 0, 0, 0.22) 0 15px 12px;
+    padding: 15px;
+    font-size: 20px;
+    opacity: 1;
+    z-index: 5;
 }
 
 .formLoginShow {
@@ -60,13 +81,12 @@
 }
 
 .formLoginBody form {
-    padding-top: 20px;
+    padding: 30px;
 }
 
 .formLoginBody label {
     color: $primaryBlue;
     font-weight: bold;
-    padding-left: 40px;
 }
 
 .formLoginBody input {
@@ -74,21 +94,8 @@
     border-radius: 4px;
     color: $primaryBlue;
     height: 30px;
-    width: 200px;
+    width: 300px;
     text-align: right;
-    margin-left: 40px;
-}
-
-.formLoginBody button {
-    background-color: $primaryBlue;
-    color: $primaryWhite;
-    border-radius: 5px;
-    width: 30%;
-    position: absolute;
-    top: 90%;
-    left: 40%;
-    border: none;
-    font-size: 20px;
 }
 
 #formLoginCheckbox {
@@ -100,52 +107,69 @@
     margin-left: 40px;
 }
 
-@media screen and (max-width: 480px) {
-    .ptk-baseContainer {
-        background-image: url("../images/loginMobile.png");
-        background-position: center;
-    }
-    .ptk-navbarContainer, .ptk-sideContainer, .ptk-blockContainer, .formLoginTitle, .formLoginLink, #formLoginCheckbox, .formTextCheckbox  {
-        display: none;
-    }
-
-    .formLogin {
-        border: none;
-        box-shadow: none;
-        left: 5%;
-        top: 30%;
-    }
-
-    .formLoginBody label {
-        color: $primaryWhite;
-        font-weight: bold;
-    }
-
-    .formLoginBody label {
-        font-size: 40px;
-    }
-
-    .formLoginBody input {
-        width: 300px;
-        height: 50px;
-    }
-    .formLoginRememberMe label {
-        font-size: 25px;
-    }
-
-
-    .formLoginLink a {
-        color: $primaryWhite;
-    }
-    .formLoginBody button {
-        background-color: $primaryWhite;
-        color: $primaryBlue;
-        border-radius: 5px;
-        width: 60%;
-        height: 15%;
-        left: 15%;
-        margin-top: 80px;
-        font-weight: bolder;
-        font-size: 30px;
-    }
+.ptk-loginErrorModalContainer{
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb($secondaryGrey, 0.5);
+    z-index: 5;
 }
+
+.loginBtnContainer{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+//@media screen and (max-width: 480px) {
+//    .ptk-baseContainer {
+//        background-image: url("../images/loginMobile.png");
+//        background-position: center;
+//    }
+//    .ptk-navbarContainer, .ptk-sideContainer, .ptk-blockContainer, .formLoginTitle, .formLoginLink, #formLoginCheckbox, .formTextCheckbox  {
+//        display: none;
+//    }
+//
+//    .formLogin {
+//        border: none;
+//        box-shadow: none;
+//        left: 5%;
+//        top: 30%;
+//    }
+//
+//    .formLoginBody label {
+//        color: $primaryWhite;
+//        font-weight: bold;
+//    }
+//
+//    .formLoginBody label {
+//        font-size: 40px;
+//    }
+//
+//    .formLoginBody input {
+//        width: 300px;
+//        height: 50px;
+//    }
+//    .formLoginRememberMe label {
+//        font-size: 25px;
+//    }
+//
+//
+//    .formLoginLink a {
+//        color: $primaryWhite;
+//    }
+//    .formLoginBody button {
+//        background-color: $primaryWhite;
+//        color: $primaryBlue;
+//        border-radius: 5px;
+//        width: 60%;
+//        height: 15%;
+//        left: 15%;
+//        margin-top: 80px;
+//        font-weight: bolder;
+//        font-size: 30px;
+//    }
+//}

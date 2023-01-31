@@ -23,30 +23,30 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
 class IdeaController extends AbstractController
 {
 
-    #[Route('/new/{id}', name: 'app_idea_new', methods: ['GET', 'POST'])]
-    public function new(Project $project, Request $request, IdeaRepository $ideaRepository): Response
-    {
-        $idea = new Idea();
-        $form = $this->createForm(IdeaType::class, $idea);
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-            $idea->setUser($this->getUser());
-            $idea->setProject($project);
-            $ideaRepository->save($idea, true);
-            $this->addFlash('success', 'Success:  New idea created');
-            return $this->redirectToRoute('app_project_show', [
-                'id' => $project->getId(),
-                'orderBy' => 'show',
-            ], Response::HTTP_SEE_OTHER);
-        }
-
-        return $this->renderForm('idea/new.html.twig', [
-            'idea' => $idea,
-            'form' => $form,
-            'project' => $project,
-            'edit' => true,
-        ]);
-    }
+//    #[Route('/new/{id}', name: 'app_idea_new', methods: ['GET', 'POST'])]
+//    public function new(Project $project, Request $request, IdeaRepository $ideaRepository): Response
+//    {
+//        $idea = new Idea();
+//        $form = $this->createForm(IdeaType::class, $idea);
+//        $form->handleRequest($request);
+//        if ($form->isSubmitted() && $form->isValid()) {
+//            $idea->setUser($this->getUser());
+//            $idea->setProject($project);
+//            $ideaRepository->save($idea, true);
+//            $this->addFlash('success', 'Success:  New idea created');
+//            return $this->redirectToRoute('app_project_show', [
+//                'id' => $project->getId(),
+//                'orderBy' => 'show',
+//            ], Response::HTTP_SEE_OTHER);
+//        }
+//
+//        return $this->renderForm('idea/new.html.twig', [
+//            'idea' => $idea,
+//            'form' => $form,
+//            'project' => $project,
+//            'edit' => true,
+//        ]);
+//    }
 
     #[Route('/{id}', name: 'app_idea_show', methods: ['GET', 'POST'])]
     public function show(

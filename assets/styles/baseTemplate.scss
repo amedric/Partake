@@ -21,7 +21,9 @@
 }
 
 .ptk-headerContainer{
-    display: grid;
+    position: relative;
+    display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     height: 220px;
@@ -53,10 +55,10 @@
 }
 
 .ptk-modalContainer{
+    position: absolute;
     display: flex;
     justify-content: center;
     align-items: center;
-    position: absolute;
     width: 100vw;
     height: 100vh;
     opacity: 0;

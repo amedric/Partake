@@ -24,34 +24,32 @@ use Symfony\Component\Mime\Email;
 #[Route('/project')]
 class ProjectController extends AbstractController
 {
-
-    #[Route('/new', name: 'app_project_new', methods: ['GET', 'POST'])]
-    public function new(Request $request, ProjectRepository $projectRepository, MailerInterface $mailer,): Response
-    {
-        $project = new Project();
-        $form = $this->createForm(Project1Type::class, $project);
-        $form->handleRequest($request);
-
-        /** @var User $user */
-        $user = $this->getUser();
-
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $project->setUser($user);
-            $today = new DateTime();
-            $project->setCreatedAt($today);
-            $projectRepository->save($project, true);
-            $this->addFlash('success', 'Success: New project created');
-
-            return $this->redirectToRoute('app_home', [], Response::HTTP_SEE_OTHER);
-        }
-
-        return $this->renderForm('project/new.html.twig', [
-            'project' => $project,
-            'form' => $form,
-            'edit' => true,
-        ]);
-    }
+//    #[Route('/new', name: 'app_project_new', methods: ['GET', 'POST'])]
+//    public function new(Request $request, ProjectRepository $projectRepository, MailerInterface $mailer,): Response
+//    {
+//        $project = new Project();
+//        $form = $this->createForm(Project1Type::class, $project);
+//        $form->handleRequest($request);
+//
+//        /** @var User $user */
+//        $user = $this->getUser();
+//
+//        if ($form->isSubmitted() && $form->isValid()) {
+//            $project->setUser($user);
+//            $today = new DateTime();
+//            $project->setCreatedAt($today);
+//            $projectRepository->save($project, true);
+//            $this->addFlash('success', 'Success: New project created');
+//
+//            return $this->redirectToRoute('app_home', [], Response::HTTP_SEE_OTHER);
+//        }
+//
+//        return $this->renderForm('project/new.html.twig', [
+//            'project' => $project,
+//            'form' => $form,
+//            'edit' => true,
+//        ]);
+//    }
 
     #[Route('/{id}/{orderBy}', name: 'app_project_show', methods: ['GET', 'POST'])]
     public function show(
@@ -65,24 +63,8 @@ class ProjectController extends AbstractController
         $currentUser = $this->getUser();
         $projectCreateBy = $project->getUser();
         $userAuthorized = $project->getUsersSelectOnProject()->contains($currentUser);
-        $ideas = $ideaRepository->findAllIdeasByProjectId($project->getId(), 'createdAt', 'ASC');
-
-        $idea = new Idea();
-        $formNew = $this->createForm(IdeaType::class, $idea);
-        $formNew->handleRequest($request);
 
         if ($currentUser === $projectCreateBy || $currentUser == $userAuthorized) {
-            if ($formNew->isSubmitted() && $formNew->isValid()) {
-                $idea->setUser($this->getUser());
-                $idea->setProject($project);
-                $ideaRepository->save($idea, true);
-                $this->addFlash('success', 'Success:  New idea created');
-                return $this->redirectToRoute('app_project_show', [
-                    'id' => $project->getId(),
-                    'orderBy' => 'show',
-                ], Response::HTTP_SEE_OTHER);
-            }
-
             switch ($orderBy) {
                 case 'show':
                     $ideas = $ideaRepository->findAllIdeasByProjectId($project->getId(), 'createdAt', 'ASC');
@@ -106,37 +88,93 @@ class ProjectController extends AbstractController
                     break;
             }
 
+            //------------------ add new idea form ----------------------------
+            $idea = new Idea();
+            $formNew = $this->createForm(IdeaType::class, $idea);
+            $formNew->handleRequest($request);
+            //------------------ edit project form ----------------------------
+            $formEdit = $this->createForm(ProjectEditType::class, $project);
+            $formEdit->handleRequest($request);
+
+            //--------------- if new idea form is submitted --------------------
+            if ($formNew->isSubmitted() && $formNew->isValid()) {
+                $idea->setUser($this->getUser());
+                $idea->setProject($project);
+                $ideaRepository->save($idea, true);
+                $this->addFlash('success', 'Success:  New idea created');
+                return $this->redirectToRoute('app_project_show', [
+                    'id' => $project->getId(),
+                    'orderBy' => 'show',
+                    'project' => $project,
+                    'ideas' => $ideas,
+                    'edit' => true,
+                ], Response::HTTP_SEE_OTHER);
+            }
+
+//            //--------------- if edit project form is submitted --------------------
+            if ($formEdit->isSubmitted() && $formEdit->isValid()) {
+//                $project ->setCategory($project->getCategory()->getId());
+                $projectRepository->save($project, true);
+                $this->addFlash('success', 'Success: Project modified');
+                return $this->redirectToRoute('app_project_show', [
+                    'id' => $project->getId(),
+                    'orderBy' => 'show',
+                    'project' => $project,
+                    'ideas' => $ideas,
+                    'edit' => true,
+                ], Response::HTTP_SEE_OTHER);
+            }
+
             return $this->render('project/show.html.twig', [
                 'project' => $project,
                 'ideas' => $ideas,
                 'formNew' => $formNew->createView(),
+                'formEdit' => $formEdit->createView(),
                 'edit' => true,
             ]);
         } else {
-            $this->addFlash('notice', 'You do not have permission to access this project, please contact your administrator');
+            $this->addFlash(
+                'notice',
+                'You do not have permission to access this project, please contact your administrator'
+            );
             return $this->redirectToRoute('app_home');
         }
     }
 
-    #[Route('/{id}/edit', name: 'app_project_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Project $project, ProjectRepository $projectRepository): Response
+//    #[Route('/{id}/edit', name: 'app_project_edit', methods: ['GET', 'POST'])]
+//    public function edit(Request $request, Project $project, ProjectRepository $projectRepository): Response
+//    {
+//        $form = $this->createForm(ProjectEditType::class, $project);
+//        $form->handleRequest($request);
+//
+//        if ($form->isSubmitted() && $form->isValid()) {
+//            $projectRepository->save($project, true);
+//            $this->addFlash('success', 'Success: Project modified');
+//            return $this->redirectToRoute('app_project_show', [
+//                'id' => $project->getId(),
+//            ], Response::HTTP_SEE_OTHER);
+//        }
+//
+//        return $this->renderForm('project/edit.html.twig', [
+//            'project' => $project,
+//            'form' => $form,
+//            'edit' => true,
+//        ]);
+//    }
+
+    #[Route('/{id}/delete', name: 'app_project_delete', methods: ['POST'])]
+    public function projectDelete(Request $request, User $user, Project $project, ProjectRepository $projectRepository): Response
     {
-        $form = $this->createForm(ProjectEditType::class, $project);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $projectRepository->save($project, true);
-            $this->addFlash('success', 'Success: Project modified');
-            return $this->redirectToRoute('app_project_show', [
-                'id' => $project->getId(),
-            ], Response::HTTP_SEE_OTHER);
+        if ($this->isGranted('ROLE_ADMIN')) {
+            if ($this->isCsrfTokenValid('delete' . $project->getId(), $request->request->get('_token'))) {
+                $projectRepository->remove($project, true);
+                $this->addFlash('notice', 'Project deleted');
+            }
+            return $this->redirectToRoute('app_admin_project_list', [], Response::HTTP_SEE_OTHER);
+        } else {
+            $this->addFlash('danger', 'You do not have access rights, please contact your administrator');
+            return $this->redirectToRoute('app_home', [], Response::HTTP_SEE_OTHER);
         }
-
-        return $this->renderForm('project/edit.html.twig', [
-            'project' => $project,
-            'form' => $form,
-            'edit' => true,
-        ]);
     }
 
     #[Route('/{id}/show/archived', name: 'app_project_archived', methods: ['GET', 'POST'])]
@@ -161,7 +199,6 @@ class ProjectController extends AbstractController
             $project->setIsArchived(false);
             $projectRepository->save($project, true);
             $this->addFlash('notice', 'Success: Project unarchived');
-
         }
 
         return $this->redirectToRoute('app_project_show', [
