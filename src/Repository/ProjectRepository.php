@@ -77,7 +77,7 @@ class ProjectRepository extends ServiceEntityRepository
 
     public function findIdeasCountLikes(int $id): array
     {
-      $conn = $this->getEntityManager()->getConnection();
+        $conn = $this->getEntityManager()->getConnection();
 
         $sql = '
             select project.id,
@@ -153,7 +153,7 @@ class ProjectRepository extends ServiceEntityRepository
         return $resultSet->fetchAllAssociative();
     }
 
-    public function findIdeasCountComments(int $id): array
+    public function findIdeasCountComments(): array
     {
         $conn = $this->getEntityManager()->getConnection();
 
@@ -168,12 +168,11 @@ class ProjectRepository extends ServiceEntityRepository
             from project
             left join idea on project.id = idea.project_id
             left join comment on idea.id = comment.idea_id
-            where project.id = :id
             group by comment.idea_id
             order by ideaComments desc
             ';
         $stmt = $conn->prepare($sql);
-        $resultSet = $stmt->executeQuery(['id' => $id]);
+        $resultSet = $stmt->executeQuery();
 
         // returns an array of arrays (i.e. a raw data set)
         return $resultSet->fetchAllAssociative();

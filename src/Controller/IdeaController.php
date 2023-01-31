@@ -11,6 +11,7 @@ use App\Form\IdeaType;
 use App\Repository\CommentRepository;
 use App\Repository\IdeaRepository;
 use App\Repository\LikeRepository;
+use App\Repository\ProjectRepository;
 use DateTime;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -22,7 +23,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
 #[Route('/idea')]
 class IdeaController extends AbstractController
 {
-
     #[Route('/new/{id}', name: 'app_idea_new', methods: ['GET', 'POST'])]
     public function new(Project $project, Request $request, IdeaRepository $ideaRepository): Response
     {
@@ -53,7 +53,8 @@ class IdeaController extends AbstractController
         Idea $idea,
         IdeaRepository $ideaRepository,
         Request $request,
-        CommentRepository $commentRepository
+        CommentRepository $commentRepository,
+        ProjectRepository $projectRepository,
     ): Response {
         $user = $this->getUser();
         $idea->setIdeaViews($idea->getIdeaViews() + 1);
@@ -76,12 +77,14 @@ class IdeaController extends AbstractController
         }
 
         $comments = $commentRepository->findAll();
+        $nbComments = $projectRepository->findIdeasCountComments();
         return $this->render('idea/show.html.twig', [
             'idea' => $idea,
             'user' => $user,
             'form' => $form->createView(),
             'edit' => true,
             'comments' => $comments,
+            'nbComments' => $nbComments,
         ]);
     }
 
