@@ -18,9 +18,10 @@ class ProjectEditType extends AbstractType
         $builder
             ->add('title', TextType::class)
             ->add('content', TextareaType::class)
-            ->add('category', EntityType::class, [
-                'class' => Category::class,
+            ->add('category', null, [
+                'placeholder' => 'Choose a department',
                 'choice_label' => 'title',
+                'attr' => ['disabled' => true]
             ])
         ;
     }

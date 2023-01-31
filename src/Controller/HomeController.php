@@ -2,7 +2,10 @@
 
 namespace App\Controller;
 
+
+use App\Entity\Project;
 use App\Entity\User;
+use App\Form\Project1Type;
 use App\Form\SearchContentType;
 use App\Repository\CategoryRepository;
 use App\Repository\IdeaRepository;
@@ -12,7 +15,9 @@ use App\Service\ChartStats;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use DateTime;
 
 #[Route('/home', name: '')]
 class HomeController extends AbstractController
@@ -24,10 +29,20 @@ class HomeController extends AbstractController
         ProjectRepository $projectRepository,
         CategoryRepository $categoryRepository,
         IdeaRepository $ideaRepository,
-        ChartStats $chartStats
+        ChartStats $chartStats,
+        MailerInterface $mailer
     ): Response {
+        //----------------------- search bar form -----------------
         $form = $this->createForm(SearchContentType::class);
         $form->handleRequest($request);
+
+        //----------------------- new project form -----------------
+        /** @var User $user */
+        $user = $this->getUser();
+        $project = new Project();
+        $formNew = $this->createForm(Project1Type::class, $project);
+        $formNew->handleRequest($request);
+
         if ($form->isSubmitted() && $form->isValid()) {
             $search = $form->getData()['search'];
             $projects = $projectRepository->findLikeProject($search);
@@ -41,6 +56,16 @@ class HomeController extends AbstractController
                 'form' => $form->createView(),
             ]);
         } else {
+            //----------------------- if project form is submitted -----------------
+            if ($formNew->isSubmitted() && $formNew->isValid()) {
+                $project->setUser($user);
+                $today = new DateTime();
+                $project->setCreatedAt($today);
+                $projectRepository->save($project, true);
+                $this->addFlash('success', 'Success: New project created');
+
+                return $this->redirectToRoute('app_home', [], Response::HTTP_SEE_OTHER);
+            }
             $projects = $projectRepository->findAllProjects('createdAt', 'ASC');
             $categories = $categoryRepository->findAll();
         }
@@ -54,11 +79,13 @@ class HomeController extends AbstractController
             'projects' => $projects,
             'categories' => $categories,
             'form' => $form->createView(),
+            'formNew' => $formNew->createView(),
             'projectChart1' => $projectChart1,
             'ideaChart1' => $ideaChart1,
             'projectChart2' => $projectChart2,
             'ideaChart2' => $ideaChart2,
             "authorizedProjects" => $authorizedProjects,
+            'edit' => true
         ]);
     }
 
@@ -67,11 +94,21 @@ class HomeController extends AbstractController
         Request $request,
         ProjectRepository $projectRepository,
         CategoryRepository $categoryRepository,
+        IdeaRepository $ideaRepository,
         ChartStats $chartStats,
-        string $orderBy,
+        MailerInterface $mailer,
+        string $orderBy
     ): Response {
+        //----------------------- search bar form -----------------
         $form = $this->createForm(SearchContentType::class);
         $form->handleRequest($request);
+
+        //----------------------- new project form -----------------
+        /** @var User $user */
+        $user = $this->getUser();
+        $project = new Project();
+        $formNew = $this->createForm(Project1Type::class, $project);
+        $formNew->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $search = $form->getData()['search'];
             $projects = $projectRepository->findLikeProject($search);
@@ -106,11 +143,13 @@ class HomeController extends AbstractController
             'projects' => $projects,
             'categories' => $categories,
             'form' => $form->createView(),
+            'formNew' => $formNew->createView(),
             'projectChart1' => $projectChart1,
             'ideaChart1' => $ideaChart1,
             'projectChart2' => $projectChart2,
             'ideaChart2' => $ideaChart2,
             "authorizedProjects" => $authorizedProjects,
+            'edit' => true
         ]);
     }
 }

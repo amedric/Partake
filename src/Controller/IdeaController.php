@@ -23,42 +23,48 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
 class IdeaController extends AbstractController
 {
 
-    #[Route('/new/{id}', name: 'app_idea_new', methods: ['GET', 'POST'])]
-    public function new(Project $project, Request $request, IdeaRepository $ideaRepository): Response
-    {
-        $idea = new Idea();
-        $form = $this->createForm(IdeaType::class, $idea);
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-            $idea->setUser($this->getUser());
-            $idea->setProject($project);
-            $ideaRepository->save($idea, true);
-            $this->addFlash('success', 'Success:  New idea created');
-            return $this->redirectToRoute('app_project_show', [
-                'id' => $project->getId(),
-                'orderBy' => 'show',
-            ], Response::HTTP_SEE_OTHER);
-        }
+//    #[Route('/new/{id}', name: 'app_idea_new', methods: ['GET', 'POST'])]
+//    public function new(Project $project, Request $request, IdeaRepository $ideaRepository): Response
+//    {
+//        $idea = new Idea();
+//        $form = $this->createForm(IdeaType::class, $idea);
+//        $form->handleRequest($request);
+//        if ($form->isSubmitted() && $form->isValid()) {
+//            $idea->setUser($this->getUser());
+//            $idea->setProject($project);
+//            $ideaRepository->save($idea, true);
+//            $this->addFlash('success', 'Success:  New idea created');
+//            return $this->redirectToRoute('app_project_show', [
+//                'id' => $project->getId(),
+//                'orderBy' => 'show',
+//            ], Response::HTTP_SEE_OTHER);
+//        }
+//
+//        return $this->renderForm('idea/new.html.twig', [
+//            'idea' => $idea,
+//            'form' => $form,
+//            'project' => $project,
+//            'edit' => true,
+//        ]);
+//    }
 
-        return $this->renderForm('idea/new.html.twig', [
-            'idea' => $idea,
-            'form' => $form,
-            'project' => $project,
-            'edit' => true,
-        ]);
-    }
-
+    /**
+     * @throws Exception
+     */
     #[Route('/{id}', name: 'app_idea_show', methods: ['GET', 'POST'])]
     public function show(
         Idea $idea,
         IdeaRepository $ideaRepository,
         Request $request,
-        CommentRepository $commentRepository
+        CommentRepository $commentRepository,
+        ProjectRepository $projectRepository,
+        LikeRepository $likeRepository,
     ): Response {
         $user = $this->getUser();
         $idea->setIdeaViews($idea->getIdeaViews() + 1);
         $ideaRepository->save($idea, true);
-
+        $likedUser = $likeRepository->findLikeByUser($user->getId(), $idea->getId());
+        $ideaLikes = count($likeRepository->findBy(['idea' => $idea->getId()]));
         $comment = new Comment();
         $form = $this->createForm(CommentType::class, $comment);
         $form->handleRequest($request);
@@ -76,12 +82,16 @@ class IdeaController extends AbstractController
         }
 
         $comments = $commentRepository->findAll();
+        $nbComments = $projectRepository->findIdeasCountComments();
         return $this->render('idea/show.html.twig', [
             'idea' => $idea,
             'user' => $user,
-            'form' => $form->createView(),
+            'formComm' => $form->createView(),
             'edit' => true,
             'comments' => $comments,
+            'nbComments' => $nbComments,
+            'likedUser' => $likedUser,
+            'ideaLikes' => $ideaLikes
         ]);
     }
 
@@ -142,7 +152,8 @@ class IdeaController extends AbstractController
         $like->setUser($this->getUser());
         $likeRepository->save($like, true);
         return $this->redirectToRoute(
-            'app_user_show', [
+            'app_user_show',
+            [
                 'id' => $this->getUser()->getId(),
                 'orderBy' => $orderBy,
                 'dataType' => $dataType
@@ -157,12 +168,12 @@ class IdeaController extends AbstractController
         int $id,
         string $orderBy,
         string $dataType
-    ): Response
-    {
+    ): Response {
         $ideaUser = $likeRepository->findOneBy(['user' => $this->getUser(), 'idea' => $idea->getId()]);
         $likeRepository->remove($ideaUser, true);
         return $this->redirectToRoute(
-            'app_user_show', [
+            'app_user_show',
+            [
                 'id' => $this->getUser()->getId(),
                 'orderBy' => $orderBy,
                 'dataType' => $dataType

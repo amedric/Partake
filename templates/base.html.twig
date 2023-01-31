@@ -13,10 +13,6 @@
         {% block stylesheets %}
             {{ encore_entry_link_tags('app') }}
         {% endblock %}
-
-        {% block javascripts %}
-            {{ encore_entry_script_tags('app') }}
-        {% endblock %}
     </head>
     <body>
         <div class="ptk-stickyContainer">
@@ -42,8 +38,14 @@
                 {% block underFilters %}{% endblock %}
             </div>
         </div>
+        <div class="ptk-modalContainer">
+            {% block modal %}{% endblock %}
+        </div>
         <div class="ptk-bodyContainer">
             {% block body %}{% endblock %}
         </div>
+        {% block javascripts %}
+            {{ encore_entry_script_tags('app') }}
+        {% endblock %}
     </body>
 </html>

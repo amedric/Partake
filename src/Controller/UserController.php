@@ -30,9 +30,14 @@ class UserController extends AbstractController
         string $orderBy,
         string $dataType
     ): Response {
+
+        //----------------- search form --------------------------------
+
         $form = $this->createForm(SearchContentType::class);
         $form->handleRequest($request);
-
+        //----------------- edit profile form ---------------------------------
+        $formEdit = $this->createForm(UserType::class, $user);
+        $formEdit->handleRequest($request);
         // -------------------- set where clause parameters --------------------
         switch ($dataType) {
             case 'Projects and Ideas':
@@ -45,48 +50,85 @@ class UserController extends AbstractController
                 $wherePara = "'idea'";
                 break;
         }
+
+        //--------------- if search form is submitted ---------------------------
         if ($form->isSubmitted() && $form->isValid()) {
-            $search = $form->getData()['search'];
-            $projectsIdeas = $userRepository->findProjectsIdeasForUser($user->getId(), 'createdAt', 'ASC', $wherePara);
+                $search = $form->getData()['search'];
+                $projectsIdeas = $userRepository->findProjectsIdeasForUser(
+                    $user->getId(),
+                    'createdAt',
+                    'ASC',
+                    $wherePara
+                );
         } else {
-            // -------------------- set order by parameters --------------------
+                // -------------------- set order by parameters --------------------
             switch ($orderBy) {
                 case 'newest':
-                    $projectsIdeas = $userRepository->findProjectsIdeasForUser($user->getId(), 'createdAt', 'DESC', $wherePara);
+                    $projectsIdeas = $userRepository->findProjectsIdeasForUser(
+                        $user->getId(),
+                        'createdAt',
+                        'DESC',
+                        $wherePara
+                    );
                     break;
                 case 'oldest':
-                    $projectsIdeas = $userRepository->findProjectsIdeasForUser($user->getId(), 'createdAt', 'ASC', $wherePara);
+                    $projectsIdeas = $userRepository->findProjectsIdeasForUser(
+                        $user->getId(),
+                        'createdAt',
+                        'ASC',
+                        $wherePara
+                    );
                     break;
                 case 'views':
-                    $projectsIdeas = $userRepository->findProjectsIdeasForUser($user->getId(), 'views', 'DESC', $wherePara);
+                    $projectsIdeas = $userRepository->findProjectsIdeasForUser(
+                        $user->getId(),
+                        'views',
+                        'DESC',
+                        $wherePara
+                    );
                     break;
+            }
+            //--------------- if edit profile form is submitted --------------------------------
+            if ($formEdit->isSubmitted() && $formEdit->isValid()) {
+//                    $passwordUser = $user->getPassword();
+//                    $user->setPassword(password_hash($passwordUser, PASSWORD_DEFAULT));
+                $userRepository->save($user, true);
+
+                return $this->redirectToRoute('app_user_show', [
+                    'user' => $user,
+                    'projectsIdeas' => $projectsIdeas,
+                    'form' => $form->createView(),
+                    'formEdit' => $formEdit->createView()
+                ], Response::HTTP_SEE_OTHER);
             }
         }
 
         return $this->render('user/show.html.twig', [
             'user' => $user,
             'projectsIdeas' => $projectsIdeas,
-            'form' => $form->createView()
+            'form' => $form->createView(),
+            'formEdit' => $formEdit->createView(),
+            'edit' => true
         ]);
     }
 
-    #[Route('/{id}/edit', name: 'app_user_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, User $user, UserRepository $userRepository): Response
-    {
-        $form = $this->createForm(UserType::class, $user);
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-            $passwordUser = $user->getPassword();
-            $user->setPassword(password_hash($passwordUser, PASSWORD_DEFAULT));
-            $userRepository->save($user, true);
-
-            return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);
-        }
-
-        return $this->renderForm('user/edit.html.twig', [
-            'user' => $user,
-            'form' => $form,
-            'edit' => true,
-        ]);
-    }
+//    #[Route('/{id}/edit', name: 'app_user_edit', methods: ['GET', 'POST'])]
+//    public function edit(Request $request, User $user, UserRepository $userRepository): Response
+//    {
+//        $form = $this->createForm(UserType::class, $user);
+//        $form->handleRequest($request);
+//        if ($form->isSubmitted() && $form->isValid()) {
+//            $passwordUser = $user->getPassword();
+//            $user->setPassword(password_hash($passwordUser, PASSWORD_DEFAULT));
+//            $userRepository->save($user, true);
+//
+//            return $this->redirectToRoute('app_user_index', [], Response::HTTP_SEE_OTHER);
+//        }
+//
+//        return $this->renderForm('user/edit.html.twig', [
+//            'user' => $user,
+//            'form' => $form,
+//            'edit' => true,
+//        ]);
+//    }
 }

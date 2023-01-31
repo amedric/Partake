@@ -13,4 +13,5 @@ import './bootstrap';
 import '/assets/js/horizontalScroll.js';
 import '/assets/js/charts.js';
 import '/assets/js/flashMessages.js';
+import '/assets/js/modal.js';
 
