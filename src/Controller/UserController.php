@@ -104,7 +104,8 @@ class UserController extends AbstractController
             'user' => $user,
             'projectsIdeas' => $projectsIdeas,
             'form' => $form->createView(),
-            'formEdit' => $formEdit->createView()
+            'formEdit' => $formEdit->createView(),
+            'edit' => true
         ]);
     }
 

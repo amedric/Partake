@@ -98,7 +98,9 @@ class ProjectRepository extends ServiceEntityRepository
             ';
         $stmt = $conn->prepare($sql);
         $resultSet = $stmt->executeQuery(['id' => $id]);
-        
+        return $resultSet->fetchAllAssociative();
+    }
+
 //    public function findProjectDesc(): array
 //    {
 //        $conn = $this->getEntityManager()->getConnection();
@@ -268,20 +270,6 @@ class ProjectRepository extends ServiceEntityRepository
         return $resultSet->fetchAllAssociative();
     }
 
-   public function countNumberProjects(): array
-    {
-        $conn = $this->getEntityManager()->getConnection();
-
-        $sql = '
-            select count(*) as nbProjects from project;
-            ';
-        $stmt = $conn->prepare($sql);
-        $resultSet = $stmt->executeQuery();
-
-        // returns an array of arrays (i.e. a raw data set)
-        return $resultSet->fetchAllAssociative();
-    }
-    
     public function countTotalProjectViews(): array
     {
         $conn = $this->getEntityManager()->getConnection();

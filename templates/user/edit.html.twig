@@ -1,16 +1,13 @@
-{% extends 'base.html.twig' %}
-{% block title %}Edit User{% endblock %}
 
-{% block body %}
-    <div class="formUser">
-        <div class="formUserTitle">
-            <h1>Edit Profile</h1>
-        </div>
-        <div class="formUserBody">
-            {{ include('user/_form.html.twig', {'button_label': 'Save'}) }}
-        </div>
-        <a href="{{ path('app_user_show', {'id': app.user.id}) }}" class="formUserClose">X</a>
-    </div>
+{#    <div class="formUser">#}
+{#        <div class="formUserTitle">#}
+{#            <h1>Edit Profile</h1>#}
+{#        </div>#}
+{#        <div class="formUserBody">#}
+{#            {{ include('user/_form.html.twig', {'button_label': 'Save'}) }}#}
+{#        </div>#}
+{#        <a href="{{ path('app_user_show', {'id': app.user.id, 'orderBy': 'oldest', 'dataType': 'Projects and Ideas'}) }}" class="formUserClose">X</a>#}
+{#    </div>#}
     <div>
         <div class="ptk-formRow ptk-formContainerMargins">
             {{ form_label(formEdit.firstname, null, {'label_attr': {'class': 'ptk-formLabels'}}) }}
@@ -42,3 +39,4 @@
     </div>
     {{ form_end(formEdit, {'render_rest': false }) }}
 </div>
+
