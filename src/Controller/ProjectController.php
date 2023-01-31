@@ -62,13 +62,12 @@ class ProjectController extends AbstractController
 
     #[Route('/{id}/{orderBy}', name: 'app_project_show', methods: ['GET', 'POST'])]
     public function show(
-        Project           $project,
-        IdeaRepository    $ideaRepository,
+        Project $project,
+        IdeaRepository $ideaRepository,
         ProjectRepository $projectRepository,
-        int               $id,
-        string            $orderBy
-    ): Response
-    {
+        int $id,
+        string $orderBy
+    ): Response {
         $currentUser = $this->getUser();
         $projectCreateBy = $project->getUser();
         $userAuthorized = $project->getUsersSelectOnProject()->contains($currentUser);
@@ -101,7 +100,10 @@ class ProjectController extends AbstractController
                 'ideas' => $ideas,
             ]);
         } else {
-            $this->addFlash('notice', 'You do not have permission to access this project, please contact your administrator');
+            $this->addFlash(
+                'notice',
+                'You do not have permission to access this project, please contact your administrator'
+            );
             return $this->redirectToRoute('app_home');
         }
     }

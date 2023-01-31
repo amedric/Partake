@@ -9,6 +9,6 @@
         <div class="formUserBody">
             {{ include('user/_form.html.twig', {'button_label': 'Save'}) }}
         </div>
-        <a href="{{ path('app_user_show', {'id': app.user.id}) }}" class="formUserClose">X</a>
+        <a href="{{ path('app_user_show', {'id': app.user.id, 'orderBy': 'oldest', 'dataType': 'Projects and Ideas'}) }}" class="formUserClose">X</a>
     </div>
 {% endblock %}
