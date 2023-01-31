@@ -11,6 +11,7 @@ use App\Form\IdeaType;
 use App\Repository\CommentRepository;
 use App\Repository\IdeaRepository;
 use App\Repository\LikeRepository;
+use App\Repository\ProjectRepository;
 use App\Repository\UserRepository;
 use DateTime;
 use Doctrine\DBAL\Exception;
@@ -24,7 +25,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
 #[Route('/idea')]
 class IdeaController extends AbstractController
 {
-
     #[Route('/new/{id}', name: 'app_idea_new', methods: ['GET', 'POST'])]
     public function new(Project $project, Request $request, IdeaRepository $ideaRepository): Response
     {
@@ -59,6 +59,7 @@ class IdeaController extends AbstractController
         IdeaRepository $ideaRepository,
         Request $request,
         CommentRepository $commentRepository,
+        ProjectRepository $projectRepository,
         LikeRepository $likeRepository,
     ): Response {
         $user = $this->getUser();
@@ -83,12 +84,14 @@ class IdeaController extends AbstractController
         }
 
         $comments = $commentRepository->findAll();
+        $nbComments = $projectRepository->findIdeasCountComments();
         return $this->render('idea/show.html.twig', [
             'idea' => $idea,
             'user' => $user,
             'form' => $form->createView(),
             'edit' => true,
             'comments' => $comments,
+            'nbComments' => $nbComments,
             'likedUser' => $likedUser,
             'ideaLikes' => $ideaLikes
         ]);
