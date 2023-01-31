@@ -5,27 +5,46 @@
 {% block header %}
     <div class="ptk-titleContainer">
         <h1 class="ptk-titleHeader">Results</h1>
+        <h1 class="ptk-titleHeader">Results</h1>
     </div>
 {% endblock %}
 
-{% block underFilters %}
-    <p class="ptk-blockDescription">Search results :</p>
-{% endblock %}
-
 {% block body %}
+<div class="ptk-resultsBlock">
 
-    <p>Users :</p>
+    {% if users|length > 0 %}
+    <h1 class="ptk-category">Users :</h1>
     <ul>{% for user in users %}
-            <li> <a href="{{ path('app_user_show', {id: user.id, 'orderBy':'oldest','dataType': 'Projects and Ideas'}) }}"> {{ user.lastname }} </a></li>
+            <li> <a href="{{ path('app_user_show', {id: user.id, 'orderBy':'oldest','dataType': 'Projects and Ideas'}) }}"
+                    class="ptk-resultsLinks">{{ user.lastname }}</a></li>
         {% endfor %}</ul>
-    <p>Projects :</p>
-    <ul>{% for project in projects %}
-         <li> <a href="{{ path('app_project_show', {id: project.id, 'orderBy':'show'}) }}">{{ project.title }}</a> </li>
-        {% endfor %}</ul>
-    <p>Ideas :</p>
+    {% else %}
+    <h1 class="ptk-category">Ideas :</h1>
+    <p>There is no user currently matching with your research.</p>
+    {% endif %}
+
+    {% if projects|length > 0 %}
+        <h1 class="ptk-category">Projects :</h1>
+        <ul>{% for project in projects %}
+                <li> <a href="{{ path('app_project_show', {id: project.id, 'orderBy':'show'}) }}"
+                        class="ptk-resultsLinks">{{ project.title }}</a></li>
+            {% endfor %}</ul>
+    {% else %}
+        <h1 class="ptk-category">Projects :</h1>
+        <p>There is no project currently matching with your research.</p>
+    {% endif %}
+
+    {% if ideas|length > 0 %}
+    <h1 class="ptk-category">Ideas :</h1>
     <ul>{% for idea in ideas %}
-            <li><a href="{{ path('app_idea_show',{'id': idea.id}) }}">{{ idea.title }}</a></li>
+            <li><a href="{{ path('app_idea_show',{'id': idea.id}) }}"
+                   class="ptk-resultsLinks">{{ idea.title }}</a></li>
         {% endfor %}</ul>
+    {% else %}
+        <h1 class="ptk-category">Ideas :</h1>
+        <p>There is no idea currently matching with your research.</p>
+    {% endif %}
+</div>
 
 {% endblock %}
 
