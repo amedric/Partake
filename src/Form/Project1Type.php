@@ -18,7 +18,9 @@ class Project1Type extends AbstractType
     {
         $builder
             ->add('title', TextType::class)
-            ->add('content', TextareaType::class)
+            ->add('content', TextareaType::class, [
+                'attr' => ['maxlength' => 500]
+            ])
             ->add('createdAt')
             ->add('projectViews')
             ->add('projectColor')
