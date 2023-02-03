@@ -123,7 +123,10 @@ class ProjectController extends AbstractController
             }
 
             if (isset($_POST["deleteProject"])) {
-                $this->addFlash('notice', 'Notice: Project deleted');
+                if ($this->isCsrfTokenValid('delete' . $project->getId(), $request->request->get('_token'))) {
+                    $projectRepository->remove($project, true);
+                    $this->addFlash('notice', 'Project deleted');
+                }
                 return $this->redirectToRoute('app_home', [], Response::HTTP_SEE_OTHER);
             }
 
@@ -176,7 +179,7 @@ class ProjectController extends AbstractController
                 $projectRepository->remove($project, true);
                 $this->addFlash('notice', 'Project deleted');
             }
-            return $this->redirectToRoute('app_admin_project_list', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_home', [], Response::HTTP_SEE_OTHER);
         } else {
             $this->addFlash('danger', 'You do not have access rights, please contact your administrator');
             return $this->redirectToRoute('app_home', [], Response::HTTP_SEE_OTHER);
