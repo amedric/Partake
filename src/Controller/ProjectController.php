@@ -106,23 +106,25 @@ class ProjectController extends AbstractController
                     'id' => $project->getId(),
                     'orderBy' => 'show',
                     'project' => $project,
-                    'ideas' => $ideas,
                     'edit' => true,
                 ], Response::HTTP_SEE_OTHER);
             }
 
 //            //--------------- if edit project form is submitted --------------------
             if ($formEdit->isSubmitted() && $formEdit->isValid()) {
-//                $project ->setCategory($project->getCategory()->getId());
                 $projectRepository->save($project, true);
                 $this->addFlash('success', 'Success: Project modified');
                 return $this->redirectToRoute('app_project_show', [
                     'id' => $project->getId(),
                     'orderBy' => 'show',
                     'project' => $project,
-                    'ideas' => $ideas,
                     'edit' => true,
                 ], Response::HTTP_SEE_OTHER);
+            }
+
+            if (isset($_POST["deleteProject"])) {
+                $this->addFlash('notice', 'Notice: Project deleted');
+                return $this->redirectToRoute('app_home', [], Response::HTTP_SEE_OTHER);
             }
 
             return $this->render('project/show.html.twig', [
@@ -163,8 +165,12 @@ class ProjectController extends AbstractController
 //    }
 
     #[Route('/{id}/delete', name: 'app_project_delete', methods: ['POST'])]
-    public function projectDelete(Request $request, User $user, Project $project, ProjectRepository $projectRepository): Response
-    {
+    public function projectDelete(
+        Request $request,
+        User $user,
+        Project $project,
+        ProjectRepository $projectRepository
+    ): Response {
         if ($this->isGranted('ROLE_ADMIN')) {
             if ($this->isCsrfTokenValid('delete' . $project->getId(), $request->request->get('_token'))) {
                 $projectRepository->remove($project, true);
