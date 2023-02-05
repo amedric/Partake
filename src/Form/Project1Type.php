@@ -36,7 +36,7 @@ class Project1Type extends AbstractType
                     return $user->getFullName();
                 },
                 'group_by' => function (User $user) {
-                    return $user->getTeam();
+                    return $user->getCategory()->getTitle();
                 }
             ])
         ;
