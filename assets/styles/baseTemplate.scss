@@ -1,9 +1,10 @@
 //------------------- Base Template -------------------------------------------------------
 .ptk-stickyContainer{
-    background: #0042BF;
-    background: -webkit-linear-gradient(bottom, #0042BF, #013DB1);
-    background: -moz-linear-gradient(bottom, #0042BF, #013DB1);
-    background: linear-gradient(to top, #0042BF, #013DB1);
+    //background: #0042BF;
+    //background: -webkit-linear-gradient(bottom, #0042BF, #013DB1);
+    //background: -moz-linear-gradient(bottom, #0042BF, #013DB1);
+    //background: linear-gradient(to top, #0042BF, #013DB1);
+    background-color: $primaryGrey;
     position: sticky;
     top: 0;
     z-index: 2;
@@ -18,6 +19,7 @@
     width: 100vw;
     border-bottom: 2px solid #003ea8;
     box-shadow: rgba(0, 0, 0, 0.35) 0 1px 10px;
+    background-color: $primaryBlue;
 }
 
 .ptk-headerContainer{
@@ -26,8 +28,9 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 220px;
+    height: 35vh;
     width: 100vw;
+    background-color: #e1e1e1;
 }
 
 .ptk-filtersContainer{
@@ -37,8 +40,7 @@
     height: 50px;
     width: 100vw;
     margin: auto;
-    border-top: 2px solid #003ea8;
-    border-radius: 15px 15px 0 0;
+    //border-top: 2px solid #d2d2d2;
 }
 
 .ptk-containerSpaceBetween{
@@ -62,7 +64,7 @@
     width: 100vw;
     height: 100vh;
     opacity: 0;
-    z-index: 0;
+    z-index: -1;
     transition: ease-out 0.2s;
 }
 
@@ -74,6 +76,7 @@
 .ptk-bodyContainer{
     position: relative;
     width: 100vw;
+    background-color: #F3F3F3FF;
 }
 
 //------------------- Admin Base Template -------------------------------------------------------

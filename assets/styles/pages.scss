@@ -687,3 +687,51 @@
 .ptk-dropdownDatatype:hover .ptk-dropDownbtn {
     background-color: $primaryBlue;
 }
+
+
+
+//------------------------------------ Idea page ----------------------------------------
+
+.ptk-ideaUnderContentContainer{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.ptk-ideaCardStatsContainer{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    //height: 65px;
+    width: 215px;
+    border-radius: 0 0 10px 10px;
+}
+
+.ptk-ideaHeaderContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+}
+
+.ptk-ideaCommentsSection{
+    padding: 15px;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 100%;
+}
+
+.ptk-ideaCommentsContainer{
+    height: 100%;
+    width: 70%;
+}
+
+.ptk-ideaPostCommentContainer{
+    height: 100%;
+    width: 30%;
+}

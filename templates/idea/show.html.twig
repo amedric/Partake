@@ -2,74 +2,233 @@
 
 {% block title %}Idea{% endblock %}
 
-{% block body %}
-    <div class="ptk-ideaShowBlock">
-
-        <div class="ptk-ideaShowContainer">
-            <div class="ptk-ideaCloseContainer">
-                <a href="{{ path('app_project_show', {'id': idea.project.id, 'orderBy': 'show'}) }}" class="ptk-ideaCloseBttn">Close</a>
-                {% if user.id == idea.user.id %}
-                    <a href="{{ path('app_idea_edit', {'id': idea.id}) }}" class="ptk-ideaCloseBttn">edit</a>
-                {% endif %}
+{% block header %}
+    <div class="ptk-ideaHeaderContainer">
+        <div class="ptk-titleContainer">
+            <h1 class="ptk-ideaTitleHeader">{{ idea.title }}</h1>
+            <h1 class="ptk-ideaTitleHeader">{{ idea.title }}</h1>
+        </div>
+        <div class="ptk-underTitleBlock">
+            <p class="ptk-projectContent">{{ idea.content }}</p>
+        </div>
+        <div class="ptk-linksContainer">
+        </div>
+        <div class="ptk-ideaUnderContentContainer">
+            <div class="ptk-createdAtContainer">
+                <p class="ptk-createdAt">Created by:</p>
+                <p class="ptk-createdAtContent">{{ idea.user.fullName }}</p>
+                <p class="ptk-createdAt">on:</p>
+                <p class="ptk-createdAtContent">{{ idea.createdAt ? idea.createdAt|date('d-m-Y') : '' }}</p>
             </div>
-
-            <div class="ptk-ideaTitleContainer">
-                <h1 class="ptk-ideaTitle">{{ idea.title }}</h1>
-            </div>
-
-            <div class="ptk-ideaContentContainer">
-                <p class="ptk-ideaContent">{{ idea.content }}</p>
-            </div>
-
-            <div class="ptk-ideaInfoContainer">
-                <div class="ptk-cardStatsContainer">
-                    <div class="ptk-cardIconStats">
-                        <img src="{{ asset('build/images/like.png') }}" class="ptk-ideaInfoIcons" alt="likes">
-                        <p class="ptk-ideaStatsNo">25</p>
-                    </div>
-                    <div class="ptk-cardIconStats">
-                        <img src="{{ asset('build/images/comment.png') }}" class="ptk-ideaInfoIcons" alt="Comments">
-                        <p class="ptk-ideaStatsNo">{{ comments|length }}</p>
-                    </div>
-                    <div class="ptk-cardIconStats">
-                        <img src="{{ asset('build/images/view.png') }}" class="ptk-ideaInfoIcons" alt="Views">
-                        <p class="ptk-ideaStatsNo">{{ idea.ideaViews }}</p>
-                    </div>
+            <div class="ptk-ideaCardStatsContainer">
+                <div class="ptk-cardIconStats">
+                    <img src="{{ asset('build/images/like.png') }}" class="ptk-ideaInfoIcons" alt="likes">
+                    <p class="ptk-ideaStatsNo">25</p>
+                </div>
+                <div class="ptk-cardIconStats">
+                    <img src="{{ asset('build/images/comment.png') }}" class="ptk-ideaInfoIcons" alt="Comments">
+                    <p class="ptk-ideaStatsNo">{{ comments|length }}</p>
+                </div>
+                <div class="ptk-cardIconStats">
+                    <img src="{{ asset('build/images/view.png') }}" class="ptk-ideaInfoIcons" alt="Views">
+                    <p class="ptk-ideaStatsNo">{{ idea.ideaViews }}</p>
                 </div>
             </div>
-
-            <div class="ptk-ideaFilterContainer">
-                <a href="#" class="ptk-ideaFilters">Newest / </a>
-                <a href="#" class="ptk-ideaFilters">Oldest / </a>
-                <a href="#" class="ptk-ideaFilters">Most liked</a>
-            </div>
-
-            <div class="ptk-ideaCommentsContainer">
-                {% for comment in comments %}
-                    {% if comment.idea.id == idea.id %}
-                        <div class="ptk-ideaCommentsByUser">
-                            <a href="#" class="ptk-ideaCommentUser">{{ comment.user.firstname }} {{ comment.user.lastname }}</a>
-                            <p class="ptk-ideaComments">{{ comment.content }}</p>
-                            {% if app.user.id == comment.user.id %}
-                                <a href="{{ path('app_comment_edit', {id: comment.id}) }}">
-                                    <img src="{{ asset('build/images/modify-button-25.png') }}" alt="modify">
-                                </a>
-                                {{ include('comment/_delete_form.html.twig') }}
-                            {% endif %}
-                        </div>
-                    {% endif %}
-                {% endfor %}
-            </div>
-
-
-            <div class="ptk-ideaPostCommentContainer">
-                <h3 style="text-align: center;">Leave a comment</h3>
-
-                {{ include('comment/_form.html.twig') }}
-
-            </div>
-
         </div>
-
     </div>
 {% endblock %}
+
+{% block filters %}
+    <div class="ptk-filterContainer">
+        <p class="ptk-filterSeparators"> Order by: </p>
+        <a href="#" class="ptk-filterLinks">
+            <span class="ptk-linksHover">newest</span></a>
+        <p class="ptk-filterSeparators">/</p>
+        <a href="#" class="ptk-filterLinks">
+            <span class="ptk-linksHover">oldest</span></a>
+        <p class="ptk-filterSeparators">/</p>
+        <a href="#" class="ptk-filterLinks">
+            <span class="ptk-linksHover">most liked</span></a>
+    </div>
+{% endblock %}
+
+{% block underFilters %}
+    <p class="ptk-blockDescription">Comments:</p>
+{% endblock %}
+
+{% block modal %}
+{#    <div class="ptk-modalNewIdeaContainer">#}
+{#        {% include '/idea/new.html.twig' %}#}
+{#    </div>#}
+{#    <div class="ptk-modalEditProjectContainer">#}
+{#        {% include '/project/edit.html.twig' %}#}
+{#    </div>#}
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        let modal = document.getElementsByClassName("ptk-modalContainer");
+
+        //----------------- New idea modal -----------------------
+        let NewIdeaModalLink = document.getElementById("ptk-NewIdeaModalLink");
+        let closeNewIdeaModalLink = document.getElementById("ptk-closeNewIdeaModalLink");
+        let modalNewIdeaContainer = document.getElementsByClassName("ptk-modalNewIdeaContainer")
+        let formNewIdea = document.getElementById("ptk-newIdeaFormContainer")
+
+        NewIdeaModalLink.addEventListener("click", function(e) {
+            modal[0].classList.add("ptk-modalContainerShow");
+            modalNewIdeaContainer[0].classList.add("ptk-showModalContainers")
+            formNewIdea.classList.add("ptk-formContainerShow");
+        });
+        closeNewIdeaModalLink.addEventListener("click", function(e) {
+            modal[0].classList.remove("ptk-modalContainerShow");
+            modalNewIdeaContainer[0].classList.remove("ptk-showModalContainers")
+            formNewIdea.classList.remove("ptk-formContainerShow");
+        });
+
+        // ----------------- edit project modal -----------------------
+        let editProjectModalLink = document.getElementById("ptk-editProfileModalLink");
+        let closeEditProjectModalLink = document.getElementById("ptk-closeEditProjectModalLink");
+        let modalEditProjectContainer = document.getElementsByClassName("ptk-modalEditProjectContainer")
+        let formEditProfile = document.getElementById("ptk-editProfileFormContainer")
+
+        editProjectModalLink.addEventListener("click", function(e) {
+            modal[0].classList.add("ptk-modalContainerShow");
+            modalEditProjectContainer[0].classList.add("ptk-showModalContainers")
+            formEditProfile.classList.add("ptk-formContainerShow");
+            console.log(closeEditProjectModalLink, modalEditProjectContainer, formEditProfile)
+        });
+        closeEditProjectModalLink.addEventListener("click", function(e) {
+            modal[0].classList.remove("ptk-modalContainerShow");
+            modalEditProjectContainer[0].classList.remove("ptk-showModalContainers")
+            formEditProfile.classList.remove("ptk-formContainerShow");
+        });
+
+        let flashMessages = document.querySelectorAll(".ptk-flashMessages");
+        function fadeOutEffect() {
+            flashMessages.forEach((msgs, index) => {// index will be current button index
+
+                let fadeEffect = setInterval(function () {
+                    if (!msgs.style.opacity) {
+                        msgs.style.opacity = 1;
+                    }
+                    if (msgs.style.opacity > 0) {
+                        msgs.style.opacity = 0;
+                    }
+                }, 2500);
+            })
+        }
+        window.onload = fadeOutEffect;
+    </script>
+{% endblock %}
+
+{% block body %}
+    <div class="ptk-ideaCommentsSection">
+        <div class="ptk-ideaCommentsContainer">
+            {% for comment in comments %}
+                {% if comment.idea.id == idea.id %}
+                    <div class="ptk-ideaCommentsByUser">
+                        <a href="#" class="ptk-ideaCommentUser">{{ comment.user.firstname }} {{ comment.user.lastname }}</a>
+                        <p class="ptk-ideaComments">{{ comment.content }}</p>
+                        {% if app.user.id == comment.user.id %}
+                            <a href="{{ path('app_comment_edit', {id: comment.id}) }}">
+                                <img src="{{ asset('build/images/modify-button-25.png') }}" alt="modify">
+                            </a>
+                            {{ include('comment/_delete_form.html.twig') }}
+                        {% endif %}
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+        <div class="ptk-ideaPostCommentContainer">
+            <h3 style="text-align: center;">Leave a comment</h3>
+            {{ include('comment/_form.html.twig') }}
+        </div>
+    </div>
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+{#{% extends 'base.html.twig' %}#}
+
+{#{% block title %}Idea{% endblock %}#}
+
+{#{% block body %}#}
+{#    <div class="ptk-ideaShowBlock">#}
+
+{#        <div class="ptk-ideaShowContainer">#}
+{#            <div class="ptk-ideaCloseContainer">#}
+{#                <a href="{{ path('app_project_show', {'id': idea.project.id, 'orderBy': 'show'}) }}" class="ptk-ideaCloseBttn">Close</a>#}
+{#                {% if user.id == idea.user.id %}#}
+{#                    <a href="{{ path('app_idea_edit', {'id': idea.id}) }}" class="ptk-ideaCloseBttn">edit</a>#}
+{#                {% endif %}#}
+{#            </div>#}
+
+{#            <div class="ptk-ideaTitleContainer">#}
+{#                <h1 class="ptk-ideaTitle">{{ idea.title }}</h1>#}
+{#            </div>#}
+
+{#            <div class="ptk-ideaContentContainer">#}
+{#                <p class="ptk-ideaContent">{{ idea.content }}</p>#}
+{#            </div>#}
+
+{#            <div class="ptk-ideaInfoContainer">#}
+{#                <div class="ptk-cardStatsContainer">#}
+{#                    <div class="ptk-cardIconStats">#}
+{#                        <img src="{{ asset('build/images/like.png') }}" class="ptk-ideaInfoIcons" alt="likes">#}
+{#                        <p class="ptk-ideaStatsNo">25</p>#}
+{#                    </div>#}
+{#                    <div class="ptk-cardIconStats">#}
+{#                        <img src="{{ asset('build/images/comment.png') }}" class="ptk-ideaInfoIcons" alt="Comments">#}
+{#                        <p class="ptk-ideaStatsNo">{{ comments|length }}</p>#}
+{#                    </div>#}
+{#                    <div class="ptk-cardIconStats">#}
+{#                        <img src="{{ asset('build/images/view.png') }}" class="ptk-ideaInfoIcons" alt="Views">#}
+{#                        <p class="ptk-ideaStatsNo">{{ idea.ideaViews }}</p>#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+
+{#            <div class="ptk-ideaFilterContainer">#}
+{#                <a href="#" class="ptk-ideaFilters">Newest / </a>#}
+{#                <a href="#" class="ptk-ideaFilters">Oldest / </a>#}
+{#                <a href="#" class="ptk-ideaFilters">Most liked</a>#}
+{#            </div>#}
+
+{#            <div class="ptk-ideaCommentsContainer">#}
+{#                {% for comment in comments %}#}
+{#                    {% if comment.idea.id == idea.id %}#}
+{#                        <div class="ptk-ideaCommentsByUser">#}
+{#                            <a href="#" class="ptk-ideaCommentUser">{{ comment.user.firstname }} {{ comment.user.lastname }}</a>#}
+{#                            <p class="ptk-ideaComments">{{ comment.content }}</p>#}
+{#                            {% if app.user.id == comment.user.id %}#}
+{#                                <a href="{{ path('app_comment_edit', {id: comment.id}) }}">#}
+{#                                    <img src="{{ asset('build/images/modify-button-25.png') }}" alt="modify">#}
+{#                                </a>#}
+{#                                {{ include('comment/_delete_form.html.twig') }}#}
+{#                            {% endif %}#}
+{#                        </div>#}
+{#                    {% endif %}#}
+{#                {% endfor %}#}
+{#            </div>#}
+
+
+{#            <div class="ptk-ideaPostCommentContainer">#}
+{#                <h3 style="text-align: center;">Leave a comment</h3>#}
+
+{#                {{ include('comment/_form.html.twig') }}#}
+
+{#            </div>#}
+
+{#        </div>#}
+
+{#    </div>#}
+{#{% endblock %}#}
