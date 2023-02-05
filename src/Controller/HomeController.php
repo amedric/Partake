@@ -40,8 +40,10 @@ class HomeController extends AbstractController
         $formNew = $this->createForm(Project1Type::class, $project);
         $formNew->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $search = $form->getData()['search'];
+//        if ($form->isSubmitted() && $form->isValid()) {
+        if (isset($_GET["searchBar"])) {
+//            $search = $form->getData()['search']
+            $search = $_GET["searchBar"];
             $projects = $projectRepository->findLikeProject($search);
             $categories = $categoryRepository->findAll();
         } else {
