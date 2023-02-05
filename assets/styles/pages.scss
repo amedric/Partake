@@ -116,7 +116,7 @@
     font-style: normal;
     font-weight: 600;
     font-size: 1.3rem;
-    color: $primaryGrey;
+    color: $secondaryGrey;
 }
 
 
@@ -250,10 +250,10 @@
 
 .ptk-cardTitle{
     margin: 0;
+    font-family: Roboto, sans-serif;
     font-style: normal;
-    font-weight: 500;
-    font-size: 24px;
-    color: black;
+    font-size: 20px;
+    color: $secondaryGrey;
 }
 
 .ptk-cardStatsContainer{
@@ -284,22 +284,19 @@
 }
 
 //-------------------------------- Project page ------------------------------------------------------
-.ptk-ideaTitleHeader {
+.ptk-projectTitleHeader {
     ffont-size: 2.5rem;
     font-weight: 700;
-    background-color: $primaryYellow;
-    color: white;
-    text-shadow: 0px 4px 3px rgba(0,0,0,0.5),
-    0px 8px 13px rgba(0,0,0,0.1),
-    0px 18px 23px rgba(0,0,0,0.1);
+    background-color: $primaryPurple;
+    color: black;
     display: block;
     padding: 0 5px 0 10px;
 }
 
-.ptk-ideaTitleHeader:nth-child(2) {
+.ptk-projectTitleHeader:nth-child(2) {
     position: absolute;
-    background-color: #013DB1;
-    color: white;
+    background-color: #e1e1e1;
+    color: black;
     clip-path: inset(-1% -1% 50% -1%); // Added the negative values to prevent "bleed" in Chrome
 }
 
@@ -314,15 +311,19 @@
 
 .ptk-projectContent{
     margin: 0;
-    color: white;
+    color:$secondaryGrey;
+    font-family: Roboto, sans-serif;
     font-size: 1.5rem;
-    text-shadow: 0px 4px 3px rgba(0,0,0,0.6),
-    0px 8px 13px rgba(0,0,0,0.2),
-    0px 18px 23px rgba(0,0,0,0.2);
+    //text-shadow: 0px 4px 3px rgba(0,0,0,0.6),
+    //0px 8px 13px rgba(0,0,0,0.2),
+    //0px 18px 23px rgba(0,0,0,0.2);
 }
 
 .ptk-createdAtContainer{
+    display: flex;
+    justify-content: flex-end;
     width: 50%;
+    padding-right: 10px;
 }
 
 .ptk-createdAt{
@@ -339,7 +340,7 @@
     margin: 0;
     font-weight: 550;
     font-size: 20px;
-    color: #d0d0d0;
+    color: #a9a9a9;
 }
 
 .ptk-addIdeaContainer{
@@ -400,10 +401,10 @@
 
 .ptk-cardIdeaTitle{
     font-style: normal;
-    font-weight: 500;
+    font-family: Roboto, sans-serif;
     font-size: 20px;
     padding: 5px;
-    color: black;
+    color: $secondaryGrey;
     overflow-wrap: anywhere;
 }
 
@@ -689,15 +690,29 @@
     background-color: $primaryBlue;
 }
 
-
-
 //------------------------------------ Idea page ----------------------------------------
+.ptk-ideaTitleHeader {
+    ffont-size: 2.5rem;
+    font-weight: 700;
+    background-color: $primaryYellow;
+    color: black;
+    display: block;
+    padding: 0 5px 0 10px;
+}
+
+.ptk-ideaTitleHeader:nth-child(2) {
+    position: absolute;
+    background-color: #e1e1e1;
+    color: black;
+    clip-path: inset(-1% -1% 50% -1%); // Added the negative values to prevent "bleed" in Chrome
+}
 
 .ptk-ideaUnderContentContainer{
     display: flex;
     flex-direction: row;
     width: 100%;
     justify-content: space-between;
+    align-items: center;
 }
 
 .ptk-ideaCardStatsContainer{
@@ -729,10 +744,67 @@
 
 .ptk-ideaCommentsContainer{
     height: 100%;
-    width: 70%;
+    width: 100%;
+}
+
+.ptk-ideaCommentsByUser{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.ptk-commentUserComment{
+    display: flex;
+    flex-direction: row;
+    width: 90%;
+    gap: 10px;
+}
+
+.ptk-ideaCommentUser{
+    font-family: Roboto, sans-serif;
+    font-size: clamp(15px, 1vw, 20px);
+    color: $secondaryBlue;
+    width: 200px;
+}
+
+.ptk-ideaComments{
+    font-family: Roboto, sans-serif;
+    color: $secondaryGrey;
+    font-size: clamp(15px, 1vw, 20px);
+    width: 100%;
+}
+
+.ptk-commentBtns{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 10%;
+}
+
+.ptk-commentBtns a img{
+    background-color: transparent;
 }
 
 .ptk-ideaPostCommentContainer{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding-left: 10px;
     height: 100%;
-    width: 30%;
+    width: 100%;
+}
+
+.ptk-ideaPostCommentContainer p{
+    margin: 0 20px 0 0;
+    font-size: 1.5rem;
+}
+
+.commentsTitleContainer{
+    display: flex;
+    justify-content: flex-start;
+    width: 50%;
+    gap: 5px;
 }

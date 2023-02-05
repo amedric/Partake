@@ -4,8 +4,8 @@
 
 {% block header %}
     <div class="ptk-titleContainer">
-        <h1 class="ptk-ideaTitleHeader">{{ project.title }}</h1>
-        <h1 class="ptk-ideaTitleHeader">{{ project.title }}</h1>
+        <h1 class="ptk-projectTitleHeader">{{ project.title }}</h1>
+        <h1 class="ptk-projectTitleHeader">{{ project.title }}</h1>
     </div>
     <div class="ptk-underTitleBlock">
         <p class="ptk-projectContent">{{ project.content }}</p>
@@ -35,7 +35,7 @@
 {% endblock %}
 
 {% block filters %}
-    <div class="ptk-createdAtContainer">
+    <div class="commentsTitleContainer">
         <p class="ptk-createdAt">Created by:</p>
         <p class="ptk-createdAtContent">{{ project.user.fullName }}</p>
         <p class="ptk-createdAt">on:</p>
