@@ -14,6 +14,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Email;
 use Symfony\Component\Routing\Annotation\Route;
 use DateTime;
 
@@ -51,6 +52,17 @@ class HomeController extends AbstractController
                 $today = new DateTime();
                 $project->setCreatedAt($today);
                 $projectRepository->save($project, true);
+                $usersAuth = $project->getUsersSelectOnProject();
+                //Email
+                foreach ($usersAuth as $userAuth) {
+                    $email = (new Email())
+                        ->from('partake@partake.com')
+                        ->to($userAuth->getEmail())
+                        ->subject('New Project created !')
+                        ->text('You have been invited by ' . $user->getFullName() . ' to join the Project : '
+                            . $project->getTitle() . ' !');
+                    $mailer->send($email);
+                }
                 $this->addFlash('success', 'Success: New project created');
 
                 return $this->redirectToRoute('app_home', [], Response::HTTP_SEE_OTHER);
