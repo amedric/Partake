@@ -43,8 +43,12 @@
                         {% for nbComment in nbComments %}
                             {% if nbComment.id == idea.id %}
                                 {{ nbComment.ideaComments is null ? 0 : nbComment.ideaComments }}
+                                {% set numComments = nbComment.ideaComments %}
                             {% endif %}
                         {% endfor %}
+                        {% if numComments is not defined %}
+                        0
+                        {% endif %}
                     </p>
                 </div>
                 <div class="ptk-cardIconStats">
@@ -69,10 +73,10 @@
     <div class="ptk-filterContainer">
         <p class="ptk-filterSeparators"> Order by: </p>
         <a href="{{ path('app_idea_show', {'id': idea.id, 'orderBy': 'DESC'}) }}" class="ptk-filterLinks">
-            <span class="ptk-linksHover">newest</span></a>
+            <span class="ptk-filterLinksHover">newest</span></a>
         <p class="ptk-filterSeparators">/</p>
         <a href="{{ path('app_idea_show', {'id': idea.id, 'orderBy': 'ASC'}) }}" class="ptk-filterLinks">
-            <span class="ptk-linksHover">oldest</span></a>
+            <span class="ptk-filterLinksHover">oldest</span></a>
     </div>
 {% endblock %}
 

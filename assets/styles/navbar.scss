@@ -50,13 +50,9 @@
     display: inline;
     transition: 0.2s ease;
     color: $secondaryPurple;
-    text-shadow: 0 4px 3px rgba(0,0,0,0.2),
-    0 5px 5px rgba(0,0,0,0.1);
 }
 
 .ptk-linksHover:hover {
-    text-shadow: 2px 0 #0042bf, -2px 0 $primaryBlue, 0 2px $primaryBlue, 0 -2px $primaryBlue,
-    1px 1px $primaryBlue, -1px -1px $primaryBlue, 1px -1px $primaryBlue, -1px 1px $primaryBlue;
     background-size: 100%;
     color: $secondaryYellow;
 }
