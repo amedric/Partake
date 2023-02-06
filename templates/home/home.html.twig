@@ -22,19 +22,19 @@
     <div class="ptk-filterContainer">
         <p class="ptk-filterSeparators ptk-filtersWhite"> Order by: </p>
         <a href="{{ path('app_home_orderBy', {'orderBy': 'views'}) }}" class="ptk-filterLinks">
-            <span class="ptk-linksHover">most viewed</span>
+            <span class="filterLinksHover">most viewed</span>
         </a>
         <p class="ptk-filterSeparators"> / </p>
         <a href="{{ path('app_home_orderBy', {'orderBy': 'ideas'}) }}" class="ptk-filterLinks">
-            <span class="ptk-linksHover">ideas</span>
+            <span class="filterLinksHover">ideas</span>
         </a>
         <p class="ptk-filterSeparators"> / </p>
         <a href="{{ path('app_home_orderBy', {'orderBy': 'newest'}) }}" class="ptk-filterLinks">
-            <span class="ptk-linksHover">newest</span>
+            <span class="filterLinksHover">newest</span>
         </a>
         <p class="ptk-filterSeparators"> / </p>
         <a href="{{ path('app_home_orderBy', {'orderBy': 'oldest'}) }}" class="ptk-filterLinks">
-            <span class="ptk-linksHover">oldest</span>
+            <span class="filterLinksHover">oldest</span>
         </a>
     </div>
 {% endblock %}
