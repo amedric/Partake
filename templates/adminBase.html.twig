@@ -34,7 +34,7 @@
         <div class="ptk-adminFlashMessagesContainer">
             {% for category, messages in app.flashes %}
                 {% for message in messages %}
-                    <div class="alert ptk-flashMessages alert-{{ category }}">
+                    <div class="alert ptk-adminFlashMessages alert-{{ category }}">
                         {{ message }}
                     </div>
                 {% endfor %}
@@ -45,13 +45,29 @@
             {% block adminTitle %}{% endblock %}
         </div>
     <div class="ptk-adminBlockContainer">
-
         <div class="ptk-adminBodyContainer">
-
             <div class="ptk-adminBody">
                 {% block adminBody %}{% endblock %}
             </div>
         </div>
     </div>
+    <script>
+        let flashMessages = document.querySelectorAll(".ptk-adminFlashMessages");
+        function fadeOutEffect() {
+            flashMessages.forEach((msgs, index) => {// index will be current button index
+
+                let fadeEffect = setInterval(function () {
+                    if (!msgs.style.opacity) {
+                        msgs.style.opacity = 1;
+                    }
+                    if (msgs.style.opacity > 0) {
+                        msgs.style.opacity = 0;
+                        msgs.style.display = "none";
+                    }
+                }, 2500);
+            })
+        }
+        window.onload = fadeOutEffect;
+    </script>
 </body>
 </html>
