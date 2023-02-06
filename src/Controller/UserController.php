@@ -33,7 +33,9 @@ class UserController extends AbstractController
         string $orderBy,
         string $dataType
     ): Response {
+
         //----------------- search form --------------------------------
+
         $form = $this->createForm(SearchContentType::class);
         $form->handleRequest($request);
         //----------------- edit profile form ---------------------------------
@@ -51,6 +53,7 @@ class UserController extends AbstractController
                 $wherePara = "'idea'";
                 break;
         }
+
         //--------------- if search form is submitted ---------------------------
         if ($form->isSubmitted() && $form->isValid()) {
                 $search = $form->getData()['search'];
