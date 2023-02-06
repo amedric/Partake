@@ -110,8 +110,6 @@ class IdeaController extends AbstractController
                 'orderBy' => 'show'
             ], Response::HTTP_SEE_OTHER);
         }
-
-
         $comments = $commentRepository->findBy([], ['createdAt' => $orderBy ]);
         $nbComments = $projectRepository->findIdeasCountComments();
         return $this->render('idea/show.html.twig', [

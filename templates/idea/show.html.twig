@@ -27,11 +27,11 @@
             <div class="ptk-ideaCardStatsContainer">
                 <div class="ptk-cardIconStats">
                     {% if likedUser is not empty %}
-                        <a href="{{ path('app_like_dislike', {'id': idea.id}) }}" class="ptk-cardsLink">
+                        <a href="{{ path('app_like_dislike_comment', {'id': idea.id, 'orderBy': 'ASC'}) }}" class="ptk-cardsLink">
                             <img src="{{ asset('build/images/blackheart.png') }}" class="ptk-ideaInfoIcons" alt="Dislike" title="Unlike this idea">
                         </a>
                     {% else %}
-                        <a href="{{ path('app_like_like', {'id': idea.id}) }}" class="ptk-cardsLink">
+                        <a href="{{ path('app_like_like_comment', {'id': idea.id, 'orderBy': 'ASC'}) }}" class="ptk-cardsLink">
                             <img src="{{ asset('build/images/like.png') }}" class="ptk-ideaInfoIcons" alt="Like" title="Like this idea">
                         </a>
                     {% endif %}
