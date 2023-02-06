@@ -44,6 +44,10 @@ $secondaryGrey: rgb(100, 100, 100);
     background: $primaryPurple;
 }
 
+*button{
+    border: none;
+}
+
 body {
     display: grid;
     position: relative;

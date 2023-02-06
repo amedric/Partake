@@ -20,7 +20,7 @@ class Project
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $title = null;
 
-    #[ORM\Column(type: Types::TEXT, length: 500, nullable: true)]
+    #[ORM\Column(length: 500, nullable: true)]
     #[Assert\Length(
         max: 500,
         maxMessage: 'Description is too long, it should not exceed 500 characters',

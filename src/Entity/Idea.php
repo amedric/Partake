@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 use DateTime;
 
 #[ORM\Entity(repositoryClass: IdeaRepository::class)]
@@ -20,7 +21,11 @@ class Idea
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $title = null;
 
-    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    #[ORM\Column(length: 500, nullable: true)]
+    #[Assert\Length(
+        max: 500,
+        maxMessage: 'Description is too long, it should not exceed 500 characters',
+    )]
     private ?string $content = null;
 
     #[ORM\Column(length: 255, nullable: true)]
@@ -38,13 +43,17 @@ class Idea
     #[ORM\ManyToOne]
     private ?Project $project = null;
 
-    #[ORM\OneToMany(mappedBy: 'idea', targetEntity: Comment::class)]
+    #[ORM\OneToMany(mappedBy: 'idea', targetEntity: Comment::class, cascade: ['remove'])]
     private Collection $comments;
+
+    #[ORM\OneToMany(mappedBy: 'idea', targetEntity: Like::class, cascade: ['remove'])]
+    private Collection $likes;
 
     public function __construct()
     {
         $this->createdAt = new DateTime();
         $this->comments = new ArrayCollection();
+        $this->likes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -160,6 +169,36 @@ class Idea
             // set the owning side to null (unless already changed)
             if ($comment->getIdea() === $this) {
                 $comment->setIdea(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Comment>
+     */
+    public function getLikes(): Collection
+    {
+        return $this->likes;
+    }
+
+    public function addLike(Like $like): self
+    {
+        if (!$this->likes->contains($like)) {
+            $this->likes->add($like);
+            $like->setIdea($this);
+        }
+
+        return $this;
+    }
+
+    public function removeLike(Like $like): self
+    {
+        if ($this->likes->removeElement($like)) {
+            // set the owning side to null (unless already changed)
+            if ($like->getIdea() === $this) {
+                $like->setIdea(null);
             }
         }
 

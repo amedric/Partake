@@ -19,6 +19,7 @@ class Like
 
     #[ORM\ManyToOne]
     private ?User $user = null;
+
     #[ORM\ManyToOne]
     private ?Idea $idea = null;
 
