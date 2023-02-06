@@ -12,6 +12,9 @@ use App\Repository\UserRepository;
 use Doctrine\DBAL\Exception;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -97,8 +100,11 @@ class UserController extends AbstractController
                 return $this->redirectToRoute('app_user_show', [
                     'user' => $user,
                     'projectsIdeas' => $projectsIdeas,
-                    'form' => $form->createView(),
-                    'formEdit' => $formEdit->createView()
+//                    'form' => $form->createView(),
+//                    'formEdit' => $formEdit->createView(),
+                    'id' => $user->getId(),
+                    'orderBy' => 'oldest',
+                    'dataType' => 'Projects and Ideas',
                 ], Response::HTTP_SEE_OTHER);
             }
         }
