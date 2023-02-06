@@ -5,12 +5,8 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Form\SearchContentType;
 use App\Form\UserType;
-use App\Repository\IdeaRepository;
-use App\Repository\LikeRepository;
-use App\Repository\ProjectRepository;
 use App\Repository\UserRepository;
 use Doctrine\DBAL\Exception;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -30,7 +26,9 @@ class UserController extends AbstractController
         string $orderBy,
         string $dataType
     ): Response {
-        //----------------- searxh form --------------------------------
+
+        //----------------- search form --------------------------------
+
         $form = $this->createForm(SearchContentType::class);
         $form->handleRequest($request);
         //----------------- edit profile form ---------------------------------
@@ -48,6 +46,7 @@ class UserController extends AbstractController
                 $wherePara = "'idea'";
                 break;
         }
+
         //--------------- if search form is submitted ---------------------------
         if ($form->isSubmitted() && $form->isValid()) {
                 $search = $form->getData()['search'];
@@ -87,15 +86,14 @@ class UserController extends AbstractController
             }
             //--------------- if edit profile form is submitted --------------------------------
             if ($formEdit->isSubmitted() && $formEdit->isValid()) {
-//                    $passwordUser = $user->getPassword();
-//                    $user->setPassword(password_hash($passwordUser, PASSWORD_DEFAULT));
                 $userRepository->save($user, true);
 
                 return $this->redirectToRoute('app_user_show', [
                     'user' => $user,
                     'projectsIdeas' => $projectsIdeas,
-                    'form' => $form->createView(),
-                    'formEdit' => $formEdit->createView()
+                    'id' => $user->getId(),
+                    'orderBy' => 'oldest',
+                    'dataType' => 'Projects and Ideas',
                 ], Response::HTTP_SEE_OTHER);
             }
         }

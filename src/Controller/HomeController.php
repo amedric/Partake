@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+
 use App\Entity\Project;
 use App\Entity\User;
 use App\Form\Project1Type;
@@ -9,11 +10,13 @@ use App\Form\SearchContentType;
 use App\Repository\CategoryRepository;
 use App\Repository\IdeaRepository;
 use App\Repository\ProjectRepository;
+use App\Repository\UserRepository;
 use App\Service\ChartStats;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Email;
 use Symfony\Component\Routing\Annotation\Route;
 use DateTime;
 
@@ -23,6 +26,7 @@ class HomeController extends AbstractController
     #[Route('/', name: 'app_home')]
     public function index(
         Request $request,
+        UserRepository $userRepository,
         ProjectRepository $projectRepository,
         CategoryRepository $categoryRepository,
         IdeaRepository $ideaRepository,
@@ -45,7 +49,15 @@ class HomeController extends AbstractController
 //            $search = $form->getData()['search']
             $search = $_GET["searchBar"];
             $projects = $projectRepository->findLikeProject($search);
-            $categories = $categoryRepository->findAll();
+            $ideas = $ideaRepository->findLikeIdea($search);
+            $users = $userRepository->findLikeUser($search);
+
+            return $this->render('/searchResult.html.twig', [
+                'users' => $users,
+                'projects' => $projects,
+                'ideas' => $ideas,
+                'form' => $form->createView(),
+            ]);
         } else {
             //----------------------- if project form is submitted -----------------
             if ($formNew->isSubmitted() && $formNew->isValid()) {
@@ -53,6 +65,17 @@ class HomeController extends AbstractController
                 $today = new DateTime();
                 $project->setCreatedAt($today);
                 $projectRepository->save($project, true);
+                $usersAuth = $project->getUsersSelectOnProject();
+                //Email
+                foreach ($usersAuth as $userAuth) {
+                    $email = (new Email())
+                        ->from('partake@partake.com')
+                        ->to($userAuth->getEmail())
+                        ->subject('New Project created !')
+                        ->text('You have been invited by ' . $user->getFullName() . ' to join the Project : '
+                            . $project->getTitle() . ' !');
+                    $mailer->send($email);
+                }
                 $this->addFlash('success', 'Success: New project created');
 
                 return $this->redirectToRoute('app_home', [], Response::HTTP_SEE_OTHER);

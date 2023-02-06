@@ -17,8 +17,10 @@
                 {{ form_widget(formNew.title, {'attr': {'class': 'ptk-formTitleInput'}}) }}
             </div>
             <div class="ptk-formRow ptk-formContainerMargins">
-                {{ form_label(formNew.content, 'Desciption', {'label_attr': {'class': 'ptk-formLabels'}}) }}
+
+                {{ form_label(formNew.content, 'Description', {'label_attr': {'class': 'ptk-formLabels'}}) }}
                 {{ form_widget(formNew.content, {'attr': {'class': 'ptk-formContentInput'}}) }}
+
             </div>
             <div class="ptk-formRow ptk-formContainerMargins">
                 {{ form_label(formNew.ideaColor, null, {'label_attr': {'class': 'ptk-formLabels'}}) }}
