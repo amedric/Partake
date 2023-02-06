@@ -66,10 +66,14 @@ class IdeaController extends AbstractController
         $ideaRepository->save($idea, true);
         $likedUser = $likeRepository->findLikeByUser($user->getId(), $idea->getId());
         $ideaLikes = count($likeRepository->findBy(['idea' => $idea->getId()]));
+        $comments = $commentRepository->findAll();
+
+        //------------ comment form --------------------------------
         $comment = new Comment();
         $form = $this->createForm(CommentType::class, $comment);
         $form->handleRequest($request);
 
+        //---------------- if comment form is submitted --------------------------------
         if ($form->isSubmitted() && $form->isValid()) {
             $comment->setUser($this->getUser());
             $comment->setIdea($idea);
@@ -82,12 +86,38 @@ class IdeaController extends AbstractController
             ], Response::HTTP_SEE_OTHER);
         }
 
-        $comments = $commentRepository->findAll();
+        //---------------- edit idea form ------------------------------------------------
+        //---------------- if edit form form is submitted --------------------------------
+        $userId = $this->getUser();
+        $ideaCreatedBy = $idea->getUser();
+        $formEditIdea = $this->createForm(IdeaType::class, $idea);
+        $formEditIdea->handleRequest($request);
+        if ($ideaCreatedBy === $userId && $formEditIdea->isSubmitted() && $formEditIdea->isValid()) {
+                $ideaRepository->save($idea, true);
+                $this->addFlash('success', 'Success: Idea modified');
+                return $this->redirectToRoute('app_idea_show', [
+                    'id' => $idea->getId(),
+                ], Response::HTTP_SEE_OTHER);
+        }
+
+        if (isset($_POST["deleteIdea"])) {
+            if ($this->isCsrfTokenValid('delete' . $idea->getId(), $request->request->get('_token'))) {
+                $ideaRepository->remove($idea, true);
+                $this->addFlash('notice', 'Notice: Idea deleted');
+            }
+
+            return $this->redirectToRoute('app_project_show', [
+                'id' => $idea->getProject()->getId(),
+                'orderBy' => 'show'
+            ], Response::HTTP_SEE_OTHER);
+        }
+
         $nbComments = $projectRepository->findIdeasCountComments();
         return $this->render('idea/show.html.twig', [
             'idea' => $idea,
             'user' => $user,
             'formComm' => $form->createView(),
+            'formEditIdea' => $formEditIdea->createView(),
             'edit' => true,
             'comments' => $comments,
             'nbComments' => $nbComments,
@@ -96,35 +126,35 @@ class IdeaController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}/edit', name: 'app_idea_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, Idea $idea, IdeaRepository $ideaRepository): Response
-    {
-        $userId = $this->getUser();
-        $ideaCreatedBy = $idea->getUser();
-
-        if ($ideaCreatedBy === $userId) {
-            $form = $this->createForm(IdeaType::class, $idea);
-            $form->handleRequest($request);
-
-            if ($form->isSubmitted() && $form->isValid()) {
-                $ideaRepository->save($idea, true);
-                $this->addFlash('success', 'Success: Idea modified');
-                return $this->redirectToRoute('app_idea_show', [
-                    'id' => $idea->getId(),
-                ], Response::HTTP_SEE_OTHER);
-            }
-
-            return $this->renderForm('idea/edit.html.twig', [
-                'idea' => $idea,
-                'form' => $form,
-                'edit' => true,
-            ]);
-        } else {
-            return $this->redirectToRoute('app_idea_show', [
-                'id' => $idea->getId(),
-            ], Response::HTTP_SEE_OTHER);
-        }
-    }
+//    #[Route('/{id}/edit', name: 'app_idea_edit', methods: ['GET', 'POST'])]
+//    public function edit(Request $request, Idea $idea, IdeaRepository $ideaRepository): Response
+//    {
+//        $userId = $this->getUser();
+//        $ideaCreatedBy = $idea->getUser();
+//
+//        if ($ideaCreatedBy === $userId) {
+//            $form = $this->createForm(IdeaType::class, $idea);
+//            $form->handleRequest($request);
+//
+//            if ($form->isSubmitted() && $form->isValid()) {
+//                $ideaRepository->save($idea, true);
+//                $this->addFlash('success', 'Success: Idea modified');
+//                return $this->redirectToRoute('app_idea_show', [
+//                    'id' => $idea->getId(),
+//                ], Response::HTTP_SEE_OTHER);
+//            }
+//
+//            return $this->renderForm('idea/edit.html.twig', [
+//                'idea' => $idea,
+//                'form' => $form,
+//                'edit' => true,
+//            ]);
+//        } else {
+//            return $this->redirectToRoute('app_idea_show', [
+//                'id' => $idea->getId(),
+//            ], Response::HTTP_SEE_OTHER);
+//        }
+//    }
 
     #[Route('/{id}', name: 'app_idea_delete', methods: ['POST'])]
     public function delete(Request $request, Idea $idea, IdeaRepository $ideaRepository): Response

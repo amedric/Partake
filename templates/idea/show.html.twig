@@ -3,6 +3,7 @@
 {% block title %}Idea{% endblock %}
 
 {% block header %}
+{#    ------------------------- Titiel and content --------------------------------#}
     <div class="ptk-ideaHeaderContainer">
         <div class="ptk-titleContainer">
             <h1 class="ptk-ideaTitleHeader">{{ idea.title }}</h1>
@@ -13,6 +14,15 @@
         </div>
         <div class="ptk-linksContainer">
         </div>
+{#        ----------------------- Edit and Delete buttons --------------------#}
+        <div class="ptk-linksContainer">
+            {% if idea.user.id == app.user.id %}
+                <a class="ptk-modalShow" id="ptk-editIdeaModalLink">
+                    <img src="{{ asset('build/images/editPurple.png') }}" alt="edit profile" title="Edit idea"/>
+                </a>
+            {% endif %}
+        </div>
+{#        -------------------------- Created at info and likes, views and comments stats --------------------#}
         <div class="ptk-ideaUnderContentContainer">
             <div class="ptk-ideaCardStatsContainer">
                 <div class="ptk-cardIconStats">
@@ -70,6 +80,7 @@
 {% endblock %}
 
 {% block underFilters %}
+{#    ---------------- comments section ----------------#}
     <div class="ptk-ideaPostCommentContainer">
         <p style="text-align: center;">Leave a comment</p>
         {{ include('comment/_form.html.twig') }}
@@ -77,51 +88,31 @@
 {% endblock %}
 
 {% block modal %}
-{#    <div class="ptk-modalNewIdeaContainer">#}
-{#        {% include '/idea/new.html.twig' %}#}
-{#    </div>#}
-{#    <div class="ptk-modalEditProjectContainer">#}
-{#        {% include '/project/edit.html.twig' %}#}
-{#    </div>#}
+    <div class="ptk-modalEditIdeaContainer">
+        {% include '/idea/edit.html.twig' %}
+    </div>
 {% endblock %}
 
 {% block javascripts %}
     <script>
         let modal = document.getElementsByClassName("ptk-modalContainer");
 
-        //----------------- New idea modal -----------------------
-        let NewIdeaModalLink = document.getElementById("ptk-NewIdeaModalLink");
-        let closeNewIdeaModalLink = document.getElementById("ptk-closeNewIdeaModalLink");
-        let modalNewIdeaContainer = document.getElementsByClassName("ptk-modalNewIdeaContainer")
-        let formNewIdea = document.getElementById("ptk-newIdeaFormContainer")
+        // ----------------- edit idea modal -----------------------
+        let editIdeaModalLink = document.getElementById("ptk-editIdeaModalLink");
+        let closeEditIdeaModalLink = document.getElementById("ptk-closeEditIdeaModalLink");
+        let modalEditIdeaContainer = document.getElementsByClassName("ptk-modalEditIdeaContainer")
+        let formEditIdea = document.getElementById("ptk-editIdeaFormContainer")
 
-        NewIdeaModalLink.addEventListener("click", function(e) {
+        editIdeaModalLink.addEventListener("click", function(e) {
             modal[0].classList.add("ptk-modalContainerShow");
-            modalNewIdeaContainer[0].classList.add("ptk-showModalContainers")
-            formNewIdea.classList.add("ptk-formContainerShow");
+            modalEditIdeaContainer[0].classList.add("ptk-showModalContainers")
+            formEditIdea.classList.add("ptk-formContainerShow");
+            console.log(closeEditIdeaModalLink, modalEditIdeaContainer, formEditIdea)
         });
-        closeNewIdeaModalLink.addEventListener("click", function(e) {
+        closeEditIdeaModalLink.addEventListener("click", function(e) {
             modal[0].classList.remove("ptk-modalContainerShow");
-            modalNewIdeaContainer[0].classList.remove("ptk-showModalContainers")
-            formNewIdea.classList.remove("ptk-formContainerShow");
-        });
-
-        // ----------------- edit project modal -----------------------
-        let editProjectModalLink = document.getElementById("ptk-editProfileModalLink");
-        let closeEditProjectModalLink = document.getElementById("ptk-closeEditProjectModalLink");
-        let modalEditProjectContainer = document.getElementsByClassName("ptk-modalEditProjectContainer")
-        let formEditProfile = document.getElementById("ptk-editProfileFormContainer")
-
-        editProjectModalLink.addEventListener("click", function(e) {
-            modal[0].classList.add("ptk-modalContainerShow");
-            modalEditProjectContainer[0].classList.add("ptk-showModalContainers")
-            formEditProfile.classList.add("ptk-formContainerShow");
-            console.log(closeEditProjectModalLink, modalEditProjectContainer, formEditProfile)
-        });
-        closeEditProjectModalLink.addEventListener("click", function(e) {
-            modal[0].classList.remove("ptk-modalContainerShow");
-            modalEditProjectContainer[0].classList.remove("ptk-showModalContainers")
-            formEditProfile.classList.remove("ptk-formContainerShow");
+            modalEditIdeaContainer[0].classList.remove("ptk-showModalContainers")
+            formEditIdea.classList.remove("ptk-formContainerShow");
         });
 
         let flashMessages = document.querySelectorAll(".ptk-flashMessages");
