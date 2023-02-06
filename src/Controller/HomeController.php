@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+
 use App\Entity\Project;
 use App\Entity\User;
 use App\Form\Project1Type;
@@ -9,6 +10,7 @@ use App\Form\SearchContentType;
 use App\Repository\CategoryRepository;
 use App\Repository\IdeaRepository;
 use App\Repository\ProjectRepository;
+use App\Repository\UserRepository;
 use App\Service\ChartStats;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -23,6 +25,7 @@ class HomeController extends AbstractController
     #[Route('/', name: 'app_home')]
     public function index(
         Request $request,
+        UserRepository $userRepository,
         ProjectRepository $projectRepository,
         CategoryRepository $categoryRepository,
         IdeaRepository $ideaRepository,
@@ -45,7 +48,15 @@ class HomeController extends AbstractController
 //            $search = $form->getData()['search']
             $search = $_GET["searchBar"];
             $projects = $projectRepository->findLikeProject($search);
-            $categories = $categoryRepository->findAll();
+            $ideas = $ideaRepository->findLikeIdea($search);
+            $users = $userRepository->findLikeUser($search);
+
+            return $this->render('/searchResult.html.twig', [
+                'users' => $users,
+                'projects' => $projects,
+                'ideas' => $ideas,
+                'form' => $form->createView(),
+            ]);
         } else {
             //----------------------- if project form is submitted -----------------
             if ($formNew->isSubmitted() && $formNew->isValid()) {
