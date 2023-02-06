@@ -135,16 +135,19 @@
         <div class="ptk-ideaCommentsContainer">
             {% for comment in comments %}
                 {% if comment.idea.id == idea.id %}
-                    {{ comment.createdAt|date }}
                     <div class="ptk-ideaCommentsByUser">
                         <div class="ptk-commentUserComment">
-                            <a href="#" class="ptk-ideaCommentUser">{{ comment.user.firstname }} {{ comment.user.lastname }}</a>
+                            <div class="ptk-commentUserDate">
+
+                                <a href="#" class="ptk-ideaCommentUser">{{ comment.user.firstname }} {{ comment.user.lastname }}</a>
+                                {{ comment.createdAt ? comment.createdAt|date('d-m-Y') : '' }}
+                            </div>
                             <p class="ptk-ideaComments">{{ comment.content }}</p>
                         </div>
                         <div class="ptk-commentBtns">
                             {% if app.user.id == comment.user.id %}
                                 <a href="{{ path('app_comment_edit', {id: comment.id}) }}">
-                                    <img src="{{ asset('build/images/modify-button-25.png') }}" alt="modify">
+                                    <img src="{{ asset('build/images/editComment.png') }}" alt="modify" title="Edit comment" class="ptk-commentModifyImg">
                                 </a>
                                 {{ include('comment/_delete_form.html.twig') }}
                             {% endif %}

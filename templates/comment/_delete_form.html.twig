@@ -1,5 +1,5 @@
 <form method="post" action="{{ path('app_comment_delete', {'id': comment.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
     <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ comment.id) }}">
-    <button class="btn" style="border: none; background-color: inherit; cursor: pointer;"><img src="{{ asset('build/images/noun-delete-25.png') }}" alt="delete">
+    <button class="btn" style="border: none; background-color: inherit; cursor: pointer;"><img src="{{ asset('build/images/deleteComment.png') }}" alt="delete" title="Delete comment" class="ptk-commentModifyImg">
     </button>
 </form>
