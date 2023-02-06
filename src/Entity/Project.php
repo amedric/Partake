@@ -48,9 +48,17 @@ class Project
     #[ORM\ManyToMany(targetEntity: User::class, inversedBy: 'projects')]
     private Collection $usersSelectOnProject;
 
+    #[ORM\OneToMany(mappedBy: 'project', targetEntity: Idea::class, cascade: ['remove'])]
+    private Collection $ideas;
+
+    #[ORM\OneToMany(mappedBy: 'project', targetEntity: Comment::class, cascade: ['remove'])]
+    private Collection $comments;
+
     public function __construct()
     {
         $this->usersSelectOnProject = new ArrayCollection();
+        $this->ideas = new ArrayCollection();
+        $this->comments = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -176,6 +184,65 @@ class Project
     {
         $this->usersSelectOnProject->removeElement($usersSelectOnProject);
 
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Idea>
+     */
+    public function getLikes(): Collection
+    {
+        return $this->ideas;
+    }
+
+    public function addIdea(Idea $idea): self
+    {
+        if (!$this->ideas->contains($idea)) {
+            $this->ideas->add($idea);
+            $idea->setProject($this);
+        }
+
+        return $this;
+    }
+
+    public function removeIdea(Idea $idea): self
+    {
+        if ($this->ideas->removeElement($idea)) {
+            // set the owning side to null (unless already changed)
+            if ($idea->getProject() === $this) {
+                $idea->setProject(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Comment>
+     */
+    public function getComments(): Collection
+    {
+        return $this->comments;
+    }
+
+    public function addComment(Comment $comment): self
+    {
+        if (!$this->comments->contains($comment)) {
+            $this->comments->add($comment);
+            $comment->setProject($this);
+        }
+
+        return $this;
+    }
+
+    public function removeComment(Comment $comment): self
+    {
+        if ($this->comments->removeElement($comment)) {
+            // set the owning side to null (unless already changed)
+            if ($comment->getProject() === $this) {
+                $comment->setProject(null);
+            }
+        }
         return $this;
     }
 
