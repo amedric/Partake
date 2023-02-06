@@ -34,6 +34,11 @@
             <h2 class="ptk-formLabels">Email</h2>
             <p class="ptk-formTitleInput">{{ user.email }}</p>
         </div>
+        <div style="display: none">
+            {{ form_widget(formEdit.email, {'value' : user.email}) }}
+            {{ form_widget(formEdit.password, {'value' : user.password}) }}
+            {{ form_widget(formEdit.category, {'value' : user.category.id}) }}
+        </div>
     </div>
     {{ form_row(formEdit._token) }}
     <div class="ptk-formBttnsContainer">
