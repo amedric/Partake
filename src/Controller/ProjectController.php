@@ -2,24 +2,17 @@
 
 namespace App\Controller;
 
-use App\Entity\Comment;
 use App\Entity\Project;
 use App\Entity\Idea;
 use App\Entity\User;
-use App\Form\CommentType;
 use App\Form\IdeaType;
-use App\Form\Project1Type;
 use App\Form\ProjectEditType;
-use App\Repository\CommentRepository;
 use App\Repository\IdeaRepository;
 use App\Repository\ProjectRepository;
-use DateTime;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Mailer\MailerInterface;
-use Symfony\Component\Mime\Email;
 
 #[Route('/project')]
 class ProjectController extends AbstractController

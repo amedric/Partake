@@ -5,27 +5,22 @@ namespace App\Controller;
 use App\Entity\Comment;
 use App\Entity\Idea;
 use App\Entity\Like;
-use App\Entity\Project;
 use App\Form\CommentType;
 use App\Form\IdeaType;
 use App\Repository\CommentRepository;
 use App\Repository\ProjectRepository;
 use App\Repository\IdeaRepository;
 use App\Repository\LikeRepository;
-use App\Repository\ProjectRepository;
 use DateTime;
 use Exception;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
 
 #[Route('/idea')]
 class IdeaController extends AbstractController
 {
-
 //    #[Route('/new/{id}', name: 'app_idea_new', methods: ['GET', 'POST'])]
 //    public function new(Project $project, Request $request, IdeaRepository $ideaRepository): Response
 //    {
@@ -54,7 +49,7 @@ class IdeaController extends AbstractController
     /**
      * @throws Exception
      */
-    #[Route('/{id}', name: 'app_idea_show', methods: ['GET', 'POST'])]
+    #[Route('/{id}/{orderBy}', name: 'app_idea_show', methods: ['GET', 'POST'])]
     public function show(
         Idea $idea,
         IdeaRepository $ideaRepository,
@@ -62,6 +57,7 @@ class IdeaController extends AbstractController
         CommentRepository $commentRepository,
         ProjectRepository $projectRepository,
         LikeRepository $likeRepository,
+        string $orderBy = 'ASC',
     ): Response {
         $user = $this->getUser();
         $idea->setIdeaViews($idea->getIdeaViews() + 1);
@@ -84,7 +80,7 @@ class IdeaController extends AbstractController
             ], Response::HTTP_SEE_OTHER);
         }
 
-        $comments = $commentRepository->findAll();
+        $comments = $commentRepository->findBy([], ['createdAt' => $orderBy ]);
         $nbComments = $projectRepository->findIdeasCountComments();
         return $this->render('idea/show.html.twig', [
             'idea' => $idea,

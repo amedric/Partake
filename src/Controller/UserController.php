@@ -5,16 +5,9 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Form\SearchContentType;
 use App\Form\UserType;
-use App\Repository\IdeaRepository;
-use App\Repository\LikeRepository;
-use App\Repository\ProjectRepository;
 use App\Repository\UserRepository;
 use Doctrine\DBAL\Exception;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Form\Extension\Core\Type\DateType;
-use Symfony\Component\Form\Extension\Core\Type\EmailType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -93,15 +86,11 @@ class UserController extends AbstractController
             }
             //--------------- if edit profile form is submitted --------------------------------
             if ($formEdit->isSubmitted() && $formEdit->isValid()) {
-//                    $passwordUser = $user->getPassword();
-//                    $user->setPassword(password_hash($passwordUser, PASSWORD_DEFAULT));
                 $userRepository->save($user, true);
 
                 return $this->redirectToRoute('app_user_show', [
                     'user' => $user,
                     'projectsIdeas' => $projectsIdeas,
-//                    'form' => $form->createView(),
-//                    'formEdit' => $formEdit->createView(),
                     'id' => $user->getId(),
                     'orderBy' => 'oldest',
                     'dataType' => 'Projects and Ideas',

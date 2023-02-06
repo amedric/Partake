@@ -43,9 +43,9 @@
                 </div>
             </div>
             <div class="ptk-createdAtContainer">
-                <p class="ptk-createdAt">Created by:</p>
+                <p class="ptk-createdAt">Created by:&nbsp</p>
                 <p class="ptk-createdAtContent">{{ idea.user.fullName }}</p>
-                <p class="ptk-createdAt">on:</p>
+                <p class="ptk-createdAt">on:&nbsp</p>
                 <p class="ptk-createdAtContent">{{ idea.createdAt ? idea.createdAt|date('d-m-Y') : '' }}</p>
             </div>
         </div>
@@ -58,14 +58,11 @@
     </div>
     <div class="ptk-filterContainer">
         <p class="ptk-filterSeparators"> Order by: </p>
-        <a href="#" class="ptk-filterLinks">
+        <a href="{{ path('app_idea_show', {'id': idea.id, 'orderBy': 'DESC'}) }}" class="ptk-filterLinks">
             <span class="ptk-linksHover">newest</span></a>
         <p class="ptk-filterSeparators">/</p>
-        <a href="#" class="ptk-filterLinks">
+        <a href="{{ path('app_idea_show', {'id': idea.id, 'orderBy': 'ASC'}) }}" class="ptk-filterLinks">
             <span class="ptk-linksHover">oldest</span></a>
-        <p class="ptk-filterSeparators">/</p>
-        <a href="#" class="ptk-filterLinks">
-            <span class="ptk-linksHover">most liked</span></a>
     </div>
 {% endblock %}
 
@@ -147,6 +144,7 @@
         <div class="ptk-ideaCommentsContainer">
             {% for comment in comments %}
                 {% if comment.idea.id == idea.id %}
+                    {{ comment.createdAt|date }}
                     <div class="ptk-ideaCommentsByUser">
                         <div class="ptk-commentUserComment">
                             <a href="#" class="ptk-ideaCommentUser">{{ comment.user.firstname }} {{ comment.user.lastname }}</a>
