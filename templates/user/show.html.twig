@@ -26,7 +26,7 @@
             <div class="ptk-profileDetailsRight">
                 <div class="ptk-profileDetailsRow">
                     <p class="ptk-profileLabelsR">D.O.B:</p>
-                    <p class="ptk-profileDetails">{{ user.birthday }}</p>
+                    <p class="ptk-profileDetails">{{ user.birthday ? user.birthday|date('d-m-Y') : '' }}</p>
                 </div>
                 <div class="ptk-profileDetailsRow">
                     <p class="ptk-profileLabelsR">Email:</p>
