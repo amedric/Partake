@@ -12,7 +12,6 @@ use App\Repository\CommentRepository;
 use App\Repository\ProjectRepository;
 use App\Repository\IdeaRepository;
 use App\Repository\LikeRepository;
-use App\Repository\ProjectRepository;
 use DateTime;
 use Exception;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
@@ -25,7 +24,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
 #[Route('/idea')]
 class IdeaController extends AbstractController
 {
-
 //    #[Route('/new/{id}', name: 'app_idea_new', methods: ['GET', 'POST'])]
 //    public function new(Project $project, Request $request, IdeaRepository $ideaRepository): Response
 //    {
