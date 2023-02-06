@@ -735,7 +735,7 @@
 }
 
 .ptk-ideaCommentsSection{
-    padding: 15px;
+    padding: 25px;
     display: flex;
     flex-direction: row;
     width: 100%;
@@ -751,14 +751,23 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    align-items: center;
     width: 100%;
+    padding: 5px 0 5px 0;
+    border-bottom: 1px solid #e0e0e0;
 }
 
 .ptk-commentUserComment{
     display: flex;
     flex-direction: row;
+    align-items: center;
     width: 90%;
     gap: 10px;
+}
+
+.ptk-commentUserDate{
+    display: flex;
+    flex-direction: column;
 }
 
 .ptk-ideaCommentUser{
@@ -769,6 +778,9 @@
 }
 
 .ptk-ideaComments{
+    margin: 0;
+    display: flex;
+    align-items: center;
     font-family: Roboto, sans-serif;
     color: $secondaryGrey;
     font-size: clamp(15px, 1vw, 20px);
@@ -783,7 +795,9 @@
     width: 10%;
 }
 
-.ptk-commentBtns a img{
+.ptk-commentModifyImg{
+    width: 17px;
+    aspect-ratio: 1/1;
     background-color: transparent;
 }
 
