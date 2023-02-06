@@ -20,7 +20,9 @@ class IdeaType extends AbstractType
     {
         $builder
             ->add('title', TextType::class)
-            ->add('content', TextareaType::class)
+            ->add('content', TextareaType::class, [
+                'attr' => ['maxlength' => 500]
+            ])
             ->add('ideaColor', ChoiceType::class, [
                 'placeholder' => 'Choose a color for your idea',
                 'required' => true,
