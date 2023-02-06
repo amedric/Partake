@@ -53,6 +53,7 @@ class ProjectController extends AbstractController
         int $id,
         string $orderBy
     ): Response {
+        $projectTemp = $project->getCategory();
         $currentUser = $this->getUser();
         $projectCreateBy = $project->getUser();
         $userAuthorized = $project->getUsersSelectOnProject()->contains($currentUser);
@@ -102,9 +103,9 @@ class ProjectController extends AbstractController
                     'edit' => true,
                 ], Response::HTTP_SEE_OTHER);
             }
-
 //            //--------------- if edit project form is submitted --------------------
             if ($formEdit->isSubmitted() && $formEdit->isValid()) {
+                $project->setCategory($projectTemp);
                 $projectRepository->save($project, true);
                 $this->addFlash('success', 'Success: Project modified');
                 return $this->redirectToRoute('app_project_show', [
