@@ -116,6 +116,7 @@
             formEditIdea.classList.remove("ptk-formContainerShow");
         });
 
+        // ----------------- flash messages -----------------------
         let flashMessages = document.querySelectorAll(".ptk-flashMessages");
         function fadeOutEffect() {
             flashMessages.forEach((msgs, index) => {// index will be current button index
@@ -136,29 +137,30 @@
 
 {% block body %}
     <div class="ptk-ideaCommentsSection">
-        <div class="ptk-ideaCommentsContainer">
-            {% for comment in comments %}
-                {% if comment.idea.id == idea.id %}
-                    <div class="ptk-ideaCommentsByUser">
-                        <div class="ptk-commentUserComment">
-                            <div class="ptk-commentUserDate">
-
-                                <a href="#" class="ptk-ideaCommentUser">{{ comment.user.firstname }} {{ comment.user.lastname }}</a>
-                                {{ comment.createdAt ? comment.createdAt|date('d-m-Y') : '' }}
+        {% block comments %}
+            <div class="ptk-ideaCommentsContainer">
+                {% for comment in comments %}
+                    {% if comment.idea.id == idea.id %}
+                        <div class="ptk-ideaCommentsByUser">
+                            <div class="ptk-commentUserComment">
+                                <div class="ptk-commentUserDate">
+                                    <a href="#" class="ptk-ideaCommentUser">{{ comment.user.firstname }} {{ comment.user.lastname }}</a>
+                                    {{ comment.createdAt ? comment.createdAt|date('d-m-Y') : '' }}
+                                </div>
+                                <p class="ptk-ideaComments">{{ comment.content }}</p>
                             </div>
-                            <p class="ptk-ideaComments">{{ comment.content }}</p>
+                            <div class="ptk-commentBtns">
+                                {% if app.user.id == comment.user.id %}
+                                    <a href="{{ path('app_comment_edit', {'id': idea.id, 'commentId': comment.id}) }}">
+                                        <img src="{{ asset('build/images/editComment.png') }}" alt="modify" title="Edit comment" class="ptk-commentModifyImg" id="ptk-editCommentModalLink">
+                                    </a>
+                                    {{ include('comment/_delete_form.html.twig') }}
+                                {% endif %}
+                            </div>
                         </div>
-                        <div class="ptk-commentBtns">
-                            {% if app.user.id == comment.user.id %}
-                                <a href="{{ path('app_comment_edit', {id: comment.id}) }}">
-                                    <img src="{{ asset('build/images/editComment.png') }}" alt="modify" title="Edit comment" class="ptk-commentModifyImg">
-                                </a>
-                                {{ include('comment/_delete_form.html.twig') }}
-                            {% endif %}
-                        </div>
-                    </div>
-                {% endif %}
-            {% endfor %}
-        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        {% endblock %}
     </div>
 {% endblock %}

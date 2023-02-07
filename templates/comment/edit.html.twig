@@ -1,26 +1,197 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit Comment{% endblock %}
+{% block title %}Idea{% endblock %}
 
-{% block body %}
-
-    <div class="ptk-formBlock">
-        <div class="ptk-formContainer">
-
-            <div class="ptk-formCloseContainer">
-                <a href="{{ path('app_idea_show', {id: comment.idea.id}) }}" class="ptk-formCloseBttn">X</a>
+{% block header %}
+    {#    ------------------------- Titiel and content --------------------------------#}
+    <div class="ptk-ideaHeaderContainer">
+        <div class="ptk-titleContainer">
+            <h1 class="ptk-ideaTitleHeader">{{ idea.title }}</h1>
+            <h1 class="ptk-ideaTitleHeader">{{ idea.title }}</h1>
+        </div>
+        <div class="ptk-underTitleBlock">
+            <p class="ptk-projectContent">{{ idea.content }}</p>
+        </div>
+        <div class="ptk-linksContainer">
+        </div>
+        {#        ----------------------- Edit and Delete buttons --------------------#}
+        <div class="ptk-linksContainer">
+            {% if idea.user.id == app.user.id %}
+                <a class="ptk-modalShow" id="ptk-editIdeaModalLink">
+                    <img src="{{ asset('build/images/editPurple.png') }}" alt="edit profile" title="Edit idea"/>
+                </a>
+            {% endif %}
+        </div>
+        {#        -------------------------- Created at info and likes, views and comments stats --------------------#}
+        <div class="ptk-ideaUnderContentContainer">
+            <div class="ptk-ideaCardStatsContainer">
+                <div class="ptk-cardIconStats">
+                    {% if likedUser is not empty %}
+                        <a href="{{ path('app_like_dislike_comment', {'id': idea.id, 'orderBy': 'ASC'}) }}" class="ptk-cardsLink">
+                            <img src="{{ asset('build/images/blackheart.png') }}" class="ptk-ideaInfoIcons" alt="Dislike" title="Unlike this idea">
+                        </a>
+                    {% else %}
+                        <a href="{{ path('app_like_like_comment', {'id': idea.id, 'orderBy': 'ASC'}) }}" class="ptk-cardsLink">
+                            <img src="{{ asset('build/images/like.png') }}" class="ptk-ideaInfoIcons" alt="Like" title="Like this idea">
+                        </a>
+                    {% endif %}
+                    <p class="ptk-cardStatsNo">{{ ideaLikes }}</p>
+                </div>
+                <div class="ptk-cardIconStats">
+                    <img src="{{ asset('build/images/comment.png') }}" class="ptk-ideaInfoIcons" alt="Comments" title="Number of comments">
+                    <p class="ptk-ideaStatsNo">
+                        {% for nbComment in nbComments %}
+                            {% if nbComment.id == idea.id %}
+                                {{ nbComment.ideaComments is null ? 0 : nbComment.ideaComments }}
+                                {% set numComments = nbComment.ideaComments %}
+                            {% endif %}
+                        {% endfor %}
+                        {% if numComments is not defined %}
+                            0
+                        {% endif %}
+                    </p>
+                </div>
+                <div class="ptk-cardIconStats">
+                    <img src="{{ asset('build/images/view.png') }}" class="ptk-ideaInfoIcons" alt="Views" title="Number of views">
+                    <p class="ptk-ideaStatsNo">{{ idea.ideaViews }}</p>
+                </div>
             </div>
-
-            <div class="ptk-formTitleContainer">
-                <h1 class="ptk-formTitle">Edit comment</h1>
+            <div class="ptk-createdAtContainer">
+                <p class="ptk-createdAt">Created by:&nbsp</p>
+                <p class="ptk-createdAtContent">{{ idea.user.fullName }}</p>
+                <p class="ptk-createdAt">on:&nbsp</p>
+                <p class="ptk-createdAtContent">{{ idea.createdAt ? idea.createdAt|date('d-m-Y') : '' }}</p>
             </div>
-            <div style="margin-bottom: 15vh;">
-
-            </div>
-
-            {{ include('comment/_form.html.twig', {'button_label': 'Update'}) }}
-
         </div>
     </div>
-
 {% endblock %}
+
+{% block filters %}
+    <div class="commentsTitleContainer">
+        <a href="{{ path('app_idea_show', {'id': idea.id, 'orderBy': 'DESC'}) }}" class="ptk-filterLinks">
+            <span class="ptk-filterLinksHover">View all comments</span></a>
+    </div>
+    <div class="ptk-filterContainer"></div>
+{% endblock %}
+
+{% block underFilters %}
+    <div class="ptk-formTitleContainer">
+        <h1 class="ptk-editCommentTitle">Edit Comment</h1>
+    </div>
+{% endblock %}
+
+{% block modal %}
+    <div class="ptk-modalEditIdeaContainer">
+        {% include '/idea/edit.html.twig' %}
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        let modal = document.getElementsByClassName("ptk-modalContainer");
+
+        // ----------------- edit idea modal -----------------------
+        let editIdeaModalLink = document.getElementById("ptk-editIdeaModalLink");
+        let closeEditIdeaModalLink = document.getElementById("ptk-closeEditIdeaModalLink");
+        let modalEditIdeaContainer = document.getElementsByClassName("ptk-modalEditIdeaContainer")
+        let formEditIdea = document.getElementById("ptk-editIdeaFormContainer")
+
+        editIdeaModalLink.addEventListener("click", function(e) {
+            modal[0].classList.add("ptk-modalContainerShow");
+            modalEditIdeaContainer[0].classList.add("ptk-showModalContainers")
+            formEditIdea.classList.add("ptk-formContainerShow");
+            console.log(closeEditIdeaModalLink, modalEditIdeaContainer, formEditIdea)
+        });
+        closeEditIdeaModalLink.addEventListener("click", function(e) {
+            modal[0].classList.remove("ptk-modalContainerShow");
+            modalEditIdeaContainer[0].classList.remove("ptk-showModalContainers")
+            formEditIdea.classList.remove("ptk-formContainerShow");
+        });
+
+        // ----------------- flash messages -----------------------
+        let flashMessages = document.querySelectorAll(".ptk-flashMessages");
+        function fadeOutEffect() {
+            flashMessages.forEach((msgs, index) => {// index will be current button index
+
+                let fadeEffect = setInterval(function () {
+                    if (!msgs.style.opacity) {
+                        msgs.style.opacity = 1;
+                    }
+                    if (msgs.style.opacity > 0) {
+                        msgs.style.opacity = 0;
+                    }
+                }, 2500);
+            })
+        }
+        window.onload = fadeOutEffect;
+    </script>
+{% endblock %}
+
+{% block body %}
+    <div class="ptk-ideaCommentsSection">
+        <div class="ptk-commentEditListContainer">
+                <div class="ptk-ideaCommentsContainer">
+                            <div class="ptk-ideaCommentsByUser">
+                                <div class="ptk-commentUserComment">
+                                    <div class="ptk-commentUserDate">
+                                        <a href="#" class="ptk-ideaCommentUser">{{ comment.user.firstname }} {{ comment.user.lastname }}</a>
+                                        {{ comment.createdAt ? comment.createdAt|date('d-m-Y') : '' }}
+                                    </div>
+                                    <p class="ptk-ideaComments">{{ comment.content }}</p>
+                                </div>
+                                <div class="ptk-commentBtns">
+                                    {% if app.user.id == comment.user.id %}
+                                        {{ include('comment/_delete_form.html.twig') }}
+                                    {% endif %}
+                                </div>
+                            </div>
+                </div>
+        </div>
+        <div class="ptk-commentEditContainer">
+            {{ form_start(formEditComm) }}
+            <div class="ptk-formErrors ptk-formContainerMargins">
+                {{ form_errors(formEditComm) }}
+            </div>
+            <div class="ptk-formRow ptk-formContainerMargins">
+                {{ form_label(formEditComm.content, null, {'label_attr': {'class': 'ptk-formLabels'}}) }}
+                {{ form_widget(formEditComm.content, {'attr': {'class': 'ptk-formContentInput'}}) }}
+            </div>
+            {{ form_row(formEditComm._token) }}
+            <div class="ptk-formBttnsContainer">
+                <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+                <button class="ptk-formBttns">{{ button_label|default('Save') }}</button>
+            </div>
+            {{ form_end(formEditComm) }}
+        </div>
+    </div>
+{% endblock %}
+
+
+
+
+
+{#        <div class="ptk-formContainer ptk-editCommFormContainer" id="ptk-editCommentFormContainer">#}
+{#            <div class="ptk-formCloseContainer">#}
+{#                <a class="ptk-formCloseBttn" id="ptk-closeEditCommentModalLink">#}
+{#                    <img src="{{ asset('build/images/closeBtn.png') }}" alt="Close"/>#}
+{#                </a>#}
+{#            </div>#}
+{#            <div class="ptk-formTitleContainer">#}
+{#                <h1 class="ptk-formTitle">Edit Comment</h1>#}
+{#            </div>#}
+{#            {{ form_start(formEditComm) }}#}
+{#            <div class="ptk-formErrors ptk-formContainerMargins">#}
+{#                {{ form_errors(formEditComm) }}#}
+{#            </div>#}
+{#            <div class="ptk-formRow ptk-formContainerMargins">#}
+{#                {{ form_label(formEditComm.content, null, {'label_attr': {'class': 'ptk-formLabels'}}) }}#}
+{#                {{ form_widget(formEditComm.content, {'attr': {'class': 'ptk-formContentInput'}}) }}#}
+{#            </div>#}
+{#            {{ form_row(formEditComm._token) }}#}
+{#            <div class="ptk-formBttnsContainer">#}
+{#                <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">#}
+{#                <button class="ptk-formBttns">{{ button_label|default('Save') }}</button>#}
+{#            </div>#}
+{#            {{ form_end(formEditComm) }}#}
+{#        </div>#}
+
