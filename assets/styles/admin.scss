@@ -68,6 +68,10 @@
     border-bottom: 1.5px solid $primaryGreen;
 }
 
+.ptk-adminDataRow:hover {
+    background-color: lightgrey;
+}
+
 .ptk-adminCenter{
     display: inline-list-item;
     justify-content: center;
@@ -101,6 +105,10 @@
     justify-content: flex-start;
     align-items: center;
     font-size: 19px;
+}
+
+.ptk-teamTableData:hover {
+    background-color: lightgrey;
 }
 
 .ptk-teamTitleData{
