@@ -50,13 +50,13 @@
             <span class="ptk-filterLinksHover">oldest</span></a>
         <p class="ptk-filterSeparators">/</p>
         <a href="{{ path('app_project_show', {'id': project.id, 'orderBy': 'likes'}) }}" class="ptk-filterLinks">
-            <span class="filterLinksHover">likes</span></a>
+            <span class="ptk-filterLinksHover">likes</span></a>
         <p class="ptk-filterSeparators">/</p>
         <a href="{{ path('app_project_show', {'id': project.id, 'orderBy': 'comments'}) }}" class="ptk-filterLinks">
-            <span class="filterLinksHover">comments</span></a>
+            <span class="ptk-filterLinksHover">comments</span></a>
         <p class="ptk-filterSeparators">/</p>
         <a href="{{ path('app_project_show', {'id': project.id, 'orderBy': 'views'}) }}" class="ptk-filterLinks">
-            <span class="filterLinksHover">views</span></a>
+            <span class="ptk-filterLinksHover">views</span></a>
     </div>
 {% endblock %}
 

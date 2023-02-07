@@ -220,24 +220,8 @@
     width: 100%;
 }
 
-.ptk-formBttns {
-    padding: 10px 25px;
-    border-radius: 5px;
-    border-color: $primaryBlue;
-    background-color: $primaryBlue;
-    cursor: pointer;
-    font-family: Rajdhani;
-    font-weight: 600;
-    font-size: 15px;
-    color: $primaryWhite;
-}
-
 .ptk-formCloseBttn:hover{
-    opacity: 0.8;
-}
-
-.ptk-formBttns:hover {
-    opacity: 0.8;
+    transform: scale(1.1);
 }
 
 .ptk-formContainerMargins{

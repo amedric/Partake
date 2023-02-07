@@ -27,12 +27,12 @@
             {{ form_row(formEditIdea._token) }}
             <div class="ptk-formBttnsContainer">
                 <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-                <button class="ptk-formBttns">{{ button_label|default('Save') }}</button>
+                <button class="ptk-bttns">{{ button_label|default('Save') }}</button>
                 {{ form_end(formEditIdea) }}
                 <form method="post" action="{{ path('app_idea_delete', {'id': idea.id}) }} name="deleteProject""
                       onsubmit="return confirm('Are you sure you want to delete this item?');">
                     <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ idea.id) }}">
-                    <button class="btn ptk-formBttns" name="deleteIdea">Delete</button>
+                    <button class="btn ptk-bttns" name="deleteIdea">Delete</button>
                 </form>
             </div>
         </div>

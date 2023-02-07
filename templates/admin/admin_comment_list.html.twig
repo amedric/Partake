@@ -21,10 +21,10 @@
                     <td class="ptk-adminTableData">{{ comment.content|striptags|length > 80 ? comment.content|striptags|slice(0, 80) ~ '...' : comment.content|striptags }}</td>
                     <td class="ptk-adminTableData ptk-adminCenter">{{ comment.createdAt ? comment.createdAt|date('d-m-Y') : '' }}</td>
                     <td class="ptk-teamBttns ptk-adminCenter">
-                        <a href="{{ path('app_admin_comment_view', {'id': comment.id}) }}" class="btn ptk-bttns ptk-smlBttns">View</a>
+                        <a href="{{ path('app_admin_comment_view', {'id': comment.id}) }}" class="ptk-bttns ptk-smlBttns">View</a>
                         <form method="post" action="{{ path('app_admin_comment_delete', {'id': comment.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
                             <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ comment.id) }}">
-                            <button class="btn ptk-bttns ptk-smlBttns">Delete</button>
+                            <button class="ptk-bttns ptk-smlBttns">Delete</button>
                         </form>
                     </td>
                 </tr>
