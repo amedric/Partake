@@ -75,6 +75,7 @@
     margin-left: 10px;
     font-weight: lighter;
     padding: 5px 10px 5px 10px;
+    width: 400px;
 }
 
 .btnSearchBar{
@@ -135,14 +136,15 @@
 
 .ptk-navDropdownContent {
     margin-top: 15px;
-    display: none;
+    display: flex;
     position: absolute;
-    top: 40px;
+    top: 300px;
     background-color: #003EA8;
     min-width: 120px;
     box-shadow: rgba(0, 0, 0, 0.3) 0 19px 38px, rgba(0, 0, 0, 0.22) 0 15px 12px;
-    z-index: 5;
+    z-index: -1;
     border-radius: 0 0 15px 15px;
+    opacity: 0;
 }
 .ptk-navDropdownContent a {
     font-style: normal;
@@ -162,12 +164,10 @@
 }
 
 .ptk-navDropdownDatatype:hover .ptk-navDropdownContent {
-    display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    top: 40px;
+    opacity: 1;
+    z-index: 10;
 }
-
-//.ptk-navDropdownDatatype:hover .ptk-navDropDownbtn {
-//    background-color: $primaryBlue;
-//}

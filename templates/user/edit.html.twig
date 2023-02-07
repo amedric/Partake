@@ -43,7 +43,7 @@
     {{ form_row(formEdit._token) }}
     <div class="ptk-formBttnsContainer">
         <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-        <button class="ptk-formBttns">{{ button_label|default('Save') }}</button>
+        <button class="ptk-bttns">{{ button_label|default('Save') }}</button>
     </div>
     {{ form_end(formEdit, {'render_rest': false }) }}
 </div>
