@@ -69,23 +69,23 @@
                 <div class="item item-4"></div>
             </div>
         </div>
-        <script>
-            let flashMessages = document.querySelectorAll(".ptk-adminFlashMessages");
-            function fadeOutEffect() {
-                flashMessages.forEach((msgs, index) => {// index will be current button index
+{#        <script>#}
+{#            let flashMessages = document.querySelectorAll(".ptk-adminFlashMessages");#}
+{#            function fadeOutEffect() {#}
+{#                flashMessages.forEach((msgs, index) => {// index will be current button index#}
 
-                    let fadeEffect = setInterval(function () {
-                        if (!msgs.style.opacity) {
-                            msgs.style.opacity = 1;
-                        }
-                        if (msgs.style.opacity > 0) {
-                            msgs.style.opacity = 0;
-                            msgs.style.display = "none";
-                        }
-                    }, 2500);
-                })
-            }
-            window.onload = fadeOutEffect;
-        </script>
+{#                    let fadeEffect = setInterval(function () {#}
+{#                        if (!msgs.style.opacity) {#}
+{#                            msgs.style.opacity = 1;#}
+{#                        }#}
+{#                        if (msgs.style.opacity > 0) {#}
+{#                            msgs.style.opacity = 0;#}
+{#                            msgs.style.display = "none";#}
+{#                        }#}
+{#                    }, 2500);#}
+{#                })#}
+{#            }#}
+{#            window.onload = fadeOutEffect;#}
+{#        </script>#}
     </body>
 </html>
