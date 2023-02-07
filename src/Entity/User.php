@@ -51,9 +51,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\ManyToOne]
     private ?Category $category = null;
 
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Project::class, cascade: ['remove'])]
+    private Collection $users;
+
     public function __construct()
     {
         $this->projects = new ArrayCollection();
+        $this->users = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -241,4 +245,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+
+    /**
+     * @return Collection<int, Project>
+     */
+    public function getLikes(): Collection
+    {
+        return $this->users;
+    }
+
 }
