@@ -14,4 +14,5 @@ import '/assets/js/horizontalScroll.js';
 import '/assets/js/charts.js';
 import '/assets/js/flashMessages.js';
 import '/assets/js/modal.js';
+import '/assets/js/loader.js';
 

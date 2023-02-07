@@ -1,4 +1,4 @@
-const preloader = document.querySelector('#preloader');
+const preloader = document.querySelector('.ptk-loaderContainer');
 if (preloader) {
     window.addEventListener('load', () => {
         setTimeout(() => {

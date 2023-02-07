@@ -1,0 +1,5 @@
+#preloader.loaded:before,
+#preloader.loaded:after {
+    -webkit-animation: preloaderfinish 300ms ease-in-out 500ms forwards;
+    animation: preloaderfinish 300ms ease-in-out 500ms forwards;
+}
