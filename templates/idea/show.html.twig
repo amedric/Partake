@@ -116,6 +116,7 @@
             formEditIdea.classList.remove("ptk-formContainerShow");
         });
 
+        // ----------------- flash messages -----------------------
         let flashMessages = document.querySelectorAll(".ptk-flashMessages");
         function fadeOutEffect() {
             flashMessages.forEach((msgs, index) => {// index will be current button index
@@ -142,7 +143,6 @@
                     <div class="ptk-ideaCommentsByUser">
                         <div class="ptk-commentUserComment">
                             <div class="ptk-commentUserDate">
-
                                 <a href="{{ path('app_user_show', {id: comment.user.id, orderBy: 'oldest', dataType: 'Projects and Ideas'}) }}" class="ptk-ideaCommentUser">{{ comment.user.firstname }} {{ comment.user.lastname }}</a>
                                 {{ comment.createdAt ? comment.createdAt|date('d-m-Y') : '' }}
                             </div>

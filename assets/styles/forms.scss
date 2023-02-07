@@ -24,6 +24,11 @@
     transition: ease-in 0.2s;
 }
 
+.ptk-editCommFormContainer {
+    height: 450px;
+    width: 600px;
+}
+
 .ptk-formContainerShow {
     opacity: 1;
 }
@@ -100,6 +105,13 @@
     transition: ease-in 0.2s;
 }
 
+.ptk-modalEditCommentContainer{
+    position: absolute;
+    top: -650px;
+    opacity: 1;
+    transition: ease-in 0.2s;
+}
+
 .ptk-modalEditProjectContainer{
     position: absolute;
     top: -650px;
@@ -145,9 +157,8 @@
     display: flex;
     justify-content: center;
     margin: 0;
-    font-size: 40px;
+    font-size: 35px;
     font-weight: 550;
-    width: 10ch;
     background: linear-gradient(180deg, $primaryGrey 55%, $primaryYellow 45%);
 }
 

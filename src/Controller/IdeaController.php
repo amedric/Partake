@@ -84,6 +84,16 @@ class IdeaController extends AbstractController
             ], Response::HTTP_SEE_OTHER);
         }
 
+        //------------ edit comment form --------------------------------
+        $formEditComm = $this->createForm(CommentType::class, $comment);
+        $formEditComm->handleRequest($request);
+        if ($formEditComm->isSubmitted() && $formEditComm->isValid()) {
+            $commentRepository->save($comment, true);
+            $this->addFlash('success', 'Success: Comment modified');
+            return $this->redirectToRoute('app_idea_show', [
+                'id' => $idea->getId(),
+            ], Response::HTTP_SEE_OTHER);
+        }
 
         //---------------- edit idea form ------------------------------------------------
         //---------------- if edit form form is submitted --------------------------------
