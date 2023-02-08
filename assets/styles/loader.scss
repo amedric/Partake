@@ -1,13 +1,16 @@
 .ptk-loaderContainer{
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
+    //margin-left: -50px;
+    //margin-top: -50px;
     display: flex;
     justify-content: center;
     align-items: center;
     width: 100vw;
     height: 100vh;
-    background-color: rgb($secondaryGrey, 0.5);
+    background-color: rgb($secondaryGrey, 0.2);
+    z-index: 20;
 }
 
 .loader-hidden {

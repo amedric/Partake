@@ -1,21 +1,12 @@
 {% if app.user %}
 
     <div class="ptk-navbarLogoContainer">
-        <p class="ptk-logo"><a href="{{ path('app_home') }}"><span class="ptk-linksHover">PARTAKE</span></a></p>
+        <p class="ptk-logo"><a href="{{ path('app_home') }}" class="ptk-loader"><span class="ptk-linksHover">PARTAKE</span></a></p>
     </div>
-
-{#    {% if (form is defined) and (edit is not defined) %}#}
-{#        <div class="ptk-searchContainer">#}
-{#        {{ form_start(form, {'attr': {'class': 'searchBar'}}) }}#}
-{#        {{ form_widget(form, {'attr': {'class': 'inputSearchBar'}}) }}#}
-{#        {{ form_end(form) }}#}
-{#        </div>#}
-{#    {% endif %}#}
 
     <div class="ptk-searchContainer">
         <form action="{{ path('app_home') }}" method="get" class="inputSearchBar">
             <input type="text" class="search-input" placeholder="Search" name="searchBar" id="search" required>
-{#            <button class="search-button" type="submit"></button>#}
         </form>
     </div>
 
@@ -27,15 +18,15 @@
                 </button>
             </div>
             <div class="ptk-navDropdownContent">
-                <a href="{{ path('app_user_show', {'id': app.user.id, 'orderBy': 'oldest', 'dataType': 'Projects and Ideas'}) }}">
+                <a href="{{ path('app_user_show', {'id': app.user.id, 'orderBy': 'oldest', 'dataType': 'Projects and Ideas'}) }}" class="ptk-loader">
                     Profile
                 </a>
                 {% if app.user.roles[0] == "ROLE_ADMIN" %}
-                    <a href="{{ path('app_admin_user_list') }}">
+                    <a href="{{ path('app_admin_user_list') }}" class="ptk-loader">
                         Admin
                     </a>
                 {% endif %}
-                <a href="{{ path('app_logout') }}">
+                <a href="{{ path('app_logout') }}" class="ptk-loader">
                     Logout
                 </a>
             </div>

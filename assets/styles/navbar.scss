@@ -68,45 +68,24 @@
     color: $primaryBlue;
 }
 
-//.inputSearchBar input{
-//    border: 2px solid $primaryBlue;
-//    font-size: 20px;
-//    border-radius: 20px;
-//    margin-left: 10px;
-//    font-weight: lighter;
-//    padding: 5px 10px 5px 10px;
-//    width: 400px;
-//}
-
 .inputSearchBar input{
-    line-height: 28px;
-    border: 2px solid $primaryGrey;
-    border-radius: 25px;
-    padding: .2rem 2.5rem;
-    outline: none;
-    background-color: transparent;
-    transition: .3s cubic-bezier(0.645, 0.045, 0.355, 1);
+    border: 2px solid $primaryBlue;
+    font-size: 20px;
+    border-radius: 20px;
+    margin-left: 10px;
+    font-weight: lighter;
+    padding: 5px 10px 5px 10px;
+    width: 250px;
+    transition: width 0.4s;
 }
 
-.inputSearchBar input:focus, input:hover {
-    outline: none;
-    padding: .3rem 5rem;
-    border-radius: 25px;
-    border-color: $primaryBlue;
-    background-color: white;
+.inputSearchBar:hover input{
+    width: 400px;
 }
 
-.inputSearchBar input::placeholder {
-    color: $primaryGrey;
+.inputSearchBar input:focus {
+    width: 400px;
 }
-
-//.btnSearchBar{
-//    font-size: 24px;
-//    border-radius: 50%;
-//    margin-left: 10px;
-//    background-color: transparent;
-//    border: none;
-//}
 
 .ptk-navbarLinksContainer{
     display: flex;

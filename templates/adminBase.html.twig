@@ -10,10 +10,6 @@
     {% block stylesheets %}
         {{ encore_entry_link_tags('app') }}
     {% endblock %}
-
-    {% block javascripts %}
-        {{ encore_entry_script_tags('app') }}
-    {% endblock %}
 </head>
 <body>
     <div class="ptk-stickyContainer">
@@ -51,6 +47,14 @@
             </div>
         </div>
     </div>
+    <div class="ptk-loaderContainer loader-hidden" id="ptk-loaderContainer">
+        <div class="loaderContainer">
+            <div class="item item-1"></div>
+            <div class="item item-2"></div>
+            <div class="item item-3"></div>
+            <div class="item item-4"></div>
+        </div>
+    </div>
     <script>
         let flashMessages = document.querySelectorAll(".ptk-adminFlashMessages");
         function fadeOutEffect() {
@@ -68,6 +72,46 @@
             })
         }
         window.onload = fadeOutEffect;
+
+        let ptkClicked = document.querySelectorAll(".ptk-loader");
+        let ptkCards = document.querySelectorAll(".ptk-cardsLink");
+        let ptkBtns = document.querySelectorAll(".ptk-bttns");
+        let ptksmlBtns = document.querySelectorAll(".ptk-smlBttns");
+        const preloader = document.getElementById('ptk-loaderContainer');
+
+        // ----------- loader -----------------
+        ptkBtns.forEach((clicked, index) => {
+            clicked.addEventListener("click", function(e) {
+                console.log(clicked);
+                preloader.classList.remove('loader-hidden');
+            });
+        })
+        ptksmlBtns.forEach((clicked, index) => {
+            clicked.addEventListener("click", function(e) {
+                console.log(clicked);
+                preloader.classList.remove('loader-hidden');
+            });
+        })
+        ptkCards.forEach((clicked, index) => {
+            clicked.addEventListener("click", function(e) {
+                console.log(clicked);
+                preloader.classList.remove('loader-hidden');
+            });
+        })
+        ptkClicked.forEach((clicked, index) => {
+            clicked.addEventListener("click", function(e) {
+                console.log(clicked);
+                preloader.classList.remove('loader-hidden');
+            });
+        })
+
+        function loader ()
+        {
+            preloader.classList.remove('loader-hidden');
+        }
     </script>
+    {% block javascripts %}
+        {{ encore_entry_script_tags('app') }}
+    {% endblock %}
 </body>
 </html>
