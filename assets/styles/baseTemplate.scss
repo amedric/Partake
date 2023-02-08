@@ -1,9 +1,5 @@
 //------------------- Base Template -------------------------------------------------------
 .ptk-stickyContainer{
-    //background: #0042BF;
-    //background: -webkit-linear-gradient(bottom, #0042BF, #013DB1);
-    //background: -moz-linear-gradient(bottom, #0042BF, #013DB1);
-    //background: linear-gradient(to top, #0042BF, #013DB1);
     background-color: $primaryGrey;
     position: sticky;
     top: 0;
@@ -225,6 +221,7 @@
     width: 100vw;
     background-color: #F3F3F3FF;
 }
+
 
 //------------------- Admin Base Template -------------------------------------------------------
 .ptk-adminBlockContainer{

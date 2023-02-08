@@ -14,6 +14,14 @@
         {% endblock %}
     </head>
     <body>
+    <div class="ptk-loaderContainer loader-hidden" id="ptk-loaderContainer">
+        <div class="loaderContainer">
+            <div class="item item-1"></div>
+            <div class="item item-2"></div>
+            <div class="item item-3"></div>
+            <div class="item item-4"></div>
+        </div>
+    </div>
         <div class="ptk-stickyContainer">
             <div class="ptk-navbarContainer">
                 {% include '/_includes/_navbar.html.twig' %}
@@ -58,6 +66,62 @@
         <div class="ptk-bodyContainer">
             {% block body %}{% endblock %}
         </div>
+        <script>
+            let ptkClicked = document.querySelectorAll(".ptk-loader");
+            let ptkCards = document.querySelectorAll(".ptk-cardsLink");
+            let ptkBtns = document.querySelectorAll(".ptk-bttns");
+            let ptksmlBtns = document.querySelectorAll(".ptk-smlBttns");
+            const preloader = document.getElementById('ptk-loaderContainer');
+            // ----------- flash messages -----------------
+            let allFlashMessages = document.querySelectorAll(".ptk-flashMessages");
+            function fadeOutEffect() {
+
+                allFlashMessages.forEach((msgs, index) => {// index will be current button index
+
+                    let fadeEffect = setInterval(function () {
+                        if (!msgs.style.opacity) {
+                            msgs.style.opacity = 1;
+                        }
+                        if (msgs.style.opacity > 0) {
+                            msgs.style.opacity = 0;
+                        }
+                    }, 3500);
+                })
+            }
+
+            // ----------- loader -----------------
+            ptkBtns.forEach((clicked, index) => {
+                clicked.addEventListener("click", function(e) {
+                    console.log(clicked);
+                    preloader.classList.remove('loader-hidden');
+                });
+            })
+            ptksmlBtns.forEach((clicked, index) => {
+                clicked.addEventListener("click", function(e) {
+                    console.log(clicked);
+                    preloader.classList.remove('loader-hidden');
+                });
+            })
+            ptkCards.forEach((clicked, index) => {
+                clicked.addEventListener("click", function(e) {
+                    console.log(clicked);
+                    preloader.classList.remove('loader-hidden');
+                });
+            })
+            ptkClicked.forEach((clicked, index) => {
+                clicked.addEventListener("click", function(e) {
+                    console.log(clicked);
+                    preloader.classList.remove('loader-hidden');
+                });
+            })
+
+            function loader ()
+            {
+                preloader.classList.remove('loader-hidden');
+            }
+
+            window.onload = fadeOutEffect;
+        </script>
         {% block javascripts %}
             {{ encore_entry_script_tags('app') }}
         {% endblock %}

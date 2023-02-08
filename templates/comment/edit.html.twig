@@ -159,39 +159,9 @@
             {{ form_row(formEditComm._token) }}
             <div class="ptk-formBttnsContainer">
                 <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-                <button class="ptk-formBttns">{{ button_label|default('Save') }}</button>
+                <button class="ptk-bttns">{{ button_label|default('Save') }}</button>
             </div>
             {{ form_end(formEditComm) }}
         </div>
     </div>
 {% endblock %}
-
-
-
-
-
-{#        <div class="ptk-formContainer ptk-editCommFormContainer" id="ptk-editCommentFormContainer">#}
-{#            <div class="ptk-formCloseContainer">#}
-{#                <a class="ptk-formCloseBttn" id="ptk-closeEditCommentModalLink">#}
-{#                    <img src="{{ asset('build/images/closeBtn.png') }}" alt="Close"/>#}
-{#                </a>#}
-{#            </div>#}
-{#            <div class="ptk-formTitleContainer">#}
-{#                <h1 class="ptk-formTitle">Edit Comment</h1>#}
-{#            </div>#}
-{#            {{ form_start(formEditComm) }}#}
-{#            <div class="ptk-formErrors ptk-formContainerMargins">#}
-{#                {{ form_errors(formEditComm) }}#}
-{#            </div>#}
-{#            <div class="ptk-formRow ptk-formContainerMargins">#}
-{#                {{ form_label(formEditComm.content, null, {'label_attr': {'class': 'ptk-formLabels'}}) }}#}
-{#                {{ form_widget(formEditComm.content, {'attr': {'class': 'ptk-formContentInput'}}) }}#}
-{#            </div>#}
-{#            {{ form_row(formEditComm._token) }}#}
-{#            <div class="ptk-formBttnsContainer">#}
-{#                <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">#}
-{#                <button class="ptk-formBttns">{{ button_label|default('Save') }}</button>#}
-{#            </div>#}
-{#            {{ form_end(formEditComm) }}#}
-{#        </div>#}
-

@@ -26,7 +26,7 @@
     font-size: 4.5rem;
     font-weight: 700;
     background-color: $primaryPurple;
-    color: white;
+    color: #1f1f1f;
     display: block;
     padding: 0 10px 0 10px;
     text-shadow: 0px 4px 3px rgba(0,0,0,0.3),
@@ -36,8 +36,10 @@
 
 .ptk-titleHeader:nth-child(2) {
     position: absolute;
-    background-color: #013DB1;
-    color: white;
+    background-color: #e1e1e1;
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    color: #1f1f1f;
     clip-path: inset(-1% -1% 50% -1%); // Added the negative values to prevent "bleed" in Chrome
 }
 
@@ -311,12 +313,15 @@
 
 .ptk-projectContent{
     margin: 0;
-    color:$secondaryGrey;
+    padding: 10px;
+    border-radius: 15px;
+    color: #3a3a3a;
     font-family: Roboto, sans-serif;
     font-size: 1.3rem;
-    //text-shadow: 0px 4px 3px rgba(0,0,0,0.6),
-    //0px 8px 13px rgba(0,0,0,0.2),
-    //0px 18px 23px rgba(0,0,0,0.2);
+    background: rgba(225,225,225,0.5);
+    -webkit-backdrop-filter: blur(5px);
+    backdrop-filter: blur(10px);
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
 .ptk-createdAtContainer{
@@ -496,11 +501,7 @@
     -webkit-backdrop-filter: blur(10px);
     backdrop-filter: blur(10px);
     border: 1px solid rgba(225,225,225,0.25);
-    box-shadow: rgba(0, 0, 0, 0.25) 0 54px 55px,
-    rgba(0, 0, 0, 0.12) 0 -12px 30px,
-    rgba(0, 0, 0, 0.12) 0 4px 6px,
-    rgba(0, 0, 0, 0.17) 0 12px 13px,
-    rgba(0, 0, 0, 0.09) 0 -3px 5px;
+    box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
     border-radius: 15px;
 }
 
