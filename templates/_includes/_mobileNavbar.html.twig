@@ -1,5 +1,5 @@
 {% if app.user %}
-    <a href="{{ path('app_user_show', {'id': app.user.id, 'orderBy': 'oldest', 'dataType': 'all'}) }}"> {{ app.user.lastname }} {{ app.user.firstname }}</a>
-    <a href="{{ path('app_logout') }}"> Logout </a>
+    <a href="{{ path('app_user_show', {'id': app.user.id, 'orderBy': 'oldest', 'dataType': 'all'}) }}" class="ptk-mblLinks"> {{ app.user.lastname }} {{ app.user.firstname }}</a>
+    <a href="{{ path('app_logout') }}" class="ptk-mblLinks"> Logout </a>
 {% endif %}
 
